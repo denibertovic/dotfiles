@@ -1,3 +1,4 @@
+set encoding=utf-8
 set sts=2 
 set sw=2 
 set et
