@@ -1,0 +1,30 @@
+[user]
+	name = Deni Bertovic
+	email = deni@element.hr
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 958x1059+954+19
+	main-window-view = FileView
+
+[merge]
+  keepBackup = false
+  tool = p4merge
+[mergetool "p4merge"]
+  cmd = extmerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+  keepTemporaries = false
+  trustExitCode = false
+  keepBackup = false
+[diff]
+  external = extdiff
+
+[alias]
+  a = add
+  au = add -u
+  st = status
+  ci = commit
+  co = checkout
+  cp = cherry-pick
+  br = branch
+  df = diff
+  lg = log -p
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
