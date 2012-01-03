@@ -46,3 +46,7 @@ nnoremap <C-a> yG
 nnoremap <C-p> p
 
 " yw y$ - yank til end of word or file
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
