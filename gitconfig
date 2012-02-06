@@ -14,8 +14,8 @@
   keepTemporaries = false
   trustExitCode = false
   keepBackup = false
-[diff]
-  external = extdiff
+#[diff]
+#  external = diffuse
 
 [alias]
   a = add
