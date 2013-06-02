@@ -1,11 +1,14 @@
 set encoding=utf-8
-set sts=2
-set sw=2
+set sts=4
+set sw=4
 set et
 au Filetype python setl et ts=4 sw=4
 syntax on
 set number
 set showmatch
+
+"highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+"set colorcolumn=72
 
 " Switch on filetype detection and loads 
 " indent file (indent.vim) for specific file types
