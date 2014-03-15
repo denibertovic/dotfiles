@@ -2,9 +2,11 @@
 !A
 urxvt*geometry:         120x30
 urxvt*title:            terminal
-urxvt*transparent:      true
+urxvt*transparent:      false
+urxvt*depth:            32
 urxvt*termName:         rxvt
-urxvt*background:       #242424
+!urxvt*background:       #242424
+urxvt*background:       [70]black
 urxvt*foreground:       white
 urxvt*cursorBlink:      true
 urxvt*cursorColor:      magenta
