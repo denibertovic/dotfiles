@@ -36,3 +36,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc)$',
   \ }
 
+" tab manipulation
+nnoremap <C-j> :tabprev<cr>
+nnoremap <C-k> :tabnext<cr>
+
+
