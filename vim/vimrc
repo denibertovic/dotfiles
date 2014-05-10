@@ -25,6 +25,8 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'dag/vim2hs'
+Bundle 'tpope/vim-commentary'
 " ...
 
 filetype plugin indent on     " required
@@ -51,6 +53,8 @@ au Filetype python setl et ts=4 sw=4
 syntax on
 set number
 set showmatch
+
+set pastetoggle=<F2>
 
 "highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 "set colorcolumn=72
