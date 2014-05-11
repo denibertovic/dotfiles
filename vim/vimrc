@@ -21,6 +21,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'mhinz/vim-signify'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-scripts/buftabs'
 
 " Themes
 Plugin 'tomasr/molokai'
@@ -37,7 +38,9 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " tab manipulation
-nnoremap <C-j> :tabprev<cr>
-nnoremap <C-k> :tabnext<cr>
+" nnoremap <C-j> :tabprev<cr>
+" nnoremap <C-k> :tabnext<cr>
 
-
+" buffer manipulation
+:noremap <C-j> :bprev<CR>
+:noremap <C-k> :bnext<CR>
