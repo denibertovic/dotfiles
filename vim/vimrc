@@ -44,3 +44,6 @@ let g:ctrlp_custom_ignore = {
 " buffer manipulation
 :noremap <C-j> :bprev<CR>
 :noremap <C-k> :bnext<CR>
+
+let g:haskell_conceal = 0
+autocmd FileType haskell setlocal nofoldenable
