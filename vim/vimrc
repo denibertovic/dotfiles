@@ -22,6 +22,7 @@ Plugin 'bling/vim-airline'
 Plugin 'mhinz/vim-signify'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-scripts/buftabs'
+Plugin 'godlygeek/tabular'
 
 " Themes
 Plugin 'tomasr/molokai'
@@ -47,3 +48,25 @@ let g:ctrlp_custom_ignore = {
 
 let g:haskell_conceal = 0
 autocmd FileType haskell setlocal nofoldenable
+
+set pastetoggle=<F2>
+
+" tabs and spaces and indent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+set autoindent
+
+" line numbers
+set number
+
+" highlithgt trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
