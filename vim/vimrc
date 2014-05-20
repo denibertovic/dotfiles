@@ -23,6 +23,7 @@ Plugin 'mhinz/vim-signify'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-scripts/buftabs'
 Plugin 'godlygeek/tabular'
+Plugin 'eagletmt/ghcmod-vim'
 
 " Themes
 Plugin 'tomasr/molokai'
@@ -70,3 +71,4 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
