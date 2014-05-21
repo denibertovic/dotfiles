@@ -72,3 +72,13 @@ autocmd BufWinLeave * call clearmatches()
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
+" status line at all times
+set laststatus=2
+
+" use powerline fonts
+let g:airline_powerline_fonts = 1
+
+" Color Theme
+colorscheme Monokai
+let g:molokai_original = 1
+let g:rehash256 = 1
