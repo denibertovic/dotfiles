@@ -14,8 +14,10 @@ urxvt*underlineColor:   #86a2be
 urxvt.urlLauncher:      google-chrome
 urxvt*cutchars:         `"()'*<>[]{|}
 !A
-urxvt*font:             xft:DejaVu Sans Mono:pixelsize=11
-urxvt*boldFont:         xft:DejaVu Sans Mono:pixelsize=11
+! urxvt*font:             xft:DejaVu Sans Mono:pixelsize=11
+! urxvt*boldFont:         xft:DejaVu Sans Mono:pixelsize=11
+urxvt*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=11
+urxvt*boldFont:         xft:DejaVu Sans Mono for Powerline:pixelsize=11
 ! A
 urxvt*scrollBar:        false
 urxvt*jumpScroll:       false
@@ -32,7 +34,7 @@ urxvt*saveLines:        15000
 ! A
 urxvt*tintColor: white
 urxvt*shading:         15
-urxvt*fading:  				 20 
+urxvt*fading:  				 20
 
 ! A
 
