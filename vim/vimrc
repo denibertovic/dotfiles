@@ -10,26 +10,48 @@ Plugin 'gmarik/vundle'
 
 
 " Plugins
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'dag/vim2hs'
+
+" Some defaults kindof
 Plugin 'tpope/vim-commentary'
+Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/YankRing.vim'
+
+" Moving around and such
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/buftabs'
+
+" Markup
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Haskell
+Plugin 'dag/vim2hs'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'Twinside/vim-hoogle'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'nbouscal/vim-stylish-haskell'
+Plugin 'Shougo/vimproc.vim'
+
+" Syntax highlight and autocomplete
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
-Plugin 'mhinz/vim-signify'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-scripts/buftabs'
-Plugin 'godlygeek/tabular'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
 Plugin 'Shougo/neocomplete.vim'
+
+" Git gutters
+Plugin 'mhinz/vim-signify'
+
+" Markdown
+Plugin 'plasticboy/vim-markdown'
 
 " Themes
 Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
+
+" Dpaste
+Plugin 'vim-scripts/Dpaste.com-Plugin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,6 +75,9 @@ let g:haskell_conceal = 0
 autocmd FileType haskell setlocal nofoldenable
 
 set pastetoggle=<F2>
+
+" markdown folding
+let g:vim_markdown_folding_disabled=1
 
 " tabs and spaces and indent
 set tabstop=4
@@ -163,3 +188,20 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" Hoogle
+au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
+au BufNewFile,BufRead *.hs map <C-F1> :HoogleClose<CR>
+" au BufNewFile,BufRead *.hs map <buffer> <S-F1> :HoogleLine<CR>
+
+" Easymotion
+nnoremap s <Plug>(easymotion-bd-f)
+
+" Yankring
+nnoremap <silent> <F11> :YRShow<CR>
+
+" Close buffer
+nnoremap <F10> :bd<CR>
+
+" Enable to switch between buffers without saving
+set hidden
