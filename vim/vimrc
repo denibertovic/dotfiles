@@ -57,6 +57,14 @@ Plugin 'vim-scripts/Dpaste.com-Plugin'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" re-map leader key
+let mapleader=","
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+
 " Custom ctrlp ignore options
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -191,11 +199,20 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " Hoogle
 au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
-au BufNewFile,BufRead *.hs map <C-F1> :HoogleClose<CR>
 " au BufNewFile,BufRead *.hs map <buffer> <S-F1> :HoogleLine<CR>
 
 " Easymotion
-nnoremap s <Plug>(easymotion-bd-f)
+" re-map default <Leader> <Leader> to just <Leader>
+map <Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-sn)
+nmap t <Plug>(easymotion-tn)
+" don't allow abuse of hjkl
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 " Yankring
 nnoremap <silent> <F11> :YRShow<CR>
@@ -205,3 +222,9 @@ nnoremap <F10> :bd<CR>
 
 " Enable to switch between buffers without saving
 set hidden
+
+" Ghc Mod bindings
+nnoremap <F5> :GhcModCheck<CR>
+nnoremap <C-h> :GhcModType<CR>
+nnoremap <C-l> :GhcModTypeClear<CR>
+
