@@ -17,6 +17,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/YankRing.vim'
+Plugin 'jiangmiao/auto-pairs'
 
 " Moving around and such
 Plugin 'Lokaltog/vim-easymotion'
