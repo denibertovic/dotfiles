@@ -68,7 +68,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Custom ctrlp ignore options
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist)$',
   \ 'file': '\v\.(pyc)$',
   \ }
 
