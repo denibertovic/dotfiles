@@ -11,7 +11,7 @@ urxvt*foreground:       white
 urxvt*cursorBlink:      true
 urxvt*cursorColor:      magenta
 urxvt*underlineColor:   #86a2be
-urxvt.urlLauncher:      google-chrome
+urxvt.url-launcher:     xdg-open
 urxvt*cutchars:         `"()'*<>[]{|}
 !A
 urxvt*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=11
@@ -25,22 +25,23 @@ URxvt.urgentOnBell: True
 ! A
 #urxvt*inheritPixmap:   True
 urxvt*internalBorder:   0
-urxvt*externalBorder:    0
+urxvt*externalBorder:   0
 urxvt*loginShell:       true
 urxvt*saveLines:        15000
 
 ! A
 urxvt*tintColor: white
-urxvt*shading:         15
-urxvt*fading:  				 20
+urxvt*shading:   15
+urxvt*fading:	 20
 
 ! A
 
-URxvt.perl-ext-common: font-size,default,matcher
-URxvt.urlLauncher: /usr/bin/google-chrome
-URxvt.matcher.button: 1
+URxvt.perl-ext-common:   font-size,default,matcher,url-select
+URxvt.url-launcher:      /usr/bin/xdg-open
+URxvt.matcher.button:    1
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt.colorUL: #4682B4
+URxvt.colorUL:           #4682B4
+URxvt.keysym.M-u:        perl:url-select:select_next
 
 urxvt.keysym.C-Up:     perl:font-size:increase
 urxvt.keysym.C-Down:   perl:font-size:decrease
@@ -51,28 +52,28 @@ urxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 !Colors
 ! Black
-*color0: #5A5A5A
-*color8: #3e3e3e
+*color0:  #5A5A5A
+*color8:  #3e3e3e
 ! Red
-*color1: #FF4747
-*color9: #FF6767
+*color1:  #FF4747
+*color9:  #FF6767
 ! Green
-*color2: #AFC81C
+*color2:  #AFC81C
 *color10: #bFC81C
 ! Yellow
-*color3: #FDD338
+*color3:  #FDD338
 *color11: #F4D461
 ! Blue
-*color4: #619AF4
+*color4:  #619AF4
 *color12: #5496FF
 ! Purple
-*color5: #5F5A90
+*color5:  #5F5A90
 *color13: #826AB1
 ! Cyan
-*color6: #47E0FF
+*color6:  #47E0FF
 *color14: #2ED9FB
 ! White
-*color7: #FFFFFF
+*color7:  #FFFFFF
 *color15: #DEDEDE
 ! Orange
 *color16: #FFB000
