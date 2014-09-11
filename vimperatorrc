@@ -1,0 +1,5 @@
+noremap k 3k
+noremap j 3j
+
+let g:smooziee_scroll_amount="300"
+let g:smooziee_scroll_interval="10"
