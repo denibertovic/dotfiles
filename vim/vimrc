@@ -229,3 +229,6 @@ nnoremap <F5> :GhcModCheck<CR>
 nnoremap <C-h> :GhcModType<CR>
 nnoremap <C-l> :GhcModTypeClear<CR>
 
+
+" Syntastic
+let g:syntastic_python_checkers = ['flake8']
