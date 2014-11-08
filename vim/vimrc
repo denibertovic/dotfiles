@@ -80,6 +80,7 @@ let g:ctrlp_custom_ignore = {
 :noremap <C-j> :bprev<CR>
 :noremap <C-k> :bnext<CR>
 
+" Don't fold blocks
 let g:haskell_conceal = 0
 autocmd FileType haskell setlocal nofoldenable
 
@@ -229,6 +230,8 @@ nnoremap <F5> :GhcModCheck<CR>
 nnoremap <C-h> :GhcModType<CR>
 nnoremap <C-l> :GhcModTypeClear<CR>
 
-
 " Syntastic
 let g:syntastic_python_checkers = ['flake8']
+
+" GHC MOD
+
