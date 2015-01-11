@@ -156,6 +156,13 @@ nnoremap <C-l> :GhcModTypeClear<CR>
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_always_populate_loc_list=1
 
+" let g:syntastic_debug = 3
+" Enable syntastic checker only for python
+let g:syntastic_mode_map = {
+            \ "mode": "active",
+            \ "active_filetypes": ["python"],
+            \ "passive_filetypes": ["haskell"]}
+
 
 " Haskell autocomplete with YCM
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
