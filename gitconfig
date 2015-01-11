@@ -1,6 +1,6 @@
 [user]
 	name = Deni Bertovic
-	email = deni@kset.org
+	email = deni@denibertovic.com
 [core]
 	editor = vim
 	excludesfile = /home/deni/.gitignore
