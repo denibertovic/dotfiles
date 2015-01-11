@@ -155,5 +155,8 @@ nnoremap <C-l> :GhcModTypeClear<CR>
 " Syntastic
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_haskell_checkers = ["ghc_mod","hlint"]
+
+
+" Haskell autocomplete with YCM
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
