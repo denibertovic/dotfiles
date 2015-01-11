@@ -28,8 +28,9 @@ Plugin 'vim-scripts/buftabs'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell mode
-Plugin 'Twinside/vim-hoogle'
-Plugin 'eagletmt/ghcmod-vim'
+Plugin 'dag/vim2hs'
+Plugin 'Twinside/vim-hoogle' " cabal install hoogle; hoogle data
+Plugin 'eagletmt/ghcmod-vim'  " needs cabal install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell'
 Plugin 'Shougo/vimproc.vim'
 
@@ -52,8 +53,9 @@ Plugin 'flazz/vim-colorschemes'
 " Dpaste
 Plugin 'vim-scripts/Dpaste.com-Plugin'
 
-" Cabal path
-let $PATH = $PATH . ':' . expand("~/.cabal/bin")
+" Whiste space: Show tabs
+set list
+set listchars=tab:\|\
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
