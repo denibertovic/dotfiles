@@ -167,3 +167,5 @@ let g:syntastic_mode_map = {
 " Haskell autocomplete with YCM
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
+" Auto lint and check with ghc-mod on buffer write
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
