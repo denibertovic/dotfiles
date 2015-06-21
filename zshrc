@@ -13,8 +13,13 @@ ZSH_THEME="gallifrey"
 
 
 # docker related aliases
+#
 alias c='docker-compose'
-alias dclean='docker ps -a -q=true | xargs --no-run-if-empty docker rm -v'
+# Delete all stoped/exited containers except dataContainers which will have the naming scheme
+# someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
+# dashes or underscores
+alias dclean='docker ps -a -q=true -f status=exited | grep -vi "dataContainer" | xargs --no-run-if-empty docker rm -v'
+# remove all images tagged as <none>
 alias dcleanimages='docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
 alias dps='docker ps'
