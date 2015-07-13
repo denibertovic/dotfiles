@@ -15,11 +15,12 @@ ZSH_THEME="gallifrey"
 # docker related aliases
 #
 alias c='docker-compose'
+alias m='docker-machine'
 # Delete all stoped/exited containers except data containers which will have the naming scheme
 # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
 # dashes or underscores
 # TODO: figure out how to use labels for this (need inverted query)
-alias dclean='docker ps -a -f status=exited | grep -vi "data" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v'
+alias dclean='docker ps -a -f status=exited | grep -vi "datacontainer" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v'
 # remove all images tagged as <none>
 alias dcleanimages='docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
@@ -44,7 +45,7 @@ alias ack='ack-grep'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 alias psc='ps xawf -eo pid,user,cgroup,args'
-alias dctl='systemctl'
+alias ctl='systemctl'
 alias t='/usr/local/bin/todo.sh'
 
 # Set to this to use case-sensitive completion
