@@ -64,6 +64,8 @@ DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
+#
+WORKON_HOME=/home/deni/.virtualenvs
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -89,3 +91,4 @@ unsetopt correct_all
 [ -e /home/deni/.nix-profile/etc/profile.d/nix.sh  ] && source /home/deni/.nix-profile/etc/profile.d/nix.sh;
 
 RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
+
