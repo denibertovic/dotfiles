@@ -23,6 +23,7 @@ alias m='docker-machine'
 alias dclean='docker ps -a -f status=exited | grep -vi "datacontainer" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v'
 # remove all images tagged as <none>
 alias dcleanimages='docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
+alias dgc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
 alias dps='docker ps'
 alias di="docker images | awk '{ print \$1}' | tail -n +2 | sort | uniq"
@@ -78,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 #export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/NX/bin:/opt/android-sdk-linux_86/tools:/opt/scala/bin:/opt/eclipse:/usr/local/bin/p4/bin
 
 ### Added by the Heroku Toolbelt
-export PATH="$HOME/.cabal-sandbox/bin:$HOME/.ghc/bin:$HOME/.cabal/bin::/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:$PATH"
+export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.cabal-sandbox/bin:/home/deni/local/.bin:$PATH"
 
 
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
@@ -91,4 +92,3 @@ unsetopt correct_all
 [ -e /home/deni/.nix-profile/etc/profile.d/nix.sh  ] && source /home/deni/.nix-profile/etc/profile.d/nix.sh;
 
 RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
-
