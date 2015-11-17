@@ -71,7 +71,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Custom ctrlp ignore options
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist|node_modules)$',
   \ 'file': '\v\.(pyc)$',
   \ }
 
@@ -152,6 +152,8 @@ nnoremap <F5> :GhcModCheck<CR>
 nnoremap <C-h> :GhcModType<CR>
 nnoremap <C-l> :GhcModTypeClear<CR>
 
+nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
+
 " Syntastic
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_always_populate_loc_list=1
@@ -168,4 +170,4 @@ let g:syntastic_mode_map = {
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Auto lint and check with ghc-mod on buffer write
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+" autocmd BufWritePost *.hs GhcModCheckAndLintAsync
