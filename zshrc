@@ -9,8 +9,11 @@ ZSH=$HOME/.oh-my-zsh
 # THE BEST THEME so far is fwalch
 # gallifrey is good
 #
-ZSH_THEME="gallifrey"
+ZSH_THEME="fwalch"
 
+# TEMP ALIASES
+#
+alias met='cd /home/deni/meetup/docker'
 
 # docker related aliases
 #
@@ -39,7 +42,7 @@ alias ghci=ghci-color
 
 # other aliases
 alias sudo='sudo '
-alias dk='cd /home/deni/work/datarobot'
+alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
 alias noack='ack-grep --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations'
@@ -49,6 +52,9 @@ alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
 alias t='/usr/local/bin/todo.sh'
+
+# tmux
+alias tmux='tmux -2'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -72,15 +78,11 @@ WORKON_HOME=/home/deni/.virtualenvs
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenvwrapper docker cabal python keybase)
+plugins=(git virtualenvwrapper docker cabal python keybase stack)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-#export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/NX/bin:/opt/android-sdk-linux_86/tools:/opt/scala/bin:/opt/eclipse:/usr/local/bin/p4/bin
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.cabal-sandbox/bin:/home/deni/local/.bin:$PATH"
+export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.stack/programs/x86_64-linux/ghc-7.10.3/bin:/home/deni/.local/bin:$PATH"
 
 
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
@@ -92,4 +94,10 @@ unsetopt correct_all
 # added by Nix Installer
 [ -e /home/deni/.nix-profile/etc/profile.d/nix.sh  ] && source /home/deni/.nix-profile/etc/profile.d/nix.sh;
 
-RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
+# RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
+
+# VIM mode
+bindkey -v
+
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
