@@ -17,7 +17,11 @@ Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/YankRing.vim'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-scripts/auto-pairs-gentle'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/nerdtree'
+Plugin 'milkypostman/vim-togglelist'
 
 " Moving around and such
 Plugin 'Lokaltog/vim-easymotion'
@@ -31,12 +35,12 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'dag/vim2hs'
 Plugin 'Twinside/vim-hoogle' " cabal install hoogle; hoogle data
 Plugin 'eagletmt/ghcmod-vim'  " needs cabal install ghc-mod
-Plugin 'nbouscal/vim-stylish-haskell'
+Plugin 'nbouscal/vim-stylish-haskell' " needs cabal install stylish-haskell on $PHATH
 Plugin 'Shougo/vimproc.vim'
+Plugin 'eagletmt/neco-ghc'
 
 " Syntax highlight and autocomplete
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'eagletmt/neco-ghc'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 
@@ -53,6 +57,8 @@ Plugin 'flazz/vim-colorschemes'
 " Dpaste
 Plugin 'vim-scripts/Dpaste.com-Plugin'
 
+" =============== Sensible defaults ===============
+
 " Whiste space: Show tabs
 set list
 set listchars=tab:\|\
@@ -64,16 +70,11 @@ filetype plugin indent on    " required
 " re-map leader key
 let mapleader=","
 
+set completeopt=menu,longest
+
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-
-" Custom ctrlp ignore options
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist|node_modules)$',
-  \ 'file': '\v\.(pyc)$',
-  \ }
 
 " tab manipulation
 " nnoremap <C-j> :tabprev<cr>
@@ -86,6 +87,7 @@ let g:ctrlp_custom_ignore = {
 " Don't fold blocks
 let g:haskell_conceal = 0
 autocmd FileType haskell setlocal nofoldenable
+autocmd FileType cabal setlocal nofoldenable
 
 set pastetoggle=<F2>
 
@@ -102,6 +104,12 @@ set autoindent
 " line numbers
 set number
 
+" Close buffer
+nnoremap <F10> :bd<CR>
+
+" Enable to switch between buffers without saving
+set hidden
+
 " highlithgt trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -115,17 +123,31 @@ autocmd BufWritePre * :%s/\s\+$//e
 " status line at all times
 set laststatus=2
 
-" use powerline fonts
+" Powerline fonts
 let g:airline_powerline_fonts = 1
 
-" Color Theme
+" Spelling
+nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
+
+" =============== PLUGINS ===============
+
+
+" =============== CTRLP ===============
+" Custom ctrlp ignore options
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist|node_modules|build)$',
+  \ 'file': '\v\.(pyc)$',
+  \ }
+
+" =============== Color Theme ===============
 colorscheme busybee
 
-" Hoogle
+" =============== Hoogle ===============
 au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
 " au BufNewFile,BufRead *.hs map <buffer> <S-F1> :HoogleLine<CR>
 
-" Easymotion
+" =============== Easymotion ===============
+
 " re-map default <Leader> <Leader> to just <Leader>
 map <Leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-sn)
@@ -138,36 +160,53 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
-" Yankring
-nnoremap <silent> <F11> :YRShow<CR>
 
-" Close buffer
-nnoremap <F10> :bd<CR>
+" =============== Yankring ===============
+nnoremap <silent> <F12> :YRShow<CR>
 
-" Enable to switch between buffers without saving
-set hidden
+" =============== GhcMod bindings ===============
 
-" Ghc Mod bindings
-nnoremap <F5> :GhcModCheck<CR>
-nnoremap <C-h> :GhcModType<CR>
-nnoremap <C-l> :GhcModTypeClear<CR>
+nnoremap <F5>  :GhcModCheck<CR>
+" nnoremap <C-h> :GhcModType<CR>
+" nnoremap <C-l> :GhcModTypeClear<CR>
 
-nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
+" Auto lint and check with ghc-mod on buffer write
+" autocmd BufWritePost *.hs GhcModCheckAsync
 
-" Syntastic
+
+" =============== Syntastic ===============
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_always_populate_loc_list=1
 
 " let g:syntastic_debug = 3
-" Enable syntastic checker only for python
-let g:syntastic_mode_map = {
-            \ "mode": "active",
-            \ "active_filetypes": ["python"],
-            \ "passive_filetypes": ["haskell"]}
+map <Leader>s :SyntasticToggleMode<CR>
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Haskell autocomplete with YCM
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" =============== YouCompleteMe ===============
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
-" Auto lint and check with ghc-mod on buffer write
-" autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+" =============== Tabular ===============
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
+" =============== NerdTree ===============
+map <Leader>n :NERDTreeToggle<CR>
+
+
+" =============== UtilSnips ===============
+let g:UltiSnipsExpandTrigger="<insert>"
+
