@@ -1,0 +1,25 @@
+
+- name: Create .vim directory
+  file: path=/home/deni/.vim state=directory mode=0755
+
+- name: Create .vim/bundle
+  file: path=/home/deni/.vim/bundle state=directory mode=0755
+
+- name: install vundle
+  git: repo=https://github.com/vundlevim/vundle.vim.git dest=/home/deni/.vim/bundle/Vundle.vim update=no
+
+- name: Make sure to link vimrc config
+  file: src=/home/deni/dotfiles/vim/vimrc dest=/home/deni/.vimrc owner=deni group=deni state=link
+
+- name: make sure to link vim after
+  file: src=/home/deni/dotfiles/vim/after dest=/home/deni/.vim/after owner=deni group=deni state=link
+
+- name: make sure to link vim ftdetect
+  file: src=/home/deni/dotfiles/vim/ftdetect dest=/home/deni/.vim/ftdetect owner=deni group=deni state=link
+
+- name: Make sure to link vim indent
+  file: src=/home/deni/dotfiles/vim/indent dest=/home/deni/.vim/indent owner=deni group=deni state=link
+
+- name: Make sure to link vim syntax
+  file: src=/home/deni/dotfiles/vim/syntax dest=/home/deni/.vim/syntax owner=deni group=deni state=link
+

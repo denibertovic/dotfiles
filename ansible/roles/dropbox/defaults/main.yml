@@ -1,0 +1,3 @@
+
+dropbox_deb_url: "https://www.dropbox.com/download?dl=packages/debian/dropbox_2015.10.28_amd64.deb"
+dropbox_deb_local_path: "/tmp/dropbox.deb"

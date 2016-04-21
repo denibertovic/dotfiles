@@ -1,0 +1,54 @@
+- name: apt-get update
+  apt: update_cache=yes
+  become: yes
+  ignore_errors: True
+
+- name: Install required packages
+  become: yes
+  apt: name={{ item }} state=installed
+  with_items:
+    - ack-grep
+    - apt-transport-https
+    - build-essential
+    - ca-certificates
+    - cmake
+    - cryptkeeper
+    - fonts-powerline
+    - git
+    - gnome-shell-extension-redshift
+    - htop
+    - iftop
+    - keepassx
+    - make
+    - mc
+    - parcellite
+    - pidgin
+    - python-dev
+    - python-pip
+    - python-virtualenv
+    - redshift
+    - rxvt-unicode-256color
+    - sudo
+    - vim
+    - vim-gnome
+    - vim-nox
+    - weechat
+    - zsh
+
+- name: Install virtualenvwrapper
+  become: yes
+  pip: name=virtualenvwrapper
+
+- name: Copy over logind.conf
+  become: yes
+  copy: src=logind.conf dest=/etc/systemd/logind.conf
+
+- name: Make sure to link urxvt config
+  file: src=/home/deni/dotfiles/Xdefaults dest=/home/deni/.Xdefaults owner=deni group=deni state=link
+
+- name: install oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/deni/.oh-my-zsh update=no
+
+- name: link zshrc
+  file: src=/home/deni/dotfiles/zshrc dest=/home/deni/.zshrc owner=deni group=deni state=link
+

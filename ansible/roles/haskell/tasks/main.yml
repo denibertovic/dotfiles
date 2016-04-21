@@ -1,0 +1,13 @@
+
+- name: Add FP complete apt key
+  become: yes
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=575159689BEFB442
+
+- name: Add FP complete apt repo
+  become: yes
+  apt_repository: repo='deb http://download.fpcomplete.com/debian jessie main' state=present
+
+- name: Install Stack
+  become: yes
+  apt: name=stack state=installed
+
