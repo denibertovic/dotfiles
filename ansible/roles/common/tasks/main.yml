@@ -8,6 +8,7 @@
   apt: name={{ item }} state=installed
   with_items:
     - ack-grep
+    - acpi-call-dkms
     - apt-transport-https
     - build-essential
     - ca-certificates
@@ -32,6 +33,8 @@
     - redshift-gtk
     - rxvt-unicode-256color
     - sudo
+    - tlp
+    - tp-smapi-dkms
     - vim
     - vim-gnome
     - vim-nox
