@@ -14,8 +14,8 @@ urxvt*underlineColor:   #86a2be
 urxvt.url-launcher:     xdg-open
 urxvt*cutchars:         `"()'*<>[]{|}
 !A
-urxvt*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=11
-urxvt*boldFont:         xft:DejaVu Sans Mono for Powerline:pixelsize=11
+urxvt*font:             xft:Monospace:size=7
+urxvt*boldFont:         xft:Monospace-Bold:size=7
 ! A
 urxvt*scrollBar:        false
 urxvt*jumpScroll:       false
@@ -33,6 +33,13 @@ urxvt*saveLines:        15000
 urxvt*tintColor: white
 urxvt*shading:   15
 urxvt*fading:	 20
+
+!-- Xft settings -- !
+Xft.dpi:        192
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintfull
 
 ! A
 

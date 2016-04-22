@@ -1,1 +1,15 @@
 Repo for my various config files...
+
+Steps:
+
+1. Install Ansible:
+
+    apt-get install python-pip
+    pip install ansible
+
+2. Make sure the user has passwordless sudo
+
+3. Run the playbook:
+
+    make
+

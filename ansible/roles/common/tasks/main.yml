@@ -13,10 +13,12 @@
     - ca-certificates
     - cmake
     - cryptkeeper
+    - curl
     - fonts-powerline
     - git
     - gnome-shell-extension-redshift
     - htop
+    - icedove
     - iftop
     - keepassx
     - make
@@ -27,12 +29,14 @@
     - python-pip
     - python-virtualenv
     - redshift
+    - redshift-gtk
     - rxvt-unicode-256color
     - sudo
     - vim
     - vim-gnome
     - vim-nox
     - weechat
+    - wget
     - zsh
 
 - name: Install virtualenvwrapper

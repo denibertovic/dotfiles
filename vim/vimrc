@@ -166,7 +166,7 @@ nnoremap <silent> <F12> :YRShow<CR>
 
 " =============== GhcMod bindings ===============
 
-nnoremap <F5>  :GhcModCheck<CR>
+nnoremap <F5>  :GhcModCheckAndLint<CR>
 " nnoremap <C-h> :GhcModType<CR>
 " nnoremap <C-l> :GhcModTypeClear<CR>
 
