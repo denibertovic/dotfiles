@@ -1,6 +1,8 @@
 ! urxvt settings
+! Fix the underscore not appearing issue
+URxvt.lineSpace: 1
 !A
-urxvt*geometry:         120x30
+urxvt*geometry:         120x25
 urxvt*title:            terminal
 urxvt*transparent:      false
 urxvt*depth:            32
