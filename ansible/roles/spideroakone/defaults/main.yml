@@ -1,4 +1,4 @@
 
-spideroakone_deb_url: "https://spideroak.com/getbuild?platform=debian&arch=x86_64"
-spideroakone_deb_local_path: "/tmp/spideroakone.deb"
+spideroakone_debian_apt_repo: "deb http://apt.spideroak.com/debian/ stable non-free"
+spideroakone_debian_apt_repo_key_url: "https://spideroak.com/dist/spideroak-apt-2016.asc"
 

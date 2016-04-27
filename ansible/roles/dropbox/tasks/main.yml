@@ -1,19 +1,12 @@
-- name: Does the Dropbox apt file exist?
+- name: Add Dropbox apt key
   become: yes
-  command: test -f /etc/apt/sources.list.d/dropbox.list
-  register: dropbox_apt_exists
-  ignore_errors: True
+  apt_key: keyserver="{{ dropbox_debian_apt_repo_keyserver_url }}" id="{{ dropbox_debian_apt_repo_key_id }}"
 
-- name: Download dropbox package
-  get_url:
-    url={{ dropbox_deb_url }}
-    dest={{ dropbox_deb_local_path }}
-    # validate_certs=no   ## FIXME!!!
-  when: dropbox_apt_exists.rc == 1
+- name: Install dropbox apt repo
+  become: yes
+  apt_repository: repo="{{ dropbox_debian_apt_repo }}" state=present
 
 - name: Install dropbox package
   become: yes
-  apt: deb={{ dropbox_deb_local_path }}
-  when: dropbox_apt_exists.rc == 1
-
+  apt: name=dropbox state=installed
 

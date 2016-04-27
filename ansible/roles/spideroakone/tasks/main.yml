@@ -1,18 +1,12 @@
-- name: Does the SpiderOak One apt file exist?
+- name: Add Spideroak apt key
   become: yes
-  command: test -f /etc/apt/sources.list.d/spideroakone.list
-  register: spideroakone_apt_exists
-  ignore_errors: True
+  apt_key: url="{{ spideroakone_debian_apt_repo_key_url }}" state=present validate_certs=no
 
-- name: Download spideroak package
-  get_url:
-    url={{ spideroakone_deb_url }}
-    dest={{ spideroakone_deb_local_path }}
-    # validate_certs=no   ## FIXME!!!
-  when: spideroakone_apt_exists.rc == 1
+- name: Add Spideroak debian apt repo
+  become: yes
+  apt_repository: repo="{{ spideroakone_debian_apt_repo }}" state=present
 
 - name: Install spideroakone package
   become: yes
-  apt: deb={{ spideroakone_deb_local_path }}
-  when: spideroakone_apt_exists.rc == 1
+  apt: name=spideroakone state=installed
 
