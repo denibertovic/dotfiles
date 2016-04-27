@@ -47,7 +47,7 @@
   become: yes
   pip: name=virtualenvwrapper
 
-- name: Copy over logind.conf
+- name: Make sure lid close only locks the screen, not hibernate
   become: yes
   copy: src=logind.conf dest=/etc/systemd/logind.conf
 
