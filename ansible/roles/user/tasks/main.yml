@@ -1,0 +1,5 @@
+
+- name: Make sure the user is in the correct groups has the correct shell
+  become: yes
+  user: name=deni shell=/usr/bin/zsh groups=geoclue,docker,lpadmin append=yes
+

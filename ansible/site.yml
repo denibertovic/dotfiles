@@ -10,4 +10,7 @@
     - { role: spideroakone, tags: ["spideroakone"] }
     - { role: haskell, tags: ["haskell"] }
     - { role: docker, tags: ["docker"] }
+    - { role: user, tags: ["user"] } # This needs to be the last role because
+                                     # we add the user to groups that might not
+                                     # exist yet if not installed by roles above!
 
