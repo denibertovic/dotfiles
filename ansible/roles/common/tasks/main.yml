@@ -51,6 +51,14 @@
   become: yes
   copy: src=logind.conf dest=/etc/systemd/logind.conf
 
+- name: Enable Trackpoint middle click scrolling
+  become: yes
+  copy: src=usr_share_x11_xorg.conf.d_20-thinkpad.conf dest=/usr/share/X11/xorg.conf.d/20-thinkpad.conf
+
+- name: Tweak Trackpoint sensitivity and speed
+  become: yes
+  copy: src=etc_udev_rules.d_10-trackpoint.rules dest=/etc/udev/rules.d/10-trackpoint.rules
+
 - name: Make sure to link urxvt config
   file: src=/home/deni/dotfiles/Xdefaults dest=/home/deni/.Xdefaults owner=deni group=deni state=link
 
