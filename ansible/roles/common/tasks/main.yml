@@ -1,11 +1,6 @@
-- name: apt-get update
-  apt: update_cache=yes
-  become: yes
-  ignore_errors: True
-
 - name: Install required packages
   become: yes
-  apt: name={{ item }} state=installed
+  apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - ack-grep
     - acpi-call-dkms
