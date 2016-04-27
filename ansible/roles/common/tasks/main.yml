@@ -38,6 +38,12 @@
     - wget
     - zsh
 
+- name: Install global pip packages
+  become: yes
+  pip: name={{ item }}
+  with_items:
+    - subliminal
+
 - name: Install virtualenvwrapper
   become: yes
   pip: name=virtualenvwrapper
