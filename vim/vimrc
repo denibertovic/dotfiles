@@ -211,6 +211,9 @@ vmap a- :Tabularize /-><CR>
 map <Leader>n :NERDTreeToggle<CR>
 
 
-" =============== UtilSnips ===============
+" =============== UltiSnips ===============
 let g:UltiSnipsExpandTrigger="<insert>"
+
+" Html comments
+vmap ,c <esc>a--><esc>'<i<!--<esc>'>$
 
