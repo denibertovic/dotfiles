@@ -19,6 +19,7 @@ alias met='cd /home/deni/meetup/docker'
 #
 alias c='docker-compose'
 alias m='docker-machine'
+alias gpg='gpg2'
 # Delete all stoped/exited containers except data containers which will have the naming scheme
 # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
 # dashes or underscores
@@ -52,6 +53,7 @@ alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
 alias t='/usr/local/bin/todo.sh'
+alias get-subtitles='subliminal download -l en .'
 
 # tmux
 alias tmux='tmux -2'
@@ -82,7 +84,7 @@ plugins=(git virtualenvwrapper docker cabal python keybase stack)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.stack/programs/x86_64-linux/ghc-7.10.3/bin:/home/deni/.local/bin:/usr/local/bin/terraform:$PATH"
+export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.stack/programs/x86_64-linux/ghc-8.0.1/bin:/home/deni/.local/bin:/usr/local/bin/terraform:$PATH"
 
 
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
