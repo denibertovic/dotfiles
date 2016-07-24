@@ -1,10 +1,14 @@
 [user]
-	name = Deni Bertovic
-	email = deni@denibertovic.com
-[core]
-	editor = vim
-	excludesfile = /home/deni/.gitignore
+  name = Deni Bertovic
+  email = deni@denibertovic.com
+  signingkey = B92EEA75
 
+[core]
+  editor = vim
+  excludesfile = /home/deni/.gitignore
+
+[gpg]
+  program = gpg2
 
 [merge]
   keepBackup = false
@@ -27,11 +31,11 @@
   cp = cherry-pick
   br = branch
   df = diff
-  lg = log -p
+  lg = log -p --show-signature
   hist = log --pretty=format:\"%C(auto) %h %ad | %s%d [%an]\" --graph --date=short
   unstage = reset HEAD --
 
 [color]
-	ui = true
+  ui = true
 [heroku]
-	account = initeq
+  account = initeq
