@@ -31,13 +31,16 @@ Plugin 'vim-scripts/buftabs'
 " Markup
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" Haskell mode
+" Haskell
 Plugin 'dag/vim2hs'
 Plugin 'Twinside/vim-hoogle' " cabal install hoogle; hoogle data
 Plugin 'eagletmt/ghcmod-vim'  " needs cabal install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell' " needs cabal install stylish-haskell on $PHATH
 Plugin 'Shougo/vimproc.vim'
 Plugin 'eagletmt/neco-ghc'
+
+" Purescript
+Plugin 'raichoo/purescript-vim'
 
 " Syntax highlight and autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -167,8 +170,9 @@ nnoremap <silent> <F12> :YRShow<CR>
 " =============== GhcMod bindings ===============
 
 nnoremap <F5>  :GhcModCheckAndLint<CR>
-" nnoremap <C-h> :GhcModType<CR>
-" nnoremap <C-l> :GhcModTypeClear<CR>
+nnoremap <C-h> :GhcModType<CR>
+nnoremap <C-l> :GhcModTypeClear<CR>
+nnoremap <leader>- :GhcModInfo<CR>
 
 map <silent> tw :GhcModTypeInsert<CR>
 map <silent> ts :GhcModSplitFunCase<CR>
