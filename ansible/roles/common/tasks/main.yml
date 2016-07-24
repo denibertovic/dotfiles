@@ -3,12 +3,23 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - ack-grep
+    - gnupg
+    - libpcre3-dev
+    - pkg-config
     - acpi-call-dkms
     - apt-transport-https
     - build-essential
     - ca-certificates
     - cmake
+    - inotify-tools
     - cryptkeeper
+    - ykneomgr
+    - pcscd
+    - scdaemon
+    - gnupg2
+    - yubikey-personalization
+    - yubikey-neo-manager
+    - pcsc-tools
     - curl
     - fonts-powerline
     - git
@@ -37,6 +48,7 @@
     - weechat
     - wget
     - zsh
+    - libtinfo-dev
 
 - name: Install global pip packages
   become: yes
