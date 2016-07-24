@@ -13,10 +13,9 @@ urxvt*foreground:       white
 urxvt*cursorBlink:      true
 urxvt*cursorColor:      magenta
 urxvt*underlineColor:   #86a2be
-urxvt.url-launcher:     xdg-open
 urxvt*cutchars:         `"()'*<>[]{|}
 !A
-urxvt*font:             xft:Monospace:size=7
+urxvt*font:             xft:Monospace:size=7,xft:Inconsolata\ for\ Powerline:size=7
 urxvt*boldFont:         xft:Monospace-Bold:size=7
 ! A
 urxvt*scrollBar:        false
@@ -46,7 +45,7 @@ Xft.hintstyle:  hintfull
 ! A
 
 URxvt.perl-ext-common:   font-size,default,matcher,url-select,keyboard-select
-URxvt.url-launcher:      /usr/bin/xdg-open
+URxvt.url-select.launcher: firefox
 URxvt.matcher.button:    1
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 
