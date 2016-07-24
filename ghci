@@ -1,3 +1,11 @@
 :set prompt "λ: "
+:set -XOverloadedStrings
 :set -fno-warn-type-defaults
 :set -Wall
+:def browser \ u -> return $ ":! firefox " ++ u
+:def package \ m -> return $ ":! ghc-pkg --simple-output find-module " ++ m
+:{
+:def doc \ m -> return $ if m == ""
+                         then ":browser $(ghc --print-libdir)/../../share/doc/ghc/html/index.html"
+                         else ":browser $(ghc-pkg --simple-output field $(ghc-pkg --simple-output find-module " ++ m ++ ") haddock-html)/$(echo " ++ m ++ " | tr . -).html"
+:}
