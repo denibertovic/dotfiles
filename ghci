@@ -2,6 +2,7 @@
 :set -XOverloadedStrings
 :set -fno-warn-type-defaults
 :set -Wall
+:set -fno-warn-name-shadowing
 :def browser \ u -> return $ ":! firefox " ++ u
 :def package \ m -> return $ ":! ghc-pkg --simple-output find-module " ++ m
 :{

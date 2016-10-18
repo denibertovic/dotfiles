@@ -24,7 +24,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
 
 " Moving around and such
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/buftabs'
 
@@ -33,6 +33,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell
 Plugin 'dag/vim2hs'
+" Plugin 'alx741/vim-hindent'
 Plugin 'Twinside/vim-hoogle' " cabal install hoogle; hoogle data
 Plugin 'eagletmt/ghcmod-vim'  " needs cabal install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell' " needs cabal install stylish-haskell on $PHATH
@@ -96,6 +97,7 @@ set pastetoggle=<F2>
 
 " markdown folding
 let g:vim_markdown_folding_disabled=1
+autocmd FileType markdown set tw=120
 
 " tabs and spaces and indent
 set tabstop=4
@@ -131,6 +133,7 @@ let g:airline_powerline_fonts = 1
 
 " Spelling
 nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
+autocmd FileType gitcommit setlocal spell
 
 " =============== PLUGINS ===============
 
@@ -199,6 +202,8 @@ let g:syntastic_check_on_wq = 0
 
 " =============== YouCompleteMe ===============
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
+" let g:ycm_server_log_level = 'debug'
+" let g:ycm_filetype_blacklist = { 'haskell': 1  }
 
 " =============== Tabular ===============
 let g:haskell_tabular = 1

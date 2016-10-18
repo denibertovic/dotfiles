@@ -14,12 +14,18 @@ ZSH_THEME="fwalch"
 # TEMP ALIASES
 #
 alias met='cd /home/deni/meetup/docker'
+alias mtorrents='/home/deni/scripts/mount_torrents.sh'
+alias mbackups='/home/deni/scripts/mount_backups.sh'
+alias utorrents='umount /media/varys/torrents'
+alias ubackups='umount /media/varys/backups'
+
+# Force gpg2
+alias gpg='gpg2'
 
 # docker related aliases
 #
 alias c='docker-compose'
 alias m='docker-machine'
-alias gpg='gpg2'
 # Delete all stoped/exited containers except data containers which will have the naming scheme
 # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
 # dashes or underscores
@@ -46,7 +52,7 @@ alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
-alias noack='ack-grep --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations'
+alias noack='ack-grep --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work'
 alias ack='ack-grep'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
@@ -84,7 +90,7 @@ plugins=(git virtualenvwrapper docker cabal python keybase stack)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.stack/programs/x86_64-linux/ghc-8.0.1/bin:/home/deni/.local/bin:/usr/local/bin/terraform:$PATH"
+export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.local/bin:/usr/local/bin/terraform:$PATH"
 
 
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/

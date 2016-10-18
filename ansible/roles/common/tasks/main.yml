@@ -12,6 +12,7 @@
     - ca-certificates
     - cmake
     - inotify-tools
+    - libcurl4-gnutls-dev
     - cryptkeeper
     - ykneomgr
     - pcscd
@@ -25,6 +26,7 @@
     - git
     - gnome-shell-extension-redshift
     - hplip
+    - python-notify2
     - htop
     - icedove
     - iftop
