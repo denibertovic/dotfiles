@@ -11,5 +11,4 @@
   apt: pkg={{ item }} state=installed
   with_items:
     - docker-engine
-    - docker-compose
 

@@ -15,8 +15,8 @@ urxvt*cursorColor:      magenta
 urxvt*underlineColor:   #86a2be
 urxvt*cutchars:         `"()'*<>[]{|}
 !A
-urxvt*font:             xft:Monospace:size=8,xft:Inconsolata\ for\ Powerline:size=8
-urxvt*boldFont:         xft:Monospace-Bold:size=8
+urxvt*font:             xft:Monospace:size=7,xft:Inconsolata\ for\ Powerline:size=7
+urxvt*boldFont:         xft:Monospace-Bold:size=7
 ! A
 urxvt*scrollBar:        false
 urxvt*jumpScroll:       false

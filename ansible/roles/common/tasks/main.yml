@@ -80,6 +80,27 @@
 - name: Make sure to link urxvt config
   file: src=/home/deni/dotfiles/Xdefaults dest=/home/deni/.Xdefaults owner=deni group=deni state=link
 
+- name: Link urxvt dir
+  file: src=/home/deni/dotfiles/urxvt dest=/home/deni/.urxvt owner=deni group=deni state=link
+
+- name: Link mc config
+  file: src=/home/deni/dotfiles/mc dest=/home/deni/.mc owner=deni group=deni state=link
+
+- name: Link todo config
+  file: src=/home/deni/dotfiles/todo dest=/home/deni/.todo owner=deni group=deni state=link
+
+- name: Link gitconfig
+  file: src=/home/deni/dotfiles/gitconfig dest=/home/deni/.gitconfig owner=deni group=deni state=link
+
+- name: Link flake8 config
+  file: src=/home/deni/dotfiles/flake8 dest=/home/deni/.flake8 owner=deni group=deni state=link
+
+- name: Link ghci config
+  file: src=/home/deni/dotfiles/ghci dest=/home/deni/.ghci owner=deni group=deni state=link
+
+- name: Link redshift config
+  file: src=/home/deni/dotfiles/redshift.conf dest=/home/deni/.config/redshift.conf owner=deni group=deni state=link
+
 - name: install oh-my-zsh
   git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/deni/.oh-my-zsh update=no
 

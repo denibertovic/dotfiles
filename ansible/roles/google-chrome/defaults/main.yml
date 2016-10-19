@@ -1,5 +1,5 @@
 
-google_chrome_debian_apt_repo: "deb http://dl.google.com/linux/chrome/deb/ stable main"
+google_chrome_debian_apt_repo: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
 google_chrome_debian_apt_repo_key_url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
 
 
