@@ -12,3 +12,20 @@
   with_items:
     - docker-engine
 
+- stat: path=/usr/local/bin/docker-compose
+  register: c
+
+- name: Install Docker Compose
+  become: yes
+  shell: curl -L "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
+  when: not c.stat.exists
+
+- name: Make sure docker-compose is executable
+  become: yes
+  file:
+    path="/usr/local/bin/docker-compose"
+    state=file
+    mode=0755
+    owner=root
+    group=root
+

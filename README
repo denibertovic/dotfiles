@@ -16,3 +16,4 @@ Steps:
     make
 
 4. Install vim plugins and run install.sh for YouCompleteMe
+5. Install skype
