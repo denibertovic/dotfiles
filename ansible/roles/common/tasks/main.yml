@@ -86,6 +86,9 @@
 - name: Link mc config
   file: src=/home/deni/dotfiles/mc dest=/home/deni/.mc owner=deni group=deni state=link
 
+- name: Link ansible.cfg
+  file: src=/home/deni/dotfiles/ansible.cfg dest=/home/deni/.ansible.cfg owner=deni group=deni state=link
+
 - name: Link todo config
   file: src=/home/deni/dotfiles/todo dest=/home/deni/.todo owner=deni group=deni state=link
 
@@ -109,7 +112,7 @@
 
 - name: Auto load wifi headset on connect
   become: yes
-  file: src=etc_pulse_default.pa dest=/etc/pulse/default.pa
+  copy: src=etc_pulse_default.pa dest=/etc/pulse/default.pa
 
 - name: Make autoload wifi headset changes take effect (if not already loaded)
   shell:  pacmd list-modules | if ! (grep -q "module-switch-on-connect2" - ); then pacmd load-module module-switch-on-connect; fi
