@@ -11,4 +11,7 @@ from=$1
 
 rsync -avz --progress $from:projects ~
 rsync -avz --progress $from:work ~
+rsync -avz --progress $from:.mozilla ~
+rsync -avz --progress $from:.icedove ~
+rsync -avz --progress $from:.weechat ~
 

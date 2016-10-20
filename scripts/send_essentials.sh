@@ -9,6 +9,9 @@ fi
 
 to=$1
 
-rsync -avz --progress projects $to:~
-rsync -avz --progress work $to:~
+rsync -avz --progress ~/projects $to:~
+rsync -avz --progress ~/work $to:~
+rsync -avz --progress ~/.mozilla $to:~
+rsync -avz --progress ~/.icedove $to:~
+rsync -avz --progress ~/.weechat $to:~
 
