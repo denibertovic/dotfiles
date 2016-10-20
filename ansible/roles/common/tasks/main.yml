@@ -116,3 +116,19 @@
 
 - name: Make autoload wifi headset changes take effect (if not already loaded)
   shell:  pacmd list-modules | if ! (grep -q "module-switch-on-connect2" - ); then pacmd load-module module-switch-on-connect; fi
+
+- name: Check if powerline fonts are installed
+  shell: fc-list | grep -q "Inconsolata\ for\ Powerline"
+  register: powerline
+
+- name: Clone powerline repo
+  git: repo=https://github.com/powerline/fonts dest=/tmp/powerline accept_hostkey=yes
+  when: powerline.rc != 0
+
+- name: Install powerline fonts
+  shell: cd /tmp/powerline && ./install.sh
+  when: powerline.rc != 0
+
+- name: Remove powerline repo
+  file: path=/tmp/powerline state=absent
+
