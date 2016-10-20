@@ -13,6 +13,9 @@ all: enable-multi-arch dependencies
 common:
 	@cd ansible && ansible-playbook -i inventory/localhost site.yml --tags=common
 
+tag:
+	@cd ansible && ansible-playbook -i inventory/localhost site.yml --tags=${TAG}
+
 enable-multi-arch:
 	@sudo dpkg --add-architecture i386
 
