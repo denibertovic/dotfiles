@@ -1,0 +1,14 @@
+- name: Add keybase apt key
+  become: yes
+  apt_key: keyserver="{{ keybase_debian_apt_repo_keyserver_url }}" id="{{ keybase_debian_apt_repo_key_id }}"
+
+- name: Install keybase apt repo
+  become: yes
+  apt_repository: repo="{{ keybase_debian_apt_repo }}" state=present
+
+- name: Install keybase
+  become: yes
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - keybase
+

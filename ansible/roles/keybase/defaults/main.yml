@@ -1,0 +1,3 @@
+keybase_debian_apt_repo: "deb http://prerelease.keybase.io/deb stable main"
+keybase_debian_apt_repo_keyserver_url: "pgp.mit.edu"
+keybase_debian_apt_repo_key_id:  "222B85B0F90BE2D24CFEB93F47484E50656D16C7"
