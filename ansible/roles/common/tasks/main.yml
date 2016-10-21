@@ -11,6 +11,7 @@
     - apt-transport-https
     - build-essential
     - ca-certificates
+    - todotxt-cli
     - cmake
     - inotify-tools
     - libcurl4-gnutls-dev

@@ -58,7 +58,7 @@ alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
-alias t='/usr/local/bin/todo.sh'
+alias t='/usr/bin/todo-txt'
 alias get-subtitles='subliminal download -l en .'
 
 # tmux
