@@ -54,6 +54,17 @@
     - libtinfo-dev
     - libssl-dev
 
+- name: Install PIL deps
+  become: yes
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - libfreetype6-dev
+    - libjpeg-dev
+    - zlib1g-dev
+    - liblcms2-dev
+    - libtiff5-dev
+    - libtk-img-dev
+
 - name: Install global pip packages
   become: yes
   pip: name={{ item }}
