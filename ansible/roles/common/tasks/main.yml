@@ -44,7 +44,6 @@
     - redshift-gtk
     - rxvt-unicode-256color
     - sudo
-    - tlp
     - tp-smapi-dkms
     - vim
     - vim-gnome
@@ -61,6 +60,15 @@
   with_items:
     - subliminal
     - ipython
+
+- name: Install tlp packages
+  become: yes
+  apt: name={{ item }} state=installed
+  with_items:
+    - tlp
+    - tlp-rdw
+    - tp-smapi-dkms
+    - acpi-call-dkms
 
 - name: Install virtualenvwrapper
   become: yes
