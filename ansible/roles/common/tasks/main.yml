@@ -133,6 +133,9 @@
 - name: link zshrc
   file: src=/home/deni/dotfiles/zshrc dest=/home/deni/.zshrc owner=deni group=deni state=link
 
+- name: link vimperatorrc
+  file: src=/home/deni/dotfiles/vimperatorrc dest=/home/deni/.vimperatorrc owner=deni group=deni state=link
+
 - name: Auto load wifi headset on connect
   become: yes
   copy: src=etc_pulse_default.pa dest=/etc/pulse/default.pa
