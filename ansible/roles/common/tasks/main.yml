@@ -9,6 +9,8 @@
     - pkg-config
     - acpi-call-dkms
     - apt-transport-https
+    - apt-listchanges
+    - apt-listbugs
     - build-essential
     - ca-certificates
     - todotxt-cli
