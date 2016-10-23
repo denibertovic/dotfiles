@@ -2,59 +2,59 @@
   become: yes
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
-    - gnome-tweak-tool
     - ack-grep
-    - gnupg
-    - libpcre3-dev
-    - pkg-config
     - acpi-call-dkms
-    - apt-transport-https
-    - apt-listchanges
     - apt-listbugs
+    - apt-listchanges
+    - apt-transport-https
     - build-essential
     - ca-certificates
-    - todotxt-cli
     - cmake
-    - inotify-tools
-    - libcurl4-gnutls-dev
     - cryptkeeper
-    - ykneomgr
-    - pcscd
-    - scdaemon
-    - gnupg2
-    - yubikey-personalization
-    - yubikey-neo-manager
-    - pcsc-tools
     - curl
     - fonts-powerline
     - git
     - gnome-shell-extension-redshift
+    - gnome-tweak-tool
+    - gnupg
+    - gnupg2
     - hplip
-    - python-notify2
     - htop
     - icedove
     - iftop
+    - inotify-tools
     - keepassx
+    - libcurl4-gnutls-dev
+    - libpcre3-dev
+    - libssl-dev
+    - libtinfo-dev
     - make
     - mc
     - parcellite
+    - pcsc-tools
+    - pcscd
     - pidgin
+    - pkg-config
     - python-dev
+    - python-notify2
     - python-pip
     - python-virtualenv
     - redshift
     - redshift-gtk
     - rxvt-unicode-256color
+    - scdaemon
     - sudo
+    - todotxt-cli
     - tp-smapi-dkms
     - vim
     - vim-gnome
     - vim-nox
     - weechat
     - wget
+    - ykneomgr
+    - yubikey-neo-manager
+    - yubikey-personalization
     - zsh
-    - libtinfo-dev
-    - libssl-dev
 
 - name: Install PIL deps
   become: yes
@@ -62,26 +62,26 @@
   with_items:
     - libfreetype6-dev
     - libjpeg-dev
-    - zlib1g-dev
     - liblcms2-dev
     - libtiff5-dev
     - libtk-img-dev
+    - zlib1g-dev
 
 - name: Install global pip packages
   become: yes
   pip: name={{ item }}
   with_items:
-    - subliminal
     - ipython
+    - subliminal
 
 - name: Install tlp packages
   become: yes
   apt: name={{ item }} state=installed
   with_items:
+    - acpi-call-dkms
     - tlp
     - tlp-rdw
     - tp-smapi-dkms
-    - acpi-call-dkms
 
 - name: Install virtualenvwrapper
   become: yes
