@@ -112,7 +112,7 @@
   file: src=/home/deni/dotfiles/urxvt dest=/home/deni/.urxvt owner=deni group=deni state=link
 
 - name: Link mc config
-  file: src=/home/deni/dotfiles/mc dest=/home/deni/.mc owner=deni group=deni state=link
+  file: src=/home/deni/dotfiles/mc dest=/home/deni/config/mc owner=deni group=deni state=link
 
 - name: Link ansible.cfg
   file: src=/home/deni/dotfiles/ansible.cfg dest=/home/deni/.ansible.cfg owner=deni group=deni state=link
