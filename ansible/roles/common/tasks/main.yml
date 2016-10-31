@@ -36,6 +36,7 @@
     - parcellite
     - pcsc-tools
     - pcscd
+    - pdftk
     - pidgin
     - pkg-config
     - python-dev
