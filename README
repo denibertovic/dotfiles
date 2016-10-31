@@ -17,3 +17,9 @@ Steps:
 
 4. Install vim plugins and run install.sh for YouCompleteMe
 5. Install skype
+6. gpg --import /path/to/backup/.gnupg/pubring.gpg
+   cp /path/to/backup/.gnupg/private-keys-v1.d/* ~/.gnupg/private-keys-v1.d
+   # verify
+   gpg -K # Should list key meta data but point to yubikey
+
+7. cd .vim/bundle/vimproc && make
