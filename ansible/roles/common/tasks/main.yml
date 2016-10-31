@@ -12,6 +12,7 @@
     - cmake
     - cryptkeeper
     - curl
+    - feh
     - fonts-powerline
     - git
     - gnome-shell-extension-redshift
