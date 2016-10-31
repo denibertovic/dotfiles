@@ -3,9 +3,11 @@
   become: yes
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
-    - xmonad
-    - xmobar
+    - dunst
+    - feh
     - stalonetray
+    - xmobar
+    - xmonad
 
 - name: Make sure to link xmonad config
   file: src=/home/deni/dotfiles/xmonad dest=/home/deni/.xmonad owner=deni group=deni state=link
