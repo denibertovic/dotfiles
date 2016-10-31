@@ -26,6 +26,8 @@
     - ipython
     - keepassx
     - libcurl4-gnutls-dev
+    - libffi-dev
+    - libmysqlclient-dev
     - libpcre3-dev
     - libssl-dev
     - libtinfo-dev
