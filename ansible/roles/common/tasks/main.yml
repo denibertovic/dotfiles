@@ -23,6 +23,7 @@
     - icedove
     - iftop
     - inotify-tools
+    - ipython
     - keepassx
     - libcurl4-gnutls-dev
     - libpcre3-dev
@@ -71,7 +72,6 @@
   become: yes
   pip: name={{ item }}
   with_items:
-    - ipython
     - subliminal
 
 - name: Install tlp packages
