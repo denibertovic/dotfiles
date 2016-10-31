@@ -11,6 +11,7 @@
     - { role: haskell, tags: ["haskell"] }
     - { role: docker, tags: ["docker"] }
     - { role: keybase, tags: ["keybase"] }
+    - { role: terraform, tags: ["terraform"] }
     - { role: xmonad, tags: ["xmonad"] }
     - { role: user, tags: ["user"] } # This needs to be the last role because
                                      # we add the user to groups that might not

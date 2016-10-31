@@ -1,0 +1,21 @@
+---
+- name: Check if terraform is installed
+  shell: terraform -v
+  ignore_errors: True
+  register: is_installed
+
+- name: Download zip tarrball
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/0.7.7/terraform_0.7.7_linux_amd64.zip"
+    dest: /tmp/terraform.zip
+    checksum: sha256:478c4fe311392804ffc449995e8d7f903abab56f7483f317c1f120d8c21b1a81
+  when: is_installed.rc != 0
+
+- name: Extract terraform and make executable
+  become: yes
+  unarchive: src=/tmp/terraform.zip dest=/usr/local/bin/ mode=755 owner=root group=root
+  when: is_installed.rc != 0
+
+- name: Remove terraform.zip
+  file: path=/tmp/terraform.zip state=absent
+
