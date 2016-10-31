@@ -5,9 +5,11 @@
   with_items:
     - dunst
     - feh
+    - suckless-tools
     - stalonetray
     - xmobar
     - xmonad
+    - xscreensaver
 
 - name: Make sure to link xmonad config
   file: src=/home/deni/dotfiles/xmonad dest=/home/deni/.xmonad owner=deni group=deni state=link
