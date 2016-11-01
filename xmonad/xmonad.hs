@@ -21,6 +21,8 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Left), prevWS)
+           , ((modMask x, xK_Print), spawn "gnome-screenshot")
+           , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
            ]
 
@@ -35,10 +37,11 @@ myStartupHook = do
 
 myManageHook = composeAll
     [ manageHook gnomeConfig
-    , resource  =? "parcellite"  --> doIgnore
-    , className =? "Gimp"        --> doFloat
-    , className =? "Keybase"     --> doFloat
-    , className =? "Keepassx"    --> doFloat
+    , resource  =? "parcellite"       --> doIgnore
+    , className =? "Gimp"             --> doFloat
+    , className =? "Keybase"          --> doFloat
+    , className =? "Keepassx"         --> doFloat
+    , className =? "Gnome-Screenshot" --> doIgnore
     , manageDocks
     ]
 
