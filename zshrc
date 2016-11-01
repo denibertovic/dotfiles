@@ -118,3 +118,4 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 export KEYTIMEOUT=1
+export SSH_AUTH_SOCK="$GNOME_KEYRING_CONTROL/ssh"

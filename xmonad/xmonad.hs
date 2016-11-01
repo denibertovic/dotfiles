@@ -29,6 +29,7 @@ newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
 
 myStartupHook = do
     spawnOnce "xsetroot -cursor_name left_ptr"
+    spawnOnce "gnome-keyring-daemon --start"
     spawnOnce "xmodmap ~/.Xmodmap"
     spawnOnce "gnome-settings-daemon"
     spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x000 --heighttype pixel --height 32"
