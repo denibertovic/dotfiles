@@ -23,3 +23,9 @@
 - name: Make sure to link Xresources config
   file: src=/home/deni/dotfiles/Xresources dest=/home/deni/.Xresources owner=deni group=deni state=link
 
+- name: Make sure dunst config dir exists
+  file: path=/home/deni/.config/dunst state=directory
+
+- name: Link dunstrc
+  file: src=/home/deni/dotfiles/dunstrc dest=/home/deni/.config/dunst/dunstrc owner=deni group=deni state=link
+
