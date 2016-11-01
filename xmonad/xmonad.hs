@@ -32,7 +32,7 @@ myStartupHook = do
     spawnOnce "gnome-keyring-daemon --start"
     spawnOnce "xmodmap ~/.Xmodmap"
     spawnOnce "gnome-settings-daemon"
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x000 --heighttype pixel --height 32"
+    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36"
     spawnOnce "parcellite"
     spawnOnce "synclient TouchpadOff=1"
     spawnOnce "redshift -c /home/deni/dotfiles/redshift.conf"
