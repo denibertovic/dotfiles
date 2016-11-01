@@ -11,7 +11,7 @@ import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.NoBorders
 import qualified XMonad.StackSet          as W
-import           XMonad.Util.EZConfig     (additionalKeys, removeKeys)
+import           XMonad.Util.EZConfig     (additionalKeys, removeKeys, additionalKeysP)
 import           XMonad.Util.Run          (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
@@ -25,6 +25,18 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
            ]
+
+audioToggleCmd = "amixer -q set Master toggle && amixer get Master | grep '\\[off\\]' && notify-send \"AUDIO OFF\" || notify-send \"AUDIO ON\""
+
+micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
+
+specialKeys = [ ("<XF86AudioMute>",       spawn audioToggleCmd)
+            , ("<XF86AudioLowerVolume>",  spawn "amixer -c 0 set Master 2dB-")
+            , ("<XF86AudioRaiseVolume>",  spawn "amixer -c 0 set Master 2dB+")
+            , ("<XF86AudioMicMute>",      spawn micToggleCmd)
+            , ("<XF86MonBrightnessUp>",   spawn "/home/deni/scripts/brightness.sh +10")
+            , ("<XF86MonBrightnessDown>", spawn "/home/deni/scripts/brightness.sh -10")
+            ]
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
     where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return)]
@@ -58,5 +70,5 @@ main = do
         , startupHook = myStartupHook
         , keys        = newKeys
         , modMask     = mod4Mask -- super key
-        }
+        } `additionalKeysP` specialKeys
 
