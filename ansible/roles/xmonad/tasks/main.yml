@@ -6,7 +6,7 @@
     - dunst
     - feh
     - suckless-tools
-    - stalonetray
+    - trayer
     - xmobar
     - xmonad
     - xscreensaver
@@ -16,9 +16,6 @@
 
 - name: Make sure to link xmobar config
   file: src=/home/deni/dotfiles/xmobarrc dest=/home/deni/.xmobarrc owner=deni group=deni state=link
-
-- name: Make sure to link stalonetray config
-  file: src=/home/deni/dotfiles/stalonetrayrc dest=/home/deni/.stalonetrayrc owner=deni group=deni state=link
 
 - name: Make sure to link Xmodmap config
   file: src=/home/deni/dotfiles/Xmodmap dest=/home/deni/.Xmodmap owner=deni group=deni state=link
