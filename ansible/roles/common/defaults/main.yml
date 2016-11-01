@@ -1,1 +1,3 @@
-
+default_user: deni
+default_group: "{{ default_user }}"
+screenshot_dir: "/home/{{ default_user }}/screenshots"

@@ -179,3 +179,13 @@
   become: yes
   kernel_blacklist: name=pcspkr state=present
 
+- name: Make sure screenshot directory exists
+  file: path="{{ screenshot_dir }}" state=directory owner={{ default_user }} group={{ default_group }}
+
+- name: Get gnome screenshot folder
+  shell: gsettings get org.gnome.gnome-screenshot auto-save-directory
+  register: screenshot_dir_check
+
+- name: Set gnome screenshot folder
+  shell: gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///{{ screenshot_dir }}"
+  when: screenshot_dir_check.stdout == "''"
