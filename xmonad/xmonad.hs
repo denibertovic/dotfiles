@@ -40,12 +40,16 @@ myStartupHook = do
     spawnOnce "xscreensaver -nosplash"
     spawnOnce "dunst"
     spawnOnce "nm-applet"
+    spawnOnce "dropbox start"
+    spawnOnce "run_keybase"
+
 
 myManageHook = composeAll
     [ manageHook gnomeConfig
-    , resource  =? "stalonetray" --> doIgnore
-    , resource  =? "parcellite" --> doIgnore
-    , className =? "Gimp"      --> doFloat
+    , resource  =? "parcellite"  --> doIgnore
+    , className =? "Gimp"        --> doFloat
+    , className =? "Keybase"     --> doFloat
+    , className =? "Keepassx"    --> doFloat
     , manageDocks
     ]
 
