@@ -29,20 +29,9 @@ newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
 
 myStartupHook = do
     spawnOnce "xsetroot -cursor_name left_ptr"
-    spawnOnce "gnome-keyring-daemon --start"
     spawnOnce "xmodmap ~/.Xmodmap"
-    spawnOnce "gnome-settings-daemon"
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36"
-    spawnOnce "parcellite"
     spawnOnce "synclient TouchpadOff=1"
-    spawnOnce "redshift -c /home/deni/dotfiles/redshift.conf"
     spawnOnce "feh --bg-scale /home/deni/walls/droid.png"
-    spawnOnce "xscreensaver -nosplash"
-    spawnOnce "dunst"
-    spawnOnce "nm-applet"
-    spawnOnce "dropbox start"
-    spawnOnce "run_keybase"
-
 
 myManageHook = composeAll
     [ manageHook gnomeConfig
