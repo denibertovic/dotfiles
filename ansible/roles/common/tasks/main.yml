@@ -174,10 +174,8 @@
 - name: Remove pcspkr module
   become: yes
   modprobe: name=pcspkr state=absent
-  tags: "dinamo"
 
 - name: Make sure pcspkr module does not get loaded on boot
   become: yes
   kernel_blacklist: name=pcspkr state=present
-  tags: "dinamo"
 
