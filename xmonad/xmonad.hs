@@ -53,6 +53,7 @@ myManageHook = composeAll
     , className =? "Gimp"             --> doFloat
     , className =? "Keybase"          --> doFloat
     , className =? "Keepassx"         --> doFloat
+    , className =? "SpiderOakONE"     --> doFloat
     , className =? "Gnome-Screenshot" --> doIgnore
     , manageDocks
     ]

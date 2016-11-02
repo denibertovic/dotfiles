@@ -9,5 +9,6 @@ redshift -c /home/deni/dotfiles/redshift.conf &
 dunst &
 nm-applet &
 dropbox start &
+SpiderOakONE &
 run_keybase &
 
