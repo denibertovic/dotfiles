@@ -3,7 +3,7 @@ eval $(gnome-keyring-daemon --start)
 xscreensaver -nosplash &
 
 # Startup apps
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36 --monitor "primary" &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36 --monitor primary &
 parcellite &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst &
