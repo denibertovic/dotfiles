@@ -24,6 +24,7 @@
 [alias]
   ff = pull --ff-only
   a = add
+  ap = add -p
   au = add -u
   st = status
   ci = commit
