@@ -118,3 +118,19 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 export KEYTIMEOUT=1
+
+# use all 3 monitors at work
+workmon () {
+    killall trayer
+    xrandr --output eDP-1 --primary --below DP-2-2 --output DP-2-2 --right-of DP-2-1 --auto --output DP-2-1 --rotate left --auto
+    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36  --monitor 2 &
+
+}
+
+# set single monitor
+singlemon () {
+    killall trayer
+    xrandr --output DP-2-2 --off --output DP-2-1 --off
+    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36 &
+}
+
