@@ -11,3 +11,14 @@
   become: yes
   apt: name=stack state=installed
 
+- name: Run stack setup for global project
+  shell: stack setup
+
+- name: Install global packages
+  shell: stack install {{ item }}
+  with_items:
+    - hledger
+    - hledger-web
+    - ghc-mod
+    - stylish-haskell
+
