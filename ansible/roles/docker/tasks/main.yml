@@ -29,3 +29,14 @@
     owner=root
     group=root
 
+- name: Make sure systedmd override dir exists
+  become: yes
+  file: path=/etc/systemd/system/docker.service.d state=directory
+
+- name: Copy over docker systemd override
+  become: yes
+  copy: src=docker.conf dest=/etc/systemd/system/docker.service.d/docker.conf
+  notify:
+    - reload systemd configuration
+    - restart docker
+
