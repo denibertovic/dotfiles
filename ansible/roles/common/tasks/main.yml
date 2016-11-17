@@ -24,16 +24,20 @@
     - iftop
     - inotify-tools
     - ipython
+    - kazam
     - keepassx
     - libcurl4-gnutls-dev
-    - libnotify-bin
     - libffi-dev
+    - libgit2-dev
     - libmysqlclient-dev
+    - libnotify-bin
     - libpcre3-dev
+    - libpq-dev
     - libssl-dev
     - libtinfo-dev
     - make
     - mc
+    - pandoc
     - parcellite
     - pcsc-tools
     - pcscd
@@ -51,6 +55,7 @@
     - sudo
     - todotxt-cli
     - tp-smapi-dkms
+    - unrtf
     - vim
     - vim-gnome
     - vim-nox
