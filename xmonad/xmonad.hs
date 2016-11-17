@@ -11,7 +11,8 @@ import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.NoBorders
 import qualified XMonad.StackSet          as W
-import           XMonad.Util.EZConfig     (additionalKeys, removeKeys, additionalKeysP)
+import           XMonad.Util.EZConfig     (additionalKeys, additionalKeysP,
+                                           removeKeys)
 import           XMonad.Util.Run          (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
@@ -30,13 +31,13 @@ audioToggleCmd = "amixer -q set Master toggle && amixer get Master | grep '\\[of
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
-specialKeys = [ ("<XF86AudioMute>",       spawn audioToggleCmd)
-            , ("<XF86AudioLowerVolume>",  spawn "amixer -c 0 set Master 2dB-")
-            , ("<XF86AudioRaiseVolume>",  spawn "amixer -c 0 set Master 2dB+")
-            , ("<XF86AudioMicMute>",      spawn micToggleCmd)
-            , ("<XF86MonBrightnessUp>",   spawn "/home/deni/scripts/brightness.sh +10")
-            , ("<XF86MonBrightnessDown>", spawn "/home/deni/scripts/brightness.sh -10")
-            ]
+specialKeys = [ ("<XF86AudioMute>",         spawn audioToggleCmd)
+              , ("<XF86AudioLowerVolume>",  spawn "amixer -c 0 set Master 4dB-")
+              , ("<XF86AudioRaiseVolume>",  spawn "amixer -c 0 set Master 4dB+")
+              , ("<XF86AudioMicMute>",      spawn micToggleCmd)
+              , ("<XF86MonBrightnessUp>",   spawn "/home/deni/scripts/brightness.sh +10")
+              , ("<XF86MonBrightnessDown>", spawn "/home/deni/scripts/brightness.sh -10")
+              ]
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
     where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return)]
@@ -51,7 +52,11 @@ myManageHook = composeAll
     [ manageHook gnomeConfig
     , resource  =? "parcellite"       --> doIgnore
     , className =? "Gimp"             --> doFloat
+    , className =? "Firefox"          --> doFloat
+    , className =? "Google-chrome"    --> doFloat
+    , className =? "Gnome-calculator" --> doFloat
     , className =? "Keybase"          --> doFloat
+    , className =? "Totem"            --> doFloat
     , className =? "Keepassx"         --> doFloat
     , className =? "SpiderOakONE"     --> doFloat
     , className =? "Gnome-Screenshot" --> doIgnore
