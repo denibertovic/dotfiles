@@ -17,6 +17,8 @@
 - name: Install global packages
   shell: stack install {{ item }}
   with_items:
+    - hoogle
+    - hscolour
     - hledger
     - hledger-web
     - ghc-mod
