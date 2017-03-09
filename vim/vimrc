@@ -25,7 +25,7 @@ Plugin 'milkypostman/vim-togglelist'
 
 " Moving around and such
 Plugin 'easymotion/vim-easymotion'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/buftabs'
 
 " Markup
@@ -33,10 +33,10 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell
 Plugin 'dag/vim2hs'
-" Plugin 'alx741/vim-hindent'
-Plugin 'Twinside/vim-hoogle' " cabal install hoogle; hoogle data
-Plugin 'eagletmt/ghcmod-vim'  " needs cabal install ghc-mod
-Plugin 'nbouscal/vim-stylish-haskell' " needs cabal install stylish-haskell on $PHATH
+Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
+Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
+Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
+Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 Plugin 'Shougo/vimproc.vim'
 Plugin 'eagletmt/neco-ghc'
 
@@ -87,6 +87,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " buffer manipulation
 :noremap <C-j> :bprev<CR>
 :noremap <C-k> :bnext<CR>
+
+" window manipulation
+:map <F6> <C-W>w
 
 " Don't fold blocks
 let g:haskell_conceal = 0
