@@ -2,18 +2,21 @@
 -- Xmonad Configuration by Deni Bertovic
 --
 
-import qualified Data.Map                 as M
+import qualified Data.Map                   as M
 import           System.IO
 import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Config.Gnome
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Layout.IM
 import           XMonad.Layout.NoBorders
-import qualified XMonad.StackSet          as W
-import           XMonad.Util.EZConfig     (additionalKeys, additionalKeysP,
-                                           removeKeys)
-import           XMonad.Util.Run          (spawnPipe)
+import           XMonad.Layout.PerWorkspace
+import qualified XMonad.StackSet            as W
+import           XMonad.Util.EZConfig       (additionalKeys, additionalKeysP,
+                                             removeKeys)
+import           XMonad.Util.Run            (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
 
@@ -52,22 +55,37 @@ myManageHook = composeAll
     [ manageHook gnomeConfig
     , resource  =? "parcellite"       --> doIgnore
     , className =? "Gimp"             --> doFloat
-    , className =? "Firefox"          --> doFloat
-    , className =? "Google-chrome"    --> doFloat
     , className =? "Gnome-calculator" --> doFloat
     , className =? "Keybase"          --> doFloat
     , className =? "Totem"            --> doFloat
     , className =? "Keepassx"         --> doFloat
     , className =? "SpiderOakONE"     --> doFloat
     , className =? "Gnome-Screenshot" --> doIgnore
+    , className =? "Pidgin"           --> doShift "3"
+    , classNotRole ("Pidgin", "buddy_list") --> doFloat
     , manageDocks
     ]
+  where classNotRole :: (String, String) -> Query Bool
+        classNotRole (c,r) = (className =? c) <&&> (role /=? r)
+        role = stringProperty "WM_WINDOW_ROLE"
+
+
+-- Layouts
+myLayout = smartBorders $ avoidStruts $ onWorkspace "3" imLayout $ standardLayouts
+  where
+    --          numMasters, resizeIncr, splitRatio
+    tall = Tall 1           0.02        0.5
+    -- define the list of standardLayouts
+    standardLayouts = layoutHook defaultConfig -- tall ||| Mirror tall ||| Full
+    -- notice that withIM, which normally acts on one layout, can also
+    -- work on a list of layouts (yay recursive data types!)
+    imLayout = withIM (2/10) (Role "buddy_list") standardLayouts
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/deni/.xmobarrc"
     xmonad $ gnomeConfig
         { manageHook = myManageHook
-        , layoutHook = smartBorders $ avoidStruts $ layoutHook defaultConfig
+        , layoutHook = myLayout -- smartBorders $ avoidStruts $ layoutHook defaultConfig
         , logHook = dynamicLogWithPP xmobarPP
                    { ppOutput = hPutStrLn xmproc
                    , ppTitle = xmobarColor "green" "" . shorten 50
