@@ -10,6 +10,7 @@
     - build-essential
     - ca-certificates
     - cmake
+    - nfs-kernel-server
     - cryptkeeper
     - curl
     - fonts-powerline
@@ -50,15 +51,19 @@
     - python-virtualenv
     - redshift
     - redshift-gtk
+    - ruby-dev
     - rxvt-unicode-256color
     - scdaemon
     - sudo
     - todotxt-cli
     - tp-smapi-dkms
+    - ttyrec
     - unrtf
+    - vagrant
     - vim
     - vim-gnome
     - vim-nox
+    - virtualbox
     - weechat
     - wget
     - ykneomgr
@@ -130,7 +135,7 @@
   file: src=/home/deni/dotfiles/gitconfig dest=/home/deni/.gitconfig owner=deni group=deni state=link
 
 - name: Link flake8 config
-  file: src=/home/deni/dotfiles/flake8 dest=/home/deni/.flake8 owner=deni group=deni state=link
+  file: src=/home/deni/dotfiles/flake8 dest=/home/deni/.config/flake8 owner=deni group=deni state=link
 
 - name: Link ghci config
   file: src=/home/deni/dotfiles/ghci dest=/home/deni/.ghci owner=deni group=deni state=link
