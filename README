@@ -23,3 +23,30 @@ Steps:
    gpg -K # Should list key meta data but point to yubikey
 
 7. cd .vim/bundle/vimproc && make
+
+
+/etc/crypttab:
+
+add discard option
+
+/etc/fstab
+add defaults,noatime,discard options
+
+
+/etc/lvm/lvm.conf
+
+set issue_discards = 1
+
+And finally run: sudo update-initramfs -u -k all
+
+
+Troubleshooting:
+
+If ipython fails to start with the following error:
+
+    ImportError: No module named shutil_get_terminal_size
+
+Run the following command:
+
+    pip install --upgrade backports.shutil_get_terminal_size
+
