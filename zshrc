@@ -22,6 +22,11 @@ alias ubackups='umount /media/varys/backups'
 # Force gpg2
 alias gpg='gpg2'
 
+# Keymaps
+# Xmonad map is for switching Caps Lock for Control
+alias setkben="setxkbmap en_US && xmodmap ~/.Xmodmap"
+alias setkbhr="setxkbmap hr && xmodmap ~/.Xmodmap"
+
 # docker related aliases
 #
 alias c='docker-compose'
@@ -33,7 +38,7 @@ alias m='docker-machine'
 alias dclean='docker ps -a -f status=exited | grep -vi "datacontainer" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v'
 # remove all images tagged as <none>
 alias dcleanimages='docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
-alias dcleanvolumes='docker run -v $(which docker):/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker:/var/lib/docker --rm martin/docker-cleanup-volumes'
+alias dcleanvolumes='docker volume ls -q | xargs docker volume rm'
 alias dgc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
 alias dps='docker ps'
@@ -45,21 +50,21 @@ alias shell='./manage.py shell'
 alias debug='python -m pdb manage.py runserver'
 alias idebug='python -m ipdb manage.py runserver --pm'
 alias clojure='docker run -e LEIN_ROOT=1 -i -t clojure /bin/bash -c "lein repl"'
-alias ghci=ghci-color
+# alias ghci=ghci-color
 
 # other aliases
 alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
-alias noack='ack-grep --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work'
-alias ack='ack-grep'
+alias noack='ack --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
-alias psc='ps xawf -eo pid,user,cgroup,args'
+# alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
 alias t='/usr/bin/todo-txt'
 alias get-subtitles='subliminal download -l en .'
+alias copy-path="pwd | tr -d '\n' | xsel -b"
 
 # tmux
 alias tmux='tmux -2'
