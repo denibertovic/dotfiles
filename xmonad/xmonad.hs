@@ -2,7 +2,9 @@
 -- Xmonad Configuration by Deni Bertovic
 --
 
+import           Control.Monad
 import qualified Data.Map                   as M
+import           System.Exit
 import           System.IO
 import           XMonad
 import           XMonad.Actions.CycleWS
@@ -15,14 +17,21 @@ import           XMonad.Layout.IM
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
 import qualified XMonad.StackSet            as W
+import           XMonad.Util.Dmenu
 import           XMonad.Util.Dzen
 import           XMonad.Util.EZConfig       (additionalKeys, additionalKeysP,
                                              removeKeys)
 import           XMonad.Util.Run            (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
+quitWithWarning :: X ()
+quitWithWarning = do
+    let m = "Are you sure you want to quit?"
+    s <- dmenu [m]
+    when (m == s) (io exitSuccess)
 
 myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
+           , ((mod4Mask .|. shiftMask, xK_q), quitWithWarning)
            , ((modMask x, xK_Return), spawn $ XMonad.terminal x) -- %! Launch terminal
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Right), nextWS)
@@ -43,7 +52,7 @@ specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
               ]
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
-    where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return)]
+    where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return), (mod4Mask .|. shiftMask,   xK_q)]
 
 alert = dzenConfig (centered 150) . show . round
 centered w =
