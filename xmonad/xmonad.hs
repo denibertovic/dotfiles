@@ -6,6 +6,7 @@ import qualified Data.Map                   as M
 import           System.IO
 import           XMonad
 import           XMonad.Actions.CycleWS
+import           XMonad.Actions.Volume
 import           XMonad.Config.Gnome
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
@@ -14,6 +15,7 @@ import           XMonad.Layout.IM
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
 import qualified XMonad.StackSet            as W
+import           XMonad.Util.Dzen
 import           XMonad.Util.EZConfig       (additionalKeys, additionalKeysP,
                                              removeKeys)
 import           XMonad.Util.Run            (spawnPipe)
@@ -30,13 +32,11 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
            ]
 
-audioToggleCmd = "amixer -q set Master toggle && amixer get Master | grep '\\[off\\]' && notify-send \"AUDIO OFF\" || notify-send \"AUDIO ON\""
-
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
-specialKeys = [ ("<XF86AudioMute>",         spawn audioToggleCmd)
-              , ("<XF86AudioLowerVolume>",  spawn "amixer -c 0 set Master 4dB-")
-              , ("<XF86AudioRaiseVolume>",  spawn "amixer -c 0 set Master 4dB+")
+specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
+              , ("<XF86AudioLowerVolume>",  lowerVolume 4 >>= alert)
+              , ("<XF86AudioRaiseVolume>",  raiseVolume 4 >>= alert)
               , ("<XF86AudioMicMute>",      spawn micToggleCmd)
               , ("<XF86MonBrightnessUp>",   spawn "/home/deni/scripts/brightness.sh +10")
               , ("<XF86MonBrightnessDown>", spawn "/home/deni/scripts/brightness.sh -10")
@@ -44,6 +44,16 @@ specialKeys = [ ("<XF86AudioMute>",         spawn audioToggleCmd)
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
     where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return)]
+
+alert = dzenConfig (centered 150) . show . round
+centered w =
+        onCurr (center w 66)
+    >=> font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
+    >=> addArgs ["-fg", "#80c0ff"]
+    >=> addArgs ["-bg", "#000040"]
+
+showAudioMuteAlert True  = dzenConfig (centered 300) $ "Sound Off"
+showAudioMuteAlert False = dzenConfig (centered 300) $ "Sound On"
 
 myStartupHook = do
     spawnOnce "xsetroot -cursor_name left_ptr"

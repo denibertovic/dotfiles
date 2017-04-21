@@ -4,7 +4,10 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - dunst
+    - dzen2
     - feh
+    - libghc-xmonad-contrib-dev
+    - libghc-xmonad-extras-dev
     - suckless-tools
     - trayer
     - xmobar
