@@ -27,12 +27,6 @@ import           XMonad.Util.EZConfig        (additionalKeys, additionalKeysP,
 import           XMonad.Util.Run             (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
-quitWithWarning :: X ()
-quitWithWarning = do
-    let m = "Are you sure you want to quit?"
-    s <- dmenu [m]
-    when (m == s) (io exitSuccess)
-
 promptConfig = defaultXPConfig
   { font        = "xft:Monospace-Bold:pixelsize=64"
   , borderColor = "#1e2320"
