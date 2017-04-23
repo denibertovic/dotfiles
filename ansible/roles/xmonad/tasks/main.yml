@@ -5,6 +5,7 @@
   with_items:
     - dunst
     - dzen2
+    - conky-all
     - feh
     - libghc-xmonad-contrib-dev
     - libghc-xmonad-extras-dev
@@ -13,6 +14,8 @@
     - xmobar
     - xmonad
     - xscreensaver
+    - xscreensaver-gl
+    - xscreensaver-gl-extra
 
 - name: Make sure to link xmonad config
   file: src=/home/deni/dotfiles/xmonad dest=/home/deni/.xmonad owner=deni group=deni state=link
