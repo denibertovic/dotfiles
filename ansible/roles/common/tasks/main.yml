@@ -10,7 +10,6 @@
     - build-essential
     - ca-certificates
     - cmake
-    - nfs-kernel-server
     - cryptkeeper
     - curl
     - fonts-powerline
@@ -19,6 +18,7 @@
     - gnome-tweak-tool
     - gnupg
     - gnupg2
+    - hddtemp
     - hplip
     - htop
     - icedove
@@ -36,8 +36,10 @@
     - libpq-dev
     - libssl-dev
     - libtinfo-dev
+    - lm-sensors
     - make
     - mc
+    - nfs-kernel-server
     - pandoc
     - parcellite
     - pcsc-tools
