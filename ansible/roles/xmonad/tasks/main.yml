@@ -3,19 +3,31 @@
   become: yes
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
+    - conky-all
     - dunst
     - dzen2
-    - conky-all
     - feh
     - libghc-xmonad-contrib-dev
     - libghc-xmonad-extras-dev
     - suckless-tools
     - trayer
+    - xfonts-terminus
     - xmobar
     - xmonad
     - xscreensaver
     - xscreensaver-gl
     - xscreensaver-gl-extra
+
+# Workaround xscreensaver delay after resuming from suspend
+# See here for more info:  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=781961
+- name: Copy over xscreensaver.service
+  become: yes
+  copy: src=xscreensaver.service dest=/etc/systemd/system/xscreensaver.service
+  notify:
+    - reload systemd configuration
+
+- name: Enable xscreensaver service
+  service: name=xscreensaver enabled=yes
 
 - name: Make sure to link xmonad config
   file: src=/home/deni/dotfiles/xmonad dest=/home/deni/.xmonad owner=deni group=deni state=link
