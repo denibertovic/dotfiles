@@ -4,7 +4,7 @@ URxvt.lineSpace: 1
 !A
 urxvt*geometry:         120x25
 urxvt*title:            terminal
-urxvt*transparent:      false
+urxvt*transparent:      true
 urxvt*depth:            32
 urxvt*termName:         rxvt
 !urxvt*background:       #242424
