@@ -4,22 +4,41 @@
 
 import           Control.Monad
 import qualified Data.Map                           as M
+import           Data.Monoid                        ((<>))
 import           System.Exit
 import           System.IO
 import           XMonad
 import           XMonad.Actions.Commands
+import           XMonad.Actions.CopyWindow          (copyToAll,
+                                                     killAllOtherCopies,
+                                                     wsContainingCopies)
 import           XMonad.Actions.CycleWS
+import           XMonad.Actions.DynamicProjects
+import           XMonad.Actions.DynamicProjects
+import           XMonad.Actions.SpawnOn             (spawnOn)
 import           XMonad.Actions.Volume
 import           XMonad.Actions.WithAll             (killAll)
 import           XMonad.Config.Gnome
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
+import           XMonad.Layout.Accordion            (Accordion (..))
 import           XMonad.Layout.BinarySpacePartition
+import           XMonad.Layout.BoringWindows
 import           XMonad.Layout.Grid
+import           XMonad.Layout.Hidden               (hideWindow,
+                                                     popOldestHiddenWindow)
 import           XMonad.Layout.IM
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
+import           XMonad.Layout.Simplest             (Simplest (..))
+import           XMonad.Layout.SubLayouts
+import           XMonad.Layout.Tabbed               (CustomShrink (..),
+                                                     Shrinker (..), Theme (..),
+                                                     addTabs, shrinkText,
+                                                     simpleTabbed, tabbed)
+import           XMonad.Layout.WindowNavigation
+import           XMonad.ManageHook
 import           XMonad.Prompt                      (XPConfig (..),
                                                      XPPosition (..),
                                                      defaultXPConfig)
@@ -30,8 +49,12 @@ import qualified XMonad.Util.Dzen                   as D
 import           XMonad.Util.EZConfig               (additionalKeys,
                                                      additionalKeysP,
                                                      removeKeys)
-import           XMonad.Util.Run                    (spawnPipe)
+import           XMonad.Util.NamedScratchpad
+import           XMonad.Util.Run                    (runInTerm, spawnPipe)
 import           XMonad.Util.SpawnOnce
+
+
+myTerminal = "urxvt"
 
 -- Colors
 babyblue  = "#80c0ff"
@@ -62,7 +85,7 @@ yellow    = "#b58900"
 gap         = 10
 topbar      = 10
 border      = 0
-prompt      = 200
+prompt      = 100
 status      = 20
 
 myNormalBorderColor     = "#000000"
@@ -79,6 +102,23 @@ myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
 myWideFont  = "xft:Eurostar Black Extended:"
             ++ "style=Regular:pixelsize=180:hinting=true"
 myPromptFont = "xft:Monospace-Bold:pixelsize=64"
+myTabFont = "xft:Monospace-Bold:pixelsize=32"
+
+-- Browsers
+firefox = "firefox"
+chrome = "google-chrome"
+chromium = "chromium"
+
+myTabTheme = def
+    { fontName            = myTabFont
+    , activeColor         = active
+    , inactiveColor       = base02
+    , activeBorderColor   = active
+    , inactiveBorderColor = base02
+    , activeTextColor     = base03
+    , inactiveTextColor   = base00
+    , decoHeight          = 40
+    }
 
 myPromptTheme = def
     { font                  = myPromptFont
@@ -108,17 +148,47 @@ quitPromptTheme = myPromptTheme { promptBorderWidth = 20 }
 
 commands = defaultCommands
 
+toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
+                      [] -> windows copyToAll
+                      _  -> killAllOtherCopies
+
+
 myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. shiftMask, xK_q), confirmPrompt hotPromptTheme "exit" $ io exitSuccess)
            , ((modMask x, xK_Return), spawn $ XMonad.terminal x) -- %! Launch terminal
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Left), prevWS)
-           , ((mod4Mask .|. controlMask, xK_BackSpace), confirmPrompt hotPromptTheme "kill all" $ killAll)
+           , ((modMask x, xK_BackSpace), kill)
+           , ((mod4Mask .|. shiftMask, xK_BackSpace), confirmPrompt hotPromptTheme "kill all" $ killAll)
+           , ((modMask x, xK_n), withFocused hideWindow)
+           , ((mod4Mask .|. shiftMask, xK_p), switchProjectPrompt warmPromptTheme)
+           , ((mod4Mask .|. shiftMask, xK_o), toggleCopyToAll)
+           , ((mod4Mask .|. shiftMask, xK_n), popOldestHiddenWindow)
            , ((mod4Mask .|. controlMask, xK_y), commands >>= runCommand)
+           -- Window navigation and sublayouts
+           , ((mod4Mask .|. controlMask, xK_h), sendMessage $ pullGroup L)
+           , ((mod4Mask .|. controlMask, xK_l), sendMessage $ pullGroup R)
+           , ((mod4Mask .|. controlMask, xK_k), sendMessage $ pullGroup U)
+           , ((mod4Mask .|. controlMask, xK_j), sendMessage $ pullGroup D)
+           , ((mod4Mask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
+           , ((mod4Mask .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
+           , ((mod4Mask .|. controlMask, xK_period), onGroup W.focusUp')
+           , ((mod4Mask .|. controlMask, xK_comma), onGroup W.focusDown')
+           , ((modMask x, xK_j), focusUp)
+           , ((modMask x, xK_k), focusDown)
+           , ((modMask x, xK_m), focusMaster)
+           -- Scratchpads
+           , ((mod4Mask .|. controlMask, xK_h), namedScratchpadAction scratchpads "htop")
+           , ((mod4Mask .|. controlMask, xK_g), namedScratchpadAction scratchpads "googleMusic")
+           , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "trello")
+           -- , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "go")
+           -- Applications
            , ((modMask x, xK_Print), spawn "gnome-screenshot")
            , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
+           , ((modMask x, xK_backslash), spawn firefox)
+           , ((modMask x, xK_slash), spawn chrome)
            ]
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
@@ -132,7 +202,13 @@ specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
               ]
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
-    where changedKeys = removeKeys defaultConfig [(mod4Mask .|. shiftMask, xK_Return), (mod4Mask, xK_Return), (mod4Mask .|. shiftMask,   xK_q)]
+    where changedKeys = removeKeys defaultConfig [
+                            (mod4Mask .|. shiftMask, xK_Return)
+                          , (mod4Mask, xK_Return)
+                          , (mod4Mask .|. shiftMask,   xK_q)
+                          , (mod4Mask .|. shiftMask,   xK_c)
+                          , (mod4Mask .|. shiftMask,   xK_p)
+                          ]
 
 alert = D.dzenConfig (centered 150) . show . round
 centered w =
@@ -143,6 +219,15 @@ centered w =
 
 showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound Off"
 showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound On"
+
+-- COMMANDS
+trelloCommand = "dex $HOME/Desktop/trello.desktop"
+trelloResource = "crx_ncbimcinaaoicbdgigfhhkjkohgkdffc"
+isTrello = (resource =? trelloResource)
+
+googleMusicCommand = "dex $HOME/Desktop/googlemusic.desktop"
+googleMusicResource = "crx_mohcaplidabfmbioljcgponkanhekdbf"
+isGoogleMusic = (resource =? googleMusicResource)
 
 myStartupHook = do
     spawnOnce "xsetroot -cursor_name left_ptr"
@@ -162,34 +247,76 @@ myManageHook = composeAll
     , className =? "Gnome-Screenshot" --> doIgnore
     , className =? "Pidgin"           --> doShift "3"
     , classNotRole ("Pidgin", "buddy_list") --> doFloat
+    -- , isGoogleMusic --> doFullFloat
+    -- , isTrello --> doFullFloat
     , manageDocks
     ]
   where classNotRole :: (String, String) -> Query Bool
         classNotRole (c,r) = (className =? c) <&&> (role /=? r)
         role = stringProperty "WM_WINDOW_ROLE"
 
+scratchpads = [
+    -- run htop in xterm, find it by title, use default floating window placement
+    NS "htop" "urxvt -title htop -e htop" (title =? "htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  , NS "googleMusic" googleMusicCommand isGoogleMusic defaultFloating
+  , NS "trello" trelloCommand isTrello defaultFloating
+  ]
+
+dontShrinkText :: CustomShrink
+dontShrinkText = CustomShrink
+
+instance Shrinker CustomShrink where
+    shrinkIt _ "" = [""]
+    shrinkIt s cs = [cs]
 
 -- Layouts
-myLayout = smartBorders $ avoidStruts $ onWorkspace "3" imLayout $ myLayouts
+myLayout = smartBorders
+     $ windowNavigation
+     $ boringWindows
+     $ avoidStruts
+     $ addTabs shrinkText myTabTheme
+     $ subLayout [] (Simplest ||| Accordion)
+     $ onWorkspace "3" imLayout $ myLayouts
   where
     --          numMasters, resizeIncr, splitRatio
     tall = Tall 1           0.02        0.5
     -- define the list of standardLayouts
-    myLayouts = tall ||| Mirror tall ||| Full ||| Grid ||| emptyBSP
+    myLayouts = (layoutHook defaultConfig) ||| Grid ||| emptyBSP
     -- notice that withIM, which normally acts on one layout, can also
     -- work on a list of layouts (yay recursive data types!)
     imLayout = withIM (2/10) (Role "buddy_list") myLayouts
 
+wsDMO = "DMO"
+wsWRK = "WRK"
+
+-- Projects
+projects :: [Project]
+projects = [ Project { projectName  = wsDMO
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawn "/usr/lib/xscreensaver/spheremonics"
+                                                     runInTerm "-title top" "top"
+                                                     runInTerm "-title top" "htop"
+                                                     spawn "/usr/lib/xscreensaver/cubicgrid"
+                                                     spawn "/usr/lib/xscreensaver/surfaces"
+                     }
+           , Project { projectName  = wsWRK
+                     , projectDirectory  = "~/work/appsembler"
+                     , projectStartHook  = Just $ do spawnOn wsWRK myTerminal
+                                                     spawnOn wsWRK myTerminal
+                                                     spawnOn wsWRK myTerminal
+                     }
+           ]
+
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/deni/.xmobarrc"
-    xmonad $ gnomeConfig
-        { manageHook = myManageHook
+    xmonad $ dynamicProjects projects $ gnomeConfig
+        { manageHook = myManageHook <> namedScratchpadManageHook scratchpads
         , layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
                    { ppOutput = hPutStrLn xmproc
                    , ppTitle = xmobarColor "green" "" . shorten 50
                    }
-        , terminal    = "urxvt"
+        , terminal    = myTerminal
         , startupHook = myStartupHook
         , keys        = newKeys
         , modMask     = mod4Mask -- super key
