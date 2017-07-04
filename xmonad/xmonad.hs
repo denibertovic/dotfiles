@@ -106,7 +106,8 @@ myTabFont = "xft:Monospace-Bold:pixelsize=32"
 
 -- Browsers
 firefox = "firefox"
-chrome = "google-chrome"
+chrome = "google-chrome --force-device-scale-factor=2"
+chromeIncognito = "google-chrome --incognito"
 chromium = "chromium"
 
 myTabTheme = def
@@ -158,12 +159,13 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_Return), spawn $ XMonad.terminal x) -- %! Launch terminal
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Right), nextWS)
+           , ((modMask x, xK_Home), toggleWS' ["NSP"])
            , ((modMask x, xK_Left), prevWS)
            , ((modMask x, xK_BackSpace), kill)
            , ((mod4Mask .|. shiftMask, xK_BackSpace), confirmPrompt hotPromptTheme "kill all" $ killAll)
            , ((modMask x, xK_n), withFocused hideWindow)
-           , ((mod4Mask .|. shiftMask, xK_p), switchProjectPrompt warmPromptTheme)
-           , ((mod4Mask .|. shiftMask, xK_o), toggleCopyToAll)
+           , ((modMask x, xK_o), switchProjectPrompt warmPromptTheme)
+           , ((mod4Mask .|. shiftMask, xK_a), toggleCopyToAll)
            , ((mod4Mask .|. shiftMask, xK_n), popOldestHiddenWindow)
            , ((mod4Mask .|. controlMask, xK_y), commands >>= runCommand)
            -- Window navigation and sublayouts
@@ -182,7 +184,8 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_h), namedScratchpadAction scratchpads "htop")
            , ((mod4Mask .|. controlMask, xK_g), namedScratchpadAction scratchpads "googleMusic")
            , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "trello")
-           -- , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "go")
+           , ((mod4Mask .|. controlMask, xK_p), namedScratchpadAction scratchpads "keepassX")
+           -- , ((mod4Mask .|. controlMask, xK_bracketright), namedScratchpadAction scratchpads "pidgin")
            -- Applications
            , ((modMask x, xK_Print), spawn "gnome-screenshot")
            , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
@@ -221,6 +224,14 @@ showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound Off"
 showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound On"
 
 -- COMMANDS
+keepassXCommand = "keepassx"
+keepassXResource =  "keepassx"
+isKeepassX = (resource =? keepassXResource)
+
+-- pidginCommand = "pidgin"
+-- pidginResource =  "Pidgin"
+-- isPidgin = (appName =? pidginResource)
+
 trelloCommand = "dex $HOME/Desktop/trello.desktop"
 trelloResource = "crx_ncbimcinaaoicbdgigfhhkjkohgkdffc"
 isTrello = (resource =? trelloResource)
@@ -245,10 +256,9 @@ myManageHook = composeAll
     , className =? "Keepassx"         --> doFloat
     , className =? "SpiderOakONE"     --> doFloat
     , className =? "Gnome-Screenshot" --> doIgnore
-    , className =? "Pidgin"           --> doShift "3"
-    , classNotRole ("Pidgin", "buddy_list") --> doFloat
-    -- , isGoogleMusic --> doFullFloat
-    -- , isTrello --> doFullFloat
+    , className =? "Pidgin"           --> doShift "2"
+    , className =? "skypeforlinux"    --> doShift "2"
+    , classNotRole ("Pidgin", "buddy_list") --> doShift "2"
     , manageDocks
     ]
   where classNotRole :: (String, String) -> Query Bool
@@ -259,7 +269,9 @@ scratchpads = [
     -- run htop in xterm, find it by title, use default floating window placement
     NS "htop" "urxvt -title htop -e htop" (title =? "htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "googleMusic" googleMusicCommand isGoogleMusic defaultFloating
+  , NS "keepassX" keepassXCommand isKeepassX defaultFloating
   , NS "trello" trelloCommand isTrello defaultFloating
+  -- , NS "pidgin" pidginCommand isPidgin defaultFloating
   ]
 
 dontShrinkText :: CustomShrink
@@ -276,7 +288,7 @@ myLayout = smartBorders
      $ avoidStruts
      $ addTabs shrinkText myTabTheme
      $ subLayout [] (Simplest ||| Accordion)
-     $ onWorkspace "3" imLayout $ myLayouts
+     $ onWorkspace "2" imLayout $ myLayouts
   where
     --          numMasters, resizeIncr, splitRatio
     tall = Tall 1           0.02        0.5
@@ -286,8 +298,24 @@ myLayout = smartBorders
     -- work on a list of layouts (yay recursive data types!)
     imLayout = withIM (2/10) (Role "buddy_list") myLayouts
 
-wsDMO = "DMO"
-wsWRK = "WRK"
+
+-- Numbered
+-- 1 is Firefox (personal)
+-- 2 is IM (Piding/Skype)
+wsSYS1 = "3" -- random sys stuff
+wsSYS2 = "4" -- more random sys stuff
+wsPROJ = "5" -- working on projects
+-- 6 is freeform (open random apps here)
+-- 7 is Chrome (work)
+wsWORK1 = "8"
+wsWORK2 = "9"
+
+-- Named
+wsHS = "hs" -- haskell
+wsPURS = "purs" -- purescript
+wsIRC = "irc" -- weechat (irc and slack)
+wsEMAIL = "email" -- email
+wsDMO = "dmo"  -- random demo workspace
 
 -- Projects
 projects :: [Project]
@@ -299,11 +327,52 @@ projects = [ Project { projectName  = wsDMO
                                                      spawn "/usr/lib/xscreensaver/cubicgrid"
                                                      spawn "/usr/lib/xscreensaver/surfaces"
                      }
-           , Project { projectName  = wsWRK
-                     , projectDirectory  = "~/work/appsembler"
-                     , projectStartHook  = Just $ do spawnOn wsWRK myTerminal
-                                                     spawnOn wsWRK myTerminal
-                                                     spawnOn wsWRK myTerminal
+           , Project { projectName  = wsSYS1
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsSYS1 myTerminal
+                                                     spawnOn wsSYS1 myTerminal
+                                                     spawnOn wsSYS1 myTerminal
+                     }
+           , Project { projectName  = wsSYS2
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsSYS2 myTerminal
+                                                     spawnOn wsSYS2 myTerminal
+                                                     spawnOn wsSYS2 myTerminal
+                     }
+           , Project { projectName  = wsPROJ
+                     , projectDirectory  = "~/projects"
+                     , projectStartHook  = Just $ do spawnOn wsPROJ myTerminal
+                                                     spawnOn wsPROJ myTerminal
+                                                     spawnOn wsPROJ myTerminal
+                     }
+           , Project { projectName  = wsWORK1
+                     , projectDirectory  = "~/work"
+                     , projectStartHook  = Just $ do spawnOn wsWORK1 myTerminal
+                                                     spawnOn wsWORK1 myTerminal
+                                                     spawnOn wsWORK2 myTerminal
+                     }
+           , Project { projectName  = wsWORK2
+                     , projectDirectory  = "~/work"
+                     , projectStartHook  = Just $ do spawnOn wsWORK2 myTerminal
+                                                     spawnOn wsWORK2 myTerminal
+                     }
+           , Project { projectName  = wsPURS
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsPURS myTerminal
+                                                     spawnOn wsPURS myTerminal
+                     }
+           , Project { projectName  = wsHS
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsHS myTerminal
+                                                     spawnOn wsHS myTerminal
+                     }
+           , Project { projectName  = wsEMAIL
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsEMAIL "thunderbird"
+                     }
+           , Project { projectName  = wsIRC
+                     , projectDirectory  = "~/"
+                     , projectStartHook  = Just $ do spawnOn wsHS myTerminal
                      }
            ]
 
