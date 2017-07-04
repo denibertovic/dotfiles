@@ -22,6 +22,9 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'neomake/neomake'
+Plugin 'jceb/vim-orgmode'
 
 " Moving around and such
 Plugin 'easymotion/vim-easymotion'
@@ -44,8 +47,9 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'raichoo/purescript-vim'
 
 " Syntax highlight and autocomplete
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'bling/vim-airline'
 
 " Git gutters
@@ -180,10 +184,11 @@ nnoremap <C-h> :GhcModType<CR>
 nnoremap <C-l> :GhcModTypeClear<CR>
 nnoremap <leader>- :GhcModInfo<CR>
 
-map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ti :GhcModTypeInsert<CR>
 map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
+map <silent> tt :GhcModType<CR>
+map <silent> tc :GhcModTypeClear<CR>
+map <silent> tg :GhcModSigCodegen<CR>
 " Auto lint and check with ghc-mod on buffer write
 " autocmd BufWritePost *.hs GhcModCheckAsync
 
@@ -204,7 +209,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 " =============== YouCompleteMe ===============
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+" let g:ycm_semantic_triggers = {'haskell' : ['.']}
 " let g:ycm_server_log_level = 'debug'
 " let g:ycm_filetype_blacklist = { 'haskell': 1  }
 
@@ -220,8 +225,42 @@ map <Leader>n :NERDTreeToggle<CR>
 
 
 " =============== UltiSnips ===============
-let g:UltiSnipsExpandTrigger="<insert>"
+let g:UltiSnipsExpandTrigger="<C-u>"
 
 " Html comments
 vmap ,c <esc>a--><esc>'<i<!--<esc>'>$
+
+" hindent
+let g:hindent_on_save = 0
+
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" " Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" ========= Haskell specific ==========
+au FileType haskell compiler ghc
+au FileType haskell setlocal makeprg=stack
+" au FileType haskell nnoremap <buffer> gj :write<CR> :exec "AsyncRun " . &makeprg . " build"<CR>
+" au FileType haskell nnoremap <buffer> gk :write<CR> :exec "AsyncRun " . &makeprg . " test"<CR>
+au FileType haskell nnoremap <buffer> gll :Neomake<CR>
+au FileType haskell nnoremap <buffer><silent> gl<space> :call ToggleLocationList()<CR>
+au FileType haskell nnoremap <buffer><silent> glc :sign unplace *<CR>
 

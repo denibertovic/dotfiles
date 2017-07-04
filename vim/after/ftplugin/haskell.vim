@@ -1,4 +1,4 @@
 let g:haskellmode_completion_ghc = 0
-setlocal omnifunc=necoghc#omnifunc
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 set shiftwidth=2
-
+setlocal formatprg=hindent
