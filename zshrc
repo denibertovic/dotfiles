@@ -57,7 +57,7 @@ alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
-alias noack='ack --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-file=ext:sql'
+alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 # alias psc='ps xawf -eo pid,user,cgroup,args'
@@ -139,3 +139,4 @@ singlemon () {
     nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36 &
 }
 
+export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
