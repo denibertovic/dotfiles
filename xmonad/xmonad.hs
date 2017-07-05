@@ -3,6 +3,7 @@
 --
 
 import           Control.Monad
+import           Data.List                          (isInfixOf)
 import qualified Data.Map                           as M
 import           Data.Monoid                        ((<>))
 import           System.Exit
@@ -182,6 +183,7 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_m), focusMaster)
            -- Scratchpads
            , ((mod4Mask .|. controlMask, xK_h), namedScratchpadAction scratchpads "htop")
+           , ((mod4Mask .|. controlMask, xK_bracketleft), namedScratchpadAction scratchpads "weechat")
            , ((mod4Mask .|. controlMask, xK_g), namedScratchpadAction scratchpads "googleMusic")
            , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "trello")
            , ((mod4Mask .|. controlMask, xK_p), namedScratchpadAction scratchpads "keepassX")
@@ -267,7 +269,8 @@ myManageHook = composeAll
 
 scratchpads = [
     -- run htop in xterm, find it by title, use default floating window placement
-    NS "htop" "urxvt -title htop -e htop" (title =? "htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+    NS "weechat" "urxvt -title WeeChat -e weechat" (fmap (isInfixOf "WeeChat") title) (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  , NS "htop" "urxvt -title htop -e htop" (title =? "htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "googleMusic" googleMusicCommand isGoogleMusic defaultFloating
   , NS "keepassX" keepassXCommand isKeepassX defaultFloating
   , NS "trello" trelloCommand isTrello defaultFloating
@@ -313,7 +316,6 @@ wsWORK2 = "9"
 -- Named
 wsHS = "hs" -- haskell
 wsPURS = "purs" -- purescript
-wsIRC = "irc" -- weechat (irc and slack)
 wsEMAIL = "email" -- email
 wsDMO = "dmo"  -- random demo workspace
 
@@ -369,10 +371,6 @@ projects = [ Project { projectName  = wsDMO
            , Project { projectName  = wsEMAIL
                      , projectDirectory  = "~/"
                      , projectStartHook  = Just $ do spawnOn wsEMAIL "thunderbird"
-                     }
-           , Project { projectName  = wsIRC
-                     , projectDirectory  = "~/"
-                     , projectStartHook  = Just $ do spawnOn wsHS myTerminal
                      }
            ]
 
