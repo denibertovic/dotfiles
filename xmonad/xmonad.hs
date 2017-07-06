@@ -108,6 +108,8 @@ myTabFont = "xft:Monospace-Bold:pixelsize=32"
 -- Browsers
 firefox = "firefox"
 chrome = "google-chrome --force-device-scale-factor=2"
+work1Chrome = "google-chrome --profile-directory=\"Profile 2\""
+work2Chrome = "google-chrome --profile-directory=\"Profile 3\""
 chromeIncognito = "google-chrome --incognito"
 chromium = "chromium"
 
@@ -194,6 +196,8 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
            , ((modMask x, xK_backslash), spawn firefox)
            , ((modMask x, xK_slash), spawn chrome)
+           , ((modMask x, xK_semicolon), spawn work1Chrome)
+           , ((modMask x, xK_apostrophe), spawn work2Chrome)
            ]
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
