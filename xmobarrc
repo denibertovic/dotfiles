@@ -1,7 +1,7 @@
 Config { font = "xft:Bitstream Vera Sans Mono:size=10:antialias=true"
        , bgColor = "#222222"
        , fgColor = "grey"
-       , position = TopW L 80
+       , position = TopSize L 80 46
        , commands = [ Run Cpu ["-t", "<total>%", "-L","5","-H","40","--normal","green","--high","red"] 15
                     , Run BatteryP ["BAT0"] ["-t", "(AC: <acstatus>) <left>% <timeleft>", "-h", "green", "-n", "yellow", "-l", "red"] 30
                     , Run Memory ["-t", "<usedratio>%"] 30
