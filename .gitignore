@@ -5,4 +5,6 @@ xmonad/xmonad.errors
 xmonad/xmonad.hi
 xmonad/xmonad.o
 xmonad/history
+xmonad/xmonad.state
+xmonad/prompt-history
 mc/hotlist
