@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set showcmd
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -16,6 +17,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/auto-pairs-gentle'
 Plugin 'SirVer/ultisnips'
@@ -45,6 +47,7 @@ Plugin 'eagletmt/neco-ghc'
 
 " Purescript
 Plugin 'raichoo/purescript-vim'
+Plugin 'FrigoEU/psc-ide-vim'
 
 " Syntax highlight and autocomplete
 " Plugin 'Valloric/YouCompleteMe'
@@ -54,6 +57,7 @@ Plugin 'bling/vim-airline'
 
 " Git gutters
 Plugin 'mhinz/vim-signify'
+Plugin 'Yggdroot/indentLine'
 
 " Markdown
 Plugin 'plasticboy/vim-markdown'
@@ -64,6 +68,9 @@ Plugin 'flazz/vim-colorschemes'
 
 " Dpaste
 Plugin 'vim-scripts/Dpaste.com-Plugin'
+
+" todo.txt
+Plugin 'freitass/todo.txt-vim'
 
 " =============== Sensible defaults ===============
 
@@ -76,7 +83,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " re-map leader key
-let mapleader=","
+" let mapleader=","
+let maplocalleader = "\\"
 
 set completeopt=menu,longest
 
@@ -89,8 +97,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " nnoremap <C-k> :tabnext<cr>
 
 " buffer manipulation
-:noremap <C-j> :bprev<CR>
-:noremap <C-k> :bnext<CR>
+:noremap <C-j> :bnext<CR>
+:noremap <C-k> :bprev<CR>
 
 " window manipulation
 :map <F6> <C-W>w
@@ -104,6 +112,7 @@ set pastetoggle=<F2>
 
 " markdown folding
 let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_conceal = 0
 autocmd FileType markdown set tw=120
 
 " tabs and spaces and indent
@@ -112,6 +121,8 @@ set shiftwidth=4
 set expandtab
 set softtabstop=4
 set autoindent
+
+let g:indentLine_enabled = 0
 
 " line numbers
 set number
@@ -162,14 +173,14 @@ au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
 " =============== Easymotion ===============
 
 " re-map default <Leader> <Leader> to just <Leader>
-map <Leader> <Plug>(easymotion-prefix)
-nmap s <Plug>(easymotion-sn)
-nmap t <Plug>(easymotion-tn)
+" map <Leader> <Plug>(easymotion-prefix)
+" nmap s <Plug>(easymotion-sn)
+" nmap t <Plug>(easymotion-tn)
 " don't allow abuse of hjkl
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+map <leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
@@ -226,9 +237,6 @@ map <Leader>n :NERDTreeToggle<CR>
 
 " =============== UltiSnips ===============
 let g:UltiSnipsExpandTrigger="<C-u>"
-
-" Html comments
-vmap ,c <esc>a--><esc>'<i<!--<esc>'>$
 
 " hindent
 let g:hindent_on_save = 0
