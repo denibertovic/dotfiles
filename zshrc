@@ -19,13 +19,18 @@ alias mbackups='/home/deni/scripts/mount_backups.sh'
 alias utorrents='umount /media/varys/torrents'
 alias ubackups='umount /media/varys/backups'
 
+# kube
+alias check-kubectl-version='echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)'
+alias fetch-latest-kubectl='curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
+alias k='kubectl --namespace=${KUBECTL_NAMESPACE:-default}'
+
 # Force gpg2
 alias gpg='gpg2'
 
 # Keymaps
 # Xmonad map is for switching Caps Lock for Control
-alias setkben="setxkbmap en_US && xmodmap ~/.Xmodmap"
-alias setkbhr="setxkbmap hr && xmodmap ~/.Xmodmap"
+alias setkben='setxkbmap en_US && xmodmap ~/.Xmodmap'
+alias setkbhr='setxkbmap hr && xmodmap ~/.Xmodmap'
 
 # docker related aliases
 #
@@ -42,10 +47,10 @@ alias dcleanvolumes='docker volume ls -q | xargs docker volume rm'
 alias dgc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
 alias dps='docker ps'
-alias di="docker images | awk '{ print \$1}' | tail -n +2 | sort | uniq"
+alias di='docker images | awk "{ print \$1}" | tail -n +2 | sort | uniq'
 
 # development related aliases
-alias p="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
+alias p='python -c "import IPython; IPython.terminal.ipapp.launch_new_instance()"'
 alias shell='./manage.py shell'
 alias debug='python -m pdb manage.py runserver'
 alias idebug='python -m ipdb manage.py runserver --pm'
@@ -64,10 +69,16 @@ alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 alias ctl='systemctl'
 alias t='/usr/bin/todo-txt'
 alias get-subtitles='subliminal download -l en .'
-alias copy-path="pwd | tr -d '\n' | xsel -b"
+alias copy-path='pwd | tr -d "\n" | xsel -b'
 
 # tmux
 alias tmux='tmux -2'
+
+# jira
+alias jira-myissues='/home/deni/.virtualenvs/jira/bin/jira-cli view --search-jql="assignee=dbertovic AND status=Open" | less'
+alias jira-do='/home/deni/.virtualenvs/jira/bin/jira-cli update --transition="resolve issue" --resolution="Fixed"'
+alias jira-listcomments='/home/deni/.virtualenvs/jira/bin/jira-cli view --comments-only'
+alias jira-addcomment='/home/deni/.virtualenvs/jira/bin/jira-cli update --comment'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -91,7 +102,7 @@ WORKON_HOME=/home/deni/.virtualenvs
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenvwrapper docker cabal python keybase stack)
+plugins=(git git-flow virtualenvwrapper docker cabal python keybase stack vault pass)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,7 +139,7 @@ export KEYTIMEOUT=1
 workmon () {
     killall trayer
     xrandr --output eDP-1 --primary --below DP-2-2 --output DP-2-2 --right-of DP-2-1 --auto --output DP-2-1 --rotate left --auto
-    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36  --monitor 2 &
+    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 46 --monitor 2 > /tmp/nohup.out 2>&1 &
 
 }
 
@@ -136,7 +147,37 @@ workmon () {
 singlemon () {
     killall trayer
     xrandr --output DP-2-2 --off --output DP-2-1 --off
-    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 36 &
+    nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 46 > /tmp/nohup.out 2>&1 &
+}
+
+share-session () {
+    if (( $# == 0 ))
+    then
+        echo Usage: $0 WORKDIR;
+    else
+        docker run --rm -it \
+            -v $1:/opt/workdir \
+            -v /home/deni/.vim:/home/user/.vim \
+            -v /home/deni/dotfiles/vim/vimrc:/home/user/.vimrc \
+            -e LOCAL_USER_ID=$(id -u $USER) denibertovic/tmate tmate
+    fi;
 }
 
 export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
+
+# log last cmd to file
+# useful for documenting steps
+note () {
+    if [[ $# -eq 1  ]]; then
+        echo "Logging: `fc -ln -1`"
+        echo `fc -ln -1` >> "$HOME/Dropbox/notes/$1-`date +"%Y-%m-%d"`.md" ;
+    else
+        echo "Logging: `fc -ln -1`"
+        echo `fc -ln -1` >> "$HOME/Dropbox/notes/note-`date +"%Y-%m-%d"`.md" ;
+    fi
+}
+
+# setopt prompt_subst
+#
+eval "$(denv hook ZSH)"
+
