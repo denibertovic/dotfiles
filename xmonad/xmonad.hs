@@ -44,6 +44,7 @@ import           XMonad.Prompt                      (XPConfig (..),
                                                      XPPosition (..),
                                                      defaultXPConfig)
 import           XMonad.Prompt.ConfirmPrompt
+import           XMonad.Prompt.Shell                (shellPrompt)
 import qualified XMonad.StackSet                    as W
 import           XMonad.Util.Dmenu
 import qualified XMonad.Util.Dzen                   as D
@@ -107,7 +108,7 @@ myTabFont = "xft:Monospace-Bold:pixelsize=32"
 
 -- Browsers
 firefox = "firefox"
-chrome = "google-chrome --force-device-scale-factor=2"
+chrome = "google-chrome  --profile-directory=\"Default\""
 work1Chrome = "google-chrome --profile-directory=\"Profile 2\""
 work2Chrome = "google-chrome --profile-directory=\"Profile 3\""
 chromeIncognito = "google-chrome --incognito"
@@ -160,6 +161,8 @@ toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
 myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. shiftMask, xK_q), confirmPrompt hotPromptTheme "exit" $ io exitSuccess)
            , ((modMask x, xK_Return), spawn $ XMonad.terminal x) -- %! Launch terminal
+           -- , ((mod4Mask, xK_p), spawn "dmenu_run -fn -*-Monospace-*-r-*-*-16-*-*-*-*-*-*-*")
+           , ((mod4Mask, xK_p), shellPrompt myPromptTheme)
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Right), nextWS)
            , ((modMask x, xK_Home), toggleWS' ["NSP"])
@@ -189,13 +192,16 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_g), namedScratchpadAction scratchpads "googleMusic")
            , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "trello")
            , ((mod4Mask .|. controlMask, xK_p), namedScratchpadAction scratchpads "keepassX")
+           , ((mod4Mask .|. controlMask, xK_o), namedScratchpadAction scratchpads "yubioath")
            -- , ((mod4Mask .|. controlMask, xK_bracketright), namedScratchpadAction scratchpads "pidgin")
            -- Applications
            , ((modMask x, xK_Print), spawn "gnome-screenshot")
            , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
-           , ((modMask x, xK_backslash), spawn firefox)
-           , ((modMask x, xK_slash), spawn chrome)
+           , ((modMask x, xK_backslash), spawn chrome)
+           , ((modMask x, xK_i), spawn chromeIncognito)
+           , ((modMask x, xK_slash), spawn firefox)
+           , ((modMask x, xK_y), spawn "yubioath-gui")
            , ((modMask x, xK_semicolon), spawn work1Chrome)
            , ((modMask x, xK_apostrophe), spawn work2Chrome)
            ]
@@ -217,6 +223,7 @@ newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
                           , (mod4Mask .|. shiftMask,   xK_q)
                           , (mod4Mask .|. shiftMask,   xK_c)
                           , (mod4Mask .|. shiftMask,   xK_p)
+                          , (mod4Mask, xK_p)
                           ]
 
 alert = D.dzenConfig (centered 150) . show . round
@@ -230,8 +237,14 @@ showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound Off"
 showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound On"
 
 -- COMMANDS
-keepassXCommand = "keepassx"
-keepassXResource =  "keepassx"
+weechatCommand = "urxvt -title WeeChat -e weechat"
+isWeechat = (resource =? "urxvt") <&&> (fmap (isInfixOf "WeeChat") title)
+
+htopCommand = "urxvt -title htop -e htop"
+isHtop = (title =? "htop")
+
+keepassXCommand = "keepassxc"
+keepassXResource =  "keepassxc"
 isKeepassX = (resource =? keepassXResource)
 
 -- pidginCommand = "pidgin"
@@ -242,15 +255,16 @@ trelloCommand = "dex $HOME/Desktop/trello.desktop"
 trelloResource = "crx_ncbimcinaaoicbdgigfhhkjkohgkdffc"
 isTrello = (resource =? trelloResource)
 
+yubioathCommand = "yubioath-gui"
+yubioathResource = "yubioath-gui"
+isYubioath = (resource =? yubioathResource)
+
 googleMusicCommand = "dex $HOME/Desktop/googlemusic.desktop"
 googleMusicResource = "crx_mohcaplidabfmbioljcgponkanhekdbf"
 isGoogleMusic = (resource =? googleMusicResource)
 
 myStartupHook = do
-    spawnOnce "xsetroot -cursor_name left_ptr"
     spawnOnce "xmodmap ~/.Xmodmap"
-    spawnOnce "synclient TouchpadOff=1"
-    spawnOnce "feh --bg-scale /home/deni/walls/droid.png"
 
 myManageHook = composeAll
     [ manageHook gnomeConfig
@@ -271,13 +285,15 @@ myManageHook = composeAll
         classNotRole (c,r) = (className =? c) <&&> (role /=? r)
         role = stringProperty "WM_WINDOW_ROLE"
 
+
 scratchpads = [
     -- run htop in xterm, find it by title, use default floating window placement
-    NS "weechat" "urxvt -title WeeChat -e weechat" (fmap (isInfixOf "WeeChat") title) (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
-  , NS "htop" "urxvt -title htop -e htop" (title =? "htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+    NS "weechat" weechatCommand isWeechat (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  , NS "htop" htopCommand isHtop (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "googleMusic" googleMusicCommand isGoogleMusic defaultFloating
   , NS "keepassX" keepassXCommand isKeepassX defaultFloating
   , NS "trello" trelloCommand isTrello defaultFloating
+  , NS "yubioath" yubioathCommand isYubioath defaultFloating
   -- , NS "pidgin" pidginCommand isPidgin defaultFloating
   ]
 
@@ -381,15 +397,16 @@ projects = [ Project { projectName  = wsDMO
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/deni/.xmobarrc"
     xmonad $ dynamicProjects projects $ gnomeConfig
-        { manageHook = myManageHook <> namedScratchpadManageHook scratchpads
-        , layoutHook = myLayout
-        , logHook = dynamicLogWithPP xmobarPP
-                   { ppOutput = hPutStrLn xmproc
-                   , ppTitle = xmobarColor "green" "" . shorten 50
-                   }
-        , terminal    = myTerminal
-        , startupHook = myStartupHook
-        , keys        = newKeys
-        , modMask     = mod4Mask -- super key
+        { manageHook          = myManageHook <> namedScratchpadManageHook scratchpads
+        , layoutHook          = myLayout
+        , logHook             = dynamicLogWithPP xmobarPP
+                              { ppOutput = hPutStrLn xmproc
+                              , ppTitle  = xmobarColor "green" "" . shorten 50
+                              }
+        , terminal            = myTerminal
+        , startupHook         = myStartupHook
+        , keys                = newKeys
+        , modMask             = mod4Mask -- super key
+        , focusFollowsMouse   = False
         } `additionalKeysP` specialKeys
 
