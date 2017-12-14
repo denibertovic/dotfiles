@@ -1,15 +1,44 @@
+---
+- name: Check if stack is installed
+  shell: stack --version
+  ignore_errors: True
+  register: is_installed
 
-- name: Add FP complete apt key
-  become: yes
-  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=575159689BEFB442
+- name: Download stack tarrball
+  get_url:
+    url: "{{ stack_artifact_url }}"
+    dest: /tmp/stack.tar.gz
+  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
 
-- name: Add FP complete apt repo
-  become: yes
-  apt_repository: repo='deb http://download.fpcomplete.com/debian jessie main' state=present
+- name: Download stack tarball signature
+  get_url:
+    url: "{{ stack_artifact_signature_url }}"
+    dest: /tmp/stack.tar.gz.asc
+  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
 
-- name: Install Stack
+- name: Check stack tarball signature
+  shell: cd /tmp && gpg --verify stack.tar.gz.asc
+  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+
+# ^ It should not continue if this fails with an error code
+
+- name: Extract stack
   become: yes
-  apt: name=stack state=installed
+  unarchive: src=/tmp/stack.tar.gz dest=/tmp mode=755 owner=root group=root
+  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+
+- name: Install stack
+  become: yes
+  shell: mv /tmp/stack-{{ stack_version }}-linux-x86_64-static/stack /usr/local/bin/stack
+  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+
+- name: Remove stack install artifacts
+  become: yes
+  file: path=/tmp/{{ item }} state=absent
+  with_items:
+    - stack.tar.gz
+    - stack.tar.gz.asc
+    - stack-{{ stack_version }}-linux-x86_64-static
 
 - name: Run stack setup for global project
   shell: stack setup
