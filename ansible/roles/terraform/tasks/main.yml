@@ -9,13 +9,12 @@
     url: "{{ terraform_artifact_url }}"
     dest: /tmp/terraform.zip
     checksum: "{{ terraform_artifact_sha }}"
-  when: is_installed.rc != 0
+  when: (is_installed.rc != 0) and ('{{ terraform_version }}' not in is_installed.stdout)
 
 - name: Extract terraform and make executable
   become: yes
   unarchive: src=/tmp/terraform.zip dest=/usr/local/bin/ mode=755 owner=root group=root
-  when: is_installed.rc != 0
-
+  when: (is_installed.rc != 0) and ('{{ terraform_version }}' not in is_installed.stdout)
 
 - name: Remove terraform.zip
   file: path=/tmp/terraform.zip state=absent
