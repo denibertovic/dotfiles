@@ -1,0 +1,21 @@
+/home/deni/.cache
+*.pyc
+.stack-work
+node_modules
+bower_components
+/home/deni/Dropbox
+/home/deni/Photos
+/home/deni/SpiderOak Hive
+/home/deni/.config/SpiderOakONE
+/home/deni/VirtualBox VMs
+/home/deni/Downloads
+/home/deni/.nix*
+/home/deni/.stack
+/home/deni/.vagrant.d
+/home/deni/.CloudStation
+/home/deni/.cabal
+/home/deni/.ansible
+/home/deni/.bundle
+/home/deni/.virtualenvs
+/home/deni/Android
+/home/deni/AndroidStudioProjects
