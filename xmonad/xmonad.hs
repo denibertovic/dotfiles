@@ -265,6 +265,7 @@ isGoogleMusic = (resource =? googleMusicResource)
 
 myStartupHook = do
     spawnOnce "xmodmap ~/.Xmodmap"
+    spawnOnce "xrdb -merge -I$HOME ~/.Xresources"
 
 myManageHook = composeAll
     [ manageHook gnomeConfig
