@@ -1,0 +1,28 @@
+---
+- name: Check if kubectl is installed
+  shell: kubectl version
+  ignore_errors: True
+  register: kubectl_is_installed
+
+- name: Download kubectl binary
+  become: yes
+  get_url:
+    url: "{{ kubectl_artifact_url }}"
+    dest: /usr/local/bin/kubectl
+    mode: 0755
+  when: (kubectl_is_installed.rc != 0) and ('{{ kubectl_version }}' not in kubectl_is_installed.stdout)
+
+- name: Check if minikube is installed
+  shell: minikube version
+  ignore_errors: True
+  register: minikube_is_installed
+
+- name: Download minikube binary
+  become: yes
+  get_url:
+    url: "{{ minikube_artifact_url }}"
+    dest: /usr/local/bin/minikube
+    checksum: "{{ minikube_artifact_sha }}"
+    mode: 0755
+  when: (minikube_is_installed.rc != 0) and ('{{ minikube_version }}' not in minikube_is_installed.stdout)
+

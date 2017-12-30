@@ -13,6 +13,7 @@
     - { role: keybase, tags: ["keybase"] }
     - { role: terraform, tags: ["terraform"] }
     - { role: xmonad, tags: ["xmonad"] }
+    - { role: kube, tags: ["kube"] }
     - { role: user, tags: ["user"] } # This needs to be the last role because
                                      # we add the user to groups that might not
                                      # exist yet if not installed by roles above!
