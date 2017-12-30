@@ -44,6 +44,7 @@
     - nfs-kernel-server
     - pandoc
     - parcellite
+    - pass
     - pcsc-tools
     - pcscd
     - pdftk
