@@ -6,7 +6,7 @@
   become: yes
   apt_repository: repo="{{ docker_debian_apt_repo }}" state=present
 
-- name: Install Docker and Docker Compose
+- name: Install Docker
   become: yes
   apt: pkg={{ item }} state=installed
   with_items:
