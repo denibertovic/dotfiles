@@ -62,7 +62,7 @@ alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
-alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-file=ext:sql'
+alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 # alias psc='ps xawf -eo pid,user,cgroup,args'
@@ -102,7 +102,18 @@ WORKON_HOME=/home/deni/.virtualenvs
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow virtualenvwrapper docker cabal python keybase stack vault pass)
+plugins=(
+    git
+    git-flow
+    virtualenvwrapper
+    docker
+    cabal
+    python
+    keybase
+    stack
+    vault
+    pass
+)
 
 source $ZSH/oh-my-zsh.sh
 
