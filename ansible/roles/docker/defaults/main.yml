@@ -2,4 +2,5 @@
 docker_debian_apt_repo: "deb https://apt.dockerproject.org/repo debian-stretch main"
 docker_debian_apt_repo_keyserver_url: "hkp://p80.pool.sks-keyservers.net:80"
 docker_debian_apt_repo_key_id:  "58118E89F3A912897C070ADBF76221572C52609D"
-docker_compose_version: 1.8.1
+docker_compose_version: 1.17.1
+
