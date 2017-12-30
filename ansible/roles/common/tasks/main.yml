@@ -122,7 +122,7 @@
   copy: src=config_gtk-3.0_gtk.css dest=/home/deni/.config/gtk-3.0/gtk.css owner=deni group=deni
 
 - name: Make sure to link urxvt config
-  file: src=/home/deni/dotfiles/Xdefaults dest=/home/deni/.Xdefaults owner=deni group=deni state=link
+  file: src=/home/deni/dotfiles/Xresources dest=/home/deni/.Xresources owner=deni group=deni state=link
 
 - name: Link urxvt dir
   file: src=/home/deni/dotfiles/urxvt dest=/home/deni/.urxvt owner=deni group=deni state=link
