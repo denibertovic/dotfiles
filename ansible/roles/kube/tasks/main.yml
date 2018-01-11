@@ -10,7 +10,7 @@
     url: "{{ kubectl_artifact_url }}"
     dest: /usr/local/bin/kubectl
     mode: 0755
-  when: (kubectl_is_installed.rc != 0) and ('{{ kubectl_version }}' not in kubectl_is_installed.stdout)
+  when: (kubectl_is_installed.rc != 0) and (kubectl_version not in kubectl_is_installed.stdout)
 
 - name: Check if minikube is installed
   shell: minikube version
@@ -24,5 +24,19 @@
     dest: /usr/local/bin/minikube
     checksum: "{{ minikube_artifact_sha }}"
     mode: 0755
-  when: (minikube_is_installed.rc != 0) and ('{{ minikube_version }}' not in minikube_is_installed.stdout)
+  when: (minikube_is_installed.rc != 0) and (minikube_version not in minikube_is_installed.stdout)
+
+- name: Check if kops is installed
+  shell: kops version
+  ignore_errors: True
+  register: kops_is_installed
+
+- name: Download kops binary
+  become: yes
+  get_url:
+    url: "{{ kops_artifact_url }}"
+    dest: /usr/local/bin/kops
+    checksum: "{{ kops_artifact_sha }}"
+    mode: 0755
+  when: (kops_is_installed.rc != 0) and (kops_version not in kops_is_installed.stdout)
 
