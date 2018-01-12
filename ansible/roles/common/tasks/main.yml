@@ -28,6 +28,7 @@
     - iftop
     - inotify-tools
     - ipython
+    - jq
     - kazam
     - keepassx
     - libcurl4-gnutls-dev
