@@ -10,3 +10,8 @@ kops_version: 1.8.0
 kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
 kops_artifact_sha: "sha1:c19eb3cf0357bb5469636302ee56fe19ac5b5e30"
 
+helm_version: 2.7.2
+helm_artifact_url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+# curl helm_artifact_url.sha256 to get the sha
+helm_artifact_sha: "sha256:9f04c4824fc751d6c932ae5b93f7336eae06e78315352aa80241066aa1d66c49"
+

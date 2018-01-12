@@ -40,3 +40,34 @@
     mode: 0755
   when: (kops_is_installed.rc != 0) and (kops_version not in kops_is_installed.stdout)
 
+- name: Check if helm is installed
+  shell: helm version
+  ignore_errors: True
+  register: helm_is_installed
+
+- name: Download helm tarball
+  become: yes
+  get_url:
+    url: "{{ helm_artifact_url }}"
+    dest: /tmp/helm.tar.gz
+    checksum: "{{ helm_artifact_sha }}"
+    mode: 0755
+  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+
+- name: Extract helm and make executable
+  become: yes
+  unarchive: src=/tmp/helm.tar.gz dest=/tmp mode=755 owner=root group=root
+  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+
+- name: Move helm executable to /usr/local/bin
+  become: yes
+  shell: mv /tmp/linux-amd64/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm
+  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+
+- name: Remove helm download artifacts
+  become: yes
+  file: path=/tmp/{{ item }} state=absent
+  with_items:
+    - helm.tar.gz
+    - linux-amd64
+
