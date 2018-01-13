@@ -96,6 +96,7 @@
   pip: name={{ item }}
   with_items:
     - subliminal
+    - websocket-client # Needed for weechat plugin wee-slack
 
 - name: Install tlp packages
   become: yes
