@@ -4,33 +4,35 @@
   ignore_errors: True
   register: is_installed
 
+- debug: var=is_installed
+
 - name: Download stack tarrball
   get_url:
     url: "{{ stack_artifact_url }}"
     dest: /tmp/stack.tar.gz
-  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+  when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
 
 - name: Download stack tarball signature
   get_url:
     url: "{{ stack_artifact_signature_url }}"
     dest: /tmp/stack.tar.gz.asc
-  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+  when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
 
 - name: Check stack tarball signature
   shell: cd /tmp && gpg --verify stack.tar.gz.asc
-  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+  when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
 
 # ^ It should not continue if this fails with an error code
 
 - name: Extract stack
   become: yes
   unarchive: src=/tmp/stack.tar.gz dest=/tmp mode=755 owner=root group=root
-  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+  when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
 
 - name: Install stack
   become: yes
   shell: mv /tmp/stack-{{ stack_version }}-linux-x86_64-static/stack /usr/local/bin/stack
-  when: (is_installed.rc != 0) and ('{{ stack_version }}' not in is_installed.stdout)
+  when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
 
 - name: Remove stack install artifacts
   become: yes
