@@ -21,7 +21,7 @@ synclient TouchpadOff=1 &
 xmodmap ~/.Xmodmap &
 
 # Startup apps
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 46 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --heighttype pixel --height 20 &
 parcellite &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst &
