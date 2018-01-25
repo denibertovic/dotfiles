@@ -10,7 +10,7 @@
     url: "{{ kubectl_artifact_url }}"
     dest: /usr/local/bin/kubectl
     mode: 0755
-  when: (kubectl_is_installed.rc != 0) and (kubectl_version not in kubectl_is_installed.stdout)
+  when: (kubectl_is_installed.rc != 0) or (kubectl_version not in kubectl_is_installed.stdout)
 
 - name: Check if minikube is installed
   shell: minikube version
@@ -24,7 +24,7 @@
     dest: /usr/local/bin/minikube
     checksum: "{{ minikube_artifact_sha }}"
     mode: 0755
-  when: (minikube_is_installed.rc != 0) and (minikube_version not in minikube_is_installed.stdout)
+  when: (minikube_is_installed.rc != 0) or (minikube_version not in minikube_is_installed.stdout)
 
 - name: Check if kops is installed
   shell: kops version
@@ -38,7 +38,7 @@
     dest: /usr/local/bin/kops
     checksum: "{{ kops_artifact_sha }}"
     mode: 0755
-  when: (kops_is_installed.rc != 0) and (kops_version not in kops_is_installed.stdout)
+  when: (kops_is_installed.rc != 0) or (kops_version not in kops_is_installed.stdout)
 
 - name: Check if helm is installed
   shell: helm version
@@ -52,17 +52,17 @@
     dest: /tmp/helm.tar.gz
     checksum: "{{ helm_artifact_sha }}"
     mode: 0755
-  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+  when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
 
 - name: Extract helm and make executable
   become: yes
   unarchive: src=/tmp/helm.tar.gz dest=/tmp mode=755 owner=root group=root
-  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+  when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
 
 - name: Move helm executable to /usr/local/bin
   become: yes
   shell: mv /tmp/linux-amd64/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm
-  when: (helm_is_installed.rc != 0) and (helm_version not in helm_is_installed.stdout)
+  when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
 
 - name: Remove helm download artifacts
   become: yes
@@ -70,4 +70,37 @@
   with_items:
     - helm.tar.gz
     - linux-amd64
+
+- name: Check if kail is installed
+  shell: kail version
+  ignore_errors: True
+  register: kail_is_installed
+
+- name: Make sure kail temp dir exists
+  become: yes
+  file: path=/tmp/kail state=directory
+  when: (kail_is_installed.rc != 0) or (kail_version not in kops_is_installed.stdout)
+
+- name: Download kail tarball
+  become: yes
+  get_url:
+    url: "{{ kail_artifact_url }}"
+    dest: /tmp/kail/kail.tar.gz
+    checksum: "{{ kail_artifact_sha }}"
+    mode: 0755
+  when: (kail_is_installed.rc != 0) or (kail_version not in kops_is_installed.stdout)
+
+- name: Extract kail and make executable
+  become: yes
+  unarchive: src=/tmp/kail/kail.tar.gz dest=/tmp/kail mode=755 owner=root group=root
+  when: (kail_is_installed.rc != 0) or (kail_version not in kops_is_installed.stdout)
+
+- name: Move kail executable to /usr/local/bin
+  become: yes
+  shell: mv /tmp/kail/kail /usr/local/bin/kail && chmod +x /usr/local/bin/kail
+  when: (kail_is_installed.rc != 0) or (kail_version not in kops_is_installed.stdout)
+
+- name: Remove kail download artifacts
+  become: yes
+  file: path=/tmp/kail state=absent
 

@@ -15,3 +15,7 @@ helm_artifact_url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm
 # curl helm_artifact_url.sha256 to get the sha
 helm_artifact_sha: "sha256:9f04c4824fc751d6c932ae5b93f7336eae06e78315352aa80241066aa1d66c49"
 
+kail_version: 0.6.0
+kail_artifact_url: "https://github.com/boz/kail/releases/download/v{{ kail_version }}/kail_{{ kail_version }}_linux_amd64.tar.gz"
+kail_artifact_sha: "sha256:707fab484e36a205084d984ade132ee21cdd38a5b1009268eabf10890ab7778d"
+
