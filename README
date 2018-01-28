@@ -4,10 +4,10 @@ Steps:
 
 0. Set up paswordless sudo
 
-1. Install Ansible:
+1. Install prerequisites:
 
-    apt-get install python-pip
-    pip install ansible
+    apt-get install make git
+    # assuming you cloned this repo you have git already
 
 2. Make sure the user has passwordless sudo
 
