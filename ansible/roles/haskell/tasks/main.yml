@@ -1,5 +1,11 @@
 ---
-- name: Check if stack is installed
+- name: Install haskell prerequisites packages
+  become: yes
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - cabal-install
+
+ - name: Check if stack is installed
   shell: stack --version
   ignore_errors: True
   register: is_installed
