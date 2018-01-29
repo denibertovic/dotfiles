@@ -60,4 +60,6 @@
     - hledger-web
     - ghc-mod
     - stylish-haskell
+    - hdevtools
+    - hfmt
 
