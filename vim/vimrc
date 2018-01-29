@@ -25,7 +25,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'jceb/vim-orgmode'
 
 " Moving around and such
 Plugin 'easymotion/vim-easymotion'
@@ -39,7 +38,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
-
 Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 Plugin 'Shougo/vimproc.vim'
