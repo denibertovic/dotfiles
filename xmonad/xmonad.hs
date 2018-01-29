@@ -87,7 +87,7 @@ yellow    = "#b58900"
 gap         = 10
 topbar      = 10
 border      = 0
-prompt      = 100
+prompt      = 50
 status      = 20
 
 myNormalBorderColor     = "#000000"
@@ -103,7 +103,7 @@ myFont      = "-*-terminus-medium-*-*-*-*-160-*-*-*-*-*-*"
 myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
 myWideFont  = "xft:Eurostar Black Extended:"
             ++ "style=Regular:pixelsize=180:hinting=true"
-myPromptFont = "xft:Monospace-Bold:pixelsize=64"
+myPromptFont = "xft:Monospace-Bold:pixelsize=24"
 myTabFont = "xft:Monospace-Bold:pixelsize=32"
 
 -- Browsers
