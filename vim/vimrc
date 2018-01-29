@@ -37,7 +37,6 @@ Plugin 'vim-scripts/buftabs'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell
-Plugin 'dag/vim2hs'
 Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
 Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
