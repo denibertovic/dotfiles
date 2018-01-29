@@ -22,7 +22,6 @@ Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/auto-pairs-gentle'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'skywind3000/asyncrun.vim'
 
