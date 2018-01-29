@@ -24,8 +24,8 @@ urxvt*cursorBlink:      true
 urxvt*cursorColor:      magenta
 urxvt*underlineColor:   #86a2be
 !A
-urxvt*font:             xft:Monospace:size=7,xft:Inconsolata\ for\ Powerline:size=7
-urxvt*boldFont:         xft:Monospace-Bold:size=7
+urxvt*font:             xft:Monospace:size=9,xft:Inconsolata\ for\ Powerline:size=9
+urxvt*boldFont:         xft:Monospace-Bold:size=9
 ! A
 urxvt*scrollBar:        false
 urxvt*jumpScroll:       false
