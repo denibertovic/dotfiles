@@ -49,7 +49,6 @@ Plugin 'raichoo/purescript-vim'
 Plugin 'FrigoEU/psc-ide-vim'
 
 " Syntax highlight and autocomplete
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'bling/vim-airline'
@@ -183,7 +182,6 @@ map <leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
-
 " =============== Yankring ===============
 nnoremap <silent> <F12> :YRShow<CR>
 
@@ -217,11 +215,6 @@ set statusline+=%*
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-" =============== YouCompleteMe ===============
-" let g:ycm_semantic_triggers = {'haskell' : ['.']}
-" let g:ycm_server_log_level = 'debug'
-" let g:ycm_filetype_blacklist = { 'haskell': 1  }
 
 " =============== Tabular ===============
 let g:haskell_tabular = 1
