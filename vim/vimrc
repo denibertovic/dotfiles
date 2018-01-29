@@ -42,7 +42,6 @@ Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
 Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 Plugin 'Shougo/vimproc.vim'
-Plugin 'eagletmt/neco-ghc'
 
 " Purescript
 Plugin 'raichoo/purescript-vim'
