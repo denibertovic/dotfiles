@@ -62,6 +62,7 @@
     - rxvt-unicode-256color
     - scdaemon
     - sudo
+    - ssh
     - tmate
     - todotxt-cli
     - tp-smapi-dkms
