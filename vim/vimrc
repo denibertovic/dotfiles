@@ -20,9 +20,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/auto-pairs-gentle'
+" Plugin for snippets
+" integrates with a completion plugin
+" TODO: see if it works with deoplete
 Plugin 'SirVer/ultisnips'
+" Collection of useful snippets
 Plugin 'honza/vim-snippets'
+" Use leader+l or leader+q to toggle location/quick list
 Plugin 'milkypostman/vim-togglelist'
+" This plugin takes the advantage of new apis in Vim 8 (and NeoVim) to
+" enable you to run shell commands in background and read output
+" in the quickfix window in realtime
 Plugin 'skywind3000/asyncrun.vim'
 
 " Moving around and such
@@ -30,7 +38,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/buftabs'
 
-" Markup
+" Sparkup lets you write HTML code faster
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell
@@ -45,11 +53,13 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'raichoo/purescript-vim'
 Plugin 'FrigoEU/psc-ide-vim'
 
-" Syntax highlight and autocomplete
+" status bar
 Plugin 'bling/vim-airline'
 
-" Git gutters
+" uses the sign column to indicate added, modified and removed lines in a file that is managed
+" by a version control system (VCS)
 Plugin 'mhinz/vim-signify'
+"A vim plugin to display the indention levels with thin vertical lines
 Plugin 'Yggdroot/indentLine'
 
 " Markdown
