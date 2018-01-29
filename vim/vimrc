@@ -56,6 +56,11 @@ Plugin 'FrigoEU/psc-ide-vim'
 " status bar
 Plugin 'bling/vim-airline'
 
+" autocomplete
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+
 " uses the sign column to indicate added, modified and removed lines in a file that is managed
 " by a version control system (VCS)
 Plugin 'mhinz/vim-signify'
@@ -236,3 +241,5 @@ let g:hindent_on_save = 0
 au FileType haskell compiler ghc
 au FileType haskell setlocal makeprg=stack
 
+" ========= deoplete =======
+let g:deoplete#enable_at_startup = 1
