@@ -5,7 +5,7 @@
   with_items:
     - cabal-install
 
- - name: Check if stack is installed
+- name: Check if stack is installed
   shell: stack --version
   ignore_errors: True
   register: is_installed
