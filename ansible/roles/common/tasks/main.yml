@@ -75,6 +75,7 @@
     - virtualbox
     - weechat
     - wget
+    - xserver-xorg-input-synaptics
     - ykneomgr
     - yubikey-personalization
     - wireshark
