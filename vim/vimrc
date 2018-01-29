@@ -50,7 +50,6 @@ Plugin 'raichoo/purescript-vim'
 Plugin 'FrigoEU/psc-ide-vim'
 
 " Syntax highlight and autocomplete
-Plugin 'vim-syntastic/syntastic'
 Plugin 'bling/vim-airline'
 
 " Git gutters
@@ -209,21 +208,6 @@ autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursor
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \}
-
-" =============== Syntastic ===============
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_always_populate_loc_list=1
-
-" let g:syntastic_debug = 3
-map <Leader>s :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
 
 " =============== Tabular ===============
 let g:haskell_tabular = 1
