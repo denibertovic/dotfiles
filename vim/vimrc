@@ -25,7 +25,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'neomake/neomake'
 Plugin 'jceb/vim-orgmode'
 
 " Moving around and such
@@ -229,9 +228,4 @@ let g:hindent_on_save = 0
 " ========= Haskell specific ==========
 au FileType haskell compiler ghc
 au FileType haskell setlocal makeprg=stack
-" au FileType haskell nnoremap <buffer> gj :write<CR> :exec "AsyncRun " . &makeprg . " build"<CR>
-" au FileType haskell nnoremap <buffer> gk :write<CR> :exec "AsyncRun " . &makeprg . " test"<CR>
-au FileType haskell nnoremap <buffer> gll :Neomake<CR>
-au FileType haskell nnoremap <buffer><silent> gl<space> :call ToggleLocationList()<CR>
-au FileType haskell nnoremap <buffer><silent> glc :sign unplace *<CR>
 
