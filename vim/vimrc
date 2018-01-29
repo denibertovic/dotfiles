@@ -39,6 +39,8 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Haskell
 Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
+Plugin 'w0rp/ale' " Asynchronous Lint Engine
+
 Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
 Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 Plugin 'Shougo/vimproc.vim'
@@ -142,8 +144,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 " status line at all times
 set laststatus=2
 
-" Powerline fonts
+" Airline
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+
 
 " Spelling
 nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
@@ -198,6 +202,13 @@ map <silent> tg :GhcModSigCodegen<CR>
 " Auto lint and check with ghc-mod on buffer write
 " autocmd BufWritePost *.hs GhcModCheckAsync
 
+" ================= ALE =====================
+"
+" show multi-line errors in vim by combining your <Leader> key + ?
+autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<cr>
+let g:ale_linters ={
+      \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
+      \}
 
 " =============== Syntastic ===============
 let g:syntastic_python_checkers = ['flake8']
