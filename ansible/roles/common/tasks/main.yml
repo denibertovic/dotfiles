@@ -44,7 +44,7 @@
     - mc
     - nfs-kernel-server
     - pandoc
-    - parcellite
+    - diodon
     - pass
     - pcsc-tools
     - pcscd

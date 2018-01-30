@@ -22,7 +22,7 @@ xmodmap ~/.Xmodmap &
 
 # Startup apps
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 46 &
-parcellite &
+diodon &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst &
 nm-applet &
