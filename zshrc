@@ -174,6 +174,7 @@ share-session () {
     fi;
 }
 
+# I have no idea why I did this
 export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
 
 # log last cmd to file
