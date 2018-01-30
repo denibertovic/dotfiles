@@ -140,7 +140,7 @@ let g:indentLine_enabled = 0
 set number
 
 " Close buffer
-nnoremap <F10> :bd<CR>
+nnoremap <leader>d :bd<CR>
 
 " Enable to switch between buffers without saving
 set hidden
