@@ -409,6 +409,6 @@ main = do
         , startupHook         = myStartupHook
         , keys                = newKeys
         , modMask             = mod4Mask -- super key
-        , focusFollowsMouse   = False
+        , focusFollowsMouse   = True
         } `additionalKeysP` specialKeys
 
