@@ -4,6 +4,7 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - cabal-install
+    - exuberant-ctags
 
 - name: Check if stack is installed
   shell: stack --version
