@@ -253,7 +253,7 @@ isKeepassX = (resource =? keepassXResource)
 -- isPidgin = (appName =? pidginResource)
 
 trelloCommand = "dex $HOME/Desktop/trello.desktop"
-trelloResource = "crx_ncbimcinaaoicbdgigfhhkjkohgkdffc"
+trelloResource = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
 isTrello = (resource =? trelloResource)
 
 yubioathCommand = "yubioath-gui"
@@ -261,7 +261,7 @@ yubioathResource = "yubioath-gui"
 isYubioath = (resource =? yubioathResource)
 
 googleMusicCommand = "dex $HOME/Desktop/googlemusic.desktop"
-googleMusicResource = "crx_mohcaplidabfmbioljcgponkanhekdbf"
+googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
 isGoogleMusic = (resource =? googleMusicResource)
 
 myStartupHook = do
