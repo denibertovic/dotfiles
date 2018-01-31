@@ -4,6 +4,7 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - conky-all
+    - dex
     - dunst
     - dzen2
     - feh
