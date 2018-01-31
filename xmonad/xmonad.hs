@@ -107,7 +107,7 @@ myPromptFont = "xft:Monospace-Bold:pixelsize=24"
 myTabFont = "xft:Monospace-Bold:pixelsize=32"
 
 -- Browsers
-firefox = "firefox"
+firefox = "firefox-esr"
 chrome = "google-chrome  --profile-directory=\"Default\""
 work1Chrome = "google-chrome --profile-directory=\"Profile 2\""
 work2Chrome = "google-chrome --profile-directory=\"Profile 3\""
