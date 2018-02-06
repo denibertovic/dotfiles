@@ -1,4 +1,4 @@
-Xft.dpi: 240
+Xft.dpi: 192
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -24,8 +24,8 @@ urxvt*cursorBlink:      true
 urxvt*cursorColor:      magenta
 urxvt*underlineColor:   #86a2be
 !A
-urxvt*font:             xft:Monospace:size=7,xft:Inconsolata\ for\ Powerline:size=7
-urxvt*boldFont:         xft:Monospace-Bold:size=7
+urxvt*font:             xft:Monospace:size=9,xft:Inconsolata\ for\ Powerline:size=9
+urxvt*boldFont:         xft:Monospace-Bold:size=9
 ! A
 urxvt*scrollBar:        false
 urxvt*jumpScroll:       false
@@ -104,13 +104,13 @@ URxvt.keysym.M-r: perl:keyboard-select:search
 ! xscreensaver ---------------------------------------------------------------
 !
 !font settings
-xscreensaver.Dialog.headingFont:        -*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:           -*-dina-medium-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:          -*-dina-medium-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:          -*-dina-medium-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:         -*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:           -*-dina-medium-r-*-*-18-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:         -*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
+xscreensaver.Dialog.headingFont:        -*-terminus-bold-*-*-32-*-*-*-*-*-*-*
+xscreensaver.Dialog.bodyFont:           -*-terminus-medium-*-*-32-*-*-*-*-*-*-*
+xscreensaver.Dialog.labelFont:          -*-terminus-medium-*-*-32-*-*-*-*-*-*-*
+xscreensaver.Dialog.unameFont:          -*-terminus-medium-*-*-32-*-*-*-*-*-*-*
+xscreensaver.Dialog.buttonFont:         -*-terminus-bold-*-*-32-*-*-*-*-*-*-*
+xscreensaver.Dialog.dateFont:           -*-terminus-medium-*-*-18-*-*-*-*-*-*-*
+xscreensaver.passwd.passwdFont:         -*-terminus-bold-*-*-32-*-*-*-*-*-*-*
 !general dialog box (affects main hostname, username, password text)
 xscreensaver.Dialog.foreground:         #ffffff
 xscreensaver.Dialog.background:         #111111
@@ -121,7 +121,7 @@ xscreensaver.Dialog.Button.background:  #ffffff
 !username/password input box and date text colour
 xscreensaver.Dialog.text.foreground:    #666666
 xscreensaver.Dialog.text.background:    #ffffff
-xscreensaver.Dialog.internalBorderWidth:24
+xscreensaver.Dialog.internalBorderWidth:34
 xscreensaver.Dialog.borderWidth:        20
 xscreensaver.Dialog.shadowThickness:    2
 !timeout bar (background is actually determined by Dialog.text.background)
