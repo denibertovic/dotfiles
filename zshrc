@@ -68,6 +68,7 @@ alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 # alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
 alias t='/usr/bin/todo-txt'
+alias t-check-tags='grep -E -o "@.*" ~/Dropbox/todo/todo.txt  | sort | uniq'
 alias get-subtitles='subliminal download -l en .'
 alias copy-path='pwd | tr -d "\n" | xsel -b'
 
