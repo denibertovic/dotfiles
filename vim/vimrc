@@ -46,9 +46,14 @@ Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'Twinside/vim-hoogle' " stack install hoogle; hoogle generate
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
 Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
-Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
+" Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
+" Haskell syntax highlitght
+Plugin 'vim-scripts/haskell.vim'
 " Hooks into deoplete for completions
-Plugin 'eagletmt/neco-ghc'
+Plugin 'mkasa/lushtags'
+Plugin 'majutsushi/tagbar'
+Plugin 'mkasa/neco-ghc-lushtags'
+
 
 " Interactive command execution in Vim.
 Plugin 'Shougo/vimproc.vim'
@@ -140,12 +145,12 @@ let g:indentLine_enabled = 0
 set number
 
 " Close buffer
-nnoremap <leader>d :bd<CR>
+nnoremap <C-d> :bd<CR>
 
 " Enable to switch between buffers without saving
 set hidden
 
-" highlithgt trailing whitespace
+" highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -219,7 +224,7 @@ map <silent> tg :GhcModSigCodegen<CR>
 " ================= ALE =====================
 "
 " show multi-line errors in vim by combining your <Leader> key + ?
-autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<cr>
+autocmd FileType haskell nnoremap <buffer> <leader>a :call ale#cursor#ShowCursorDetail()<cr>
 let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \}
