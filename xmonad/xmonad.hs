@@ -234,8 +234,8 @@ centered w =
     >=> D.addArgs ["-fg", lightgray]
     >=> D.addArgs ["-bg", black]
 
-showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound Off"
-showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound On"
+showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound On"
+showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound Off"
 
 -- COMMANDS
 weechatCommand = "urxvt -title WeeChat -e weechat"
