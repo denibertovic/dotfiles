@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # env
-# export QT_ACCESSIBILITY=1
-# export QT_SCALE_FACTOR=2
-#export GDK_SCALE=2
+# Integer only
+# export GDK_SCALE=2
+# Can handle floats
+export GDK_DPI_SCALE=2
 
 # Xresources
 xsetroot -cursor_name left_ptr &
@@ -21,7 +22,7 @@ synclient TouchpadOff=1 &
 xmodmap ~/.Xmodmap &
 
 # Startup apps
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 46 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 33 &
 diodon &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst &
