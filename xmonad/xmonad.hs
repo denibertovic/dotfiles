@@ -213,9 +213,16 @@ specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
               , ("<XF86AudioLowerVolume>",  lowerVolume 4 >>= alert)
               , ("<XF86AudioRaiseVolume>",  raiseVolume 4 >>= alert)
               , ("<XF86AudioMicMute>",      spawn micToggleCmd)
-              , ("<XF86MonBrightnessUp>",   spawn "/home/deni/scripts/brightness.sh +10")
-              , ("<XF86MonBrightnessDown>", spawn "/home/deni/scripts/brightness.sh -10")
+              -- , ("<XF86AudioMicMute>",      toggleMuteMic >>= showMicMuteAlert)
+              , ("<XF86MonBrightnessUp>",   spawn "/home/deni/dotfiles/scripts/brightness.sh +10")
+              , ("<XF86MonBrightnessDown>", spawn "/home/deni/dotfiles/scripts/brightness.sh -10")
               ]
+
+micChannels :: [String]
+micChannels = ["Capture"]
+
+toggleMuteMic :: MonadIO m => m Bool
+toggleMuteMic = toggleMuteChannels micChannels
 
 newKeys x = M.union (keys changedKeys x) (M.fromList (myKeys x))
     where changedKeys = removeKeys defaultConfig [
@@ -236,6 +243,9 @@ centered w =
 
 showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound On"
 showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound Off"
+
+showMicMuteAlert True  = D.dzenConfig (centered 300) $ "Mic on"
+showMicMuteAlert False = D.dzenConfig (centered 300) $ "Mic off"
 
 -- COMMANDS
 weechatCommand = "urxvt -title WeeChat -e weechat"
