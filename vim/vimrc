@@ -226,6 +226,17 @@ let g:ale_linters ={
       \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
       \}
 
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:ale_lint_on_text_changed = 'never'
+
+highlight ALEWarning ctermbg=none
+
+
+" TEMPORARY FIX for issue: https://github.com/w0rp/ale/issues/1334
+let g:ale_echo_cursor = 0
+
 " =============== Tabular ===============
 let g:haskell_tabular = 1
 
