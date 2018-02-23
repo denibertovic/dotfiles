@@ -3,3 +3,9 @@
   become: yes
   user: name=deni shell=/usr/bin/zsh groups=geoclue,docker,lpadmin append=yes
 
+- name: Add battery watch crontab
+  cron:
+    name: "Check battery"
+    user: deni
+    job: "/home/deni/dotfiles/scripts/battery_watch.sh"
+

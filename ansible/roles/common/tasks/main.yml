@@ -3,6 +3,7 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - ack-grep
+    - acpi
     - acpi-call-dkms
     - apt-listbugs
     - apt-listchanges
@@ -34,6 +35,7 @@
     - libcurl4-gnutls-dev
     - libffi-dev
     - libgit2-dev
+    - libicu-dev
     - libmysqlclient-dev
     - libnotify-bin
     - libpcre3-dev
@@ -61,6 +63,7 @@
     - redshift-gtk
     - rsync
     - ruby-dev
+    - ruby-sass
     - rxvt-unicode-256color
     - scdaemon
     - sudo
