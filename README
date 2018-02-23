@@ -50,3 +50,10 @@ Run the following command:
 
     pip install --upgrade backports.shutil_get_terminal_size
 
+# Firefox disable middle button pase
+# This is annoying on the thinkpad X1 trackpoint middle button
+# becuase it's too sensitive and used for scrolling
+about:config
+    middlemouse.paste false
+    middlemouse.contentLoadURL false
+
