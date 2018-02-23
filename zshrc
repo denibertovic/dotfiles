@@ -14,8 +14,8 @@ ZSH_THEME="fwalch"
 # TEMP ALIASES
 #
 alias met='cd /home/deni/meetup/docker'
-alias mtorrents='/home/deni/scripts/mount_torrents.sh'
-alias mbackups='/home/deni/scripts/mount_backups.sh'
+alias mtorrents='/home/deni/dotfiles/scripts/mount_torrents.sh'
+alias mbackups='/home/deni/dotfiles/scripts/mount_backups.sh'
 alias utorrents='umount /media/varys/torrents'
 alias ubackups='umount /media/varys/backups'
 
