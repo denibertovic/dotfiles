@@ -18,7 +18,7 @@ common:
 
 ## Run Ansible playbook with single tag. TAG=keybase make tag
 tag:
-	@cd ansible && ansible-playbook -i inventory/localhost site.yml --tags=${TAG}
+	@cd ansible && ansible-playbook -i inventory/localhost site.yml --tags=${TAG} ${OPTS}
 
 ## Enable i386 arch
 enable-multi-arch:
