@@ -22,7 +22,6 @@ Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/auto-pairs-gentle'
 " Plugin for snippets
 " integrates with a completion plugin
-" TODO: see if it works with deoplete
 Plugin 'SirVer/ultisnips'
 " Collection of useful snippets
 Plugin 'honza/vim-snippets'
@@ -36,7 +35,6 @@ Plugin 'skywind3000/asyncrun.vim'
 " Moving around and such
 Plugin 'easymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/buftabs'
 
 " Sparkup lets you write HTML code faster
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -114,8 +112,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " nnoremap <C-k> :tabnext<cr>
 
 " buffer manipulation
-:noremap <C-j> :bnext<CR>
-:noremap <C-k> :bprev<CR>
+:noremap <C-j> :bprev<CR>
+:noremap <C-k> :bnext<CR>
 
 " window manipulation
 :map <F6> <C-W>w
@@ -235,10 +233,6 @@ let g:haskell_tabular = 1
 vmap a= :Tabularize /=<CR>
 vmap a; :Tabularize /::<CR>
 vmap a- :Tabularize /-><CR>
-
-" =============== NerdTree ===============
-map <Leader>n :NERDTreeToggle<CR>
-
 
 " =============== UltiSnips ===============
 let g:UltiSnipsExpandTrigger="<C-u>"
