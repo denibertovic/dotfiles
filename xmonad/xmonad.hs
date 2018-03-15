@@ -205,6 +205,9 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_y), spawn "yubioath-gui")
            , ((modMask x, xK_semicolon), spawn work1Chrome)
            , ((modMask x, xK_apostrophe), spawn work2Chrome)
+           -- Monitors
+           , ((mod4Mask .|. controlMask, xK_F11), spawn "/home/deni/dotfiles/scripts/monitors_laptop.sh")
+           , ((mod4Mask .|. controlMask, xK_F12), spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
            ]
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
