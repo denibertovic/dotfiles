@@ -57,7 +57,7 @@ Plugin 'mkasa/neco-ghc-lushtags'
 Plugin 'Shougo/vimproc.vim'
 
 " Purescript
-Plugin 'raichoo/purescript-vim'
+Plugin 'purescript-contrib/purescript-vim'
 Plugin 'FrigoEU/psc-ide-vim'
 
 " status bar
