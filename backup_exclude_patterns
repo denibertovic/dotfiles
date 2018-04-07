@@ -19,3 +19,5 @@ bower_components
 /home/deni/.virtualenvs
 /home/deni/Android
 /home/deni/AndroidStudioProjects
+/etc/shadow
+/etc/shadow-
