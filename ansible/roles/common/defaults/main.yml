@@ -1,3 +1,6 @@
 default_user: deni
 default_group: "{{ default_user }}"
 screenshot_dir: "/home/{{ default_user }}/screenshots"
+
+fzf_version: 0.17.3
+fzf_artifact_url: "https://github.com/junegunn/fzf-bin/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-linux_amd64.tgz"

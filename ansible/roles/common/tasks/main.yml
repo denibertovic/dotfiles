@@ -215,3 +215,22 @@
 - name: Set gnome screenshot folder
   shell: gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///{{ screenshot_dir }}"
   when: screenshot_dir_check.stdout == "''"
+
+- name: Check if fzf is installed
+  shell: fzf --version
+  ignore_errors: True
+  register: fzf_is_installed
+
+- name: Download fzf binary
+  become: yes
+  get_url:
+    url: "{{ fzf_artifact_url }}"
+    dest: /tmp/fzf.tgz
+    mode: 0755
+  when: (fzf_is_installed.rc != 0) or (fzf_version not in fzf_is_installed.stdout)
+
+- name: Extract fzf and make executable
+  become: yes
+  unarchive: src=/tmp/fzf.tgz dest=/usr/local/bin mode=755 owner=root group=root
+  when: (fzf_is_installed.rc != 0) or (fzf_version not in fzf_is_installed.stdout)
+
