@@ -1,0 +1,21 @@
+---
+- name: Check if packer is installed
+  shell: packer -v
+  ignore_errors: True
+  register: is_installed
+
+- name: Download zip tarrball
+  get_url:
+    url: "{{ packer_artifact_url }}"
+    dest: /tmp/packer.zip
+    checksum: "{{ packer_artifact_sha }}"
+  when: (is_installed.rc != 0) or packer_force_upgrade
+
+- name: Extract packer and make executable
+  become: yes
+  unarchive: src=/tmp/packer.zip dest=/usr/local/bin/ mode=755 owner=root group=root
+  when: (is_installed.rc != 0) or packer_force_upgrade
+
+- name: Remove packer.zip
+  file: path=/tmp/packer.zip state=absent
+
