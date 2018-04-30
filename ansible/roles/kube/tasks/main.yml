@@ -30,6 +30,8 @@
   shell: kops version
   ignore_errors: True
   register: kops_is_installed
+  tags:
+    - kops
 
 - name: Download kops binary
   become: yes
@@ -39,6 +41,8 @@
     checksum: "{{ kops_artifact_sha }}"
     mode: 0755
   when: (kops_is_installed.rc != 0) or (kops_version not in kops_is_installed.stdout)
+  tags:
+    - kops
 
 - name: Check if helm is installed
   shell: helm version

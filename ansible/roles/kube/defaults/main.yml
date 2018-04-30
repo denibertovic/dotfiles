@@ -6,9 +6,9 @@ minikube_version: 0.24.1
 minikube_artifact_url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64"
 minikube_artifact_sha: "sha256:1261de09386fd1f4ee7a4645958757c2c9e69f419a2a4ca8aff475017a7e036e"
 
-kops_version: 1.8.0
+kops_version: 1.8.1
 kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
-kops_artifact_sha: "sha1:c19eb3cf0357bb5469636302ee56fe19ac5b5e30"
+kops_artifact_sha: "sha1:3f806f914d8bf2a0b9b3c6785689257b7aadcd17"
 
 helm_version: 2.7.2
 helm_artifact_url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz"
