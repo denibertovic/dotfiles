@@ -285,6 +285,7 @@ myManageHook = composeAll
     [ manageHook gnomeConfig
     , resource  =? "diodon"           --> doIgnore
     , className =? "Gimp"             --> doFloat
+    , className =? "zoom"             --> doFloat
     , className =? "Gnome-calculator" --> doFloat
     , className =? "Keybase"          --> doFloat
     , className =? "Totem"            --> doFloat
