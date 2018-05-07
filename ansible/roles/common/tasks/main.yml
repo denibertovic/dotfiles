@@ -86,6 +86,9 @@
     - vim-nox
     - virtualbox
     - weechat
+    - weechat-plugins
+    - weechat-perl
+    - weechat-python
     - wget
     - xserver-xorg-input-synaptics
     - ykneomgr
