@@ -228,6 +228,7 @@ let g:UltiSnipsExpandTrigger="<C-u>"
 
 " hindent
 let g:hindent_on_save = 0
+vmap <leader>h :Hindent<CR>
 
 " ========= Haskell specific ==========
 au FileType haskell compiler ghc
