@@ -213,7 +213,8 @@ highlight ALEWarning ctermbg=none
 
 
 " TEMPORARY FIX for issue: https://github.com/w0rp/ale/issues/1334
-let g:ale_echo_cursor = 0
+" Seem to be fixed NOW....check for a while and then remove later
+let g:ale_echo_cursor = 1
 
 " =============== Tabular ===============
 let g:haskell_tabular = 1
