@@ -1,0 +1,21 @@
+---
+- name: Check if vault is installed
+  shell: vault -v
+  ignore_errors: True
+  register: is_installed
+
+- name: Download zip tarrball
+  get_url:
+    url: "{{ vault_artifact_url }}"
+    dest: /tmp/vault.zip
+    checksum: "{{ vault_artifact_sha }}"
+  when: (is_installed.rc != 0) or vault_force_upgrade
+
+- name: Extract vault and make executable
+  become: yes
+  unarchive: src=/tmp/vault.zip dest=/usr/local/bin/ mode=755 owner=root group=root
+  when: (is_installed.rc != 0) or vault_force_upgrade
+
+- name: Remove vault.zip
+  file: path=/tmp/vault.zip state=absent
+

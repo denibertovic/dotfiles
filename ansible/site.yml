@@ -13,6 +13,7 @@
     - { role: keybase, tags: ["keybase"] }
     - { role: terraform, tags: ["terraform"] }
     - { role: packer, tags: ["packer"] }
+    - { role: vault, tags: ["vault"] }
     - { role: xmonad, tags: ["xmonad"] }
     - { role: kube, tags: ["kube"] }
     - { role: user, tags: ["user"] } # This needs to be the last role because
