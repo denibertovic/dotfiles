@@ -50,7 +50,6 @@ Plugin 'Shougo/vimproc.vim'
 
 " Purescript
 Plugin 'purescript-contrib/purescript-vim'
-Plugin 'FrigoEU/psc-ide-vim'
 
 " status bar
 Plugin 'bling/vim-airline'
