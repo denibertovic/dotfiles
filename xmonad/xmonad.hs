@@ -291,6 +291,7 @@ myManageHook = composeAll
     , className =? "Totem"            --> doFloat
     , className =? "Keepassx"         --> doFloat
     , className =? "SpiderOakONE"     --> doFloat
+    , isHtop                          --> (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
     , className =? "Gnome-Screenshot" --> doIgnore
     , className =? "Pidgin"           --> doShift "2"
     , className =? "skypeforlinux"    --> doShift "2"
@@ -340,14 +341,14 @@ myLayout = smartBorders
 
 -- Numbered
 -- 1 is Firefox (personal)
--- 2 is IM (Piding/Skype)
-wsSYS1 = "3" -- random sys stuff
-wsSYS2 = "4" -- more random sys stuff
-wsPROJ = "5" -- working on projects
+-- 2 is Chrome (work) (TODO: Move IM layout from here)
+wsSYS1 = "3" -- random stuff (one terminal)
+wsSYS2 = "4" -- more random sys stuff (three terminals)
+wsPROJ = "5" -- working on projects (3 terminals)
 -- 6 is freeform (open random apps here)
--- 7 is Chrome (work)
-wsWORK1 = "8"
-wsWORK2 = "9"
+-- 7 is freeform (open random apps here)
+wsWORK1 = "8" -- Work (3 terminals by default)
+wsWORK2 = "9" -- Work (2 terminals by default)
 
 -- Named
 wsHS = "hs" -- haskell
@@ -361,15 +362,13 @@ projects = [ Project { projectName  = wsDMO
                      , projectDirectory  = "~/"
                      , projectStartHook  = Just $ do spawn "/usr/lib/xscreensaver/spheremonics"
                                                      runInTerm "-title top" "top"
-                                                     runInTerm "-title top" "htop"
+                                                     runInTerm "-title htop" "htop"
                                                      spawn "/usr/lib/xscreensaver/cubicgrid"
                                                      spawn "/usr/lib/xscreensaver/surfaces"
                      }
            , Project { projectName  = wsSYS1
                      , projectDirectory  = "~/"
-                     , projectStartHook  = Just $ do spawnOn wsSYS1 myTerminal
-                                                     spawnOn wsSYS1 myTerminal
-                                                     spawnOn wsSYS1 myTerminal
+                     , projectStartHook  = Just $ spawnOn wsSYS1 myTerminal
                      }
            , Project { projectName  = wsSYS2
                      , projectDirectory  = "~/"
