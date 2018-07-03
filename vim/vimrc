@@ -42,7 +42,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Haskell
 Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
-" Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 " Haskell syntax highlitght
 Plugin 'vim-scripts/haskell.vim'
 " Hooks into deoplete for completions
@@ -102,7 +101,9 @@ let maplocalleader = "\\"
 set completeopt=menu,longest
 
 " Quickly edit/reload the vimrc file
+" edit
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" reload
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " tab manipulation
