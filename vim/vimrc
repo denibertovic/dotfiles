@@ -42,7 +42,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Haskell
 Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
-Plugin 'eagletmt/ghcmod-vim'  " needs stack install ghc-mod
 " Plugin 'nbouscal/vim-stylish-haskell' " needs stylish-haskell on $PHATH (stack install stylish-haskell)
 " Haskell syntax highlitght
 Plugin 'vim-scripts/haskell.vim'
@@ -201,21 +200,6 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 " =============== Yankring ===============
 nnoremap <silent> <F12> :YRShow<CR>
-
-" =============== GhcMod bindings ===============
-
-nnoremap <F5>  :GhcModCheckAndLint<CR>
-nnoremap <C-h> :GhcModType<CR>
-nnoremap <C-l> :GhcModTypeClear<CR>
-nnoremap <leader>- :GhcModInfo<CR>
-
-map <silent> ti :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tt :GhcModType<CR>
-map <silent> tc :GhcModTypeClear<CR>
-map <silent> tg :GhcModSigCodegen<CR>
-" Auto lint and check with ghc-mod on buffer write
-" autocmd BufWritePost *.hs GhcModCheckAsync
 
 " ================= ALE =====================
 "
