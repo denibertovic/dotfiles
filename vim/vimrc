@@ -44,11 +44,6 @@ Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
 " Haskell syntax highlitght
 Plugin 'vim-scripts/haskell.vim'
-" Hooks into deoplete for completions
-Plugin 'mkasa/lushtags'
-Plugin 'majutsushi/tagbar'
-Plugin 'mkasa/neco-ghc-lushtags'
-
 
 " Interactive command execution in Vim.
 Plugin 'Shougo/vimproc.vim'
