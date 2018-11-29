@@ -14,6 +14,7 @@ import           XMonad.Actions.CopyWindow          (copyToAll,
                                                      killAllOtherCopies,
                                                      wsContainingCopies)
 import           XMonad.Actions.CycleWS
+import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.SpawnOn             (spawnOn)
@@ -411,7 +412,7 @@ projects = [ Project { projectName  = wsDMO
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/deni/.xmobarrc"
-    xmonad $ dynamicProjects projects $ gnomeConfig
+    xmonad $ ewmh $ dynamicProjects projects $ gnomeConfig
         { manageHook          = myManageHook <> namedScratchpadManageHook scratchpads
         , layoutHook          = myLayout
         , logHook             = dynamicLogWithPP xmobarPP
