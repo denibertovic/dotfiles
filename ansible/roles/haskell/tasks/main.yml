@@ -10,24 +10,34 @@
   shell: stack --version
   ignore_errors: True
   register: is_installed
+  tags:
+    - haskell:stack
 
 - debug: var=is_installed
+  tags:
+    - haskell:stack
 
 - name: Download stack tarrball
   get_url:
     url: "{{ stack_artifact_url }}"
     dest: /tmp/stack.tar.gz
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
 
 - name: Download stack tarball signature
   get_url:
     url: "{{ stack_artifact_signature_url }}"
     dest: /tmp/stack.tar.gz.asc
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
 
 - name: Check stack tarball signature
   shell: cd /tmp && gpg --verify stack.tar.gz.asc
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
 
 # ^ It should not continue if this fails with an error code
 
@@ -35,11 +45,15 @@
   become: yes
   unarchive: src=/tmp/stack.tar.gz dest=/tmp mode=755 owner=root group=root
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
 
 - name: Install stack
   become: yes
-  shell: mv /tmp/stack-{{ stack_version }}-linux-x86_64-static/stack /usr/local/bin/stack
+  shell: mv /tmp/stack-{{ stack_version }}-linux-x86_64/stack /usr/local/bin/stack
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
 
 - name: Remove stack install artifacts
   become: yes
@@ -47,7 +61,9 @@
   with_items:
     - stack.tar.gz
     - stack.tar.gz.asc
-    - stack-{{ stack_version }}-linux-x86_64-static
+    - stack-{{ stack_version }}-linux-x86_64
+  tags:
+    - haskell:stack
 
 - name: Run stack setup for global project
   shell: stack setup
