@@ -235,8 +235,8 @@ let g:hindent_on_save = 0
 vmap <leader>h :Hindent<CR>
 
 " ========= Haskell specific ==========
-au FileType haskell compiler ghc
-au FileType haskell setlocal makeprg=stack
+" au FileType haskell compiler ghc
+" au FileType haskell setlocal makeprg=stack
 
 " ========= deoplete =======
 let g:deoplete#enable_at_startup = 1
