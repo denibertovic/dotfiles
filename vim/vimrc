@@ -32,6 +32,9 @@ Plugin 'milkypostman/vim-togglelist'
 " in the quickfix window in realtime
 Plugin 'skywind3000/asyncrun.vim'
 
+" Nerdtree
+Plugin 'scrooloose/nerdtree'
+
 " Moving around and such
 Plugin 'easymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -83,6 +86,7 @@ Plugin 'freitass/todo.txt-vim'
 " Whiste space: Show tabs
 set list
 set listchars=tab:\|\
+set linebreak
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
