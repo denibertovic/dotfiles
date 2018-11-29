@@ -1,5 +1,6 @@
 :set prompt "λ: "
 :set -XOverloadedStrings
+:set -XScopedTypeVariables
 :set -fno-warn-type-defaults
 :set -Wall
 :set -fno-warn-name-shadowing
