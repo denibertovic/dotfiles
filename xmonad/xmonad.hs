@@ -19,6 +19,7 @@ import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.SpawnOn             (spawnOn)
 import           XMonad.Actions.Volume
+import           XMonad.Actions.WindowBringer       (bringMenu, gotoMenu)
 import           XMonad.Actions.WithAll             (killAll)
 import           XMonad.Config.Gnome
 import           XMonad.Hooks.DynamicLog
@@ -206,6 +207,8 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_y), spawn "yubioath-gui")
            , ((modMask x, xK_semicolon), spawn work1Chrome)
            , ((modMask x, xK_apostrophe), spawn work2Chrome)
+           , ((mod4Mask .|. shiftMask, xK_g), gotoMenu)
+           , ((mod4Mask .|. shiftMask, xK_b), bringMenu)
            -- Monitors
            , ((mod4Mask .|. controlMask, xK_F11), spawn "/home/deni/dotfiles/scripts/monitors_laptop.sh")
            , ((mod4Mask .|. controlMask, xK_F12), spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
