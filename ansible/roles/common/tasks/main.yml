@@ -8,6 +8,7 @@
     - apt-listbugs
     - apt-listchanges
     - apt-transport-https
+    - arbtt
     - awscli
     - borgbackup
     - build-essential
@@ -22,6 +23,10 @@
     - gnome-tweak-tool
     - gnupg
     - gnupg2
+    - gobject-introspection
+    - libgirepository1.0-dev
+    - libwebkit2gtk-4.0-dev
+    - libgtksourceview-3.0-dev
     - hddtemp
     - hplip
     - hplip-gui
