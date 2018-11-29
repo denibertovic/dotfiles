@@ -33,6 +33,7 @@
   br = branch
   df = diff
   lg = log -p --show-signature
+  diffc = diff --cached
   hist = log --pretty=format:\"%C(auto) %h %ad | %s%d [%an]\" --graph --date=short
   unstage = reset HEAD --
 
