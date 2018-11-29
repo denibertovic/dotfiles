@@ -10,15 +10,17 @@
   become: yes
   apt: pkg={{ item }} state=installed
   with_items:
-    - docker-engine
+    - docker-ce
 
-- stat: path=/usr/local/bin/docker-compose
-  register: c
+- name: Check if docker-compose is installed
+  shell: docker-compose version
+  ignore_errors: True
+  register: docker_compose_is_installed
 
 - name: Install Docker Compose
   become: yes
   shell: curl -L "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
-  when: not c.stat.exists
+  when: (docker_compose_is_installed.rc != 0) or (docker_compose_version not in docker_compose_is_installed.stdout)
 
 - name: Make sure docker-compose is executable
   become: yes
@@ -39,4 +41,3 @@
   notify:
     - reload systemd configuration
     - restart docker
-
