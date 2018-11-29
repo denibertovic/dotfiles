@@ -16,6 +16,8 @@
   shell: minikube version
   ignore_errors: True
   register: minikube_is_installed
+  tags:
+    - kube:minikube
 
 - name: Download minikube binary
   become: yes
@@ -25,6 +27,8 @@
     checksum: "{{ minikube_artifact_sha }}"
     mode: 0755
   when: (minikube_is_installed.rc != 0) or (minikube_version not in minikube_is_installed.stdout)
+  tags:
+    - kube:minikube
 
 - name: Check if kops is installed
   shell: kops version
