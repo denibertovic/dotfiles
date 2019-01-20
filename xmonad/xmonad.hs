@@ -153,7 +153,10 @@ hotPromptTheme = myPromptTheme
 
 quitPromptTheme = myPromptTheme { promptBorderWidth = 20 }
 
-commands = defaultCommands
+commands :: X [(String, X ())]
+commands = do
+  defcmds <- defaultCommands
+  return $ defcmds ++ [("meh", mehCmd)]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                       [] -> windows copyToAll
@@ -214,6 +217,14 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_F12), spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
            ]
 
+mehStr :: String
+mehStr = "¯\\_(ツ)_/¯"
+
+mehCmd :: X ()
+mehCmd = do
+  spawn ("echo " <> "'" <> mehStr <> "'" <> " | xclip -selection clipboard")
+  D.dzenConfig (centeredLarge 1900) mehStr
+
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
 specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
@@ -245,6 +256,12 @@ alert = D.dzenConfig (centered 150) . show . round
 centered w =
         D.onCurr (D.center w 66)
     >=> D.font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
+    >=> D.addArgs ["-fg", lightgray]
+    >=> D.addArgs ["-bg", black]
+
+centeredLarge w =
+        D.onCurr (D.center w 450)
+    >=> D.font "-*-helvetica-*-r-*-*-224-*-*-*-*-*-*-*"
     >=> D.addArgs ["-fg", lightgray]
     >=> D.addArgs ["-bg", black]
 
