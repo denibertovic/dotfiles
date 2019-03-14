@@ -35,6 +35,7 @@ dunst -config ~/.config/dunst/dunstrc &
 dbus-launch nm-applet &
 dropbox start &
 run_keybase &
+arbtt-capture &
 #conky -X ":0.0" &
 # synology-cloud-station-drive &
 
