@@ -82,6 +82,10 @@ alias jira-do='/home/deni/.virtualenvs/jira/bin/jira-cli update --transition="re
 alias jira-listcomments='/home/deni/.virtualenvs/jira/bin/jira-cli view --comments-only'
 alias jira-addcomment='/home/deni/.virtualenvs/jira/bin/jira-cli update --comment'
 
+# eid
+alias eid-client='/usr/lib/akd/eidmiddleware/Client'
+alias eid-signer='/usr/lib/akd/eidmiddleware/Signer'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
