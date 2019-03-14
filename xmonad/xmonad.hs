@@ -222,7 +222,7 @@ mehStr = "¯\\_(ツ)_/¯"
 
 mehCmd :: X ()
 mehCmd = do
-  spawn ("echo " <> "'" <> mehStr <> "'" <> " | xclip -selection clipboard")
+  spawn ("echo -n " <> "'" <> mehStr <> "'" <> " | xclip -selection clipboard")
   D.dzenConfig (centeredLarge 1900) mehStr
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
