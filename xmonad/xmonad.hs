@@ -236,6 +236,11 @@ specialKeys = [ ("<XF86AudioMute>",         toggleMute >>= showAudioMuteAlert)
               , ("<XF86MonBrightnessDown>", spawn "/home/deni/dotfiles/scripts/brightness.sh -10")
               ]
 
+-- NOTE: This was hack when `lowerVolume` and `raiseVolume` were not really working
+-- after some alsa/pulseaudio upgrade. Keeping just in case
+-- lowerVolumeHack = spawn "amixer -D pulse sset Master 5%-"
+-- raiseVolumeHack = spawn "amixer -D pulse sset Master 5%+"
+
 micChannels :: [String]
 micChannels = ["Capture"]
 
