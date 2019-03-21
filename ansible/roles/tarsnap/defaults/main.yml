@@ -1,0 +1,3 @@
+---
+tarsnap_debian_apt_repo: "deb http://pkg.tarsnap.com/deb/sid ./"
+tarsnap_debian_apt_repo_key_url: "https://pkg.tarsnap.com/tarsnap-deb-packaging-key.asc"
