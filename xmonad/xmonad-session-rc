@@ -25,11 +25,11 @@ xmodmap ~/.Xmodmap &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 33 &
 
 # Tried diodon instead of parcellite because parcellite has scaling issues
-# diodon &
+diodon &
 
 # Fork of parcellite: https://github.com/CristianHenzel/ClipIt
 # Fixes scaling issues
-clipit &
+# clipit &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst -config ~/.config/dunst/dunstrc &
 dbus-launch nm-applet &

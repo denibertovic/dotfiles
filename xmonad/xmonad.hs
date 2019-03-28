@@ -203,7 +203,7 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((modMask x, xK_Print), spawn "gnome-screenshot")
            , ((mod4Mask .|. shiftMask, xK_Print), spawn "gnome-screenshot --interactive")
            , ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
-           -- , ((controlMask .|. mod1Mask, xK_h), spawn "/usr/bin/diodon")
+           , ((controlMask .|. mod1Mask, xK_h), spawn "/usr/bin/diodon")
            , ((modMask x, xK_backslash), spawn chrome)
            , ((modMask x, xK_i), spawn chromeIncognito)
            , ((modMask x, xK_slash), spawn firefox)
@@ -310,9 +310,9 @@ myStartupHook = do
 myManageHook = composeAll
     [ manageHook gnomeConfig
     , resource  =? "diodon"           --> doIgnore
+    , resource  =? "clipit"           --> doIgnore
+    , resource  =? "parcellite"       --> doIgnore
     , className =? "Gimp"             --> doFloat
-    , className =? "parcellite"       --> doFloat
-    , className =? "clipit"           --> doFloat
     , className =? "zoom"             --> doFloat
     , className =? "Gnome-calculator" --> doFloat
     , className =? "Keybase"          --> doFloat
