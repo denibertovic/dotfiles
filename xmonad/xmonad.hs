@@ -48,7 +48,6 @@ import           XMonad.Prompt                      (XPConfig (..),
 import           XMonad.Prompt.ConfirmPrompt
 import           XMonad.Prompt.Shell                (shellPrompt)
 import qualified XMonad.StackSet                    as W
-import           XMonad.Util.Dmenu
 import qualified XMonad.Util.Dzen                   as D
 import           XMonad.Util.EZConfig               (additionalKeys,
                                                      additionalKeysP,
