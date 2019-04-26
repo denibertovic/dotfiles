@@ -86,6 +86,9 @@ alias jira-addcomment='/home/deni/.virtualenvs/jira/bin/jira-cli update --commen
 alias eid-client='/usr/lib/akd/eidmiddleware/Client'
 alias eid-signer='/usr/lib/akd/eidmiddleware/Signer'
 
+# haskell
+alias h='hoogle --count=100'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
