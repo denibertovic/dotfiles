@@ -141,9 +141,6 @@ unsetopt correct_all
 # added by travis gem
 [ -f /home/deni/.travis/travis.sh ] && source /home/deni/.travis/travis.sh
 
-# added by Nix Installer
-[ -e /home/deni/.nix-profile/etc/profile.d/nix.sh  ] && source /home/deni/.nix-profile/etc/profile.d/nix.sh;
-
 # RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
 
 # VIM mode
