@@ -25,7 +25,9 @@ xmodmap ~/.Xmodmap &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 33 &
 
 # Tried diodon instead of parcellite because parcellite has scaling issues
-diodon &
+# XDG_CURRENT_DESKTOP=GNOME parcellite &
+# this one is writen in haskell and integrates great with rofi
+greenclip daemon &
 
 # Fork of parcellite: https://github.com/CristianHenzel/ClipIt
 # Fixes scaling issues
