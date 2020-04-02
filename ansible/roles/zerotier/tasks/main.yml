@@ -1,0 +1,11 @@
+- name: Add Zerotier apt key
+  become: yes
+  apt_key: url="{{ zerotier_debian_apt_repo_key_url }}" state=present
+
+- name: Add Zerotier debian apt repo
+  become: yes
+  apt_repository: repo="{{ zerotier_debian_apt_repo }}" state=present
+
+- name: Install zerotier-one package
+  become: yes
+  apt: name=zerotier-one state=installed

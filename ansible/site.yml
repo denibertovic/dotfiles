@@ -17,6 +17,7 @@
     - { role: xmonad, tags: ["xmonad"] }
     - { role: kube, tags: ["kube"] }
     - { role: tarsnap, tags: ["tarsnap"] }
+    - { role: zerotier, tags: ["zerotier"] }
     - { role: user, tags: ["user"] } # This needs to be the last role because
                                      # we add the user to groups that might not
                                      # exist yet if not installed by roles above!
