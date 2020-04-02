@@ -74,6 +74,8 @@
     - pwgen
     - redshift
     - redshift-gtk
+    - resolvconf
+    - rofi
     - rsync
     - ruby-dev
     - ruby-sass
@@ -87,6 +89,7 @@
     - ttyrec
     - unrtf
     - units
+    - uuid
     - vagrant
     - vim
     - vim-gnome
