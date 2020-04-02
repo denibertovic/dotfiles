@@ -35,6 +35,7 @@ greenclip daemon &
 redshift -c /home/deni/dotfiles/redshift.conf &
 dunst -config ~/.config/dunst/dunstrc &
 dbus-launch nm-applet &
+blueman-applet &
 dropbox start &
 run_keybase &
 arbtt-capture &
