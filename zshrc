@@ -23,9 +23,14 @@ alias ubackups='umount /media/varys/backups'
 alias check-kubectl-version='echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)'
 alias fetch-latest-kubectl='curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
 alias k='kubectl --namespace=${KUBECTL_NAMESPACE:-default}'
+alias gci='google-chrome --incognito'
+
+# notifications
+alias pause-notifications='killall -SIGUSR1 dunst'
+alias resume-notifications='killall -SIGUSR2 dunst'
 
 # Force gpg2
-alias gpg='gpg2'
+# alias gpg='gpg2'
 
 # Keymaps
 # Xmonad map is for switching Caps Lock for Control
@@ -62,7 +67,7 @@ alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
 alias la='ls -la'
-alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-file=ext:sql'
+alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1'
 alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
 # alias psc='ps xawf -eo pid,user,cgroup,args'
