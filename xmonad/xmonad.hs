@@ -218,13 +218,9 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_F12), spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
            ]
 
-mehStr :: String
-mehStr = "¯\\_(ツ)_/¯"
-
 mehCmd :: X ()
 mehCmd = do
-  spawn ("echo -n " <> "'" <> mehStr <> "'" <> " | xclip -selection clipboard")
-  D.dzenConfig (centeredLarge 1900) mehStr
+  spawn "/home/deni/.local/bin/meh"
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
