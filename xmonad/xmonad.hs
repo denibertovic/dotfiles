@@ -195,6 +195,7 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_h), namedScratchpadAction scratchpads "htop")
            , ((mod4Mask .|. controlMask, xK_bracketleft), namedScratchpadAction scratchpads "weechat")
            , ((mod4Mask .|. controlMask, xK_g), namedScratchpadAction scratchpads "googleMusic")
+           , ((mod4Mask .|. controlMask, xK_bracketright), namedScratchpadAction scratchpads "signal")
            , ((mod4Mask .|. controlMask, xK_t), namedScratchpadAction scratchpads "trello")
            , ((mod4Mask .|. controlMask, xK_p), namedScratchpadAction scratchpads "keepassX")
            , ((mod4Mask .|. controlMask, xK_o), namedScratchpadAction scratchpads "yubioath")
@@ -303,6 +304,9 @@ googleMusicCommand = "dex $HOME/Desktop/googlemusic.desktop"
 googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
 isGoogleMusic = (resource =? googleMusicResource)
 
+signalCommand = "signal-desktop"
+isSignal = (className =? "Signal")
+
 myStartupHook = do
     spawn "xmodmap ~/.Xmodmap"
     spawn "xrdb -merge -I$HOME ~/.Xresources"
@@ -313,6 +317,7 @@ myManageHook = composeAll
     , resource  =? "clipit"           --> doIgnore
     , resource  =? "parcellite"       --> doIgnore
     , className =? "Gimp"             --> doFloat
+    , className =? "Signal"           --> doFloat
     , className =? "zoom"             --> doFloat
     , className =? "Gnome-calculator" --> doFloat
     , className =? "Keybase"          --> doFloat
@@ -335,6 +340,7 @@ scratchpads = [
     -- run htop in xterm, find it by title, use default floating window placement
     NS "weechat" weechatCommand isWeechat (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "htop" htopCommand isHtop (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  , NS "signal" signalCommand isSignal defaultFloating
   , NS "googleMusic" googleMusicCommand isGoogleMusic defaultFloating
   , NS "keepassX" keepassXCommand isKeepassX defaultFloating
   , NS "trello" trelloCommand isTrello defaultFloating
