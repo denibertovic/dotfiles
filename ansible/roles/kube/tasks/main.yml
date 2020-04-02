@@ -52,6 +52,7 @@
   shell: helm version
   ignore_errors: True
   register: helm_is_installed
+  tags: kube:helm
 
 - name: Download helm tarball
   become: yes
@@ -61,16 +62,19 @@
     checksum: "{{ helm_artifact_sha }}"
     mode: 0755
   when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
+  tags: kube:helm
 
 - name: Extract helm and make executable
   become: yes
   unarchive: src=/tmp/helm.tar.gz dest=/tmp mode=755 owner=root group=root
   when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
+  tags: kube:helm
 
 - name: Move helm executable to /usr/local/bin
   become: yes
   shell: mv /tmp/linux-amd64/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm
   when: (helm_is_installed.rc != 0) or (helm_version not in helm_is_installed.stdout)
+  tags: kube:helm
 
 - name: Remove helm download artifacts
   become: yes
@@ -78,6 +82,7 @@
   with_items:
     - helm.tar.gz
     - linux-amd64
+  tags: kube:helm
 
 - name: Check if kail is installed
   shell: kail version
