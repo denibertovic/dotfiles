@@ -41,3 +41,5 @@
   ui = true
 [heroku]
   account = initeq
+[github]
+	user = denibertovic
