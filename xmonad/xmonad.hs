@@ -157,7 +157,7 @@ quitPromptTheme = myPromptTheme { promptBorderWidth = 20 }
 commands :: X [(String, X ())]
 commands = do
   defcmds <- defaultCommands
-  return $ defcmds ++ [("meh", mehCmd)]
+  return $ defcmds ++ [("meh", mehCmd), ("clear-clipboard", clearClipboardCmd)]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                       [] -> windows copyToAll
@@ -234,6 +234,10 @@ getScreens = do
     return rects
   let ids = zip [0 .. ] screens
   return $ map fst ids
+
+clearClipboardCmd :: X ()
+clearClipboardCmd = do
+  spawn $ "pkill greenclip && greenclip clear && greenclip daemon &"
 
 mehCmd :: X ()
 mehCmd = do
