@@ -342,6 +342,7 @@ myManageHook = composeAll
     , resource  =? "clipit"           --> doIgnore
     , resource  =? "parcellite"       --> doIgnore
     , className =? "Gimp"             --> doFloat
+    , className =? "VirtualBox Manager" --> doFloat
     , className =? "Signal"           --> doFloat
     , className =? "zoom"             --> doFloat
     , className =? "Gnome-calculator" --> doFloat
