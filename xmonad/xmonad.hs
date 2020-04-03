@@ -14,6 +14,7 @@ import           XMonad.Actions.CopyWindow          (copyToAll,
                                                      killAllOtherCopies,
                                                      wsContainingCopies)
 import           XMonad.Actions.CycleWS
+import           Graphics.X11.Xinerama              (getScreenInfo)
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.DynamicProjects
@@ -48,6 +49,7 @@ import           XMonad.Prompt                      (XPConfig (..),
 import           XMonad.Prompt.ConfirmPrompt
 import           XMonad.Prompt.Shell                (shellPrompt)
 import qualified XMonad.StackSet                    as W
+import           XMonad.StackSet                    (StackSet(..), Screen(..))
 import qualified XMonad.Util.Dzen                   as D
 import           XMonad.Util.EZConfig               (additionalKeys,
                                                      additionalKeysP,
@@ -218,9 +220,32 @@ myKeys x = [ ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
            , ((mod4Mask .|. controlMask, xK_F12), spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
            ]
 
+getOffset :: X (Int, Int)
+getOffset = withWindowSet $ \W.StackSet {current=W.Screen
+  {screenDetail=SD {screenRect=Rectangle {rect_x=x, rect_y=y}}}} -> return $
+  (fromIntegral x, fromIntegral y)
+
+getScreens :: IO [ScreenId]
+getScreens = do
+  screens <- do
+    dpy <- openDisplay ""
+    rects <- getScreenInfo dpy
+    closeDisplay dpy
+    return rects
+  let ids = zip [0 .. ] screens
+  return $ map fst ids
+
 mehCmd :: X ()
 mehCmd = do
-  spawn "/home/deni/.local/bin/meh"
+  (xOffset, yOffset) <- getOffset
+  screens <- liftIO getScreens
+  -- Because of Xinerama
+  let x = xOffset
+  -- 720 == 1440/2
+  -- Still need to test with 3 monitors. Will likely need to adjust the x axis as well
+  let y = if (yOffset /= 0 && length screens > 1) then 720 else if (length screens > 1) then -720 else yOffset
+  spawn $ "echo 'xO:" <> (show $ xOffset) <> " yO:" <> (show $ yOffset) <> "   x:" <> (show x) <> " y:" <> (show y) <> "' >/tmp/dinamo.txt"
+  spawn $ "/home/deni/.local/bin/meh" <> " -x " <> (show x) <> " -y " <> (show y)
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
