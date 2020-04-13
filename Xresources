@@ -8,22 +8,6 @@ Xft.rgba: rgb
 Xcursor.size: 40
 
 
-! rofi
-rofi.color-enabled: true
-rofi.color-window: #282828, #282828, #268bd2
-rofi.color-normal: #282828, #ffffff, #282828, #268bd2, #ffffff
-rofi.color-active: #282828, #268bd2, #282828, #268bd2, #205171
-rofi.color-urgent: #282828, #f3843d, #282828, #268bd2, #ffc39c
-! rofi.font: Hack Bold 13
-rofi.font: Source Code Pro Medium 12
-rofi.modi: window,run,ssh
-! rofi.key-run: SuperL+p
-
-rofi.terminal:          urxvt
-!rofi.run-shell-command: /usr/bin/termite -e '{cmd}'
-rofi.ssh-client:        ssh
-!rofi.ssh-command:       {terminal} -e "{ssh-client} {host}"
-
 ! urxvt settings
 ! Fix the underscore not appearing issue
 URxvt.lineSpace: 1
