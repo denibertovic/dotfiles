@@ -17,7 +17,7 @@ xsetroot -cursor_name left_ptr &
 
 eval $(gnome-keyring-daemon --start)
 xscreensaver -nosplash &
-feh --bg-scale /home/deni/walls/droid.png &
+feh --bg-scale /home/deni/walls/DeathStar.png &
 synclient TouchpadOff=1 &
 xmodmap ~/.Xmodmap &
 
