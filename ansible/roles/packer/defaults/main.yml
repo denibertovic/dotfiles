@@ -1,6 +1,6 @@
 
 packer_force_upgrade: false
-packer_version: 1.2.3
+packer_version: 1.6.0
 packer_artifact_url: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
-packer_artifact_sha: "sha256:822fe76c2dfe699f187ef8c44537d10453a1545db620e40b345cf6991a690f7d"
+packer_artifact_sha: "sha256:a678c995cb8dc232db3353881723793da5acc15857a807d96c52e96e671309d9."
 
