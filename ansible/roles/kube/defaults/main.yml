@@ -1,5 +1,5 @@
 
-kubectl_version: 1.8.2
+kubectl_version: 1.16.6
 kubectl_artifact_url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
 
 minikube_version: 0.28.2
@@ -10,12 +10,11 @@ kops_version: 1.8.1
 kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
 kops_artifact_sha: "sha1:3f806f914d8bf2a0b9b3c6785689257b7aadcd17"
 
-helm_version: 2.12.1
-helm_artifact_url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+helm_version: 3.2.4
+helm_artifact_url: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
 # curl helm_artifact_url.sha256 to get the sha
-helm_artifact_sha: "sha256:891004bec55431b39515e2cedc4f4a06e93782aa03a4904f2bd742b168160451"
+helm_artifact_sha: "sha256:8eb56cbb7d0da6b73cd8884c6607982d0be8087027b8ded01d6b2759a72e34b1"
 
 kail_version: 0.6.0
 kail_artifact_url: "https://github.com/boz/kail/releases/download/v{{ kail_version }}/kail_{{ kail_version }}_linux_amd64.tar.gz"
 kail_artifact_sha: "sha256:707fab484e36a205084d984ade132ee21cdd38a5b1009268eabf10890ab7778d"
-

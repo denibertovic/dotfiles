@@ -3,6 +3,9 @@
   shell: kubectl version
   ignore_errors: True
   register: kubectl_is_installed
+  tags:
+    - kube:kubectl
+
 
 - name: Download kubectl binary
   become: yes
@@ -11,6 +14,8 @@
     dest: /usr/local/bin/kubectl
     mode: 0755
   when: (kubectl_is_installed.rc != 0) or (kubectl_version not in kubectl_is_installed.stdout)
+  tags:
+    - kube:kubectl
 
 - name: Check if minikube is installed
   shell: minikube version
