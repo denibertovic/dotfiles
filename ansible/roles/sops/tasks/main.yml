@@ -1,0 +1,18 @@
+---
+- name: Check if sops is installed
+  shell: sops --version
+  ignore_errors: True
+  register: is_installed
+  tags:
+    - sops
+
+- name: Download sops executable
+  become: true
+  get_url:
+    url: "{{ sops_artifact_url }}"
+    dest: /usr/local/bin/sops
+    mode: 0755
+    # checksum: "{{ sops_artifact_sha }}"
+  when: (is_installed.rc != 0) or (sops_version not in is_installed.stdout)
+  tags:
+    - sops
