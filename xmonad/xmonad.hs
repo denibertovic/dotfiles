@@ -9,6 +9,7 @@ import qualified Data.Map                           as M
 import           Data.Monoid                        ((<>))
 import           System.Exit
 import           System.IO
+import           System.Process hiding (runCommand)
 import           XMonad
 import           XMonad.Actions.Commands
 import           XMonad.Actions.CopyWindow          (copyToAll,
@@ -244,9 +245,9 @@ myKeys x = let
            , ("M-m", addName "Focus master" $ focusMaster)
            -- Scratchpads
            , ("M-C-h", addName "Launch HTOP" $ namedScratchpadAction scratchpads "htop")
-           , ("M-C-[", addName "Launch Weechat" $ namedScratchpadAction scratchpads "weechat")
+           , ("M-C-]", addName "Launch Weechat" $ namedScratchpadAction scratchpads "weechat")
            , ("M-C-g", addName "Launch Google Music" $ namedScratchpadAction scratchpads "googleMusic")
-           , ("M-C-]", addName "Launch Signal" $ namedScratchpadAction scratchpads "signal")
+           , ("M-C-[", addName "Launch Signal" $ namedScratchpadAction scratchpads "signal")
            , ("M-C-t", addName "Launch Trello" $ namedScratchpadAction scratchpads "trello")
            , ("M-C-p", addName "Launch keepassX" $ namedScratchpadAction scratchpads "keepassX")
            , ("M-C-o", addName "Launch YubiOAuth" $ namedScratchpadAction scratchpads "yubioath")
