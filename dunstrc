@@ -145,7 +145,7 @@
     icon_position = off
 
     # Paths to default icons.
-    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_folders = /usr/share/icons/gnome/24x24/status/:/usr/share/icons/gnome/24x24/devices/
 
 [frame]
     width = 3
@@ -236,6 +236,10 @@
 # to "".
 # NOTE: It might be helpful to run dunst -print in a terminal in order
 # to find fitting options for rules.
+
+[DND]
+    summary = *Do Not Disturb*
+    set_stack_tag = "dnd"
 
 #[espeak]
 #    summary = "*"
