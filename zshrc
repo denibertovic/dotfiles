@@ -23,7 +23,7 @@ alias ubackups='umount /media/varys/backups'
 alias check-kubectl-version='echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)'
 alias fetch-latest-kubectl='curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
 alias k='kubectl --namespace=${KUBECTL_NAMESPACE:-default}'
-alias gci='google-chrome --incognito'
+alias h='helm --namespace=${KUBECTL_NAMESPACE:-default}'
 
 # notifications
 alias pause-notifications='killall -SIGUSR1 dunst'
@@ -77,6 +77,9 @@ alias t-check-tags='grep -E -o "@.*" ~/Dropbox/todo/todo.txt  | sort | uniq'
 alias get-subtitles='subliminal download -l en .'
 alias copy-path='pwd | tr -d "\n" | xsel -b'
 alias asciicast2gif='docker run -v $PWD:/data asciinema/asciicast2gif'
+alias gci='google-chrome --incognito'
+alias z="zathura"
+alias pdf="evince"
 
 # tmux
 alias tmux='tmux -2'
@@ -92,7 +95,7 @@ alias eid-client='/usr/lib/akd/eidmiddleware/Client'
 alias eid-signer='/usr/lib/akd/eidmiddleware/Signer'
 
 # haskell
-alias h='hoogle --count=100'
+alias hoogle='hoogle --count=100'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
