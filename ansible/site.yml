@@ -14,6 +14,7 @@
     - { role: terraform, tags: ["terraform"] }
     - { role: packer, tags: ["packer"] }
     - { role: vault, tags: ["vault"] }
+    - { role: sops, tags: ["sops"] }
     - { role: xmonad, tags: ["xmonad"] }
     - { role: kube, tags: ["kube"] }
     - { role: tarsnap, tags: ["tarsnap"] }
