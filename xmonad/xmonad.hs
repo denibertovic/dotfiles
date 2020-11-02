@@ -239,8 +239,8 @@ myKeys x = let
            , ("M-M1-u", addName "Unmerge all tabs" $ withFocused (sendMessage . UnMerge))
            , ("M-;", addName "Tab down" $ onGroup W.focusUp')
            , ("M-'", addName "Tab up" $ onGroup W.focusDown')
-           , ("M-j", addName "Focus up" $ focusUp)
-           , ("M-k", addName "Focus down" $ focusDown)
+           , ("M-j", addName "Focus down" $ focusDown)
+           , ("M-k", addName "Focus up" $ focusUp)
            , ("M-m", addName "Focus master" $ focusMaster)
            -- Scratchpads
            , ("M-C-h", addName "Launch HTOP" $ namedScratchpadAction scratchpads "htop")
