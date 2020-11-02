@@ -454,6 +454,7 @@ myManageHook = manageHook gnomeConfig
           , className =? "Gimp"             -?> doFloat
           -- , className =? "thunderbird"      -?> doFloat
           , className =? "Eog"              -?> doCenterFloat
+          , className =? "pinentry-gnome3"   -?> doCenterFloat
           , className =? "libreoffice-startcenter" -?> doFullFloat
           , className =? "Zathura"          -?> doCenterFloat
           , className =? "Evince"          -?> doCenterFloat
@@ -501,7 +502,7 @@ scratchpads = [
   , NS "googleMusic" googleMusicCommand isGoogleMusic doCenterFloat
   , NS "keepassX" keepassXCommand isKeepassX doCenterFloat
   , NS "trello" trelloCommand isTrello doCenterFloat
-  , NS "yubioath" yubioathCommand isYubioath doCenterFloat
+  , NS "yubioath" yubioathCommand isYubioath (customFloating $ W.RationalRect (1/3) (1/6) (2/6) (2/3))
   -- , NS "pidgin" pidginCommand isPidgin defaultFloating
   ]
 
