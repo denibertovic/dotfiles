@@ -27,7 +27,8 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
 # Tried diodon instead of parcellite because parcellite has scaling issues
 # XDG_CURRENT_DESKTOP=GNOME parcellite &
 # this one is writen in haskell and integrates great with rofi
-greenclip daemon &
+# MOVED: to systemd user service
+# greenclip daemon &
 
 # Fork of parcellite: https://github.com/CristianHenzel/ClipIt
 # Fixes scaling issues
