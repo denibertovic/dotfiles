@@ -277,10 +277,10 @@ myKeys x = let
            ^++^
    subKeys "Media Keys"
            [ ("<XF86AudioMute>", addName "Toggle Sounds" $ toggleMute >>= showAudioMuteAlert)
-           , ("<XF86AudioLowerVolume>",  addName "Lower volume" $ lowerVolume 4 >>= alert)
-           , ("<XF86AudioRaiseVolume>",  addName "Raise volume" $ raiseVolume 4 >>= alert)
-           , ("<XF86AudioMicMute>", addName "Toggle Mic" $ spawn micToggleCmd)
-           -- , ("<XF86AudioMicMute>",      toggleMuteMic >>= showMicMuteAlert)
+           , ("<XF86AudioLowerVolume>",  addName "Lower volume" $ lowerVolume 4 >>= volumeNotification)
+           , ("<XF86AudioRaiseVolume>",  addName "Raise volume" $ raiseVolume 4 >>= volumeNotification)
+           -- , ("<XF86AudioMicMute>", addName "Toggle Mic" $ spawn micToggleCmd)
+           , ("<XF86AudioMicMute>",  addName "ToggleMic" $ toggleMicrophoneAndNotify)
            , ("<XF86MonBrightnessUp>", addName "Increase brightness" $ spawn "/home/deni/dotfiles/scripts/brightness.sh +10")
            , ("<XF86MonBrightnessDown>", addName "Decrease brightness" $ spawn "/home/deni/dotfiles/scripts/brightness.sh -10")
            ]
@@ -341,7 +341,7 @@ mehCmd = do
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
--- NOTE: This was hack when `lowerVolume` and `raiseVolume` were not really working
+-- NOTE: This was a hack when `lowerVolume` and `raiseVolume` were not really working
 -- after some alsa/pulseaudio upgrade. Keeping just in case
 -- lowerVolumeHack = spawn "amixer -D pulse sset Master 5%-"
 -- raiseVolumeHack = spawn "amixer -D pulse sset Master 5%+"
@@ -352,7 +352,12 @@ micChannels = ["Capture"]
 toggleMuteMic :: MonadIO m => m Bool
 toggleMuteMic = toggleMuteChannels micChannels
 
-alert = D.dzenConfig (centered 150) . show . round
+volumeDzenNotification :: Double -> X ()
+volumeDzenNotification = D.dzenConfig (centered 150) . show . round
+
+volumeNotification :: Double -> X ()
+volumeNotification x = spawn $ "/usr/local/bin/rumno -v " <> (show $ round x)
+
 centered w =
         D.onCurr (D.center w 66)
     >=> D.font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
@@ -365,11 +370,29 @@ centeredLarge w =
     >=> D.addArgs ["-fg", lightgray]
     >=> D.addArgs ["-bg", black]
 
-showAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound On"
-showAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound Off"
+showDzenAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound On"
+showDzenAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound Off"
 
-showMicMuteAlert True  = D.dzenConfig (centered 300) $ "Mic on"
-showMicMuteAlert False = D.dzenConfig (centered 300) $ "Mic off"
+showAudioMuteAlert True  = getVolume >>= volumeNotification
+showAudioMuteAlert False = spawn "/usr/local/bin/rumno -m"
+
+showDzenMicMuteAlert True  = D.dzenConfig (centered 300) $ "Mic on"
+showDzenMicMuteAlert False = D.dzenConfig (centered 300) $ "Mic off"
+
+-- from XMonad.Actions.Volume from xmonad-extras
+outputOf :: String -> IO String
+outputOf s = do
+    uninstallSignalHandlers
+    (hIn, hOut, hErr, p) <- runInteractiveCommand s
+    mapM_ hClose [hIn, hErr]
+    hGetContents hOut <* waitForProcess p <* installSignalHandlers
+
+toggleMicrophoneAndNotify :: X ()
+toggleMicrophoneAndNotify = do
+  out <- liftIO $ outputOf "amixer set Capture toggle"
+  case ("[off]" `isInfixOf` out) of
+    True -> spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg"
+    False -> spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
 
 -- COMMANDS
 weechatCommand = "urxvt -title WeeChat -e weechat"
