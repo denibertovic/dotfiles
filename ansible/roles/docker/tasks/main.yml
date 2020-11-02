@@ -16,11 +16,15 @@
   shell: docker-compose version
   ignore_errors: True
   register: docker_compose_is_installed
+  tags:
+    - docker:compose
 
 - name: Install Docker Compose
   become: yes
   shell: curl -L "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
   when: (docker_compose_is_installed.rc != 0) or (docker_compose_version not in docker_compose_is_installed.stdout)
+  tags:
+    - docker:compose
 
 - name: Make sure docker-compose is executable
   become: yes
@@ -30,6 +34,8 @@
     mode=0755
     owner=root
     group=root
+  tags:
+    - docker:compose
 
 - name: Make sure systedmd override dir exists
   become: yes
