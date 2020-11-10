@@ -2,9 +2,9 @@
 kubectl_version: 1.16.6
 kubectl_artifact_url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
 
-minikube_version: 0.28.2
+minikube_version: 1.14.2
 minikube_artifact_url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64"
-minikube_artifact_sha: "sha256:3c84872ffa5ddbce472062fb548f9b3a25af72587d35243e12f18d86aaa6a085"
+minikube_artifact_sha: "sha256:f38f8da05a940589989eb0e85492edfe146caf57f9cfbb4ebb06de877f828f2e"
 
 kops_version: 1.8.1
 kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
