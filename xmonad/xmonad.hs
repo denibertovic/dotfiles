@@ -258,8 +258,10 @@ myKeys x = let
            , ("M-S-l", addName "Lock screen" $ spawn "xscreensaver-command -lock")
            , ("C-M1-h", addName "Launch clipboard manager" $ spawn "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'")
            , ("M-\\", addName "Launch Google Chrome" $ spawn chrome)
+           , ("M-C-\\", addName "Launch Google Chrome With Profile" $ spawn "rofi -modi 'Chrome Profile':/home/deni/dotfiles/scripts/rofi-chrome-profile-launcher.sh -show 'Chrome Profile'")
            , ("M-i", addName "Launch Google Chrome Icognito" $ spawn chromeIncognito)
            , ("M-/", addName "Launch Firefox" $ spawn firefox)
+           , ("M-C-/", addName "Launch Firefox With Profile" $ spawn "rofi -modi 'Firefox Profile':/home/deni/dotfiles/scripts/rofi-firefox-profile-launcher.sh -show 'Firefox Profile'")
            -- gotoMenu is not really needed since we have rofi
            , ("M-S-g", addName "DEPRECATED: goto window" $ gotoMenu)
            , ("M-S-b", addName "Bring window" $ bringMenu)
