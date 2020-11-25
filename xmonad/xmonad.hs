@@ -419,8 +419,8 @@ yubioathCommand = "yubioath-gui"
 yubioathResource = "yubioath-gui"
 isYubioath = (resource =? yubioathResource)
 
-googleMusicCommand = "dex $HOME/Desktop/googlemusic.desktop"
-googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
+googleMusicCommand = "dex $HOME/Desktop/youtubemusic.desktop"
+googleMusicResource = "crx_cinhimbnkkaeohfgghhklpknlkffjgod"
 isGoogleMusic = (resource =? googleMusicResource)
 
 signalCommand = "signal-desktop"
