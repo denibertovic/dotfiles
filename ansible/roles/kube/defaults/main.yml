@@ -1,14 +1,14 @@
 
-kubectl_version: 1.16.6
+kubectl_version: 1.18.9
 kubectl_artifact_url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
 
 minikube_version: 1.14.2
 minikube_artifact_url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64"
 minikube_artifact_sha: "sha256:f38f8da05a940589989eb0e85492edfe146caf57f9cfbb4ebb06de877f828f2e"
 
-kops_version: 1.8.1
-kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
-kops_artifact_sha: "sha1:3f806f914d8bf2a0b9b3c6785689257b7aadcd17"
+kops_version: 1.18.2
+kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/v{{ kops_version }}/kops-linux-amd64"
+kops_artifact_sha: "sha256:2a920e07f530250127ae834d2ad804ecce7d11a9dbb05a3ef4a97392228f70d2"
 
 helm_version: 3.3.4
 helm_artifact_url: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
