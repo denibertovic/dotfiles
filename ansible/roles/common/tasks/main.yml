@@ -17,6 +17,9 @@
     - cmake
     - curl
     - dos2unix
+    - firmware-linux
+    - firmware-linux-nonfree
+    - firmware-misc-nonfree
     - fonts-powerline
     - fonts-symbola
     - git
