@@ -35,7 +35,7 @@ if [ ! -d "$CHROME_USER_DATA_DIR" ]; then
 fi
 
 # Run a python script to read profiles data from an state file used by Chrome
-DATA=$(python << END
+DATA=$(python3 << END
 import json
 with open("$CHROME_USER_DATA_DIR/Local State") as f:
     data = json.load(f)
@@ -63,5 +63,6 @@ if [ -z "$@" ]; then
 else
     # One argument passed, meaning that user selected a profile: launch Chrome
     NAME="${@}"
-    $CHROME_VERSION --profile-directory="${profiles[$NAME]}" > /dev/null 2>&1
+    # $CHROME_VERSION --profile-directory="${profiles[$NAME]}" > /dev/null 2>&1
+    $CHROME_VERSION --profile-directory="${profiles[$NAME]}" > /dev/null &
 fi
