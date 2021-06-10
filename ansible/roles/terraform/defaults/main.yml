@@ -1,4 +1,4 @@
 terraform_force_upgrade: true
-terraform_version: 0.13.5
+terraform_version: 0.14.4
 terraform_artifact_url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
-terraform_artifact_sha: "sha256:f7b7a7b1bfbf5d78151cfe3d1d463140b5fd6a354e71a7de2b5644e652ca5147"
+terraform_artifact_sha: "sha256:042f1f4fb47696b3442eca12bce7cce6de0b477b299503ddad6b8bc3777a54b5"
