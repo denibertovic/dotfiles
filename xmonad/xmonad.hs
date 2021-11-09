@@ -416,8 +416,8 @@ trelloCommand = "dex $HOME/Desktop/trello.desktop"
 trelloResource = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
 isTrello = (resource =? trelloResource)
 
-yubioathCommand = "yubioath-gui"
-yubioathResource = "yubioath-gui"
+yubioathCommand = "yubioath-desktop"
+yubioathResource = "yubioath-desktop"
 isYubioath = (resource =? yubioathResource)
 
 googleMusicCommand = "dex $HOME/Desktop/youtubemusic.desktop"
