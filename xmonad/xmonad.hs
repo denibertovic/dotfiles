@@ -476,13 +476,16 @@ myManageHook = manageHook gnomeConfig
           , className =? "skypeforlinux"    -?> doShift "2"
           , classNotRole ("Pidgin", "buddy_list") -?> doShift "2"
           , transience
-          , isRole =? gtkFile  -?> forceCenterFloat
-          , isChromeDialog -?> forceCenterFloat
-          , isFirefoxDialog -?> forceCenterFloat
-          , isRole =? "pop-up" -?> doCenterFloat
-          , isDialog -?> doCenterFloat
-          , isInProperty "_NET_WM_WINDOW_TYPE"
-                         "_NET_WM_WINDOW_TYPE_SPLASH" -?> doCenterFloat
+          -- , isRole =? gtkFile  -?> forceCenterFloat
+          -- , isChromeDialog -?> forceCenterFloat
+          -- , isFirefoxDialog -?> forceCenterFloat
+          , isRole =? "pop-up" -?> forceCenterFloat -- doCenterFloat
+          , isDialog -?> forceCenterFloat -- doCenterFloat
+          , isDialog' -?> forceCenterFloat  -- doCenterFloat
+          , isSplash -?> forceCenterFloat -- doCenterFloat
+          , isSplash' -?> forceCenterFloat -- doCenterFloat
+          , isUtility -?> forceCenterFloat -- doCenterFloat
+          , isToolkit -?> forceCenterFloat -- doCenterFloat
           , resource =? "console" -?> tileBelowNoFocus
           , isFullscreen -?> doFullFloat
           , pure True -?> tileBelow
@@ -492,9 +495,14 @@ myManageHook = manageHook gnomeConfig
         isRole = stringProperty "WM_WINDOW_ROLE"
         gtkFile = "GtkFileChooserDialog"
         classNotRole (c,r) = (className =? c) <&&> (role /=? r)
-        isChromeDialog = isDialog <&&> className =? "google-chrome"
-        isFirefoxDialog = isDialog <&&> className =? "Firefox"
+        isChromeDialog = isDialog' <&&> className =? "google-chrome"
+        isFirefoxDialog = isDialog' <&&> className =? "Firefox"
         role = stringProperty "WM_WINDOW_ROLE"
+        isDialog' = isInProperty "_NET_WM_WINDOW_TYPE(ATOM)" "_NET_WM_WINDOW_TYPE_DIALOG"
+        isSplash = isInProperty "_NET_WM_WINDOW_TYPE(ATOM)" "_NET_WM_WINDOW_TYPE_SPLASH"
+        isSplash' = isInProperty "_NET_WM_WINDOW_TYPE(ATOM)" "_NET_WM_WINDOW_TYPE_SPLASH"
+        isUtility = isInProperty "_NET_WM_WINDOW_TYPE(ATOM)" "_NET_WM_WINDOW_TYPE_UTILITY"
+        isToolkit = className =? "Toolkit"
 
 
 scratchpads = [
