@@ -137,6 +137,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 let g:haskell_conceal = 0
 autocmd FileType haskell setlocal nofoldenable
 autocmd FileType cabal setlocal nofoldenable
+autocmd FileType markdown setlocal nofoldenable
+autocmd FileType yaml setlocal nofoldenable
 
 set pastetoggle=<F2>
 
