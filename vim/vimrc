@@ -193,7 +193,7 @@ autocmd FileType gitcommit setlocal spell
 " =============== CTRLP ===============
 " Custom ctrlp ignore options
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|(dist|node_modules|build)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|spago)|(dist|node_modules|build|output)$',
   \ 'file': '\v\.(pyc)$',
   \ }
 
