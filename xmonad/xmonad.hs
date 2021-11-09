@@ -552,11 +552,11 @@ wsDMO = "dmo"  -- random demo workspace
 projects :: [Project]
 projects = [ Project { projectName  = wsDMO
                      , projectDirectory  = "~/"
-                     , projectStartHook  = Just $ do spawn "/usr/lib/xscreensaver/spheremonics"
+                     , projectStartHook  = Just $ do spawn "/usr/libexec/xscreensaver/spheremonics"
                                                      runInTerm "-title top" "top"
                                                      runInTerm "-title htop" "htop"
-                                                     spawn "/usr/lib/xscreensaver/cubicgrid"
-                                                     spawn "/usr/lib/xscreensaver/surfaces"
+                                                     spawn "/usr/libexec/xscreensaver/cubicgrid"
+                                                     spawn "/usr/libexec/xscreensaver/surfaces"
                      }
            , Project { projectName  = wsSYS1
                      , projectDirectory  = "~/"
