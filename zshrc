@@ -141,9 +141,6 @@ export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
 unsetopt correct_all
 
-# added by travis gem
-[ -f /home/deni/.travis/travis.sh ] && source /home/deni/.travis/travis.sh
-
 # RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
 
 # VIM mode
