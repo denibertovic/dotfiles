@@ -4,7 +4,8 @@
 # Integer only
 # export GDK_SCALE=2
 # Can handle floats
-export GDK_DPI_SCALE=2
+# export GDK_DPI_SCALE=2
+export QT_FONT_DPI=210
 
 # Xresources
 xsetroot -cursor_name left_ptr &
@@ -33,13 +34,15 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
 # Fork of parcellite: https://github.com/CristianHenzel/ClipIt
 # Fixes scaling issues
 # clipit &
-redshift -c /home/deni/dotfiles/redshift.conf &
+
+# NOTE: fix dbus and geoclue error
+# redshift -c /home/deni/dotfiles/redshift.conf &
+
 dunst -config ~/.config/dunst/dunstrc &
 dbus-launch nm-applet &
 blueman-applet &
 dropbox start &
 run_keybase &
-arbtt-capture &
 #conky -X ":0.0" &
 # synology-cloud-station-drive &
 
