@@ -128,6 +128,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
+    todo
     denv
     git
     git-flow
@@ -135,7 +136,6 @@ plugins=(
     docker
     cabal
     python
-    keybase
     stack
     vault
     pass
