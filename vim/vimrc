@@ -199,6 +199,7 @@ let g:ctrlp_custom_ignore = {
 
 " =============== Color Theme ===============
 colorscheme busybee
+highlight SpellBad ctermbg=088
 
 " =============== Hoogle ===============
 au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
