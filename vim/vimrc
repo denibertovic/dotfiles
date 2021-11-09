@@ -43,8 +43,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Haskell
-Plugin 'alx741/vim-hindent' " needs hindent on $PATH (stack install hindent)
-Plugin 'w0rp/ale' " Asynchronous Lint Engine
+Plugin 'sdiehl/vim-ormolu' " needs ormolu on $PATH
+Plugin 'dense-analysis/ale' " Asynchronous Lint Engine
 " Haskell syntax highlitght
 Plugin 'vim-scripts/haskell.vim'
 
@@ -72,14 +72,29 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'plasticboy/vim-markdown'
 
 " Themes
-Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
 
 " Dpaste
-Plugin 'vim-scripts/Dpaste.com-Plugin'
+Plugin 'denibertovic/Dpaste.com-Plugin'
 
 " todo.txt
 Plugin 'freitass/todo.txt-vim'
+
+" Dhall
+Plugin 'vmchale/dhall-vim'
+
+" Formatting
+Plugin 'sbdchd/neoformat'
+
+" Nix
+Plugin 'LnL7/vim-nix'
+
+" Indentation guides
+" Plugin 'nathanaelkane/vim-indent-guides'
+
+" vim gist
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/vim-gist'
 
 " =============== Sensible defaults ===============
 
@@ -87,6 +102,9 @@ Plugin 'freitass/todo.txt-vim'
 set list
 set listchars=tab:\|\
 set linebreak
+
+" use systems primary clipboad
+set clipboard=unnamed
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -203,10 +221,15 @@ nnoremap <silent> <F12> :YRShow<CR>
 " ================= ALE =====================
 "
 " show multi-line errors in vim by combining your <Leader> key + ?
-autocmd FileType haskell nnoremap <buffer> <leader>a :call ale#cursor#ShowCursorDetail()<cr>
-let g:ale_linters ={
-      \   'haskell': ['hlint', 'hdevtools', 'hfmt'],
+" autocmd FileType haskell nnoremap <buffer> <leader>a :call ale#cursor#ShowCursorDetail()<cr>
+let g:ale_linters = {
+      \   'haskell': ['hlint']
       \}
+
+let g:ale_fixers = {
+      \   'haskell': ['hlint']
+      \}
+
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -215,10 +238,11 @@ let g:ale_lint_on_text_changed = 'never'
 
 highlight ALEWarning ctermbg=none
 
-
 " TEMPORARY FIX for issue: https://github.com/w0rp/ale/issues/1334
 " Seem to be fixed NOW....check for a while and then remove later
-let g:ale_echo_cursor = 1
+" UPDATE: Updated plugin has fixed this error and the workaround is not needed
+" anymore
+"let g:ale_echo_cursor = 1
 
 " =============== Tabular ===============
 let g:haskell_tabular = 1
@@ -228,11 +252,14 @@ vmap a; :Tabularize /::<CR>
 vmap a- :Tabularize /-><CR>
 
 " =============== UltiSnips ===============
-let g:UltiSnipsExpandTrigger="<C-u>"
+let g:UltiSnipsExpandTrigger="<tab>"
 
-" hindent
-let g:hindent_on_save = 0
-vmap <leader>h :Hindent<CR>
+" ormolu
+let g:ormolu_disable = 1
+nnoremap tf :call RunOrmolu()<CR>
+nnoremap to :call ToggleOrmolu()<CR>
+nnoremap td :call DisableOrmolu()<CR>
+xnoremap tb :<c-u>call OrmoluBlock()<CR>
 
 " ========= Haskell specific ==========
 " au FileType haskell compiler ghc
@@ -240,3 +267,19 @@ vmap <leader>h :Hindent<CR>
 
 " ========= deoplete =======
 let g:deoplete#enable_at_startup = 1
+
+" Neo format purescript
+let g:neoformat_enabled_purescript = ['purty']
+
+function! SaveWithTS(filename) range
+    let l:extension = '.' . fnamemodify( a:filename, ':e' )
+    if len(l:extension) == 1
+        let l:extension = '.txt'
+    endif
+
+    let l:filename = escape( fnamemodify(a:filename, ':r') . strftime("-%Y-%m-%dT%H-%M-%S") . l:extension, ' ' )
+
+    execute "write " . l:filename
+endfunction
+
+command! -nargs=1 SWT call SaveWithTS( <q-args> )
