@@ -56,7 +56,7 @@ alias dps='docker ps'
 alias di='docker images | awk "{ print \$1}" | tail -n +2 | sort | uniq'
 
 # development related aliases
-alias p='python -c "import IPython; IPython.terminal.ipapp.launch_new_instance()"'
+alias p='python3 -c "import IPython; IPython.terminal.ipapp.launch_new_instance()"'
 alias shell='./manage.py shell'
 alias debug='python -m pdb manage.py runserver'
 alias idebug='python -m ipdb manage.py runserver --pm'
@@ -116,6 +116,12 @@ DISABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
 #
 WORKON_HOME=/home/deni/.virtualenvs
+
+# Use python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+export PYENV_ROOT="$HOME/.pyenv"
+
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
