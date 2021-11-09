@@ -10,6 +10,7 @@ ZSH=$HOME/.oh-my-zsh
 # gallifrey is good
 #
 ZSH_THEME="fwalch"
+#ZSH_THEME="gallifrey"
 
 # TEMP ALIASES
 #
