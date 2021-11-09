@@ -143,7 +143,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/usr/local/heroku/bin:/home/deni/programs/appengine:/opt/scala/bin:/home/deni/.local/bin:/usr/local/bin/terraform:$PATH"
+export PATH="/home/deni/.local/bin:$PATH"
 
 
 #export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
