@@ -194,6 +194,13 @@ note () {
     fi
 }
 
+function kubectlgetall {
+  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+    echo "Resource:" $i
+    kubectl -n ${KUBECTL_NAMESPACE:-default} get ${i}
+  done
+};
+
 # setopt prompt_subst
 #
 eval "$(denv hook ZSH)"
