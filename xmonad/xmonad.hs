@@ -249,7 +249,7 @@ myKeys x = let
            , ("M-C-g", addName "Launch Google Music" $ namedScratchpadAction scratchpads "googleMusic")
            , ("M-C-[", addName "Launch Signal" $ namedScratchpadAction scratchpads "signal")
            , ("M-C-t", addName "Launch Trello" $ namedScratchpadAction scratchpads "trello")
-           , ("M-C-p", addName "Launch keepassX" $ namedScratchpadAction scratchpads "keepassX")
+           , ("M-C-p", addName "Launch 1Password" $ namedScratchpadAction scratchpads "1Password")
            , ("M-C-o", addName "Launch YubiOAuth" $ namedScratchpadAction scratchpads "yubioath")
            -- , ((myModMask .|. controlMask, xK_bracketright), namedScratchpadAction scratchpads "pidgin")
            -- Applications
@@ -403,9 +403,10 @@ isWeechat = (resource =? "urxvt") <&&> (fmap (isInfixOf "WeeChat") title)
 htopCommand = "urxvt -title htop -e htop"
 isHtop = (title =? "htop")
 
-keepassXCommand = "keepassxc"
-keepassXResource =  "keepassxc"
-isKeepassX = (resource =? keepassXResource)
+onePasswordCommand = "1password"
+onePasswordResource =  "1password"
+isOnePassword = (resource =? onePasswordResource)
+
 
 -- pidginCommand = "pidgin"
 -- pidginResource =  "Pidgin"
@@ -502,7 +503,7 @@ scratchpads = [
   , NS "htop" htopCommand isHtop (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "signal" signalCommand isSignal doCenterFloat
   , NS "googleMusic" googleMusicCommand isGoogleMusic doCenterFloat
-  , NS "keepassX" keepassXCommand isKeepassX doCenterFloat
+  , NS "1Password" onePasswordCommand isOnePassword doCenterFloat
   , NS "trello" trelloCommand isTrello doCenterFloat
   , NS "yubioath" yubioathCommand isYubioath (customFloating $ W.RationalRect (1/3) (1/6) (2/6) (2/3))
   -- , NS "pidgin" pidginCommand isPidgin defaultFloating
