@@ -1,0 +1,3 @@
+- name: restart sysfs
+  become: yes
+  service: name=sysfsutils state=restarted

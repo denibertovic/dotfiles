@@ -86,6 +86,7 @@
     - scdaemon
     - sudo
     - ssh
+    - sysfsutils
     - tmate
     - todotxt-cli
     - tp-smapi-dkms
@@ -250,3 +251,8 @@
   unarchive: src=/tmp/fzf.tgz dest=/usr/local/bin mode=755 owner=root group=root
   when: (fzf_is_installed.rc != 0) or (fzf_version not in fzf_is_installed.stdout)
 
+- name: Tweak Trackpoint sensitivity and speed
+  become: yes
+  copy: src=etc_sysfs.d_trackpoint.conf dest=/etc/sysfs.d/trackpoint.conf
+  notify:
+    - restart sysfs
