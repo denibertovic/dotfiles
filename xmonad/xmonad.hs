@@ -338,7 +338,7 @@ mehCmd = do
   -- 720 == 1440/2
   -- Still need to test with 3 monitors. Will likely need to adjust the x axis as well
   let y = if (yOffset /= 0 && length screens > 1) then 720 else if (length screens > 1) then -720 else yOffset
-  spawn $ "echo 'xO:" <> (show $ xOffset) <> " yO:" <> (show $ yOffset) <> "   x:" <> (show x) <> " y:" <> (show y) <> "' >/tmp/dinamo.txt"
+  -- spawn $ "echo 'xO:" <> (show $ xOffset) <> " yO:" <> (show $ yOffset) <> "   x:" <> (show x) <> " y:" <> (show y) <> "' >/tmp/dinamo.txt"
   spawn $ "/home/deni/.local/bin/meh" <> " -x " <> (show x) <> " -y " <> (show y)
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
