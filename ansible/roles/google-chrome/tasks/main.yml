@@ -8,5 +8,5 @@
 
 - name: Install Google Chrome
   become: yes
-  apt: pkg=google-chrome-stable state=installed
+  apt: pkg=google-chrome-stable state=present
 

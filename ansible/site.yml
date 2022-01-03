@@ -7,7 +7,6 @@
     - { role: vim, tags: ["vim"] }
     - { role: dropbox, tags: ["dropbox"] }
     - { role: google-chrome, tags: ["google-chrome"] }
-    - { role: spideroakone, tags: ["spideroakone"] }
     - { role: haskell, tags: ["haskell"] }
     - { role: docker, tags: ["docker"] }
     - { role: keybase, tags: ["keybase"] }

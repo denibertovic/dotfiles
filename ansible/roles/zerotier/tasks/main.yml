@@ -8,4 +8,4 @@
 
 - name: Install zerotier-one package
   become: yes
-  apt: name=zerotier-one state=installed
+  apt: name=zerotier-one state=present

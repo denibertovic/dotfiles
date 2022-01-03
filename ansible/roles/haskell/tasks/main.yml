@@ -1,7 +1,7 @@
 ---
 - name: Install haskell prerequisites packages
   become: yes
-  apt: name={{ item }} state=installed update_cache=yes
+  apt: name={{ item }} state=present update_cache=yes
   with_items:
     - cabal-install
     - exuberant-ctags
@@ -30,6 +30,16 @@
     url: "{{ stack_artifact_signature_url }}"
     dest: /tmp/stack.tar.gz.asc
   when: (is_installed.rc != 0) or (stack_version not in is_installed.stdout)
+  tags:
+    - haskell:stack
+
+- name: Import Fpcomplete's GPG key
+  shell: gpg --recv-keys 0x575159689BEFB442
+  tags:
+    - haskell:stack
+
+- name: Import Manny's GPG key
+  shell: gpg --recv-keys 2C6A674E85EE3FB896AFC9B965101FF31C5C154D
   tags:
     - haskell:stack
 

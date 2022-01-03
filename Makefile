@@ -5,12 +5,12 @@
 # paswordless sudo has to be set up
 ## Install dependencies before Ansible is run
 dependencies:
-	@sudo apt-get install libssl-dev git vim sudo python-pip python-dev
+	@sudo apt-get install libssl-dev git vim sudo python3-pip python3-dev
 	@sudo pip install ansible
 
 ## Run the entire Ansible playbook and prerequisites
 all: enable-multi-arch dependencies
-	@cd ansible && ansible-playbook -i inventory/localhost site.yml
+	@cd ansible && ansible-playbook -vvv -i inventory/localhost site.yml
 
 ## Run Ansible playbook for 'common' tag
 common:
@@ -18,7 +18,7 @@ common:
 
 ## Run Ansible playbook with single tag. TAG=keybase make tag
 tag:
-	@cd ansible && ansible-playbook -i inventory/localhost site.yml --tags=${TAG} ${OPTS}
+	@cd ansible && ansible-playbook -vvv -i inventory/localhost site.yml --tags=${TAG} ${OPTS}
 
 ## Enable i386 arch
 enable-multi-arch:

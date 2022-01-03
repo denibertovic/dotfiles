@@ -1,6 +1,6 @@
 - name: Install required packages
   become: yes
-  apt: name={{ item }} state=installed update_cache=yes
+  apt: name={{ item }} state=present update_cache=yes
   with_items:
     - ack-grep
     - acpi
@@ -13,7 +13,6 @@
     - borgbackup
     - build-essential
     - ca-certificates
-    - clipit
     - cmake
     - curl
     - dos2unix
@@ -26,7 +25,6 @@
     - gnome-shell-extension-redshift
     - gnome-tweak-tool
     - gnupg
-    - gnupg2
     - gobject-introspection
     - libgirepository1.0-dev
     - libwebkit2gtk-4.0-dev
@@ -36,10 +34,9 @@
     - hplip
     - hplip-gui
     - htop
-    - icedove
     - iftop
     - inotify-tools
-    - ipython
+    - ipython3
     - jq
     - kazam
     - keepassxc
@@ -68,27 +65,24 @@
     - pcsc-tools
     - pcscd
     - pdftk
-    - pidgin
     - pkg-config
-    - python-dev
-    - python-notify2
-    - python-pip
-    - python-virtualenv
+    - python3-dev
+    - python3-neovim
+    - python3-notify2
+    - python3-pip
+    - python3-virtualenv
     - pwgen
     - redshift
     - redshift-gtk
     - resolvconf
     - rofi
     - rsync
-    - ruby-dev
-    - ruby-sass
     - rxvt-unicode-256color
     - scdaemon
     - sudo
     - ssh
     - sysfsutils
     - tmate
-    - todotxt-cli
     - tp-smapi-dkms
     - ttyrec
     - unrtf
@@ -96,7 +90,7 @@
     - uuid
     - vagrant
     - vim
-    - vim-gnome
+    - vim-gtk3
     - vim-nox
     - virtualbox
     - weechat
@@ -105,14 +99,13 @@
     - weechat-python
     - wget
     - xserver-xorg-input-synaptics
-    - ykneomgr
     - yubikey-personalization
     - wireshark
     - zsh
 
 - name: Install PIL deps
   become: yes
-  apt: name={{ item }} state=installed update_cache=yes
+  apt: name={{ item }} state=present update_cache=yes
   with_items:
     - libfreetype6-dev
     - libjpeg-dev
@@ -130,7 +123,7 @@
 
 - name: Install tlp packages
   become: yes
-  apt: name={{ item }} state=installed
+  apt: name={{ item }} state=present
   with_items:
     - acpi-call-dkms
     - tlp
@@ -194,6 +187,7 @@
 
 - name: Check if powerline fonts are installed
   shell: fc-list | grep -q "Inconsolata\ for\ Powerline"
+  ignore_errors: yes
   register: powerline
 
 - name: Clone powerline repo

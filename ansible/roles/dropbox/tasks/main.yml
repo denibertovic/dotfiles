@@ -8,5 +8,5 @@
 
 - name: Install dropbox package
   become: yes
-  apt: name=dropbox state=installed
+  apt: name=dropbox state=present
 
