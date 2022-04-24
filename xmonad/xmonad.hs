@@ -195,6 +195,7 @@ commands = do
                       , ("clear-clipboard", clearClipboardCmd)
                       , ("dnd-on", dunstDndOn)
                       , ("dnd-off", dunstDndOff)
+                      , ("fix-bluetooth", fixBluetoothCmd)
                       ]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
@@ -319,6 +320,10 @@ getScreens = do
 clearClipboardCmd :: X ()
 clearClipboardCmd = do
   spawn $ "pkill greenclip && greenclip clear && greenclip daemon &"
+
+fixBluetoothCmd :: X ()
+fixBluetoothCmd = do
+  spawn $ "sudo /home/deni/scripts/fix_bluetooth.sh"
 
 dunstDndOn :: X ()
 dunstDndOn = do
