@@ -1,4 +1,4 @@
 ---
-sops_version: 3.6.1
+sops_version: 3.7.2
 sops_artifact_url: "https://github.com/mozilla/sops/releases/download/v{{ sops_version }}/sops-v{{ sops_version }}.linux"
-# vault_artifact_sha: "sha256:...."
+sops_artifact_sha: "sha256:0f54a5fc68f82d3dcb0d3310253f2259fef1902d48cfa0a8721b82803c575024"
