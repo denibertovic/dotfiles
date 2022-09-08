@@ -43,3 +43,5 @@
   account = initeq
 [github]
 	user = denibertovic
+[init]
+	defaultBranch = main
