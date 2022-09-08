@@ -1,4 +1,8 @@
-{-# LANGUAGE AllowAmbiguousTypes, DeriveDataTypeable, TypeSynonymInstances, MultiParamTypeClasses #-}
+{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# OPTIONS_GHC -Wno-deprecations #-}
 --
 -- Xmonad Configuration by Deni Bertovic
 --
@@ -266,6 +270,10 @@ myKeys x = let
            -- gotoMenu is not really needed since we have rofi
            , ("M-S-g", addName "DEPRECATED: goto window" $ gotoMenu)
            , ("M-S-b", addName "Bring window" $ bringMenu)
+           -- dunst
+           , ("C-`", addName "Redisplay last notification" $ spawn "dunstctl history-pop")
+           , ("C-<Space>", addName "Close notification" $ spawn "dunstctl close")
+           , ("C-S-<Space>", addName "Close all notifications" $ spawn "dunstctl close-all")
            -- Monitors
            , ("M-C-<F11>", addName "Laptop monitor" $ spawn "/home/deni/dotfiles/scripts/monitors_laptop.sh")
            , ("M-C-<F12>", addName "Work monitor" $ spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
