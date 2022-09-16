@@ -1,6 +1,7 @@
 
-kubectl_version: 1.18.9
+kubectl_version: 1.21.2
 kubectl_artifact_url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
+kubectl_artifact_sha: "sha256:55b982527d76934c2f119e70bf0d69831d3af4985f72bb87cd4924b1c7d528da"
 
 minikube_version: 1.14.2
 minikube_artifact_url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64"

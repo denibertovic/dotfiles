@@ -12,6 +12,7 @@
   get_url:
     url: "{{ kubectl_artifact_url }}"
     dest: /usr/local/bin/kubectl
+    checksum: "{{ kubectl_artifact_sha }}"
     mode: 0755
   when: (kubectl_is_installed.rc != 0) or (kubectl_version not in kubectl_is_installed.stdout)
   tags:
