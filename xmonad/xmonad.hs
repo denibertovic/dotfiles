@@ -219,22 +219,22 @@ myKeys x = let
   zipM' m nm ks as f b = zipWith (\k d -> (m ++ k, addName nm $ f d b)) ks as
   in
   subKeys "My keys"
-           ([ ("M-S-<Return>", addName "Swap master window" $ windows W.swapMaster)
+           [ ("M-S-<Return>", addName "Swap master window" $ windows W.swapMaster)
            , ("M-q", addName "Restart XMonad"$ spawn "xmonad --restart")
            , ("M-S-q", addName "Quit XMonad" $ confirmPrompt hotPromptTheme "exit" $ io exitSuccess)
            , ("M-<Return>", addName "Launch Terminal" $ spawn $ XMonad.terminal x) -- %! Launch terminal
            -- , ((myModMask, xK_p), spawn "dmenu_run -fn -*-Monospace-*-r-*-*-16-*-*-*-*-*-*-*")
            -- , ((myModMask, xK_p), shellPrompt myPromptTheme)
            , ("M-p", addName "Launch Rofi" $ spawn "rofi -show run")
-           , ("M-<Right>", addName "Next workspace" $ nextWS)
+           , ("M-<Right>", addName "Next workspace" nextWS)
            , ("M-<Home>", addName "Toggle workspace" $ toggleWS' ["NSP"])
-           , ("M-<Left>", addName "Previous workspace" $ prevWS)
-           , ("M-<Backspace>", addName "Kill window" $ kill)
-           , ("M-S-<Backspace>", addName "Killall windows on workspace" $ confirmPrompt hotPromptTheme "kill all" $ killAll)
+           , ("M-<Left>", addName "Previous workspace" prevWS)
+           , ("M-<Backspace>", addName "Kill window" kill)
+           , ("M-S-<Backspace>", addName "Killall windows on workspace" $ confirmPrompt hotPromptTheme "kill all" killAll)
            , ("M-n", addName "Hide window ?????" $ withFocused hideWindow)
            , ("M-o", addName "Switch project" $ switchProjectPrompt warmPromptTheme)
-           , ("M-S-a", addName "Pin window to all workspaces" $ toggleCopyToAll)
-           , ("M-S-n", addName "Pop oldest hidden window" $ popOldestHiddenWindow)
+           , ("M-S-a", addName "Pin window to all workspaces" toggleCopyToAll)
+           , ("M-S-n", addName "Pop oldest hidden window" popOldestHiddenWindow)
            , ("M-C-y", addName "Launch commands menu" $ commands >>= runCommand)
            -- Window navigation and sublayouts
            , ("M-M1-h", addName "Pull group L" $ sendMessage $ pullGroup L)
@@ -245,9 +245,9 @@ myKeys x = let
            , ("M-M1-u", addName "Unmerge all tabs" $ withFocused (sendMessage . UnMergeAll))
            , ("M-;", addName "Tab down" $ onGroup W.focusUp')
            , ("M-'", addName "Tab up" $ onGroup W.focusDown')
-           , ("M-j", addName "Focus down" $ focusDown)
-           , ("M-k", addName "Focus up" $ focusUp)
-           , ("M-m", addName "Focus master" $ focusMaster)
+           , ("M-j", addName "Focus down" focusDown)
+           , ("M-k", addName "Focus up" focusUp)
+           , ("M-m", addName "Focus master" focusMaster)
            -- Scratchpads
            , ("M-C-h", addName "Launch HTOP" $ namedScratchpadAction scratchpads "htop")
            , ("M-C-]", addName "Launch Weechat" $ namedScratchpadAction scratchpads "weechat")
@@ -268,8 +268,8 @@ myKeys x = let
            , ("M-/", addName "Launch Firefox" $ spawn firefox)
            , ("M-C-/", addName "Launch Firefox With Profile" $ spawn "rofi -modi 'Firefox Profile':/home/deni/dotfiles/scripts/rofi-firefox-profile-launcher.sh -show 'Firefox Profile'")
            -- gotoMenu is not really needed since we have rofi
-           , ("M-S-g", addName "DEPRECATED: goto window" $ gotoMenu)
-           , ("M-S-b", addName "Bring window" $ bringMenu)
+           , ("M-S-g", addName "DEPRECATED: goto window" gotoMenu)
+           , ("M-S-b", addName "Bring window" bringMenu)
            -- dunst
            , ("C-`", addName "Redisplay last notification" $ spawn "dunstctl history-pop")
            , ("C-<Space>", addName "Close notification" $ spawn "dunstctl close")
@@ -291,7 +291,7 @@ myKeys x = let
            , ("<XF86AudioLowerVolume>",  addName "Lower volume" $ lowerVolume 4 >>= volumeNotification)
            , ("<XF86AudioRaiseVolume>",  addName "Raise volume" $ raiseVolume 4 >>= volumeNotification)
            -- , ("<XF86AudioMicMute>", addName "Toggle Mic" $ spawn micToggleCmd)
-           , ("<XF86AudioMicMute>",  addName "ToggleMic" $ toggleMicrophoneAndNotify)
+           , ("<XF86AudioMicMute>",  addName "ToggleMic" toggleMicrophoneAndNotify)
            , ("<XF86MonBrightnessUp>", addName "Increase brightness" $ spawn "/home/deni/dotfiles/scripts/brightness.sh +10")
            , ("<XF86MonBrightnessDown>", addName "Decrease brightness" $ spawn "/home/deni/dotfiles/scripts/brightness.sh -10")
            ]
@@ -312,7 +312,7 @@ myKeys x = let
 
 getOffset :: X (Int, Int)
 getOffset = withWindowSet $ \W.StackSet {current=W.Screen
-  {screenDetail=SD {screenRect=Rectangle {rect_x=x, rect_y=y}}}} -> return $
+  {screenDetail=SD {screenRect=Rectangle {rect_x=x, rect_y=y}}}} -> return
   (fromIntegral x, fromIntegral y)
 
 getScreens :: IO [ScreenId]
@@ -326,21 +326,21 @@ getScreens = do
   return $ map fst ids
 
 clearClipboardCmd :: X ()
-clearClipboardCmd = do
-  spawn $ "pkill greenclip && greenclip clear && greenclip daemon &"
+clearClipboardCmd =
+  spawn "pkill greenclip && greenclip clear && greenclip daemon &"
 
 fixBluetoothCmd :: X ()
-fixBluetoothCmd = do
-  spawn $ "sudo /home/deni/scripts/fix_bluetooth.sh"
+fixBluetoothCmd =
+  spawn "sudo /home/deni/scripts/fix_bluetooth.sh"
 
 dunstDndOn :: X ()
-dunstDndOn = do
-  spawn $ "notify-send \"DUNST_COMMAND_PAUSE\""
+dunstDndOn =
+  spawn "notify-send \"DUNST_COMMAND_PAUSE\""
 
 dunstDndOff :: X ()
 dunstDndOff = do
-  spawn $ "notify-send \"DUNST_COMMAND_RESUME\""
-  spawn $ "notify-send \"Do not Disturb\" \"Notifications resumed\""
+  spawn "notify-send \"DUNST_COMMAND_RESUME\""
+  spawn "notify-send \"Do not Disturb\" \"Notifications resumed\""
 
 mehCmd :: X ()
 mehCmd = do
@@ -350,9 +350,11 @@ mehCmd = do
   let x = xOffset
   -- 720 == 1440/2
   -- Still need to test with 3 monitors. Will likely need to adjust the x axis as well
-  let y = if (yOffset /= 0 && length screens > 1) then 720 else if (length screens > 1) then -720 else yOffset
+  let y | yOffset /= 0 && length screens > 1 = 720
+        | length screens > 1 = -720
+        | otherwise = yOffset
   -- spawn $ "echo 'xO:" <> (show $ xOffset) <> " yO:" <> (show $ yOffset) <> "   x:" <> (show x) <> " y:" <> (show y) <> "' >/tmp/dinamo.txt"
-  spawn $ "/home/deni/.local/bin/meh" <> " -x " <> (show x) <> " -y " <> (show y)
+  spawn $ "/home/deni/.local/bin/meh" <> " -x " <> show x <> " -y " <> show y
 
 micToggleCmd = "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
@@ -371,7 +373,7 @@ volumeDzenNotification :: Double -> X ()
 volumeDzenNotification = D.dzenConfig (centered 150) . show . round
 
 volumeNotification :: Double -> X ()
-volumeNotification x = spawn $ "/usr/local/bin/rumno -v " <> (show $ round x)
+volumeNotification x = spawn $ "/usr/local/bin/rumno -v " <> show (round x)
 
 centered w =
         D.onCurr (D.center w 66)
@@ -385,14 +387,14 @@ centeredLarge w =
     >=> D.addArgs ["-fg", lightgray]
     >=> D.addArgs ["-bg", black]
 
-showDzenAudioMuteAlert True  = D.dzenConfig (centered 300) $ "Sound On"
-showDzenAudioMuteAlert False = D.dzenConfig (centered 300) $ "Sound Off"
+showDzenAudioMuteAlert True  = D.dzenConfig (centered 300) "Sound On"
+showDzenAudioMuteAlert False = D.dzenConfig (centered 300) "Sound Off"
 
 showAudioMuteAlert True  = getVolume >>= volumeNotification
 showAudioMuteAlert False = spawn "/usr/local/bin/rumno -m"
 
-showDzenMicMuteAlert True  = D.dzenConfig (centered 300) $ "Mic on"
-showDzenMicMuteAlert False = D.dzenConfig (centered 300) $ "Mic off"
+showDzenMicMuteAlert True  = D.dzenConfig (centered 300) "Mic on"
+showDzenMicMuteAlert False = D.dzenConfig (centered 300) "Mic off"
 
 -- from XMonad.Actions.Volume from xmonad-extras
 outputOf :: String -> IO String
@@ -405,20 +407,18 @@ outputOf s = do
 toggleMicrophoneAndNotify :: X ()
 toggleMicrophoneAndNotify = do
   out <- liftIO $ outputOf "amixer set Capture toggle"
-  case ("[off]" `isInfixOf` out) of
-    True -> spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg"
-    False -> spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
+  if "[off]" `isInfixOf` out then spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg" else spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
 
 -- COMMANDS
 weechatCommand = "urxvt -title WeeChat -e weechat"
-isWeechat = (resource =? "urxvt") <&&> (fmap (isInfixOf "WeeChat") title)
+isWeechat = (resource =? "urxvt") <&&> fmap (isInfixOf "WeeChat") title
 
 htopCommand = "urxvt -title htop -e htop"
-isHtop = (title =? "htop")
+isHtop = title =? "htop"
 
 onePasswordCommand = "1password"
 onePasswordResource =  "1password"
-isOnePassword = (resource =? onePasswordResource)
+isOnePassword = resource =? onePasswordResource
 
 
 -- pidginCommand = "pidgin"
@@ -427,18 +427,18 @@ isOnePassword = (resource =? onePasswordResource)
 
 trelloCommand = "dex $HOME/Desktop/trello.desktop"
 trelloResource = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
-isTrello = (resource =? trelloResource)
+isTrello = resource =? trelloResource
 
 yubioathCommand = "yubioath-desktop"
 yubioathResource = "yubioath-desktop"
-isYubioath = (resource =? yubioathResource)
+isYubioath = resource =? yubioathResource
 
 googleMusicCommand = "dex $HOME/Desktop/youtubemusic.desktop"
 googleMusicResource = "crx_cinhimbnkkaeohfgghhklpknlkffjgod"
-isGoogleMusic = (resource =? googleMusicResource)
+isGoogleMusic = resource =? googleMusicResource
 
 signalCommand = "signal-desktop"
-isSignal = (className =? "Signal")
+isSignal = className =? "Signal"
 
 myStartupHook = do
     spawn "xmodmap ~/.Xmodmap"
@@ -483,7 +483,7 @@ myManageHook = manageHook gnomeConfig
           , className =? "Totem"            -?> doCenterFloat
           , className =? "Keepassx"         -?> doCenterFloat
           , className =? "SpiderOakONE"     -?> doCenterFloat
-          , isHtop                          -?> (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+          , isHtop                          -?> customFloating (W.RationalRect (1/6) (1/6) (2/3) (2/3))
           , className =? "Gnome-Screenshot" -?> doIgnore
           , className =? "Pidgin"           -?> doShift "2"
           , className =? "skypeforlinux"    -?> doShift "2"
@@ -539,10 +539,10 @@ scratchpads = [
 
 data FULLBAR = FULLBAR deriving (Read, Show, Eq, Typeable)
 instance Transformer FULLBAR Window where
-    transform FULLBAR x k = k barFull (\_ -> x)
+    transform FULLBAR x k = k barFull (const x)
 
 -- tabBarFull = avoidStruts $ noFrillsDeco shrinkText topBarTheme $ addTabs shrinkText myTabTheme $ Simplest
-barFull = avoidStruts $ Simplest
+barFull = avoidStruts Simplest
 
 -- Numbered
 -- 1 is Firefox (personal)
@@ -610,7 +610,7 @@ projects = [ Project { projectName  = wsDMO
                      }
            , Project { projectName  = wsEMAIL
                      , projectDirectory  = "~/"
-                     , projectStartHook  = Just $ do spawnOn wsEMAIL "thunderbird"
+                     , projectStartHook  = Just $ spawnOn wsEMAIL "thunderbird"
                      }
            ]
 
@@ -638,12 +638,12 @@ myLayout = renamed [ CutWordsLeft 4 ]
      $ avoidStruts
      $ addTabsBottom shrinkText myTabTheme
      $ subLayout [] (Simplest ||| Accordion)
-     $ onWorkspace "2" imLayout $ myLayouts
+     $ onWorkspace "2" imLayout myLayouts
   where
     --          numMasters, resizeIncr, splitRatio
     tall = Tall 1           0.02        0.5
     -- define the list of standardLayouts
-    myLayouts = (layoutHook defaultConfig) ||| Accordion ||| Grid ||| emptyBSP
+    myLayouts = layoutHook defaultConfig ||| Accordion ||| Grid ||| emptyBSP
     -- notice that withIM, which normally acts on one layout, can also
     -- work on a list of layouts (yay recursive data types!)
     imLayout = withIM (2/10) (Role "buddy_list") myLayouts
@@ -651,7 +651,7 @@ myLayout = renamed [ CutWordsLeft 4 ]
 myFadeHook = composeAll
     [ opaque -- default to opaque
     , isUnfocused --> opacity 0.85
-    , (className =? "URxvt") <&&> (isUnfocused) --> opacity 0.9
+    , (className =? "URxvt") <&&> isUnfocused --> opacity 0.9
     , fmap ("Google" `isPrefixOf`) className --> opaque
     , isDialog --> opaque
     --, isUnfocused --> opacity 0.55
@@ -695,7 +695,7 @@ data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 instance UrgencyHook LibNotifyUrgencyHook where
     urgencyHook LibNotifyUrgencyHook w = do
         name     <- getName w
-        Just idx <- fmap (W.findTag w) $ gets windowset
+        Just idx <- W.findTag w Control.Applicative.<$> gets windowset
 
         safeSpawn "notify-send" [show name, "workspace " ++ idx]
 
