@@ -201,6 +201,8 @@ commands = do
                       , ("dnd-on", dunstDndOn)
                       , ("dnd-off", dunstDndOff)
                       , ("fix-bluetooth", fixBluetoothCmd)
+                      , ("dns-disable", disableDnsCmd)
+                      , ("dns-enable", enableDnsCmd)
                       ]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
@@ -333,6 +335,14 @@ clearClipboardCmd =
 fixBluetoothCmd :: X ()
 fixBluetoothCmd =
   spawn "sudo /home/deni/scripts/fix_bluetooth.sh"
+
+disableDnsCmd :: X ()
+disableDnsCmd =
+  spawn "sudo /home/deni/scripts/disable_own_dns.sh"
+
+enableDnsCmd :: X ()
+enableDnsCmd =
+  spawn "sudo /home/deni/scripts/enable_own_dns.sh"
 
 dunstDndOn :: X ()
 dunstDndOn =

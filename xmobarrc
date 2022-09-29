@@ -6,10 +6,11 @@ Config { font = "xft:Monospace:size=9:antialias=true"
                     , Run BatteryP ["BAT0"] ["-t", "(AC: <acstatus>) <left>% <timeleft>", "-h", "green", "-n", "yellow", "-l", "red"] 30
                     , Run Memory ["-t", "<usedratio>%"] 30
                     , Run Date "%a %b %_d %k:%M" "date" 30
+                    , Run Com "/home/deni/scripts/check_dns_status.sh" [] "dnsstatus" 20
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date%"
+       , template = "%StdinReader% }{ BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus%"
        , lowerOnStart = False
        }
