@@ -8,6 +8,7 @@
 --
 
 import           Control.Monad
+import           Control.Applicative
 import           Data.List                          (isInfixOf, isPrefixOf)
 import qualified Data.Map                           as M
 import           Data.Monoid                        ((<>))
