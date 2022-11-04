@@ -203,6 +203,8 @@ commands = do
                       , ("fix-bluetooth", fixBluetoothCmd)
                       , ("dns-disable", disableDnsCmd)
                       , ("dns-enable", enableDnsCmd)
+                      , ("bose-connect", boseConnectCmd)
+                      , ("bose-disconnect", boseDisconnectCmd)
                       ]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
@@ -339,6 +341,14 @@ fixBluetoothCmd =
 disableDnsCmd :: X ()
 disableDnsCmd =
   spawn "sudo /home/deni/scripts/disable_own_dns.sh"
+
+boseConnectCmd :: X ()
+boseConnectCmd =
+  spawn "bluetoothctl connect 28:11:A5:D9:25:59"
+
+boseDisconnectCmd :: X ()
+boseDisconnectCmd =
+  spawn "bluetoothctl disconnect 28:11:A5:D9:25:59"
 
 enableDnsCmd :: X ()
 enableDnsCmd =
