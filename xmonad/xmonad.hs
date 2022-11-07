@@ -205,6 +205,10 @@ commands = do
                       , ("dns-enable", enableDnsCmd)
                       , ("bose-connect", boseConnectCmd)
                       , ("bose-disconnect", boseDisconnectCmd)
+                      , ("setkbhr", setkbhrCmd)
+                      , ("setkben", setkbenCmd)
+                      , ("enable-capslock", enableCapsLockCmd)
+                      , ("disable-capslock", disableCapsLockCmd)
                       ]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
@@ -353,6 +357,22 @@ boseDisconnectCmd =
 enableDnsCmd :: X ()
 enableDnsCmd =
   spawn "sudo /home/deni/scripts/enable_own_dns.sh"
+
+setkbenCmd :: X ()
+setkbenCmd =
+  spawn "setxkbmap en_US && xmodmap /home/deni/.Xmodmap"
+
+setkbhrCmd :: X ()
+setkbhrCmd =
+  spawn "setxkbmap hr && xmodmap /home/deni/.Xmodmap"
+
+enableCapsLockCmd :: X ()
+enableCapsLockCmd =
+  spawn "setxkbmap -option"
+
+disableCapsLockCmd :: X ()
+disableCapsLockCmd =
+  spawn "setxkbmap en_US && xmodmap /home/deni/.Xmodmap"
 
 dunstDndOn :: X ()
 dunstDndOn =
