@@ -287,13 +287,6 @@ myKeys x = let
            , ("M-C-<F11>", addName "Laptop monitor" $ spawn "/home/deni/dotfiles/scripts/monitors_laptop.sh")
            , ("M-C-<F12>", addName "Work monitor" $ spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
            ]
-           -- ++ zipM "M-"                "View ws"                          wsKeys [0..] (withNthWorkspace W.greedyView)
-           -- ++ zipM "M-S-"              "Move w to ws"                          wsKeys [0..] (withNthWorkspace W.shift)
-           -- ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
-           -- ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
-           -- ++ zipM' "M-C-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
-           -- ++ zipM' "M-S-"             "Swap workspace to screen"                  arrowKeys dirs screenSwap True
-           )
            ^++^
    subKeys "Media Keys"
            [ ("<XF86AudioMute>", addName "Toggle Sounds" $ toggleMute >>= showAudioMuteAlert)
