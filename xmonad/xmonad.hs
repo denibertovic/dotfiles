@@ -524,6 +524,7 @@ myManageHook = manageHook gnomeConfig
           , className =? "Totem"            -?> doCenterFloat
           , className =? "Keepassx"         -?> doCenterFloat
           , className =? "SpiderOakONE"     -?> doCenterFloat
+          , className =? "Blueman-manager"  -?> doCenterFloat
           , isHtop                          -?> customFloating (W.RationalRect (1/6) (1/6) (2/3) (2/3))
           , className =? "Gnome-Screenshot" -?> doIgnore
           , className =? "Pidgin"           -?> doShift "2"
