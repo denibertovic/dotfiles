@@ -1,4 +1,4 @@
-stack_version: "2.7.1"
+stack_version: "2.9.1"
 stack_artifact_url: "https://github.com/commercialhaskell/stack/releases/download/v{{ stack_version }}/stack-{{ stack_version }}-linux-x86_64.tar.gz"
 stack_artifact_signature_url: "https://github.com/commercialhaskell/stack/releases/download/v{{ stack_version }}/stack-{{ stack_version }}-linux-x86_64.tar.gz.asc"
 
