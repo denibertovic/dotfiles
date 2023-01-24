@@ -518,6 +518,8 @@ myManageHook = manageHook gnomeConfig
           , className =? "Keepassx"         -?> doCenterFloat
           , className =? "SpiderOakONE"     -?> doCenterFloat
           , className =? "Blueman-manager"  -?> doCenterFloat
+          , className =? "xdg-desktop-portal-gnome" -?> forceCenterFloat
+          , className =? "MPlayer" -?> forceCenterFloat
           , isHtop                          -?> customFloating (W.RationalRect (1/6) (1/6) (2/3) (2/3))
           , className =? "Gnome-Screenshot" -?> doIgnore
           , className =? "Pidgin"           -?> doShift "2"
