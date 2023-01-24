@@ -17,8 +17,8 @@ ZSH_THEME="fwalch"
 alias met='cd /home/deni/meetup/docker'
 alias mtorrents='/home/deni/dotfiles/scripts/mount_torrents.sh'
 alias mbackups='/home/deni/dotfiles/scripts/mount_backups.sh'
-alias utorrents='umount /media/varys/torrents'
-alias ubackups='umount /media/varys/backups'
+alias utorrents='umount /media/torrents'
+alias ubackups='umount /media/backups'
 
 # kube
 alias check-kubectl-version='echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)'

@@ -211,8 +211,8 @@
   become: yes
   file: path={{ item }} state=directory owner=deni group=deni
   with_items:
-    - /media/varys/torrents
-    - /media/varys/backups
+    - /media/torrents
+    - /media/backups
 
 - name: Remove pcspkr module
   become: yes

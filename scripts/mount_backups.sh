@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mount 192.168.1.54:/data/backups /media/varys/backups
+mount 192.168.1.54:/data/backups /media/backups
 
