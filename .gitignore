@@ -7,4 +7,5 @@ xmonad/xmonad.o
 xmonad/history
 xmonad/xmonad.state
 xmonad/prompt-history
+xmonad/build-x86_64-linux/
 mc/hotlist
