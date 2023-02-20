@@ -32,6 +32,10 @@ import           XMonad.Config.Gnome
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.InsertPosition
+import           XMonad.Layout.TrackFloating        (trackFloating)
+import           XMonad.Hooks.RefocusLast           (refocusLastLayoutHook,
+                                                     refocusLastWhen,
+                                                     isFloat)
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.UrgencyHook
 -- import           XMonad.Hooks.Place                  (simpleSmart, placeFocused, placeHook, inBounds, underMouse)
@@ -662,7 +666,7 @@ myHandleEventHook = docksEventHook
                 <+> fullscreenEventHook
 
 -- Layouts
-myLayout = renamed [ CutWordsLeft 4 ]
+myLayout = refocusLastLayoutHook . trackFloating $ renamed [ CutWordsLeft 4 ]
      $ smartBorders
      $ noFrillsDeco shrinkText topBarTheme
      $ spacing gap
@@ -672,7 +676,13 @@ myLayout = renamed [ CutWordsLeft 4 ]
      $ boringWindows
      $ avoidStruts
      $ addTabsBottom shrinkText myTabTheme
-     $ subLayout [] (Simplest ||| Accordion)
+     -- NOTE: commenting this out fixes the issue where the wrong (last) window
+     -- is focused after a popup or a floating window closes. It would focus the last one
+     -- in the tile rather than the last focused one (which was usually master)
+     -- BUT I LIKE HAVING TABS EVEN THOUGH I ALMOST NEVER USE THIS FEATURE.
+     -- FIX THIS!
+     -- $ subLayout [] Simplest
+     -- $ subLayout [] (Simplest ||| Accordion)
      $ onWorkspace "2" imLayout myLayouts
   where
     --          numMasters, resizeIncr, splitRatio
