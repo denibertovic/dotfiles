@@ -23,7 +23,7 @@ synclient TouchpadOff=1 &
 xmodmap ~/.Xmodmap &
 
 # Startup apps
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 33 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 41 &
 
 # Tried diodon instead of parcellite because parcellite has scaling issues
 # XDG_CURRENT_DESKTOP=GNOME parcellite &
