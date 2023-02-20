@@ -6,7 +6,6 @@
 --
 -- Xmonad Configuration by Deni Bertovic
 --
-
 import           Control.Monad
 import           Control.Applicative
 import           Data.List                          (isInfixOf, isPrefixOf)
@@ -63,8 +62,7 @@ import           XMonad.Layout.WindowNavigation
 import           XMonad.Actions.Navigation2D        (screenGo, windowToScreen, screenSwap)
 import           XMonad.ManageHook
 import           XMonad.Prompt                      (XPConfig (..),
-                                                     XPPosition (..),
-                                                     defaultXPConfig)
+                                                     XPPosition (..))
 import           XMonad.Prompt.ConfirmPrompt
 import           XMonad.Prompt.Shell                (shellPrompt)
 import qualified XMonad.StackSet                    as W
