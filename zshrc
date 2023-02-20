@@ -205,3 +205,4 @@ function kubectlgetall {
 #
 eval "$(denv hook ZSH)"
 
+#eval "$(direnv hook zsh)"
