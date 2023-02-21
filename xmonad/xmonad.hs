@@ -82,6 +82,7 @@ import           XMonad.Util.NamedWindows    (getName)
 import           XMonad.Util.NamedActions
 import           XMonad.Util.Run                    (runInTerm, spawnPipe, safeSpawnProg, safeSpawn)
 import           XMonad.Util.SpawnOnce
+import qualified XMonad.Util.Hacks as Hacks
 
 
 myTerminal = "urxvt"
@@ -664,6 +665,8 @@ myHandleEventHook = docksEventHook
                 <+> fadeWindowsEventHook
                 <+> handleEventHook def
                 <+> fullscreenEventHook
+                <+> Hacks.trayerAboveXmobarEventHook
+                <+> Hacks.trayerPaddingXmobarEventHook
 
 -- Layouts
 myLayout = refocusLastLayoutHook . trackFloating $ renamed [ CutWordsLeft 4 ]
@@ -714,7 +717,7 @@ myLogHook h = do
     ewmhDesktopsLogHook
     dynamicLogWithPP xmobarPP
       { ppOutput = hPutStrLn h
-      , ppTitle  = xmobarColor "green" "" . shorten 50
+      , ppTitle  = xmobarColor "green" "" . shorten 40
       }
 
 myModMask = mod4Mask

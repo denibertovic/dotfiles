@@ -9,9 +9,11 @@ Config { font = "DejaVu Sans Mono 10"
                     , Run Date "%a %b %_d %k:%M" "date" 30
                     , Run Com "/home/deni/scripts/check_dns_status.sh" [] "dnsstatus" 20
                     , Run StdinReader
+                    , Run XPropertyLog "_XMONAD_TRAYPAD"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus%"
-       , lowerOnStart = False
+       , template = "%StdinReader% }{ BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus%  %_XMONAD_TRAYPAD%"
+       , lowerOnStart = True
+       , overrideRedirect = True
        }
