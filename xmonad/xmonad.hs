@@ -85,7 +85,7 @@ import           XMonad.Util.SpawnOnce
 import qualified XMonad.Util.Hacks as Hacks
 
 
-myTerminal = "urxvt"
+myTerminal = "alacritty"
 
 -- Colors
 babyblue  = "#80c0ff"
