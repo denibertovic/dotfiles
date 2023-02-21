@@ -2,7 +2,7 @@ Config { font = "DejaVu Sans Mono 10"
        , dpi = 154
        , bgColor = "#222222"
        , fgColor = "grey"
-       , position = TopHM 40 2 300 0 0
+       , position = TopHM 40 2 2 0 0
        , commands = [ Run Cpu ["-t", "<total>%", "-L","5","-H","40","--normal","green","--high","red"] 15
                     , Run BatteryP ["BAT0"] ["-t", "(AC: <acstatus>) <left>% <timeleft>", "-h", "green", "-n", "yellow", "-l", "red"] 30
                     , Run Memory ["-t", "<usedratio>%"] 30
