@@ -113,7 +113,6 @@ plugins=(
     todo
     denv
     git
-    git-flow
     virtualenvwrapper
     docker
     cabal
