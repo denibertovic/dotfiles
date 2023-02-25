@@ -750,7 +750,7 @@ instance UrgencyHook LibNotifyUrgencyHook where
         safeSpawn "notify-send" [show name, "workspace " ++ idx]
 
 main = do
-    xmproc <- spawnPipe "/usr/bin/xmobar /home/deni/.xmobarrc"
+    xmproc <- spawnPipe "xmobar /home/deni/.xmobarrc"
     xmonad
       $ withUrgencyHook LibNotifyUrgencyHook
       $ ewmh
