@@ -9,6 +9,6 @@
 
 killall trayer
 xrandr --output eDP-1 --auto --right-of DP-2-2 --output DP-2-2 --auto --primary --right-of DP-2-1 --output DP-2-1 --auto --rotate left
-nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --tint 0x222222 --height 41 --monitor 1 > /tmp/nohup.out 2>&1 &
+nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --alpha 0 --tint 0x222222 --height 40 --monitor 1 > /tmp/nohup.out 2>&1 &
 rm -rf ~/.xmonad/xmonad.state
 
