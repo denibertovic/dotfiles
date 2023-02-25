@@ -698,8 +698,10 @@ myLayout = refocusLastLayoutHook . trackFloating $ renamed [ CutWordsLeft 4 ]
 
 myFadeHook = composeAll
     [ opaque -- default to opaque
-    , isUnfocused --> opacity 0.85
+    -- , isUnfocused --> opacity 0.7
     , (className =? "URxvt") <&&> isUnfocused --> opacity 0.9
+    , (className =? "Alacritty") --> opacity 0.9
+    , (className =? "Alacritty") <&&> isUnfocused --> opacity 0.7
     , fmap ("Google" `isPrefixOf`) className --> opaque
     , isDialog --> opaque
     --, isUnfocused --> opacity 0.55

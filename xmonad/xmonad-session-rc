@@ -9,6 +9,7 @@
 
 # Xresources
 xsetroot -cursor_name left_ptr &
+picom &
 
 # This replaces gnome-settings-daemon 8.21.2017.
 #/usr/lib/gnome-settings-daemon/gsd-xsettings &
