@@ -139,6 +139,8 @@ function my_init() {
 }
 zvm_after_init_commands+=(my_init)
 
+# 10ms for key sequences
+# https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 export KEYTIMEOUT=1
 
 share-session () {
