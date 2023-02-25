@@ -120,6 +120,7 @@ plugins=(
     stack
     vault
     pass
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -132,19 +133,16 @@ unsetopt correct_all
 
 # RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
 
-# VIM mode
-bindkey -v
+# Since the default initialization mode, this plugin will overwrite the previous key
+# bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.)
+# to fail. See here: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+# Define an init function and append to zvm_after_init_commands
+function my_init() {
+    bindkey "^[[A" history-beginning-search-backward
+    bindkey "^[[B" history-beginning-search-forward
+}
+zvm_after_init_commands+=(my_init)
 
-# bindkey "^[[A" history-beginning-search-backward
-# bindkey "^[[B" history-beginning-search-forward
-
-# function zle-line-init zle-keymap-select {
-#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-#     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-#     zle reset-prompt
-# }
-# zle -N zle-line-init
-# zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 share-session () {
