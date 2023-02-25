@@ -127,11 +127,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/home/deni/.local/bin:$PATH"
 
-
-#export PYTHONPATH="$PYTHONPATH":/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/
 unsetopt correct_all
-
-# RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
 
 # Since the default initialization mode, this plugin will overwrite the previous key
 # bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.)
@@ -180,8 +176,8 @@ function kubectlgetall {
   done
 };
 
-# setopt prompt_subst
-#
+# use denv
 eval "$(denv hook ZSH)"
 
+# use direnv
 #eval "$(direnv hook zsh)"
