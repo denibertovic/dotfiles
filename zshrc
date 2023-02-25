@@ -14,7 +14,6 @@ ZSH_THEME="fwalch"
 
 # TEMP ALIASES
 #
-alias met='cd /home/deni/meetup/docker'
 alias mtorrents='/home/deni/dotfiles/scripts/mount_torrents.sh'
 alias mbackups='/home/deni/dotfiles/scripts/mount_backups.sh'
 alias utorrents='umount /media/torrents'
@@ -25,10 +24,6 @@ alias check-kubectl-version='echo $(curl -s https://storage.googleapis.com/kuber
 alias fetch-latest-kubectl='curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
 alias k='kubectl --namespace=${KUBECTL_NAMESPACE:-default}'
 alias h='helm --namespace=${KUBECTL_NAMESPACE:-default}'
-
-# notifications
-alias pause-notifications='killall -SIGUSR1 dunst'
-alias resume-notifications='killall -SIGUSR2 dunst'
 
 # Force gpg2
 # alias gpg='gpg2'
@@ -50,18 +45,14 @@ alias dclean='docker ps -a -f status=exited | grep -vi "datacontainer" | tail -n
 # remove all images tagged as <none>
 alias dcleanimages='docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
 alias dcleanvolumes='docker volume ls -q | xargs docker volume rm'
-alias dgc='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc'
 alias dstoplast='docker ps -l -q | xargs docker stop -t 1'
 alias dps='docker ps'
 alias di='docker images | awk "{ print \$1}" | tail -n +2 | sort | uniq'
 
 # development related aliases
 alias p='python3 -c "import IPython; IPython.terminal.ipapp.launch_new_instance()"'
-alias shell='./manage.py shell'
-alias debug='python -m pdb manage.py runserver'
-alias idebug='python -m ipdb manage.py runserver --pm'
-alias clojure='docker run -e LEIN_ROOT=1 -i -t clojure /bin/bash -c "lein repl"'
-# alias ghci=ghci-color
+# alias debug='python -m pdb manage.py runserver'
+# alias idebug='python -m ipdb manage.py runserver --pm'
 
 # other aliases
 alias sudo='sudo '
@@ -71,8 +62,6 @@ alias lls='ls -l | less'
 alias la='ls -la'
 alias noack='ack --ignore-file=ext:json --no-css --no-js --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1 | sort -h'
-alias proxy='ssh -D 9999 magrathea.kset.org -p 80'
-# alias psc='ps xawf -eo pid,user,cgroup,args'
 alias ctl='systemctl'
 alias t='/home/deni/.local/bin/todo'
 alias t-check-tags='grep -E -o "@.*" ~/Dropbox/todo/todo.txt  | sort | uniq'
@@ -80,17 +69,10 @@ alias get-subtitles='subliminal download -l en .'
 alias copy-path='pwd | tr -d "\n" | xsel -b'
 alias asciicast2gif='docker run -v $PWD:/data asciinema/asciicast2gif'
 alias gci='google-chrome --incognito'
-alias z="zathura"
-alias pdf="evince"
+alias pdf="zathura"
 
 # tmux
 alias tmux='tmux -2'
-
-# jira
-alias jira-myissues='/home/deni/.virtualenvs/jira/bin/jira-cli view --search-jql="assignee=dbertovic AND status=Open" | less'
-alias jira-do='/home/deni/.virtualenvs/jira/bin/jira-cli update --transition="resolve issue" --resolution="Fixed"'
-alias jira-listcomments='/home/deni/.virtualenvs/jira/bin/jira-cli view --comments-only'
-alias jira-addcomment='/home/deni/.virtualenvs/jira/bin/jira-cli update --comment'
 
 # eid
 alias eid-client='/usr/lib/akd/eidmiddleware/Client'
