@@ -13,4 +13,4 @@ configuration {
     }
 
 
-@theme          "/home/deni/dotfiles/rofi/nord"
+@theme          "/home/deni/dotfiles/rofi/nord.rasi"
