@@ -1,0 +1,16 @@
+//----------------------
+// Configuration
+//----------------------
+
+configuration {
+    modi:           "window,run";
+//    width:          550;
+//    lines:          13;
+    font:           "JetBrains Mono 14";
+    show-match:         false;
+    separator-style:    "solid";
+    hide-scrollbar:     true;
+    }
+
+
+@theme          "/home/deni/dotfiles/rofi/nord"
