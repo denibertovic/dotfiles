@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## If you don't want the script to automatically choose the Chrome version to
 ## use, set the CHROME_VERSION variable below

@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 
 # To test out try changing the if statement to -le 100 so that it alaways

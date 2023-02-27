@@ -1,8 +1,11 @@
-Config { font = "DejaVu Sans Mono 10"
-       , dpi = 154
+Config { font = "Monospace 8"
+       , additionalFonts = [ "Source Code Pro 9"
+                           , "DejaVu Sans Mono 12"
+                           , "Symbola 10"]
+       , dpi = 157x157;
        , bgColor = "#222222"
        , fgColor = "grey"
-       , position = TopHM 40 0 0 0 0
+       , position = TopHM 30 0 0 0 0
        , commands = [ Run Cpu ["-t", "<total>%", "-L","5","-H","40","--normal","green","--high","red"] 15
                     , Run BatteryP ["BAT0"] ["-t", "(AC: <acstatus>) <left>% <timeleft>", "-h", "green", "-n", "yellow", "-l", "red"] 30
                     , Run Memory ["-t", "<usedratio>%"] 30
@@ -13,7 +16,7 @@ Config { font = "DejaVu Sans Mono 10"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% } BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus% {  %_XMONAD_TRAYPAD%"
+       , template = "%StdinReader% } | BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus% | { %_XMONAD_TRAYPAD%"
        , lowerOnStart = True
        , overrideRedirect = True
        }
