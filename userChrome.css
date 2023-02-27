@@ -1,0 +1,58 @@
+/* This used to work */
+/* #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar { */
+/*   opacity: 0; */
+/*   pointer-events: none; */
+/* } */
+/* #main-window:not([tabsintitlebar="true"]) #TabsToolbar { */
+/*     visibility: collapse !important; */
+/* } */
+
+/* #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header { */
+/*   display: none; */
+/* } */
+
+
+/* BUT as of Firefox 95 there was a big gray bar at the top where the tabs used to be */
+/* (they made it bigger/thicker) */
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+  opacity: 0;
+  pointer-events: none;
+}
+#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+    visibility: collapse !important;
+}
+
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar .titlebar-spacer {
+        border-inline-end: none;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
+}
+
+
+/* This removes the thick bar at the top */
+#titlebar {
+  appearance: none !important;
+  height: 0px;
+}
+
+#titlebar > #toolbar-menubar {
+  margin-top: 0px;
+}
+
+#TabsToolbar {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+/* This makes the minimize,maximize,close buttons dissapear */
+/* I guess this is okay for my XMonad set up but it will be tricky on other */
+/* desktop environments */
+#TabsToolbar > .titlebar-buttonbox-container {
+  display: none;
+  /* position: absolute; */
+  /* top: 12px; */
+  /* left: 0px; */
+}
+

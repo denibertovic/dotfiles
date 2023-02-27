@@ -120,7 +120,6 @@ plugins=(
     stack
     vault
     pass
-    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -1,4 +1,4 @@
-#!/bin/bash                                                                                                      
+#!/usr/bin/env bash
 
 MOZILLA_CONFIG=~/.mozilla
 FIREFOX='/usr/bin/firefox'

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Please define the path to REPOSITORY before calling
 # this scripts

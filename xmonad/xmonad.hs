@@ -128,12 +128,13 @@ inactive    = base02
 focusColor  = blue
 unfocusColor = base02
 
-myFont      = "-*-terminus-medium-*-*-*-*-160-*-*-*-*-*-*"
-myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
-myWideFont  = "xft:Eurostar Black Extended:"
-            ++ "style=Regular:pixelsize=180:hinting=true"
-myPromptFont = "xft:Monospace-Bold:pixelsize=24"
-myTabFont = "xft:Monospace-Bold:pixelsize=18"
+myFont      = "JetBrains Mono 8"
+myBigFont   = "JetBrains Mono 12"
+myWideFont  = "JetBrains Mono 14"
+-- xft:Eurostar Black Extended:"
+--             ++ "style=Regular:pixelsize=180:hinting=true"
+myPromptFont = "JetBrains Mono 32"
+myTabFont = "JetBrains Mono 18"
 
 myTabTheme = def
     { fontName            = myTabFont
@@ -149,8 +150,8 @@ myTabTheme = def
 -- this is a "fake title" used as a highlight bar in lieu of full borders
 -- (I find this a cleaner and less visually intrusive solution)
 topBarTheme = def
-    { fontName              = myFont
-    , inactiveBorderColor   = base03
+    { --fontName              = myFont
+    inactiveBorderColor   = base03
     , inactiveColor         = base03
     , inactiveTextColor     = base03
     , activeBorderColor     = active
@@ -410,7 +411,7 @@ volumeDzenNotification :: Double -> X ()
 volumeDzenNotification = D.dzenConfig (centered 150) . show . round
 
 volumeNotification :: Double -> X ()
-volumeNotification x = spawn $ "/usr/local/bin/rumno -v " <> show (round x)
+volumeNotification x = spawn $ "rumno -v " <> show (round x)
 
 centered w =
         D.onCurr (D.center w 66)
@@ -428,7 +429,7 @@ showDzenAudioMuteAlert True  = D.dzenConfig (centered 300) "Sound On"
 showDzenAudioMuteAlert False = D.dzenConfig (centered 300) "Sound Off"
 
 showAudioMuteAlert True  = getVolume >>= volumeNotification
-showAudioMuteAlert False = spawn "/usr/local/bin/rumno -m"
+showAudioMuteAlert False = spawn "rumno -m"
 
 showDzenMicMuteAlert True  = D.dzenConfig (centered 300) "Mic on"
 showDzenMicMuteAlert False = D.dzenConfig (centered 300) "Mic off"
@@ -444,7 +445,7 @@ outputOf s = do
 toggleMicrophoneAndNotify :: X ()
 toggleMicrophoneAndNotify = do
   out <- liftIO $ outputOf "amixer set Capture toggle"
-  if "[off]" `isInfixOf` out then spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg" else spawn "/usr/local/bin/rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
+  if "[off]" `isInfixOf` out then spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg" else spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
 
 -- COMMANDS
 weechatCommand = "urxvt -title WeeChat -e weechat"
@@ -719,7 +720,7 @@ myLogHook h = do
     ewmhDesktopsLogHook
     dynamicLogWithPP xmobarPP
       { ppOutput = hPutStrLn h
-      , ppTitle  = xmobarColor "green" "" . shorten 40
+      , ppTitle  = xmobarColor "green" "" . shorten 30
       }
 
 myModMask = mod4Mask
@@ -750,7 +751,8 @@ instance UrgencyHook LibNotifyUrgencyHook where
         safeSpawn "notify-send" [show name, "workspace " ++ idx]
 
 main = do
-    xmproc <- spawnPipe "xmobar /home/deni/.xmobarrc"
+    -- xmproc <- spawnPipe "xmobar /home/deni/dotfiles/xmobarrc"
+    xmproc <- spawnPipe "xmobar /home/deni/.config/xmobar/.xmobarrc"
     xmonad
       $ withUrgencyHook LibNotifyUrgencyHook
       $ ewmh

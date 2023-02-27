@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-/usr/bin/notify-send "Running SpiderOak backup...."
+notify-send "Running SpiderOak backup...."
 
 SpiderOakONE --batchmode
 
-/usr/bin/notify-send "SpiderOak backup is done!"
-
+notify-send "SpiderOak backup is done!"

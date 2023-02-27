@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Scren name     | Resolution | Size | DPI | Scaling          |
 # ============================================================|

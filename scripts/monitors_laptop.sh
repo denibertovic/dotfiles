@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 killall trayer
 # Workaround for dunst not refreshing it's geometry and positioning after

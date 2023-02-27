@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # screen-paste - Paste a screenshot to the Web (using pixbin.us service)
 #

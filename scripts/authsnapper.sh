@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #    Simple script to take picture after entering wrong password in Linux
 #
