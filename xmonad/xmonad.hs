@@ -508,6 +508,7 @@ myManageHook = manageHook gnomeConfig
           -- , className =? "thunderbird"      -?> doFloat
           , className =? "Eog"              -?> doCenterFloat
           , className =? "Pinentry-x11"   -?> forceCenterFloat
+          , (appName =? "Msgcompose")  <&&> (className =? "thunderbird-default") -?> doCenterFloat
           , className =? "libreoffice-startcenter" -?> doFullFloat
           , className =? "Zathura"          -?> doCenterFloat
           , className =? "Evince"          -?> doCenterFloat
