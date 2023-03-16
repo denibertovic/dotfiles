@@ -13,7 +13,7 @@ Config { font = "DejaVu Sans Mono 10"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus%  %_XMONAD_TRAYPAD%"
+       , template = "%StdinReader% } BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | DNSCRYPT: %dnsstatus% {  %_XMONAD_TRAYPAD%"
        , lowerOnStart = True
        , overrideRedirect = True
        }
