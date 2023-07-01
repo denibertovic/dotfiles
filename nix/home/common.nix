@@ -38,6 +38,7 @@
     pkgs.yubikey-personalization
     pkgs.yubikey-personalization-gui
     pkgs.wireshark
+    pkgs._1password-gui
     # 310 was needed because otherwise vim wouldn't find neovim/pynvim
     (pkgs.python310.withPackages (ps: with ps; [
       pip
