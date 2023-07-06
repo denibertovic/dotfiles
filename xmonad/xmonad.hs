@@ -189,10 +189,10 @@ quitPromptTheme = myPromptTheme { promptBorderWidth = 20 }
 
 -- Browsers
 firefox = "firefox -p default"
-chrome = "google-chrome --profile-directory=\"Default\" --force-device-scale-factor=1.6"
+chrome = "google-chrome --profile-directory=\"Default\" --force-device-scale-factor=1.4"
 -- work1Chrome = "google-chrome --profile-directory=\"Profile 2\""
 -- work2Chrome = "google-chrome --profile-directory=\"Profile 3\""
-chromeIncognito = "google-chrome --incognito --force-device-scale-factor=1.6"
+chromeIncognito = "google-chrome --incognito --force-device-scale-factor=1.4"
 chromium = "chromium"
 
 
