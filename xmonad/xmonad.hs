@@ -720,7 +720,7 @@ myLogHook h = do
     ewmhDesktopsLogHook
     dynamicLogWithPP xmobarPP
       { ppOutput = hPutStrLn h
-      , ppTitle  = xmobarColor "green" "" . shorten 40
+      , ppTitle  = xmobarColor "green" "" . shorten 30
       }
 
 myModMask = mod4Mask
