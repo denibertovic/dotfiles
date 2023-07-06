@@ -247,7 +247,7 @@ myKeys x = let
            , ("M-o", addName "Switch project" $ switchProjectPrompt warmPromptTheme)
            , ("M-S-a", addName "Pin window to all workspaces" toggleCopyToAll)
            , ("M-S-n", addName "Pop oldest hidden window" popOldestHiddenWindow)
-           , ("M-C-y", addName "Launch commands menu" $ commands >>= runCommand)
+           , ("M-;", addName "Launch commands menu" $ commands >>= runCommand)
            -- Window navigation and sublayouts
            , ("M-M1-h", addName "Pull group L" $ sendMessage $ pullGroup L)
            , ("M-M1-l", addName "Pull group R" $ sendMessage $ pullGroup R)
