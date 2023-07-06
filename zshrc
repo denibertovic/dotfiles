@@ -112,6 +112,12 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
 export PYENV_ROOT="$HOME/.pyenv"
 
+#ZVM_INIT_MODE=sourcing
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do time $shell -i -c exit; done
+}
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -127,7 +133,9 @@ plugins=(
     stack
     vault
     pass
+    fzf
     zsh-vi-mode
+    zsh-fzf-history-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -143,6 +151,7 @@ unsetopt correct_all
 function my_init() {
     bindkey "^[[A" history-beginning-search-backward
     bindkey "^[[B" history-beginning-search-forward
+    autoload -U history-search-end
 }
 zvm_after_init_commands+=(my_init)
 
