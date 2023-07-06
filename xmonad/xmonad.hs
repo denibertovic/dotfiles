@@ -263,7 +263,7 @@ myKeys x = let
            -- Scratchpads
            , ("M-C-h", addName "Launch HTOP" $ namedScratchpadAction scratchpads "htop")
            , ("M-C-]", addName "Launch Weechat" $ namedScratchpadAction scratchpads "weechat")
-           , ("M-C-g", addName "Launch Google Music" $ namedScratchpadAction scratchpads "googleMusic")
+           , ("M-C-g", addName "Launch Youtube Music" $ namedScratchpadAction scratchpads "youtubeMusic")
            , ("M-C-[", addName "Launch Signal" $ namedScratchpadAction scratchpads "signal")
            , ("M-C-t", addName "Launch Trello" $ namedScratchpadAction scratchpads "trello")
            , ("M-C-p", addName "Launch 1Password" $ namedScratchpadAction scratchpads "1Password")
@@ -470,9 +470,9 @@ yubioathCommand = "yubioath-desktop"
 yubioathResource = "yubioath-desktop"
 isYubioath = resource =? yubioathResource
 
-googleMusicCommand = "dex $HOME/Desktop/youtubemusic.desktop"
-googleMusicResource = "crx_cinhimbnkkaeohfgghhklpknlkffjgod"
-isGoogleMusic = resource =? googleMusicResource
+youtubeMusicCommand = "dex $HOME/Desktop/youtubemusic.desktop"
+youtubeMusicResource = "crx_cinhimbnkkaeohfgghhklpknlkffjgod"
+isYoutubeMusic = resource =? youtubeMusicResource
 
 signalCommand = "signal-desktop"
 isSignal = className =? "Signal"
@@ -564,7 +564,7 @@ scratchpads = [
     NS "weechat" weechatCommand isWeechat (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "htop" htopCommand isHtop (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "signal" signalCommand isSignal doCenterFloat
-  , NS "googleMusic" googleMusicCommand isGoogleMusic doCenterFloat
+  , NS "youtubeMusic" youtubeMusicCommand isYoutubeMusic (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   , NS "1Password" onePasswordCommand isOnePassword doCenterFloat
   , NS "trello" trelloCommand isTrello doCenterFloat
   , NS "yubioath" yubioathCommand isYubioath (customFloating $ W.RationalRect (1/3) (1/6) (2/6) (2/3))
