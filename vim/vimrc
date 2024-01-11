@@ -61,9 +61,8 @@ Plugin 'purescript-contrib/purescript-vim'
 Plugin 'bling/vim-airline'
 
 " autocomplete
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'Shougo/ddc.vim'
+Plugin 'vim-denops/denops.vim'
 
 " uses the sign column to indicate added, modified and removed lines in a file that is managed
 " by a version control system (VCS)
@@ -275,9 +274,6 @@ xnoremap tb :<c-u>call OrmoluBlock()<CR>
 " ========= Haskell specific ==========
 " au FileType haskell compiler ghc
 " au FileType haskell setlocal makeprg=stack
-
-" ========= deoplete =======
-let g:deoplete#enable_at_startup = 1
 
 " Neo format purescript
 let g:neoformat_enabled_purescript = ['purty']
