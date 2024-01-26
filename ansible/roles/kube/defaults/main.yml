@@ -11,10 +11,10 @@ kops_version: 1.20.2
 kops_artifact_url: "https://github.com/kubernetes/kops/releases/download/v{{ kops_version }}/kops-linux-amd64"
 kops_artifact_sha: "sha256:73206a2309ea53ad37a21daca8415b9c368af16457470795dfa072dc9651dbc6"
 
-helm_version: 3.3.4
+helm_version: 3.13.2
 helm_artifact_url: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
 # curl helm_artifact_url.sha256 to get the sha
-helm_artifact_sha: "sha256:b664632683c36446deeb85c406871590d879491e3de18978b426769e43a1e82c"
+helm_artifact_sha: "sha256:55a8e6dce87a1e52c61e0ce7a89bf85b38725ba3e8deb51d4a08ade8a2c70b2d"
 
 kail_version: 0.6.0
 kail_artifact_url: "https://github.com/boz/kail/releases/download/v{{ kail_version }}/kail_{{ kail_version }}_linux_amd64.tar.gz"
