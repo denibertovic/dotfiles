@@ -10,6 +10,7 @@ if [ -z "$CHROME_VERSION" ]; then
     CHROME_VERSIONS=(
         # "chromium"
         "google-chrome"
+        "google-chrome-stable"
         "google-chrome-beta"
         "google-chrome-unstable"
     )
