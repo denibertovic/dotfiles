@@ -15,7 +15,6 @@
     ./xmonad.nix
     ./rofi.nix
     ./dropbox.nix
-    ./chromium.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
