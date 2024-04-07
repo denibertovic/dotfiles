@@ -1,4 +1,6 @@
 { config, pkgs, lib, ... }:
+let unstable = import <nixos-unstable> { config = { allowUnfree = true;   };   };
+in
 {
   imports = [
     ./common.nix
@@ -15,21 +17,22 @@
     ./dunst.nix
     ./xmonad.nix
     ./rofi.nix
+    ../modules/mydropbox.nix
     ./dropbox.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
 
-  home.packages = [
-    pkgs.acpi
-    pkgs.jetbrains-mono
-    pkgs.rxvt-unicode
-    pkgs.libnotify
-    pkgs.mc
+  # because https://github.com/NixOS/nixpkgs/pull/277422
+  # tldr buildFHSEnv needs dieWithParent = false;
+  # The dropbox-cli command `dropbox start` starts the dropbox daemon in a
+  # separate session, and wants the daemon to outlive the launcher.  Enabling
+  # `--die-with-parent` defeats this and causes the daemon to exit when
+  # dropbox-cli exits.
+  # TODO: remove this with 24.05
+  nixpkgs.overlays = [
+    (self: super: {
+        dropbox = unstable.dropbox;
+    })
   ];
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 }

@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  services.dropbox = {
+  services.mydropbox = {
     enable = true;
   };
 }
