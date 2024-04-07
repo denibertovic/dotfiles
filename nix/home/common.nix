@@ -19,6 +19,12 @@
   programs.home-manager.enable = true;
 
   home.packages = [
+    pkgs.acpi
+    pkgs.jetbrains-mono
+    pkgs.rxvt-unicode
+    pkgs.libnotify
+    pkgs.mc
+
     pkgs.htop
     pkgs.ack
     pkgs.wget
@@ -89,4 +95,9 @@
     pkgs.signal-desktop
     pkgs.chromium
   ];
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
