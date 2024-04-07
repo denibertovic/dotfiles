@@ -37,7 +37,7 @@ alias h='helm --namespace=${KUBECTL_NAMESPACE:-default}'
 
 # Keymaps
 # Xmonad map is for switching Caps Lock for Control
-alias setkben='setxkbmap en_US && xmodmap ~/.Xmodmap'
+alias setkben='setxkbmap us && xmodmap ~/.Xmodmap'
 alias setkbhr='setxkbmap hr && xmodmap ~/.Xmodmap'
 
 # docker related aliases
