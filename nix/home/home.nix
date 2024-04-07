@@ -10,6 +10,7 @@
     ./gpg.nix
     ./git.nix
     ./firefox.nix
+    ./google-chrome.nix
     ./alacritty.nix
     ./dunst.nix
     ./xmonad.nix
