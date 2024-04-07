@@ -52,7 +52,6 @@
       pynvim
       virtualenvwrapper
       ipython
-      subliminal
     ]))
 
     pkgs.borgbackup
