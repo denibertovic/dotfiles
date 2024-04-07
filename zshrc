@@ -89,6 +89,11 @@ alias eid-signer='/usr/lib/akd/eidmiddleware/Signer'
 # haskell
 alias hoogle='hoogle --count=100'
 
+# aws-vault GetSessionToken duration
+export AWS_SESSION_TOKEN_TTL=12h
+export AWS_CHAINED_SESSION_TOKEN_TTL=12h
+export AWS_VAULT_PROMPT=terminal
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
