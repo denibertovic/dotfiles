@@ -65,9 +65,10 @@ alias p='python3 -c "import IPython; IPython.terminal.ipapp.launch_new_instance(
 alias sudo='sudo '
 alias dk='cd /home/deni/work'
 alias ll='ls -l'
+alias lln='ls -l --color=never'
 alias lls='ls -l | less'
 alias la='ls -la'
-alias noack='ack --ignore-file=ext:json --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql'
+alias noack='ack --ignore-file=ext:json --ignore-dir=.devenv --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql'
 alias duh='du -h --max-depth=1 | sort -h'
 alias ctl='systemctl'
 alias t='/home/deni/.local/bin/todo'
@@ -75,7 +76,7 @@ alias t-check-tags='grep -E -o "@.*" ~/Dropbox/todo/todo.txt  | sort | uniq'
 alias get-subtitles='subliminal download -l en .'
 alias copy-path='pwd | tr -d "\n" | xsel -b'
 alias asciicast2gif='docker run -v $PWD:/data asciinema/asciicast2gif'
-alias gci='google-chrome --incognito'
+alias gci='google-chrome --profile-directory=\"Default\" --incognito'
 alias pdf="zathura"
 
 # tmux
