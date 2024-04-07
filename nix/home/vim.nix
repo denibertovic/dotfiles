@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
-let black = pkgs.vimUtils.buildVimPluginFrom2Nix {
+let black = pkgs.vimUtils.buildVimPlugin {
       pname = "black";
       version = "2023-02-14";
       src = pkgs.fetchFromGitHub {
@@ -9,7 +9,7 @@ let black = pkgs.vimUtils.buildVimPluginFrom2Nix {
         sha256 = "sha256-UKW40vnV6dEIFhlyQmPQPF7tJUvCDE/LdqzWrP8QiCQ=";
       };
     };
-    vim-hug-neovim-rpc = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    vim-hug-neovim-rpc = pkgs.vimUtils.buildVimPlugin {
       pname = "vim-hug-neovim-rpc";
       version = "2021-05-15";
       src = pkgs.fetchFromGitHub {
@@ -19,7 +19,7 @@ let black = pkgs.vimUtils.buildVimPluginFrom2Nix {
         sha256 = "sha256-XX+0FUk2tXG7fklGT2pNsa4vUG+qYSDUMhB5HSAg6Ww=";
       };
     };
-    my-dpaste-fork = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    my-dpaste-fork = pkgs.vimUtils.buildVimPlugin {
       pname = "dpaste";
       version = "2020-03-10";
       src = pkgs.fetchFromGitHub {
