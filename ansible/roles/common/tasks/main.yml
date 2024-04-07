@@ -250,3 +250,7 @@
   become: yes
   unarchive: src=/tmp/fzf.tgz dest=/usr/local/bin mode=755 owner=root group=root
   when: (fzf_is_installed.rc != 0) or (fzf_version not in fzf_is_installed.stdout)
+
+- name: Fix intel_backlight permission
+  become: yes
+  copy: src=etc_udev_rules.d-10-intel-backlight.rules dest=/etc/udev/rules.d/10-intel-backlight.rules
