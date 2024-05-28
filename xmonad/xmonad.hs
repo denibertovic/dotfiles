@@ -939,5 +939,5 @@ main = do
       , startupHook = myStartupHook
       , handleEventHook = myHandleEventHook
       , modMask = mod4Mask -- super key
-      , focusFollowsMouse = False
+      , focusFollowsMouse = True
       }
