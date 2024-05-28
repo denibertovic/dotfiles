@@ -19,6 +19,7 @@
       Service = {
         Type = "simple";
         #Environment = [ "DISPLAY=:0" "XAUTHORITY=%h/.Xauthority" ];
+        ExecPreStart="${pkgs.coreutils}/bin/sleep 5";
         ExecStart = ''${pkgs.haskellPackages.greenclip}/bin/greenclip daemon'';
         Restart = "always";
       };
