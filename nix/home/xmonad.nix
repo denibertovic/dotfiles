@@ -15,9 +15,43 @@ in
     pkgs.dmenu
   ];
 
+  services.trayer = {
+    enable = true;
+    settings = {
+      edge = "top";
+      align = "right";
+      SetDockType = true;
+      SetPartialStrut = true;
+      expand = true;
+      width = 20;
+      transparent = true;
+      alpha = 0;
+      tint = "0x222222";
+      height = 25;
+    };
+  };
+
+  home.pointerCursor = {
+    x11.enable = true;
+    name = "DMZ-White";
+    package = pkgs.vanilla-dmz;
+    size = 24;
+    gtk.enable = true;
+  };
+
+  # workaround for blueman-applet. see here: https://github.com/nix-community/home-manager/issues/2064#issuecomment-887300055
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
   services.blueman-applet = {
     enable = true;
   };
+
+  services.network-manager-applet.enable = true;
 
   xresources.extraConfig = builtins.readFile "/home/deni/dotfiles/Xresources";
 

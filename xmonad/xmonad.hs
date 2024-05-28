@@ -156,9 +156,9 @@ white = "#ffffff"
 yellow = "#b58900"
 
 -- sizes
-gap = 5
+gap = 3
 
-topbar = 5
+topbar = 3
 
 border = 0
 
@@ -244,12 +244,12 @@ quitPromptTheme = myPromptTheme {promptBorderWidth = 20}
 firefox = "firefox -p default"
 
 chrome =
-  "google-chrome --profile-directory=\"Default\" --force-device-scale-factor=1.4"
+  "google-chrome-stable --profile-directory=\"Default\" --force-device-scale-factor=1.0"
 
 -- work1Chrome = "google-chrome --profile-directory=\"Profile 2\""
 -- work2Chrome = "google-chrome --profile-directory=\"Profile 3\""
 chromeIncognito =
-  "google-chrome --profile-directory=\"Default\" --incognito --force-device-scale-factor=1.4"
+  "google-chrome-stable --profile-directory=\"Default\" --incognito --force-device-scale-factor=1.0"
 
 chromium = "chromium"
 
