@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       global = {
-        font = "JetBrains Mono 10";
+        font = "JetBrains Mono 8";
         allow_markup = "yes";
         format = "<b>%s</b>\n%b";
         sort = "yes";
