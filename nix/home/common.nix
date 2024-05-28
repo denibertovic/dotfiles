@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let denv = pkgs.callPackage ../pkgs/denv.nix {};
+    browsers = pkgs.callPackage ../pkgs/browsers.nix {};
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -19,11 +22,16 @@
   programs.home-manager.enable = true;
 
   home.packages = [
+    denv
+    browsers
+    pkgs.devenv
+    pkgs.qutebrowser
     pkgs.acpi
     pkgs.jetbrains-mono
     pkgs.rxvt-unicode
     pkgs.libnotify
     pkgs.mc
+    pkgs.direnv
 
     pkgs.htop
     pkgs.ack
@@ -93,7 +101,31 @@
 
     pkgs.signal-desktop
     pkgs.chromium
+    pkgs.slack
   ];
+
+  home.sessionVariables = {
+    DEFAULT_BROWSER = "${browsers}/bin/browsers";
+  };
+
+  xdg.mimeApps.enable = true;
+
+  xdg.desktopEntries = {
+   browsers = {
+      name = "Browsers";
+      genericName = "Web Browser Chooser";
+      exec = "${browsers}/bin/browsers %u";
+      terminal = false;
+      categories = [ "Application" "Network" "WebBrowser" ];
+      mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/vnd.mozilla.xul+xml" "application/rss+xml" "application/rdf+xml" "x-scheme-handler/http" "x-scheme-handler/https" ];
+    };
+  };
+
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = "browsers.desktop";
+    "x-scheme-handler/http" = "browsers.desktop";
+    "x-scheme-handler/https" = "browsers.desktop";
+  };
 
   programs.fzf = {
     enable = true;
