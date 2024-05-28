@@ -2,17 +2,17 @@
 
 ## If you don't want the script to automatically choose the Chrome version to
 ## use, set the CHROME_VERSION variable below
-CHROME_VERSION=""
+CHROME_VERSION="google-chrome-stable"
 
 # Chrome version is not set, the script will try to locate it by looping through
 # all the possible chrome versions and checking if its user data dir exists
 if [ -z "$CHROME_VERSION" ]; then
     CHROME_VERSIONS=(
         # "chromium"
-        "google-chrome"
+        # "google-chrome"
         "google-chrome-stable"
-        "google-chrome-beta"
-        "google-chrome-unstable"
+        # "google-chrome-beta"
+        # "google-chrome-unstable"
     )
     for version in "${CHROME_VERSIONS[@]}"; do
         if [ -d "$HOME/.config/$version" ]; then
@@ -29,7 +29,7 @@ if [ -z "$CHROME_VERSION" ]; then
 fi
 
 # Check if the user data dir actually exists
-CHROME_USER_DATA_DIR="$HOME/.config/$CHROME_VERSION"
+CHROME_USER_DATA_DIR="$HOME/.config/google-chrome"
 if [ ! -d "$CHROME_USER_DATA_DIR" ]; then
     echo "unable to find Chrome user data dir"
     exit 1
@@ -65,5 +65,5 @@ else
     # One argument passed, meaning that user selected a profile: launch Chrome
     NAME="${@}"
     # $CHROME_VERSION --profile-directory="${profiles[$NAME]}" > /dev/null 2>&1
-    $CHROME_VERSION --profile-directory="${profiles[$NAME]}" > /dev/null &
+    $CHROME_VERSION --profile-directory="${profiles[$NAME]}" --force-device-scale-factor=1.0 > /dev/null &
 fi
