@@ -20,4 +20,10 @@ in
       keyid-format = "0xlong";
     };
   };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
+  };
 }
