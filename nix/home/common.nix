@@ -49,6 +49,7 @@ in
     # pkgs.weechat-unwrapped.perl
     # pkgs.weechat-unwrapped.python
     pkgs.yubikey-manager
+    pkgs.yubioath-flutter
     pkgs.yubikey-personalization
     pkgs.yubikey-personalization-gui
     pkgs.wireshark

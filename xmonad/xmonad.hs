@@ -564,9 +564,9 @@ trelloResource = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
 
 isTrello = resource =? trelloResource
 
-yubioathCommand = "yubioath-desktop"
+yubioathCommand = "yubioath-flutter"
 
-yubioathResource = "yubioath-desktop"
+yubioathResource = ".yubioath-flutter-wrapped_"
 
 isYubioath = resource =? yubioathResource
 
