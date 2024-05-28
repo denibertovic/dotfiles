@@ -212,9 +212,6 @@ in
       " au FileType haskell compiler ghc
       " au FileType haskell setlocal makeprg=stack
 
-      " ========= deoplete =======
-      let g:deoplete#enable_at_startup = 1
-
       " Neo format purescript
       let g:neoformat_enabled_purescript = ['purty']
 
@@ -260,7 +257,6 @@ in
       pkgs.vimPlugins.vimproc-vim
       pkgs.vimPlugins.purescript-vim
       pkgs.vimPlugins.vim-airline
-      pkgs.vimPlugins.deoplete-nvim
       pkgs.vimPlugins.nvim-yarp
       vim-hug-neovim-rpc
       pkgs.vimPlugins.vim-signify
