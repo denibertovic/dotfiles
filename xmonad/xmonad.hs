@@ -180,17 +180,16 @@ focusColor = blue
 
 unfocusColor = base02
 
-myFont = "JetBrains Mono 8"
+myFont      = "-*-terminus-medium-*-*-*-*-160-*-*-*-*-*-*"
 
-myBigFont = "JetBrains Mono 12"
+myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
 
-myWideFont = "JetBrains Mono 14"
+myWideFont  = "xft:Eurostar Black Extended:"
+            ++ "style=Regular:pixelsize=180:hinting=true"
 
--- xft:Eurostar Black Extended:"
---             ++ "style=Regular:pixelsize=180:hinting=true"
-myPromptFont = "JetBrains Mono 32"
+myPromptFont = "xft:Monospace-Bold:pixelsize=24"
 
-myTabFont = "JetBrains Mono 18"
+myTabFont = "xft:Monospace-Bold:pixelsize=18"
 
 myTabTheme =
   def
