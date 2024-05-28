@@ -12,6 +12,7 @@ in
     ./gpg.nix
     ./git.nix
     ./firefox.nix
+    ./thunderbird.nix
     ./google-chrome.nix
     ./alacritty.nix
     ./dunst.nix
