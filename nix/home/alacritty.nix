@@ -13,7 +13,7 @@
       font = {
         builtin_box_drawing = false;
         draw_bold_text_with_bright_colors = true;
-        size = 7.0;
+        size = 6.0;
         offset = {
           x = 1;
           y = 1;
