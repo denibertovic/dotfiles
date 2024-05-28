@@ -38,7 +38,7 @@
 
         # Keymaps
         # Xmonad map is for switching Caps Lock for Control
-        setkben="setxkbmap en_US && xmodmap ~/.Xmodmap";
+        setkben="setxkbmap en && xmodmap ~/.Xmodmap";
         setkbhr="setxkbmap hr && xmodmap ~/.Xmodmap";
 
         # docker related aliases
@@ -66,9 +66,10 @@
         sudo="sudo ";
         dk="cd /home/deni/work";
         ll="ls -l";
+        lln="ls -l --color=never";
         lls="ls -l | less";
         la="ls -la";
-        noack="ack --ignore-file=ext:json --no-css --no-js --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql";
+        noack="ack --ignore-file=ext:json --ignore-dir=.devenv --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql";
         duh="du -h --max-depth=1 | sort -h";
         ctl="systemctl";
         t="/home/deni/.local/bin/todo";
@@ -76,7 +77,7 @@
         get-subtitles="subliminal download -l en .";
         copy-path="pwd | tr -d \"\n\" | xsel -b";
         asciicast2gif="docker run -v \$PWD:/data asciinema/asciicast2gif";
-        gci="google-chrome --incognito";
+        gci="google-chrome-stable --profile=\"Default\" --incognito";
         pdf="zathura";
 
         # tmux
@@ -131,10 +132,15 @@
       };
 
       # use denv
-      #eval "$(denv hook ZSH)"
+      eval "$(denv hook ZSH)"
 
       # use direnv
-      #eval "$(direnv hook zsh)"
+      eval "$(direnv hook zsh)"
+
+      # aws-vault GetSessionToken duration
+      export AWS_SESSION_TOKEN_TTL=12h
+      export AWS_CHAINED_SESSION_TOKEN_TTL=12h
+      export AWS_VAULT_PROMPT=terminal
     '';
     zplug = {
       enable = true;
