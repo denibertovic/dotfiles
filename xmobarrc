@@ -1,11 +1,11 @@
-Config { font = "Monospace 8"
+Config { font = "Monospace 6"
        , additionalFonts = [ "Source Code Pro 9"
                            , "DejaVu Sans Mono 12"
                            , "Symbola 10"]
        , dpi = 157x157;
        , bgColor = "#222222"
        , fgColor = "grey"
-       , position = TopHM 40 0 0 0 0
+       , position = TopHM 25 0 0 0 0
        , commands = [ Run Cpu ["-t", "<total>%", "-L","5","-H","40","--normal","green","--high","red"] 15
                     , Run BatteryP ["BAT0"] ["-t", "(AC: <acstatus>) <left>%", "-h", "green", "-n", "yellow", "-l", "red"] 30
                     , Run Memory ["-t", "<usedratio>%"] 30
