@@ -15,7 +15,7 @@
       settings = {
         "browser.startup.homepage" = "about:blank";
         "browser.bookmars.showMobileBookmarks" = true;
-        "layout.css.devPixelsPerPx" = "0.8";
+        "layout.css.devPixelsPerPx" = "0.7";
         "browser.download.useDownloadDir" = false;
         # !!!This is needed for userChrome.css to work!!!
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
