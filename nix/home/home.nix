@@ -19,6 +19,7 @@ in
     ./rofi.nix
     ../modules/mydropbox.nix
     ./dropbox.nix
+    ./zoom.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
@@ -33,6 +34,8 @@ in
   nixpkgs.overlays = [
     (self: super: {
         dropbox = unstable.dropbox;
+        devenv = unstable.devenv;
+        slack = unstable.slack;
     })
   ];
 }
