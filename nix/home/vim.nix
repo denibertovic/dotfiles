@@ -9,16 +9,17 @@ let black = pkgs.vimUtils.buildVimPlugin {
         sha256 = "sha256-UKW40vnV6dEIFhlyQmPQPF7tJUvCDE/LdqzWrP8QiCQ=";
       };
     };
-    vim-hug-neovim-rpc = pkgs.vimUtils.buildVimPlugin {
-      pname = "vim-hug-neovim-rpc";
-      version = "2021-05-15";
+    ddc = pkgs.vimUtils.buildVimPlugin {
+      pname = "ddc";
+      version = "";
       src = pkgs.fetchFromGitHub {
-        owner = "roxma";
-        repo = "vim-hug-neovim-rpc";
-        rev = "93ae38792bc197c3bdffa2716ae493c67a5e7957";
-        sha256 = "sha256-XX+0FUk2tXG7fklGT2pNsa4vUG+qYSDUMhB5HSAg6Ww=";
+        owner = "Shougo";
+        repo = "ddc.vim";
+        rev = "e9342a9b24fc7d5b08408ae5b01f15fb3d843f2f";
+        sha256 = "sha256-jmvG0VSpqKhywlPybA7c48ziVk5HFyrT99NLdC6+SaE=";
       };
     };
+
     my-dpaste-fork = pkgs.vimUtils.buildVimPlugin {
       pname = "dpaste";
       version = "2020-03-10";
@@ -257,8 +258,8 @@ in
       pkgs.vimPlugins.vimproc-vim
       pkgs.vimPlugins.purescript-vim
       pkgs.vimPlugins.vim-airline
-      pkgs.vimPlugins.nvim-yarp
-      vim-hug-neovim-rpc
+      ddc
+      pkgs.vimPlugins.denops-vim
       pkgs.vimPlugins.vim-signify
       pkgs.vimPlugins.indentLine
       pkgs.vimPlugins.vim-markdown
