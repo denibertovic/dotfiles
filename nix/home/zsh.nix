@@ -91,6 +91,9 @@
 
         # haskell
         hoogle="hoogle --count=100";
+
+        # speeds up MC
+        mc="mc --nosubshell";
       };
 
     localVariables = {};
