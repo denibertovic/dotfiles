@@ -187,7 +187,7 @@ myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
 myWideFont  = "xft:Eurostar Black Extended:"
             ++ "style=Regular:pixelsize=180:hinting=true"
 
-myPromptFont = "xft:Monospace-Bold:pixelsize=24"
+myPromptFont = "xft:Monospace-Bold:pixelsize=12"
 
 myTabFont = "xft:Monospace-Bold:pixelsize=18"
 
