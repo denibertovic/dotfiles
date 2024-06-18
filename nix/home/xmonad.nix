@@ -5,6 +5,8 @@ in
   home.packages = [
     pkgs.feh
     pkgs.gnome.gnome-tweaks
+    pkgs.gnome.gnome-screenshot
+    pkgs.gnome.eog
     pkgs.networkmanagerapplet
     pkgs.xorg.xmodmap
     pkgs.xorg.xmessage
@@ -64,5 +66,15 @@ in
     enable = true;
     package = unstable.xmobar;
     extraConfig = builtins.readFile "/home/deni/dotfiles/xmobarrc";
+  };
+
+  services.cbatticon = {
+    enable = true;
+    batteryId = "BAT0";
+    commandCriticalLevel = "notify-send -u CRITICAL 'Battery Critical' 'Battery is critical - please connect charger now!'";
+    criticalLevelPercent = 10;
+    iconType = "symbolic";
+    lowLevelPercent = 20;
+    updateIntervalSeconds = 5;
   };
 }
