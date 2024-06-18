@@ -37,6 +37,7 @@ in
         dropbox = unstable.dropbox;
         devenv = unstable.devenv;
         slack = unstable.slack;
+        llm = unstable.llm;
     })
   ];
 }

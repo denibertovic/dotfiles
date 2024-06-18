@@ -24,6 +24,7 @@ in
   home.packages = [
     denv
     browsers
+    pkgs.llm
     pkgs.devenv
     pkgs.qutebrowser
     pkgs.acpi
@@ -85,6 +86,8 @@ in
     pkgs.terraform
     pkgs.awscli2
     pkgs.kubernetes-helm
+    pkgs.kubernetes-helmPlugins.helm-diff
+    pkgs.helmfile
     pkgs.kubectl
     pkgs.sops
     pkgs.kops
