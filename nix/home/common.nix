@@ -1,6 +1,12 @@
 { config, pkgs, lib, ... }:
 let denv = pkgs.callPackage ../pkgs/denv.nix {};
     browsers = pkgs.callPackage ../pkgs/browsers.nix {};
+    mc-onedark-src = pkgs.fetchFromGitHub {
+        owner = "DeadNews";
+        repo = "mc-onedark";
+        rev = "07e8704d38fe792c285c8c23c837b6e1872a7015";
+        sha256 = "sha256-evkNFgShxbVaoihzWkSYmHHOKdA9GF643uPNR9y6uWY=";
+      };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -134,5 +140,15 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  home.file.".config/mc" = {
+    source = "${mc-onedark-src}/config";
+    recursive = true;
+  };
+
+  home.file.".local/share/mc/skins" = {
+    source = "${mc-onedark-src}/skins";
+    recursive = true;
   };
 }
