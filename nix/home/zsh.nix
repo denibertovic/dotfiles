@@ -5,9 +5,11 @@
     oh-my-zsh = {
       enable = true;
       theme = "fwalch";
+      # manually copied completeions here
+      custom = "/home/deni/.oh-my-zsh/custom";
       plugins = [
         # "todo"
-        # "denv"
+        "denv"
         "git"
         # TODO: fix this error /home/deni/.nix-profile/bin/virtualenvwrapper_lazy.sh:21: unmatched '
         # "virtualenvwrapper"
