@@ -38,6 +38,7 @@ in
         devenv = unstable.devenv;
         slack = unstable.slack;
         llm = unstable.llm;
+        signal-desktop = unstable.signal-desktop;
     })
   ];
 }
