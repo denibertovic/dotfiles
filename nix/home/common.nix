@@ -85,6 +85,8 @@ in
     pkgs.pwgen
     pkgs.tarsnap
     pkgs.dex
+    pkgs.xclip
+    pkgs.dig
     # use services.redshift
     # pkgs.redshift
 
