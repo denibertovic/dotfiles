@@ -269,7 +269,22 @@ in
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "HomeOffice";
+        location = "Home";
+        deviceUri = "socket://192.168.1.1:9101";
+        model = "drv:///hp/hpcups.drv/hp-laserjet_professional_p_1102w.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
+    ];
+    ensureDefaultPrinter = "HomeOffice";
+  };
 
   # Enable sound.
   # sound.enable = true;
