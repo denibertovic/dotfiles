@@ -53,7 +53,6 @@ in
   # ZFS
   boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.enableUnstable = true;
   services.zfs.autoScrub.enable = true;
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoSnapshot.frequent = 8;
@@ -108,9 +107,9 @@ in
 
    # INPUT
   console.useXkbConfig = true;
-  services.xserver.layout = "us";
-  services.xserver.libinput.touchpad.disableWhileTyping = true;
-  services.xserver.libinput.enable = true;
+  services.xserver.xkb.layout = "us";
+  services.libinput.touchpad.disableWhileTyping = true;
+  services.libinput.enable = true;
   services.xserver.synaptics.enable = false;
   services.xserver.config =  ''
       Section "InputClass"
@@ -121,7 +120,7 @@ in
     '';
   # services.xserver.libinput.touchpad.naturalScrolling = true;
   # services.xserver.synaptics.twoFingerScroll = true;
-  services.xserver.xkbOptions = "ctrl:nocaps";
+  services.xserver.xkb.options = "ctrl:nocaps";
   # services.xserver.xkbVariant = "dvorak";
 
   # GPG
