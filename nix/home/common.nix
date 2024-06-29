@@ -106,7 +106,7 @@ in
     pkgs.kail
     pkgs.packer
     pkgs.vault
-    pkgs.vaultenv
+    # pkgs.vaultenv
 
     pkgs.cabal-install
     pkgs.stack
