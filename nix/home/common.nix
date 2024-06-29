@@ -118,6 +118,9 @@ in
     pkgs.signal-desktop
     pkgs.chromium
     pkgs.slack
+    (pkgs.writeShellScriptBin "slack-scaled" ''
+      exec slack --force-device-scale-factor=1.0
+    '')
   ];
 
   home.sessionVariables = {
