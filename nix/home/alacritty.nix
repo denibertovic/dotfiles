@@ -12,7 +12,6 @@
       # };
       font = {
         builtin_box_drawing = false;
-        draw_bold_text_with_bright_colors = true;
         size = 6.0;
         offset = {
           x = 1;
@@ -45,14 +44,14 @@
         unfocused_hollow = true;
         thickness = 0.10;
       };
-      mouse = {
-        double_click = { threshold = 300; };
-        triple_click = { threshold = 300; };
+      # mouse = {
+      # };
+      keyboard = {
+        bindings = [
+          { key = "Space"; mods = "Control"; mode = "Vi"; action = "ScrollToBottom"; }
+          { key = "Space"; mods = "Control";              action = "ToggleViMode"; }
+        ];
       };
-      key_bindings = [
-        { key = "Space"; mods = "Control"; mode = "Vi"; action = "ScrollToBottom"; }
-        { key = "Space"; mods = "Control";              action = "ToggleViMode"; }
-      ];
     };
   };
 }
