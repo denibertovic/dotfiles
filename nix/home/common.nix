@@ -106,6 +106,7 @@ in
     pkgs.kail
     pkgs.packer
     pkgs.vault
+    pkgs.pdftk
     # pkgs.vaultenv
 
     pkgs.cabal-install
