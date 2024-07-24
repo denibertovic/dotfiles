@@ -5,6 +5,7 @@ in
   home.packages = [
     pkgs.feh
     pkgs.gnome.gnome-tweaks
+    pkgs.gencfsm
     pkgs.gnome.gnome-screenshot
     pkgs.gnome.eog
     pkgs.networkmanagerapplet
