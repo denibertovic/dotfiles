@@ -40,7 +40,7 @@
 
         # Keymaps
         # Xmonad map is for switching Caps Lock for Control
-        setkben="setxkbmap en && xmodmap ~/.Xmodmap";
+        setkben="setxkbmap us && xmodmap ~/.Xmodmap";
         setkbhr="setxkbmap hr && xmodmap ~/.Xmodmap";
 
         # docker related aliases
