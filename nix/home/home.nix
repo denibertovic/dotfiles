@@ -21,6 +21,7 @@ in
     ../modules/mydropbox.nix
     ./dropbox.nix
     ./zoom.nix
+    ./media.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
