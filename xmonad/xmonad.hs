@@ -565,7 +565,7 @@ isTrello = resource =? trelloResource
 
 yubioathCommand = "yubioath-flutter"
 
-yubioathResource = ".yubioath-flutter-wrapped_"
+yubioathResource = "yubioath-flutter"
 
 isYubioath = resource =? yubioathResource
 
@@ -629,7 +629,7 @@ myManageHook =
         , className =? "MPlayer" -?> forceCenterFloat
         , isHtop -?>
           customFloating (W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3))
-        , className =? "Gnome-Screenshot" -?> doIgnore
+        , className =? "Gnome-Screenshot" -?> forceCenterFloat
         , className =? "Pidgin" -?> doShift "2"
         , className =? "skypeforlinux" -?> doShift "2"
         , classNotRole ("Pidgin", "buddy_list") -?> doShift "2"
