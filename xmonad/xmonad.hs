@@ -262,6 +262,7 @@ commands = do
     , ("dnd-on", dunstDndOn)
     , ("dnd-off", dunstDndOff)
     , ("fix-bluetooth", fixBluetoothCmd)
+    , ("fix-trackpoint-stalling", fixTrackpointStallingCmd)
     , ("dns-disable", disableDnsCmd)
     , ("dns-enable", enableDnsCmd)
     , ("bose-connect", boseConnectCmd)
@@ -438,6 +439,9 @@ clearClipboardCmd =
 
 fixBluetoothCmd :: X ()
 fixBluetoothCmd = spawn "sudo /home/deni/scripts/fix_bluetooth.sh"
+
+fixTrackpointStallingCmd :: X ()
+fixTrackpointStallingCmd = spawn "sudo /home/deni/scripts/fix_trackpoint_stalling.sh"
 
 disableDnsCmd :: X ()
 disableDnsCmd = spawn "sudo /home/deni/scripts/disable_own_dns.sh"
