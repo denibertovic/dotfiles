@@ -43,6 +43,7 @@ in
     pkgs.libnotify
     pkgs.mc
     pkgs.direnv
+    pkgs.ripgrep
 
     pkgs.htop
     pkgs.ack
