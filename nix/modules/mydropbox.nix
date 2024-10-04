@@ -5,7 +5,6 @@ with lib;
 let
 
   cfg = config.services.mydropbox;
-  baseDir = ".dropbox-hm";
   dropboxCmd = "${pkgs.dropbox-cli}/bin/dropbox";
 
 in {
