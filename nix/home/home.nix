@@ -35,7 +35,8 @@ in
   # TODO: remove this with 24.05
   nixpkgs.overlays = [
     (self: super: {
-        dropbox = unstable.dropbox;
+        # dropbox = unstable.dropbox;
+        dropbox = pkgs.callPackage ../pkgs/dropbox/default.nix {};
         devenv = unstable.devenv;
         slack = unstable.slack;
         llm = unstable.llm;
