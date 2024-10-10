@@ -730,10 +730,6 @@ wsWORK1 = "8" -- Work (3 terminals by default)
 wsWORK2 = "9" -- Work (2 terminals by default)
 
 -- Named
-wsHS = "hs" -- haskell
-
-wsPURS = "purs" -- purescript
-
 wsEMAIL = "email" -- email
 
 wsDMO = "dmo" -- random demo workspace
@@ -791,22 +787,6 @@ projects =
           Just $ do
             spawnOn wsWORK2 myTerminal
             spawnOn wsWORK2 myTerminal
-      }
-  , Project
-      { projectName = wsPURS
-      , projectDirectory = "~/"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsPURS myTerminal
-            spawnOn wsPURS myTerminal
-      }
-  , Project
-      { projectName = wsHS
-      , projectDirectory = "~/"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsHS myTerminal
-            spawnOn wsHS myTerminal
       }
   , Project
       { projectName = wsEMAIL
