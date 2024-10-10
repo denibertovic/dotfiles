@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 let unstable = import <nixos-unstable> { config = { allowUnfree = true;  };  };
+    utils = import ./utils.nix { inherit config pkgs lib; };
+    dotfiles = "${config.home.homeDirectory}/dotfiles";
 in
 {
   home.packages = [
@@ -58,9 +60,10 @@ in
 
   xresources.extraConfig = builtins.readFile "/home/deni/dotfiles/Xresources";
 
-  home.file.".xmonad" = {
-    source = /home/deni/dotfiles/xmonad;
-    recursive = true;
+  home.file = utils.linkHomeFiles {
+    # set outOfStoreSymlink = true and recursive = true to recursively link all files within source
+    ".xmonad/xmonad.hs" = { source = "${dotfiles}/xmonad/xmonad.hs"; outOfStoreSymlink = true; recursive = false; };
+    ".xmonad/icons" = { source = "${dotfiles}/xmonad/icons"; outOfStoreSymlink = true; recursive = true; };
   };
 
   programs.xmobar= {
