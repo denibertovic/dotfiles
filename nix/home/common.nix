@@ -34,6 +34,7 @@ in
   home.packages = [
     denv
     browsers
+    pkgs.deploy-rs
     pkgs.llm
     pkgs.devenv
     pkgs.qutebrowser
