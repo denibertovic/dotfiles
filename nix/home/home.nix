@@ -22,6 +22,7 @@ in
     ./dropbox.nix
     ./zoom.nix
     ./media.nix
+    ./keybase.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
