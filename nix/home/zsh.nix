@@ -14,11 +14,6 @@
         # TODO: fix this error /home/deni/.nix-profile/bin/virtualenvwrapper_lazy.sh:21: unmatched '
         # "virtualenvwrapper"
         "docker"
-        "cabal"
-        "python"
-        "stack"
-        "vault"
-        "pass"
         "fzf"
       ];
     };
