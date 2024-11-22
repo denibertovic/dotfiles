@@ -4,7 +4,6 @@ in
 {
   imports = [
     ./common.nix
-    ./vim.nix
     ./zsh.nix
     ./xscreensaver.nix
     ./rumno.nix
@@ -22,6 +21,7 @@ in
     ./dropbox.nix
     ./zoom.nix
     ./media.nix
+    ./neovim.nix
     ./keybase.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
