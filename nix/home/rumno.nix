@@ -1,9 +1,7 @@
 { config, pkgs, lib, ... }:
-let myRumnopkg = pkgs.callPackage ../pkgs/rumno/default.nix {};
-in
 {
   home.packages = [
-    myRumnopkg
+    pkgs.rumno
   ];
 
   systemd.user.services = {
@@ -23,7 +21,7 @@ in
         ExecPreStart="${pkgs.coreutils}/bin/sleep 5";
         PIDFile="/tmp/rumno/rumno.pid";
         #Environment = [ "DISPLAY=:0" "XAUTHORITY=%h/.Xauthority" ];
-        ExecStart = ''${myRumnopkg}/bin/rumno-background'';
+        ExecStart = ''${pkgs.rumno}/bin/rumno-background'';
         Restart = "always";
       };
 

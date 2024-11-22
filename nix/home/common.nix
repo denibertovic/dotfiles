@@ -1,7 +1,5 @@
 { config, pkgs, lib, ... }:
-let denv = pkgs.callPackage ../pkgs/denv.nix {};
-    browsers = pkgs.callPackage ../pkgs/browsers.nix {};
-    mc-onedark-src = pkgs.fetchFromGitHub {
+let mc-onedark-src = pkgs.fetchFromGitHub {
         owner = "DeadNews";
         repo = "mc-onedark";
         rev = "07e8704d38fe792c285c8c23c837b6e1872a7015";
@@ -32,10 +30,10 @@ in
   ];
 
   home.packages = [
-    denv
-    browsers
+    pkgs.denv
+    pkgs.browsers
     pkgs.deploy-rs
-    pkgs.llm
+    pkgs.unstable.llm
     pkgs.devenv
     pkgs.qutebrowser
     pkgs.acpi
@@ -119,16 +117,16 @@ in
     pkgs.hledger-ui
     pkgs.hledger-web
 
-    pkgs.signal-desktop
+    pkgs.unstable.signal-desktop
     pkgs.chromium
-    pkgs.slack
+    pkgs.unstable.slack
     (pkgs.writeShellScriptBin "slack-scaled" ''
       exec slack --force-device-scale-factor=1.0
     '')
   ];
 
   home.sessionVariables = {
-    DEFAULT_BROWSER = "${browsers}/bin/browsers";
+    DEFAULT_BROWSER = "${pkgs.browsers}/bin/browsers";
   };
 
   xdg.mimeApps.enable = true;
@@ -137,7 +135,7 @@ in
    browsers = {
       name = "Browsers";
       genericName = "Web Browser Chooser";
-      exec = "${browsers}/bin/browsers %u";
+      exec = "${pkgs.browsers}/bin/browsers %u";
       terminal = false;
       categories = [ "Application" "Network" "WebBrowser" ];
       mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/vnd.mozilla.xul+xml" "application/rss+xml" "application/rdf+xml" "x-scheme-handler/http" "x-scheme-handler/https" ];

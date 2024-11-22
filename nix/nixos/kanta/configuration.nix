@@ -2,31 +2,47 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ inputs, outputs, config, pkgs, lib, ... }:
 let
   privateZeroTierInterfaces = [
     "ztyqbtg66f"
   ];
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # my modules that the flake exports (from modules/nixos):
+      # outputs.nixosModules.example
+
+      # modules from other flakes (such as nixos-hardware):
+      # inputs.hardware.nixosModules.common-cpu-amd
+      # inputs.hardware.nixosModules.common-ssd
+
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # NIX / NIXOS
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.packageOverrides = pkgs: {
-    # vaapiIntel = pkgs.vaapiIntel.override { enabledHybridCodec = true; };
-    nur = import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/NUR/archive/1f80e16537599cff4c125eb306b0af827818e97c.tar.gz";
-      sha256 = "1l28ds47xzn5aw8k6hg7j8arfq8pv22vpg6vy830ddwxa42jwwfv";
-     }) {
-      inherit pkgs;
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.pulseaudio = true;
+  nixpkgs.overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
 
   system.activationScripts.ldso = lib.stringAfter [ "usrbinenv"  ] ''
     mkdir -m 0755 -p /lib64
@@ -34,8 +50,6 @@ in
     mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
     '';
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.pulseaudio = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -149,6 +163,8 @@ in
   virtualisation.docker.storageDriver = "zfs";
   virtualisation.libvirtd.enable = true;
 
+  services.systembus-notify.enable = true;
+
   # USERS
   users.extraUsers.deni.description = "Deni Bertovic";
   users.extraUsers.deni.isNormalUser = true;
@@ -246,8 +262,8 @@ in
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
-    extraPackages = haskellPackages: with haskellPackages; [
-      unstable.haskellPackages.xmobar
+    extraPackages = haskellPackages: [
+      pkgs.unstable.haskellPackages.xmobar
     ];
   };
 

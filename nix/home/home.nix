@@ -1,8 +1,13 @@
-{ config, pkgs, lib, ... }:
-let unstable = import <nixos-unstable> { config = { allowUnfree = true;   };   };
-in
+{ inputs, outputs, config, pkgs, lib, ... }:
 {
   imports = [
+    # If you want to use modules your own flake exports (from modules/home-manager):
+    outputs.homeManagerModules.mydropbox
+    inputs.nur.nixosModules.nur
+
+    # Or modules exported from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModules.default
+
     ./common.nix
     ./zsh.nix
     ./xscreensaver.nix
@@ -17,7 +22,6 @@ in
     ./dunst.nix
     ./xmonad.nix
     ./rofi.nix
-    ../modules/mydropbox.nix
     ./dropbox.nix
     ./zoom.nix
     ./media.nix
@@ -27,21 +31,28 @@ in
 #    ./haskell.nix
   ];
 
-  # because https://github.com/NixOS/nixpkgs/pull/277422
-  # tldr buildFHSEnv needs dieWithParent = false;
-  # The dropbox-cli command `dropbox start` starts the dropbox daemon in a
-  # separate session, and wants the daemon to outlive the launcher.  Enabling
-  # `--die-with-parent` defeats this and causes the daemon to exit when
-  # dropbox-cli exits.
-  # TODO: remove this with 24.05
-  nixpkgs.overlays = [
-    (self: super: {
-        # dropbox = unstable.dropbox;
-        dropbox = pkgs.callPackage ../pkgs/dropbox/default.nix {};
-        devenv = unstable.devenv;
-        slack = unstable.slack;
-        llm = unstable.llm;
-        signal-desktop = unstable.signal-desktop;
-    })
-  ];
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+    };
+  };
 }
