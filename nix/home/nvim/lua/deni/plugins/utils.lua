@@ -14,7 +14,12 @@ require("mini.surround").setup()
 require("mini.trailspace").setup()
 
 -- better commenting
-require("ts-comments").setup({ lang = { terraform = { "# %s", "/* %s */" }}})
+require("ts-comments").setup({
+    lang = {
+        terraform = { "# %s", "/* %s */" },
+        nix = "# %s"
+    }
+})
 -- ts_context_commentstring is not required apart for the calculate_commentstring function below when using
 -- it with mini.comment
 -- require("ts_context_commentstring").setup({enable_autocmd = false})
