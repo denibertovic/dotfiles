@@ -93,6 +93,7 @@
 
     localVariables = {};
     initExtra = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       WORKON_HOME=/home/deni/.virtualenvs
       DISABLE_AUTO_UPDATE="true"
       DISABLE_CORRECTION="true"
@@ -142,11 +143,5 @@
       export AWS_CHAINED_SESSION_TOKEN_TTL=12h
       export AWS_VAULT_PROMPT=terminal
     '';
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "jeffreytse/zsh-vi-mode"; }
-      ];
-    };
   };
 }
