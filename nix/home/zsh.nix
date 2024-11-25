@@ -115,7 +115,7 @@
       # https://www.johnhawthorn.com/2012/09/vi-escape-delays/
       export KEYTIMEOUT=1
 
-      note () {
+      function note () {
           if [[ $# -eq 1  ]]; then
               echo "Logging: `fc -ln -1`"
               echo `fc -ln -1` >> "$HOME/Dropbox/notes/$1-`date +"%Y-%m-%d"`.md" ;
