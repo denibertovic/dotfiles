@@ -68,9 +68,6 @@ in
   boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.supportedFilesystems = [ "zfs" ];
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
-  services.zfs.autoSnapshot.frequent = 8;
-  services.zfs.autoSnapshot.monthly = 1;
   services.zfs.trim.enable = true;
 
   # HARDWARE
@@ -407,4 +404,70 @@ in
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
     '';
+
+  services.zrepl = {
+    enable = true;
+    settings = {
+      jobs = [
+        {
+          # This job pushes to the remote sink defined in job `remote_sink` on the homelab server.
+          name = "kanta_home_backup";
+          type = "push";
+          connect = {
+            # NOTE: we're sending encrypted datasets over the local network so plain 'tcp' transport
+            # should be fine
+            # TODO: consider switching to the 'tls' transport and manager the CA and certs with terraform
+            type = "tcp";
+            address = "192.168.1.54:8888";
+          };
+          filesystems = {
+            "laptop/user/home" = true;
+          };
+          send = {
+            encrypted = true;
+          };
+          # create snapshots with prefix `zrepl_` every 15 minutes
+          snapshotting = {
+            type = "periodic";
+            interval = "15m";
+            prefix = "zrepl_";
+          };
+          pruning = {
+            keep_sender = [
+              # fade-out scheme for snapshots starting with `zrepl_`
+              # - keep all created in the last hour
+              # - then destroy snapshots such that we keep 24 each 1 hour apart
+              # - then destroy snapshots such that we keep 14 each 1 day apart
+              # - then destroy all older snapshots
+              {
+                type = "grid";
+                grid = "1x1h(keep=all) | 24x1h | 14x1d";
+                regex = "^zrepl_.*";
+              }
+              {
+                # IMPORTANT: keep all snapshots that don't have the `zrepl_` prefix
+                type = "regex";
+                negate = true;
+                regex = "^zrepl_.*;";
+              }
+            ];
+            # longer retention on the backup drive, we have more space there
+            keep_receiver = [
+              {
+                type = "grid";
+                grid = "1x1h(keep=all) | 24x1h | 360x1d";
+                regex = "^zrepl_.*";
+              }
+              {
+                # IMPORTANT: retain all non-zrepl snapshots on the backup drive
+                type = "regex";
+                negate = true;
+                regex = "^zrepl_.*";
+              }
+            ];
+          };
+        }
+        ];
+    };
+  };
 }
