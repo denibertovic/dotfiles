@@ -75,6 +75,8 @@ in
       ipython
     ]))
 
+    pkgs.unstable.python3Packages.subliminal
+
     pkgs.borgbackup
     pkgs.hddtemp
     pkgs.dos2unix
