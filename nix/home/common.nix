@@ -66,8 +66,7 @@ in
     pkgs.wireshark
     pkgs.unzip
     pkgs._1password-gui
-    # 310 was needed because otherwise vim wouldn't find neovim/pynvim
-    (pkgs.python310.withPackages (ps: with ps; [
+    (pkgs.python3.withPackages (ps: with ps; [
       pip
       virtualenv
       pynvim
