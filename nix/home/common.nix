@@ -65,7 +65,7 @@ in
     pkgs.yubikey-personalization-gui
     pkgs.wireshark
     pkgs.unzip
-    pkgs._1password-gui
+
     (pkgs.python3.withPackages (ps: with ps; [
       pip
       virtualenv

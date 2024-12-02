@@ -298,6 +298,19 @@ in
     ensureDefaultPrinter = "HomeOffice";
   };
 
+  security.polkit = {
+    enable = true;
+  };
+
+  programs._1password = {
+    enable = true;
+  };
+
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = ["deni"];
+  };
+
   # Enable sound.
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
