@@ -130,8 +130,6 @@ in
     DEFAULT_BROWSER = "${pkgs.browsers}/bin/browsers";
   };
 
-  xdg.mimeApps.enable = true;
-
   xdg.desktopEntries = {
    browsers = {
       name = "Browsers";
@@ -143,10 +141,17 @@ in
     };
   };
 
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = "browsers.desktop";
-    "x-scheme-handler/http" = "browsers.desktop";
-    "x-scheme-handler/https" = "browsers.desktop";
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+    };
+    defaultApplications = {
+      "text/html" = "browsers.desktop";
+      "x-scheme-handler/http" = "browsers.desktop";
+      "x-scheme-handler/https" = "browsers.desktop";
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+    };
   };
 
   programs.fzf = {
