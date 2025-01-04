@@ -10,6 +10,19 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    conky = prev.conky.overrideAttrs (oldAttrs: {
+      # https://github.com/brndnmtthws/conky/issues/2131
+      # version = "1.22.0";
+      version = "1.21.9";
+      src = prev.fetchFromGitHub {
+        owner = "brndnmtthws";
+        repo = "conky";
+        rev = "v1.21.9";
+        sha256 = "sha256-iGUWeEKNDsTrEenQF5IuzVQhkQcKDBYCvdBgM0BnHPI=";
+      };
+      buildInputs = oldAttrs.buildInputs ++ [prev.pkgs.gperf];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

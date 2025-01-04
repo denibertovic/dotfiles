@@ -27,6 +27,7 @@
     ./media.nix
     ./neovim.nix
     ./keybase.nix
+    ./conky.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];

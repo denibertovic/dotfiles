@@ -208,7 +208,7 @@ in
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      #font-awesome_4
+      font-awesome_5
       corefonts # Microsoft free fonts
       dejavu_fonts
       fira
