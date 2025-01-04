@@ -544,11 +544,12 @@ toggleMicrophoneAndNotify = do
     else spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
 
 -- COMMANDS
-weechatCommand = "urxvt -title WeeChat -e weechat"
+weechatCommand = "alacritty --title weechat -e weechat"
 
-isWeechat = (resource =? "urxvt") <&&> fmap (isInfixOf "WeeChat") title
+isWeechat = title =? "weechat"
+--(resource =? "alacritty") <&&> fmap (isInfixOf "WeeChat") title
 
-htopCommand = "urxvt -title htop -e htop"
+htopCommand = "alacritty --title htop -e htop"
 
 isHtop = title =? "htop"
 
