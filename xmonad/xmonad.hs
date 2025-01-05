@@ -804,6 +804,7 @@ projects =
 -- The downiside is that xmobar is visible. But I like that.
 -- If true full screen is desired use fullscreenEventHook from XMonad.Hooks.EwmhDesktops
 myHandleEventHook =
+  refocusLastWhen isFloat <+>
   docksEventHook <+>
   fadeWindowsEventHook <+>
   handleEventHook def <+>
