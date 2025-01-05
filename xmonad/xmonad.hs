@@ -834,7 +834,7 @@ myLayout =
    $
   myLayouts
   where
-    --          numMasters, resizeIncr, splitRatio
+    --  numMasters, resizeIncr, splitRatio
     tall = Tall 1 0.02 0.5
     -- define the list of standardLayouts
     myLayouts = layoutHook defaultConfig ||| Accordion ||| Grid ||| emptyBSP
