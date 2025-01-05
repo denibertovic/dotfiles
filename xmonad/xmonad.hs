@@ -824,14 +824,9 @@ myLayout =
   windowNavigation $
   boringWindows $
   avoidStruts $
-  addTabsBottom shrinkText myTabTheme
-     -- NOTE: commenting this out fixes the issue where the wrong (last) window
-     -- is focused after a popup or a floating window closes. It would focus the last one
-     -- in the tile rather than the last focused one (which was usually master)
-     -- BUT I LIKE HAVING TABS EVEN THOUGH I ALMOST NEVER USE THIS FEATURE.
-     -- FIX THIS!
-     -- $ subLayout [] Simplest
-     -- $ subLayout [] (Simplest ||| Accordion)
+  addTabsBottom shrinkText myTabTheme $
+  subLayout [] (Simplest ||| Accordion)
+ -- $ subLayout [] Simplest
    $
   myLayouts
   where
