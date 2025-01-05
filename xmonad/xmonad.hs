@@ -200,7 +200,7 @@ myTabTheme =
     , inactiveBorderColor = base02
     , activeTextColor = base03
     , inactiveTextColor = base00
-    , decoHeight = 32
+    , decoHeight = 24
     }
 
 -- this is a "fake title" used as a highlight bar in lieu of full borders
