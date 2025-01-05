@@ -832,15 +832,12 @@ myLayout =
      -- $ subLayout [] Simplest
      -- $ subLayout [] (Simplest ||| Accordion)
    $
-  onWorkspace "2" imLayout myLayouts
+  myLayouts
   where
     --          numMasters, resizeIncr, splitRatio
     tall = Tall 1 0.02 0.5
     -- define the list of standardLayouts
     myLayouts = layoutHook defaultConfig ||| Accordion ||| Grid ||| emptyBSP
-    -- notice that withIM, which normally acts on one layout, can also
-    -- work on a list of layouts (yay recursive data types!)
-    imLayout = withIM (2 / 10) (Role "buddy_list") myLayouts
 
 myFadeHook =
   composeAll
