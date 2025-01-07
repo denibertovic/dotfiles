@@ -143,7 +143,7 @@ in
 
   # keymap
   services.xserver.xkb = {
-    layout = "us";
+    layout = "us,hr";
     options = "ctrl:nocaps,compose:ralt";
     # hybrid modifiers
     extraLayouts = {
