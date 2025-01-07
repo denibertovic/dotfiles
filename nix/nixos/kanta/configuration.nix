@@ -143,7 +143,7 @@ in
 
   # keymap
   services.xserver.xkb = {
-    layout = "us-custom";
+    layout = "us";
     options = "ctrl:nocaps,compose:ralt";
     # hybrid modifiers
     extraLayouts = {
@@ -294,7 +294,6 @@ in
     eval $(gnome-keyring-daemon --start) &
     feh --bg-scale /home/deni/walls/hack5.png &
     #synclient TouchpadOff=1 &
-    xmodmap /home/deni/.Xmodmap &
   '';
 
   services.blueman.enable = true;

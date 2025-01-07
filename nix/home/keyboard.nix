@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   services.xcape = {
-    enable = true;
+    enable = false;
     timeout = 200;
     mapExpression = {
       Hyper_L = "Tab";
