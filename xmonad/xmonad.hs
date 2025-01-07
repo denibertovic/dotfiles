@@ -267,8 +267,6 @@ commands = do
     , ("dns-enable", enableDnsCmd)
     , ("bose-connect", boseConnectCmd)
     , ("bose-disconnect", boseDisconnectCmd)
-    , ("setkbhr", setkbhrCmd)
-    , ("setkben", setkbenCmd)
     , ("enable-capslock", enableCapsLockCmd)
     , ("disable-capslock", disableCapsLockCmd)
     ]
@@ -455,17 +453,11 @@ boseDisconnectCmd = spawn "bluetoothctl disconnect 28:11:A5:D9:25:59"
 enableDnsCmd :: X ()
 enableDnsCmd = spawn "sudo /home/deni/scripts/enable_own_dns.sh"
 
-setkbenCmd :: X ()
-setkbenCmd = spawn "setxkbmap us && xmodmap /home/deni/.Xmodmap"
-
-setkbhrCmd :: X ()
-setkbhrCmd = spawn "setxkbmap hr && xmodmap /home/deni/.Xmodmap"
-
 enableCapsLockCmd :: X ()
 enableCapsLockCmd = spawn "setxkbmap -option"
 
 disableCapsLockCmd :: X ()
-disableCapsLockCmd = spawn "setxkbmap us && xmodmap /home/deni/.Xmodmap"
+disableCapsLockCmd = spawn "setxkbmap -option ctrl:nocaps,compose:ralt"
 
 dunstDndOn :: X ()
 dunstDndOn = spawn "dunstctl set-paused true"
@@ -585,7 +577,6 @@ signalCommand = "signal-desktop"
 isSignal = className =? "Signal"
 
 myStartupHook = do
-  spawn "xmodmap ~/.Xmodmap"
   spawn "xrdb -merge -I$HOME ~/.Xresources"
 
 forceCenterFloat :: ManageHook
