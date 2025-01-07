@@ -7,6 +7,16 @@ let
   privateZeroTierInterfaces = [
     "ztyqbtg66f"
   ];
+  symbolsFile = pkgs.writeText "my-custom-symbols.xkb" ''
+    xkb_symbols "hypers" {
+        include "us(basic)"
+        include "level3(ralt_switch)"
+
+        key  <TAB> { [ Hyper_L, Hyper_L ] };
+        key <BKSL> { [ Hyper_R, Hyper_R ] };
+        modifier_map Mod4 { Super_L, Super_R, Hyper_L, Hyper_R };
+    };
+    '';
 in
 {
   imports =
@@ -118,7 +128,6 @@ in
 
    # INPUT
   console.useXkbConfig = true;
-  services.xserver.xkb.layout = "us";
   services.libinput.touchpad.disableWhileTyping = true;
   services.libinput.enable = true;
   services.xserver.synaptics.enable = false;
@@ -131,8 +140,22 @@ in
     '';
   # services.xserver.libinput.touchpad.naturalScrolling = true;
   # services.xserver.synaptics.twoFingerScroll = true;
-  services.xserver.xkb.options = "ctrl:nocaps";
-  # services.xserver.xkbVariant = "dvorak";
+
+  # keymap
+  services.xserver.xkb = {
+    layout = "us-custom";
+    options = "ctrl:nocaps,compose:ralt";
+    # hybrid modifiers
+    extraLayouts = {
+      us-custom = {
+        description = "My custom hybrid modifier layout";
+        symbolsFile = symbolsFile;
+        # ISO 639-2 codes
+        # just "en" is ISO 639-1 apparently
+        languages = ["eng"];
+      };
+    };
+  };
 
   # GPG
   programs.gnupg.agent.enable = true;
@@ -275,10 +298,6 @@ in
   '';
 
   services.blueman.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
