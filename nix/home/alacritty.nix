@@ -10,6 +10,9 @@
       # window = {
       #   dynamic_padding = true;
       # };
+      env = {
+        WINIT_X11_SCALE_FACTOR = "1.5";
+      };
       font = {
         builtin_box_drawing = false;
         size = 6.0;
