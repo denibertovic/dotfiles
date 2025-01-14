@@ -11,4 +11,4 @@
 
 # had to downgrade DP-2-3 and set a lower resolution cause otherwise I got the
 # following error:  'xrandr: Configure crtc 2 failed'
-xrandr --output eDP-1 --auto --right-of DP-2-3 --output DP-2-3 --mode 1920x1080 --primary --right-of DP-2-2 --output DP-2-2 --auto --rotate left
+xrandr --dpi 157 --output eDP-1 --mode 1920x1080 --right-of DP-2-3 --output DP-2-3 --mode 1920x1080 --primary --right-of DP-2-2 --output DP-2-2 --mode 1920x1080 --rotate left
