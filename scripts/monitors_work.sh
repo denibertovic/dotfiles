@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-
+# calculation:
+# 210 / (math.sqrt(1920**2 + 1080**2) / 14)
+#
 # Scren name     | Resolution | Size | DPI | Scaling          |
 # ============================================================|
-# Laptop: eDP1   | 2560x1440  | 14"  | 210 | 210/210 = 1x1    |
-# Dell-1 DP-2-2  | 2560x1440  | 27"  | 109 | 210/109 = 1.926  |
-# Dell-2: DP-2-1 | 1920x1080  | 23"  | 96  | 210/96  = 2.187  |
+# Laptop: eDP1   | 1920x1080  | 14"  | 157 | 210/157 = 1.33   |
+# Dell-2: DP-2-2 | 1920x1080  | 23"  | 96  | 210/96  = 2.187  |
+# Dell-1 DP-2-3  | 1920x1080  | 27"  | 82  | 210/82  = 2.56   |
 # ============================================================|
 
-killall trayer
-xrandr --output eDP-1 --auto --right-of DP-2-2 --output DP-2-2 --auto --primary --right-of DP-2-1 --output DP-2-1 --auto --rotate left
-nohup trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --transparent true --alpha 0 --tint 0x222222 --height 40 --monitor 1 > /tmp/nohup.out 2>&1 &
-rm -rf ~/.xmonad/xmonad.state
-
+# had to downgrade DP-2-3 and set a lower resolution cause otherwise I got the
+# following error:  'xrandr: Configure crtc 2 failed'
+xrandr --output eDP-1 --auto --right-of DP-2-3 --output DP-2-3 --mode 1920x1080 --primary --right-of DP-2-2 --output DP-2-2 --auto --rotate left

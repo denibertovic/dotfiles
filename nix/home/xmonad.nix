@@ -33,6 +33,7 @@ in
       alpha = 0;
       tint = "0x222222";
       height = 25;
+      monitor = "primary";
     };
   };
 
