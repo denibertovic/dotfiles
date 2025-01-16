@@ -32,6 +32,7 @@ in
   home.packages = [
     pkgs.denv
     pkgs.browsers
+    pkgs.brave
     pkgs.deploy-rs
     pkgs.unstable.llm
     pkgs.devenv
