@@ -254,6 +254,9 @@ in
       unifont # some international languages
       jetbrains-mono
       symbola
+      hack-font
+      iosevka
+      iosevka-comfy.comfy
     ];
     fontconfig = {
       antialias = true;

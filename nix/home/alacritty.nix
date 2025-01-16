@@ -15,25 +15,25 @@
       };
       font = {
         builtin_box_drawing = false;
-        size = 6.0;
-        offset = {
-          x = 1;
-          y = 1;
-        };
+        size = 8.0;
+        # offset = {
+        #   x = 1;
+        #   y = 1;
+        # };
         normal = {
-          family = "Monospace";
+          family = "Hack";
           style = "Regular";
         };
         bold = {
-          family = "Monospace";
+          family = "Hack";
           style = "Bold";
         };
         italic = {
-          family = "Monospace";
+          family = "Hack";
           style = "Italic";
         };
         bold_italic = {
-          family = "Monospace";
+          family = "Hack";
           style = "Bold Italic";
         };
       };
