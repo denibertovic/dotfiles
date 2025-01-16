@@ -33,6 +33,7 @@ in
     pkgs.denv
     pkgs.browsers
     pkgs.brave
+    pkgs.nitch
     pkgs.deploy-rs
     pkgs.unstable.llm
     pkgs.devenv
