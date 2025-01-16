@@ -2,7 +2,7 @@
 {
     programs.rofi = {
     enable = true;
-    font = "JetBrains Mono 10";
+    font = "Hack 10";
     extraConfig = {
       modi = "window,run";
       show-match = false;
