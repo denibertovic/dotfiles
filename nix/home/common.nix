@@ -34,6 +34,7 @@ in
     pkgs.browsers
     pkgs.brave
     pkgs.nitch
+    pkgs.yazi
     pkgs.obsidian
     pkgs.deploy-rs
     pkgs.unstable.llm
