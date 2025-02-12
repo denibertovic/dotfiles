@@ -82,7 +82,7 @@
         ctl="systemctl";
         t="/home/deni/.local/bin/todo";
         t-check-tags="grep -E -o \"@.*\" ~/Dropbox/todo/todo.txt  | sort | uniq";
-        get-subtitles="subliminal download -l en .";
+        get-subtitles="op run -- subliminal --opensubtitles $OPENSUBTITLES_USERNAME $OPENSUBTITLES_PASSWORD download -l en .";
         copy-path="pwd | tr -d \"\n\" | xsel -b";
         asciicast2gif="docker run -v \$PWD:/data asciinema/asciicast2gif";
         gci="google-chrome-stable --profile=\"Default\" --incognito";
