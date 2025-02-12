@@ -576,8 +576,8 @@ signalCommand = "signal-desktop"
 
 isSignal = className =? "Signal"
 
-myStartupHook = do
-  spawn "xrdb -merge -I$HOME ~/.Xresources"
+-- myStartupHook = do
+--   spawn "xrdb -merge -I$HOME ~/.Xresources"
 
 forceCenterFloat :: ManageHook
 forceCenterFloat = doFloatDep move
@@ -904,7 +904,7 @@ main = do
       , logHook = myLogHook xmproc
       , terminal = myTerminal
       , borderWidth = border
-      , startupHook = myStartupHook
+      -- , startupHook = myStartupHook
       , handleEventHook = myHandleEventHook
       , modMask = mod4Mask -- super key
       , focusFollowsMouse = True
