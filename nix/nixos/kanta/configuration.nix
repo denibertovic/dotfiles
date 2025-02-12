@@ -36,7 +36,6 @@ in
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.pulseaudio = true;
   nixpkgs.overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
@@ -83,10 +82,9 @@ in
   # HARDWARE
   hardware.bluetooth.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
@@ -94,15 +92,9 @@ in
       libvdpau-va-gl
     ];
   };
-  hardware.pulseaudio.enable = true;
-  # hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
-  hardware.pulseaudio.support32Bit = true;
-  hardware.pulseaudio.zeroconf.discovery.enable = true;
-  hardware.pulseaudio.zeroconf.publish.enable = true;
   hardware.sane.enable = true;
   # deprecated
   # hardware.video.hidpi.enable = true;
-  sound.enable = true;
 
   # NETWORKING
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -331,10 +323,6 @@ in
     enable = true;
     polkitPolicyOwners = ["deni"];
   };
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

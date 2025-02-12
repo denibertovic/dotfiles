@@ -6,17 +6,17 @@ in
 {
   home.packages = [
     pkgs.feh
-    pkgs.gnome.gnome-tweaks
+    pkgs.gnome-tweaks
     pkgs.gencfsm
-    pkgs.gnome.gnome-screenshot
-    pkgs.gnome.eog
+    pkgs.gnome-screenshot
+    pkgs.eog
     pkgs.networkmanagerapplet
     pkgs.xorg.xmodmap
     pkgs.xorg.xmessage
     pkgs.xorg.xf86inputsynaptics
     pkgs.trayer
     pkgs.picom
-    pkgs.gnome.zenity
+    pkgs.zenity
     pkgs.dmenu
   ];
 
@@ -40,7 +40,7 @@ in
   home.pointerCursor = {
     x11.enable = true;
     name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.adwaita-icon-theme;
     size = 24;
     gtk.enable = true;
   };

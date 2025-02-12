@@ -7,7 +7,7 @@
     profiles.default = {
       # this is the bare minimum to get me going
       # the rest can be synced from firefox sync
-      extensions = with config.nur.repos.rycee.firefox-addons; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         vimium
         tree-style-tab
       ];
