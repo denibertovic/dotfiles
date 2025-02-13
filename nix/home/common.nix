@@ -33,6 +33,7 @@ in
     pkgs.denv
     pkgs.browsers
     pkgs.brave
+    pkgs.unstable.cachix
     pkgs.nitch
     pkgs.yazi
     pkgs.obsidian
