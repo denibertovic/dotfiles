@@ -284,10 +284,10 @@ in
 
   services.xserver.displayManager.sessionCommands = ''
     xsetroot -cursor_name left_ptr &
-    picom &
+    ${pkgs.picom}/bin/picom --backend xrender &
     ${pkgs.xorg.xinput}/bin/xinput disable 'Synaptics TM3471-010'
     eval $(gnome-keyring-daemon --start) &
-    feh --bg-scale /home/deni/walls/hack5.png &
+    ${pkgs.feh}/bin/feh --bg-scale /home/deni/walls/hack5.png &
     #synclient TouchpadOff=1 &
   '';
 
