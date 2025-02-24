@@ -5,7 +5,7 @@ vim.cmd([[colorscheme tokyonight]])
 -- vim.cmd([[colorscheme catppuccin]])
 
 vim.opt.termguicolors = true
-require("bufferline").setup({})
+-- require("bufferline").setup({})
 require("lualine").setup()
 require("ibl").setup({
     exclude = {

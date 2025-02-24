@@ -71,7 +71,7 @@ in {
       # ui
       nvim-notify
       # I'm not sure I need these "tabs"
-      bufferline-nvim
+      # bufferline-nvim
       lualine-nvim
       indent-blankline-nvim
       noice-nvim
