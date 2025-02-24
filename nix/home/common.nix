@@ -36,6 +36,7 @@ in
     pkgs.unstable.cachix
     pkgs.nitch
     pkgs.yazi
+    pkgs.file
     pkgs.obsidian
     pkgs.deploy-rs
     pkgs.unstable.llm
@@ -129,6 +130,10 @@ in
     (pkgs.writeShellScriptBin "slack-scaled" ''
       exec slack --force-device-scale-factor=1.0
     '')
+    (pkgs.writeShellScriptBin "zoom-scaled" ''
+      exec env QT_AUTO_SCREEN_SCALE_FACTOR=0 zoom-us
+    '')
+
   ];
 
   home.sessionVariables = {
