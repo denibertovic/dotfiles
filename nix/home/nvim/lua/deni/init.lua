@@ -58,6 +58,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     command = [[:%s/\s\+$//e]],
 })
 
+-- vim.g.mapleader = " ";
+
 require("deni.keymaps")
 require("deni.plugins.treesitter")
 require("deni.plugins.telescope")
