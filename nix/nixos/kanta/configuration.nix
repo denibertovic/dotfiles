@@ -195,7 +195,11 @@ in
     "wheel"
     "smartmontools"
   ];
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    # home-manager handles this so it's disabled here
+    enableGlobalCompInit = false;
+  };
   users.extraUsers.deni.shell = pkgs.zsh;
   nix.settings.trusted-users = [ "root" "deni" ];
 

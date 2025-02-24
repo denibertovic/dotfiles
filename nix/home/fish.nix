@@ -11,39 +11,8 @@
     };
   };
 
-  programs.zsh = {
+  programs.fish = {
     enable = true;
-    # performance monitoring
-    # zprof.enable = true;
-
-    # disabled here becasue oh-my-zsh does it anyway
-    # also see: https://github.com/nix-community/home-manager/issues/3965
-    enableCompletion = true;
-    autosuggestion.enable = false;
-    completionInit = ''
-    autoload -Uz compinit
-    if [[ -n ''${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-      compinit
-    else
-      compinit -C
-    fi
-    '';
-    history = {
-      append = true;
-      share = true;
-    };
-    oh-my-zsh = {
-      enable = true;
-      theme = "fwalch";
-      # manually copied completeions here
-      # custom = "/home/deni/.oh-my-zsh/custom";
-      # plugins = [
-      #   # TODO: fix this error /home/deni/.nix-profile/bin/virtualenvwrapper_lazy.sh:21: unmatched '
-      #   # "virtualenvwrapper"
-      #   "docker"
-      #   "fzf"
-      # ];
-    };
     shellAliases = {
         # TEMP ALIASES
         mtorrents="/home/deni/dotfiles/scripts/mount_torrents.sh";
@@ -117,36 +86,10 @@
         # speeds up MC
         mc="mc --nosubshell";
       };
-    initExtraBeforeCompInit = ''
-      # This prevents compaudit from running inside Oh My Zsh.
-      zstyle ':omz:plugins:compinit' skip true
-    '';
 
-
-
-    initExtra = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      unsetopt correct_all
-      # Since the default initialization mode, this plugin will overwrite the previous key
-      # bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.)
-      # to fail. See here: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
-      # Define an init function and append to zvm_after_init_commands
-      # useful for documenting steps
-      function my_init() {
-          bindkey "^[[A" history-beginning-search-backward
-          bindkey "^[[B" history-beginning-search-forward
-          autoload -U history-search-end
-      }
-      zvm_after_init_commands+=(my_init)
-
+    shellInit = ''
       WORKON_HOME=/home/deni/.virtualenvs
-      DISABLE_AUTO_UPDATE="true"
-      DISABLE_CORRECTION="true"
       export PATH="/home/deni/.local/bin:''${PATH}"
-
-      # 10ms for key sequences
-      # https://www.johnhawthorn.com/2012/09/vi-escape-delays/
-      export KEYTIMEOUT=1
 
       function note () {
           if [[ $# -eq 1  ]]; then
@@ -166,10 +109,10 @@
       };
 
       # use denv
-      eval "$(denv hook ZSH)"
+      denv hook FISH | source
 
       # use direnv
-      eval "$(direnv hook zsh)"
+      direnv hook fish | source
 
       # aws-vault GetSessionToken duration
       export AWS_SESSION_TOKEN_TTL=12h
