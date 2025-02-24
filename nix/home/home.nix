@@ -9,6 +9,7 @@
 
     ./common.nix
     ./zsh.nix
+    ./fish.nix
     ./xscreensaver.nix
     ./rumno.nix
     ./greenclip.nix

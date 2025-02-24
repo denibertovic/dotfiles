@@ -23,8 +23,8 @@
         # kube
         check-kubectl-version="echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)";
         fetch-latest-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl";
-        k="kubectl --namespace=\${KUBECTL_NAMESPACE:-default}";
-        h="helm --namespace=\${KUBECTL_NAMESPACE:-default}";
+        k="kubectl --namespace=(test -n \"$KUBECTL_NAMESPACE\"; and echo \"$KUBECTL_NAMESPACE\"; or echo \"default\")";
+        h="helm --namespace=(test -n \"$KUBECTL_NAMESPACE\"; and echo \"$KUBECTL_NAMESPACE\"; or echo \"default\")";
 
         # Force gpg2
         # gpg="gpg2";
@@ -88,25 +88,30 @@
       };
 
     shellInit = ''
-      WORKON_HOME=/home/deni/.virtualenvs
-      export PATH="/home/deni/.local/bin:''${PATH}"
+      set WORKON_HOME /home/deni/.virtualenvs
+      set -x PATH "/home/deni/.local/bin:$PATH"
 
-      function note () {
-          if [[ $# -eq 1  ]]; then
-              echo "Logging: `fc -ln -1`"
-              echo `fc -ln -1` >> "$HOME/Dropbox/notes/$1-`date +"%Y-%m-%d"`.md" ;
-          else
-              echo "Logging: `fc -ln -1`"
-              echo `fc -ln -1` >> "$HOME/Dropbox/notes/note-`date +"%Y-%m-%d"`.md" ;
-          fi
-      }
+      function note
+        set cmd (history --show-time="%Y-%m-%d" | tail -n1 | string split " " | tail -n+2 | string join " ")
+        echo "Logging: $cmd"
 
-      function kubectlgetall {
-        for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-          echo "Resource:" $i
-          kubectl -n ''${KUBECTL_NAMESPACE:-default} get $i
-        done
-      };
+        if test (count $argv) -eq 1
+          set filename "$HOME/Dropbox/notes/$argv[1]-(date '+%Y-%m-%d').md"
+        else
+          set filename "$HOME/Dropbox/notes/note-(date '+%Y-%m-%d').md"
+        end
+
+        echo $cmd >> $filename
+      end
+
+      function kubectlgetall
+        set namespace (test -n "$KUBECTL_NAMESPACE"; and echo "$KUBECTL_NAMESPACE"; or echo "default")
+
+        kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq | while read -l resource
+          echo "Resource: $resource"
+          kubectl -n $namespace get $resource
+        end
+      end
 
       # use denv
       denv hook FISH | source
@@ -115,9 +120,9 @@
       direnv hook fish | source
 
       # aws-vault GetSessionToken duration
-      export AWS_SESSION_TOKEN_TTL=12h
-      export AWS_CHAINED_SESSION_TOKEN_TTL=12h
-      export AWS_VAULT_PROMPT=terminal
+      set -x AWS_SESSION_TOKEN_TTL 12h
+      set -x AWS_CHAINED_SESSION_TOKEN_TTL 12h
+      set -x AWS_VAULT_PROMPT terminal
     '';
   };
 }
