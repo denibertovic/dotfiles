@@ -60,7 +60,8 @@ in
     pkgs.unrtf
     pkgs.units
     pkgs.vagrant
-    pkgs.virtualboxWithExtpack
+    # super slow. disable for now
+    # pkgs.virtualboxWithExtpack
     # NOTE: needs configuring
     pkgs.weechat
     # pkgs.weechat-unwrapped.perl
