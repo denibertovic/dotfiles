@@ -30,6 +30,7 @@ in
   ];
 
   home.packages = [
+    pkgs.appimage-run
     pkgs.denv
     pkgs.browsers
     pkgs.brave
