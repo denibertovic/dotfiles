@@ -29,6 +29,7 @@
     ./keybase.nix
     ./conky.nix
     ./keyboard.nix
+    ./obs.nix
     # ghc-syb-utils doesn't compile (whatever that is)
 #    ./haskell.nix
   ];
