@@ -116,6 +116,11 @@
 
         # speeds up MC
         mc="mc --nosubshell";
+
+        # pdf printing
+        print-pdf="lpr -o media=a4 -P HomeOffice";
+        # just the first page
+        print-pdf1="lpr -o page-ranges=1 -o media=a4 -P HomeOffice";
       };
     initExtraBeforeCompInit = ''
       # This prevents compaudit from running inside Oh My Zsh.
@@ -162,6 +167,39 @@
         for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
           echo "Resource:" $i
           kubectl -n ''${KUBECTL_NAMESPACE:-default} get $i
+        done
+      };
+
+      print-all-pdfs() {
+        for pdf in *.[Pp][Dd][Ff]; do
+          if [[ ! -f "$pdf" ]]; then
+            echo "No PDF files found in the current directory."
+            return
+          fi
+
+          num_pages=$(pdftk "$pdf" dump_data | grep NumberOfPages | awk '{print $2}')
+          if [[ -z "$num_pages" ]]; then
+            echo "Could not determine number of pages for $pdf, skipping."
+            continue
+          fi
+
+          if (( num_pages > 1 )); then
+            echo "$pdf has $num_pages pages. Do you want to print all pages? (y/n)"
+            read -r answer
+            if [[ "$answer" != "y" ]]; then
+              echo "Enter the page numbers you want to print (patterns: 1 | 1-4 | 1-4,7,9-12):"
+              read -r pages
+              echo "Printing: $pdf"
+              lpr -o media=a4 -o page-ranges=$pages -P HomeOffice "$pdf"
+            else
+              echo "Printing: $pdf"
+              lpr -o media=a4 -P HomeOffice "$pdf"
+            fi
+          else
+            echo "Printing: $pdf"
+            lpr -o media=a4 -P HomeOffice "$pdf"
+          fi
+          sleep 2
         done
       };
 
