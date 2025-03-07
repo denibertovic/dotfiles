@@ -34,6 +34,7 @@ in
     pkgs.denv
     pkgs.browsers
     pkgs.brave
+    pkgs.zathura
     pkgs.unstable.cachix
     pkgs.nitch
     pkgs.yazi
