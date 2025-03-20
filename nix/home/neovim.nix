@@ -98,6 +98,7 @@ in {
       vim-signify
       which-key-nvim
       neoscroll-nvim
+      pkgs.unstable.vimPlugins.avante-nvim
     ];
     extraPackages = with pkgs; [
       lua-language-server
