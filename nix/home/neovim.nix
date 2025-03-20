@@ -96,6 +96,8 @@ in {
       # vim-repeat
       plenary-nvim
       vim-signify
+      which-key-nvim
+      neoscroll-nvim
     ];
     extraPackages = with pkgs; [
       lua-language-server
