@@ -23,10 +23,10 @@ require("conform").setup({
 		quiet = false, -- not recommended to change
 		lsp_format = "fallback", -- not recommended to change
 	},
-	formatters_by_filetype = {
+	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "black" },
-		rust = { "rustfmt", lsp_format = "fallback" },
+		rust = { "rustfmt" },
 		-- Conform will run the first available formatter
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
