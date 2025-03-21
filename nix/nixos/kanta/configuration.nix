@@ -79,6 +79,13 @@ in
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
 
+  # GC
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   # HARDWARE
   hardware.bluetooth.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
