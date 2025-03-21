@@ -6,13 +6,13 @@ lspconfig.pyright.setup({})
 lspconfig.ts_ls.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.lua_ls.setup({
-	settings = {
-		Lua = {
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-		},
-	},
+    settings = {
+        Lua = {
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+        },
+    },
 })
 lspconfig.terraformls.setup({})
