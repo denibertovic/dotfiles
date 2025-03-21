@@ -56,6 +56,13 @@ in {
     # })
   ];
 
+  # GC
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   system.activationScripts.ldso = lib.stringAfter ["usrbinenv"] ''
     mkdir -m 0755 -p /lib64
     ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
@@ -81,13 +88,6 @@ in {
   boot.supportedFilesystems = ["zfs"];
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
-
-  # GC
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
 
   # HARDWARE
   hardware.bluetooth.enable = true;
