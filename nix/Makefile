@@ -10,7 +10,7 @@ require-%:
 
 ## build system with 'nixos-reuild switch --flake .'
 system:
-	@sudo nixos-rebuild switch --flake .#kanta
+	@sudo nixos-rebuild switch --flake .#kanta ${NIX_BUILDER_OPTS}
 
 ## build home with 'home-manager --flake .#your-username@your-hostname'
 user:
