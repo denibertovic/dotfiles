@@ -67,3 +67,25 @@ cmp.setup.cmdline(":", {
 
 -- Set up lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- lang specific settings
+
+-- lua, golang
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*.lua", "*.go" },
+	callback = function()
+		-- overrides defaults tab expansion for languages that
+		-- use tabs by convention
+		vim.opt.expandtab = false
+	end,
+})
+
+-- html, yaml
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*.nix", "*.html", "*.yaml", "*.yml" },
+	callback = function()
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.tabstop = 2
+		vim.opt.softtabstop = 2
+	end,
+})
