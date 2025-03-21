@@ -14,7 +14,7 @@ system:
 
 ## build home with 'home-manager --flake .#your-username@your-hostname'
 user:
-	@home-manager switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@kanta --impure
+	@home-manager switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@kanta --impure ${NIX_BUILDER_OPTS}
 
 ## Show help screen.
 help:
