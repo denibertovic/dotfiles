@@ -1,9 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, outputs, config, pkgs, lib, ... }:
-let
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   privateZeroTierInterfaces = [
     "ztyqbtg66f"
   ];
@@ -16,48 +21,46 @@ let
         key <BKSL> { [ Hyper_R, Hyper_R ] };
         modifier_map Mod4 { Super_L, Super_R, Hyper_L, Hyper_R };
     };
-    '';
-in
-{
-  imports =
-    [
-      # my modules that the flake exports (from modules/nixos):
-      # outputs.nixosModules.example
+  '';
+in {
+  imports = [
+    # my modules that the flake exports (from modules/nixos):
+    # outputs.nixosModules.example
 
-      # modules from other flakes (such as nixos-hardware):
-      # inputs.hardware.nixosModules.common-cpu-amd
-      # inputs.hardware.nixosModules.common-ssd
+    # modules from other flakes (such as nixos-hardware):
+    # inputs.hardware.nixosModules.common-cpu-amd
+    # inputs.hardware.nixosModules.common-ssd
 
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # NIX / NIXOS
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+    # Add overlays your own flake exports (from overlays and pkgs dir):
+    outputs.overlays.additions
+    outputs.overlays.modifications
+    outputs.overlays.unstable-packages
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+    # You can also add overlays exported from other flakes:
+    # neovim-nightly-overlay.overlays.default
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
+    # Or define it inline, for example:
+    # (final: prev: {
+    #   hi = final.hello.overrideAttrs (oldAttrs: {
+    #     patches = [ ./change-hello-to-hi.patch ];
+    #   });
+    # })
+  ];
 
-  system.activationScripts.ldso = lib.stringAfter [ "usrbinenv"  ] ''
+  system.activationScripts.ldso = lib.stringAfter ["usrbinenv"] ''
     mkdir -m 0755 -p /lib64
     ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
     mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
-    '';
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -68,14 +71,14 @@ in
   system.stateVersion = "23.05"; # Did you read the comment?
 
   # BOOT
-  boot.kernelParams = [ "consoleblank=90" "mem_sleep_default=deep" ];
+  boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep"];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ZFS
-  boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = ["zfs"];
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
 
@@ -94,7 +97,7 @@ in
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
       libvdpau-va-gl
       libva
@@ -126,18 +129,18 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Zagreb";
 
-   # INPUT
+  # INPUT
   console.useXkbConfig = true;
   services.libinput.touchpad.disableWhileTyping = true;
   services.libinput.enable = true;
   services.xserver.synaptics.enable = false;
-  services.xserver.config =  ''
-      Section "InputClass"
-        Identifier     "Enable libinput for TrackPoint"
-        MatchIsPointer "on"
-        Driver         "libinput"
-      EndSection
-    '';
+  services.xserver.config = ''
+    Section "InputClass"
+      Identifier     "Enable libinput for TrackPoint"
+      MatchIsPointer "on"
+      Driver         "libinput"
+    EndSection
+  '';
   # services.xserver.libinput.touchpad.naturalScrolling = true;
   # services.xserver.synaptics.twoFingerScroll = true;
 
@@ -209,13 +212,15 @@ in
     enableGlobalCompInit = false;
   };
   users.extraUsers.deni.shell = pkgs.zsh;
-  nix.settings.trusted-users = [ "root" "deni" ];
+  nix.settings.trusted-users = ["root" "deni"];
 
-  security.sudo.extraRules= [
-    {  users = [ "deni" ];
+  security.sudo.extraRules = [
+    {
+      users = ["deni"];
       commands = [
-         { command = "ALL" ;
-           options= [ "NOPASSWD" ];
+        {
+          command = "ALL";
+          options = ["NOPASSWD"];
         }
       ];
     }
@@ -269,9 +274,9 @@ in
       hinting.style = "slight";
       hinting.autohint = true;
       defaultFonts = {
-        monospace = [ "Source Code Pro" ];
-        sansSerif = [ "Source Sans Pro" ];
-        serif = [ "Source Serif Pro" ];
+        monospace = ["Source Code Pro"];
+        sansSerif = ["Source Sans Pro"];
+        serif = ["Source Serif Pro"];
       };
     };
   };
@@ -279,11 +284,9 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
 
   # XMONAD
   services.xserver.windowManager.xmonad = {
@@ -307,7 +310,7 @@ in
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+  services.printing.drivers = [pkgs.hplipWithPlugin];
   hardware.printers = {
     ensurePrinters = [
       {
@@ -359,7 +362,6 @@ in
     python3Packages.gpgme
     python3Packages.pygobject3
     python3Packages.gst-python
-
   ];
 
   environment.localBinInPath = true;
@@ -428,8 +430,8 @@ in
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 17500 ];
-  networking.firewall.allowedUDPPorts = [ 17500 ];
+  networking.firewall.allowedTCPPorts = [17500];
+  networking.firewall.allowedUDPPorts = [17500];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -437,7 +439,7 @@ in
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
-    '';
+  '';
 
   services.zrepl = {
     enable = true;
@@ -501,7 +503,7 @@ in
             ];
           };
         }
-        ];
+      ];
     };
   };
 }
