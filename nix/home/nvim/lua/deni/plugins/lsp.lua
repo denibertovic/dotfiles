@@ -3,7 +3,7 @@ lspconfig.hls.setup({})
 lspconfig.nixd.setup({})
 lspconfig.pyright.setup({})
 -- lspconfig.pylsp.setup{}
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 lspconfig.yamlls.setup({})
 lspconfig.lua_ls.setup({
 	settings = {
