@@ -63,6 +63,27 @@ in {
     options = "--delete-older-than 30d";
   };
 
+  nix.buildMachines = [
+    {
+      hostName = "deni@melisandre";
+      system = "x86_64-linux"; # add cross building support
+
+      # this is not required so we're leaving it null
+      # since /root/.ssh/config will take care to do the right thing
+      # sshKey = "/home/deni/.ssh/nixbuilder";
+
+      protocol = "ssh";
+      maxJobs = 16;
+      speedFactor = 100;
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+    }
+  ];
+
+  nix.distributedBuilds = true;
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
+
   system.activationScripts.ldso = lib.stringAfter ["usrbinenv"] ''
     mkdir -m 0755 -p /lib64
     ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
