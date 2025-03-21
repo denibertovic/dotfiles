@@ -32,6 +32,7 @@ in
   home.packages = [
     pkgs.appimage-run
     pkgs.denv
+    pkgs.alejandra
     pkgs.browsers
     pkgs.brave
     pkgs.zathura
