@@ -1,7 +1,7 @@
 require("nvim-treesitter.configs").setup({
 	highlight = { enable = true },
-	indent = { enable = true },
-    -- managed by home-manager
+	indent = { enable = false },
+	-- managed by home-manager
 	-- ensure_installed = {
 	-- 	"bash",
 	-- 	"c",
