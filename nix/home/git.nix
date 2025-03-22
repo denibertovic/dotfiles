@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.git = {
     enable = true;
     userEmail = "deni@denibertovic.com";
@@ -51,10 +55,10 @@
       };
 
       "mergetool \"p4merge\"" = {
-         cmd = ''extmerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
-         keepTemporaries = false;
-         trustExitCode = false;
-         keepBackup = false;
+        cmd = ''extmerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
+        keepTemporaries = false;
+        trustExitCode = false;
+        keepBackup = false;
       };
     };
     signing = {

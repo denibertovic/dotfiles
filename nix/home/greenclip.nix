@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = [
     pkgs.haskellPackages.greenclip
   ];
@@ -12,22 +16,21 @@
     greenclip-daemon = {
       Unit = {
         Description = "Clipboard manager to use with rofi - Image support and blacklist";
-        Documentation = [ "https://github.com/erebe/greenclip" ];
-        After = [ "display-manager.service" ];
+        Documentation = ["https://github.com/erebe/greenclip"];
+        After = ["display-manager.service"];
       };
 
       Service = {
         Type = "simple";
         #Environment = [ "DISPLAY=:0" "XAUTHORITY=%h/.Xauthority" ];
-        ExecPreStart="${pkgs.coreutils}/bin/sleep 5";
+        ExecPreStart = "${pkgs.coreutils}/bin/sleep 5";
         ExecStart = ''${pkgs.haskellPackages.greenclip}/bin/greenclip daemon'';
         Restart = "always";
       };
 
       Install = {
-        WantedBy = [ "default.target" ];
+        WantedBy = ["default.target"];
       };
     };
   };
-
 }

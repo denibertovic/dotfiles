@@ -1,5 +1,9 @@
-{ pkgs, lib, fetchFromGitLab, rustPlatform }:
-
+{
+  pkgs,
+  lib,
+  fetchFromGitLab,
+  rustPlatform,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "rumno";
   version = "2020-08-17";
@@ -11,8 +15,8 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-mSswFbwWsNDV8KnHlG4CyhOI0bpHCYMKAVGXwCtkD5U=";
   };
 
-  nativeBuildInputs = [ pkgs.pkg-config ];
-  buildInputs = [ pkgs.dbus.dev pkgs.gtk3.dev pkgs.glib.dev ];
+  nativeBuildInputs = [pkgs.pkg-config];
+  buildInputs = [pkgs.dbus.dev pkgs.gtk3.dev pkgs.glib.dev];
 
   cargoHash = "sha256-ha9Ge4QBavfhCh6Zh8wbNWhkMWkK0EYsJO90FAEaEVM=";
 

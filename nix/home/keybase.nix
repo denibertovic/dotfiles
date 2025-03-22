@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.keybase.enable = true;
   services.kbfs.enable = true;
   # workaround: https://github.com/nix-community/home-manager/pull/5655

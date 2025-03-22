@@ -1,9 +1,13 @@
-{ config, pkgs, lib, ... }:
-let unstable = import <nixos-unstable> { config = { allowUnfree = true;  };  };
-    utils = import ./utils.nix { inherit config pkgs lib; };
-    dotfiles = "${config.home.homeDirectory}/dotfiles";
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
+  utils = import ./utils.nix {inherit config pkgs lib;};
+  dotfiles = "${config.home.homeDirectory}/dotfiles";
+in {
   home.packages = [
     pkgs.feh
     pkgs.gnome-tweaks
@@ -49,7 +53,7 @@ in
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
+      Requires = ["graphical-session-pre.target"];
     };
   };
 
@@ -63,11 +67,19 @@ in
 
   home.file = utils.linkHomeFiles {
     # set outOfStoreSymlink = true and recursive = true to recursively link all files within source
-    ".xmonad/xmonad.hs" = { source = "${dotfiles}/xmonad/xmonad.hs"; outOfStoreSymlink = true; recursive = false; };
-    ".xmonad/icons" = { source = "${dotfiles}/xmonad/icons"; outOfStoreSymlink = true; recursive = true; };
+    ".xmonad/xmonad.hs" = {
+      source = "${dotfiles}/xmonad/xmonad.hs";
+      outOfStoreSymlink = true;
+      recursive = false;
+    };
+    ".xmonad/icons" = {
+      source = "${dotfiles}/xmonad/icons";
+      outOfStoreSymlink = true;
+      recursive = true;
+    };
   };
 
-  programs.xmobar= {
+  programs.xmobar = {
     enable = true;
     package = unstable.xmobar;
     extraConfig = builtins.readFile "/home/deni/dotfiles/xmobarrc";

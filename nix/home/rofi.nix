@@ -1,6 +1,10 @@
-{ config, pkgs, lib, ... }:
 {
-    programs.rofi = {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  programs.rofi = {
     enable = true;
     font = "Hack 10";
     extraConfig = {

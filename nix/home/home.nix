@@ -1,5 +1,11 @@
-{ inputs, outputs, config, pkgs, lib, ... }:
 {
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
     outputs.homeManagerModules.mydropbox
@@ -32,7 +38,7 @@
     ./obs.nix
     ./ai.nix
     # ghc-syb-utils doesn't compile (whatever that is)
-#    ./haskell.nix
+    #    ./haskell.nix
   ];
 
   nixpkgs = {

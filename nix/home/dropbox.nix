@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # NOTES: First log into the default browser
   # Then start the service and let it download .dropbox-dist
   # Connect via browser once the tab opens

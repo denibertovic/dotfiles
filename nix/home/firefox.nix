@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.firefox = {
     enable = true;
     # this also needs services.gnome.gnome-browser-connector.enable = true
@@ -22,6 +26,5 @@
       };
       userChrome = builtins.readFile "/home/deni/dotfiles/userChrome.css";
     };
-
   };
 }

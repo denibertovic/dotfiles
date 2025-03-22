@@ -1,5 +1,9 @@
-{ pkgs, lib, fetchFromGitHub, rustPlatform }:
-
+{
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "browsers";
   # 0.5.5 (latest) requires rustc >=1.74 and NixOS 23.11 has 1.73.
@@ -13,8 +17,8 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-qLqyv5XXG7cpW+/eNCWguqemT3G2BhnolntHi2zZJ0o=";
   };
 
-  nativeBuildInputs = [ pkgs.pkg-config ] ;
-  buildInputs = [ pkgs.glib.dev pkgs.glibc.dev pkgs.cairo.dev pkgs.pango.dev pkgs.atkmm.dev pkgs.gtk3.dev ];
+  nativeBuildInputs = [pkgs.pkg-config];
+  buildInputs = [pkgs.glib.dev pkgs.glibc.dev pkgs.cairo.dev pkgs.pango.dev pkgs.atkmm.dev pkgs.gtk3.dev];
 
   cargoLock = {
     lockFile = "${src}/Cargo.lock";

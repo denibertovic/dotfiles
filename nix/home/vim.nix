@@ -1,37 +1,41 @@
-{ config, pkgs, lib, ... }:
-let black = pkgs.vimUtils.buildVimPlugin {
-      pname = "black";
-      version = "2023-02-14";
-      src = pkgs.fetchFromGitHub {
-        owner = "psf";
-        repo = "black";
-        rev = "d9b8a6407e2f46304a8d36b18e4a73d8e0613519";
-        sha256 = "sha256-UKW40vnV6dEIFhlyQmPQPF7tJUvCDE/LdqzWrP8QiCQ=";
-      };
-    };
-    ddc = pkgs.vimUtils.buildVimPlugin {
-      pname = "ddc";
-      version = "";
-      src = pkgs.fetchFromGitHub {
-        owner = "Shougo";
-        repo = "ddc.vim";
-        rev = "e9342a9b24fc7d5b08408ae5b01f15fb3d843f2f";
-        sha256 = "sha256-jmvG0VSpqKhywlPybA7c48ziVk5HFyrT99NLdC6+SaE=";
-      };
-    };
-
-    my-dpaste-fork = pkgs.vimUtils.buildVimPlugin {
-      pname = "dpaste";
-      version = "2020-03-10";
-      src = pkgs.fetchFromGitHub {
-        owner = "denibertovic";
-        repo = "Dpaste.com-Plugin";
-        rev = "95bf653e2f214fa4962ec848256789997785fa01";
-        sha256 = "sha256-0PsTz45n5+oAyAcdJQaq0W5/1DudzkxpX3PgYuO+V/c=";
-      };
-    };
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  black = pkgs.vimUtils.buildVimPlugin {
+    pname = "black";
+    version = "2023-02-14";
+    src = pkgs.fetchFromGitHub {
+      owner = "psf";
+      repo = "black";
+      rev = "d9b8a6407e2f46304a8d36b18e4a73d8e0613519";
+      sha256 = "sha256-UKW40vnV6dEIFhlyQmPQPF7tJUvCDE/LdqzWrP8QiCQ=";
+    };
+  };
+  ddc = pkgs.vimUtils.buildVimPlugin {
+    pname = "ddc";
+    version = "";
+    src = pkgs.fetchFromGitHub {
+      owner = "Shougo";
+      repo = "ddc.vim";
+      rev = "e9342a9b24fc7d5b08408ae5b01f15fb3d843f2f";
+      sha256 = "sha256-jmvG0VSpqKhywlPybA7c48ziVk5HFyrT99NLdC6+SaE=";
+    };
+  };
+
+  my-dpaste-fork = pkgs.vimUtils.buildVimPlugin {
+    pname = "dpaste";
+    version = "2020-03-10";
+    src = pkgs.fetchFromGitHub {
+      owner = "denibertovic";
+      repo = "Dpaste.com-Plugin";
+      rev = "95bf653e2f214fa4962ec848256789997785fa01";
+      sha256 = "sha256-0PsTz45n5+oAyAcdJQaq0W5/1DudzkxpX3PgYuO+V/c=";
+    };
+  };
+in {
   programs.vim = {
     enable = true;
     defaultEditor = true;

@@ -1,12 +1,16 @@
-{ config, pkgs, lib, ... }:
-let mc-onedark-src = pkgs.fetchFromGitHub {
-        owner = "DeadNews";
-        repo = "mc-onedark";
-        rev = "07e8704d38fe792c285c8c23c837b6e1872a7015";
-        sha256 = "sha256-evkNFgShxbVaoihzWkSYmHHOKdA9GF643uPNR9y6uWY=";
-      };
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  mc-onedark-src = pkgs.fetchFromGitHub {
+    owner = "DeadNews";
+    repo = "mc-onedark";
+    rev = "07e8704d38fe792c285c8c23c837b6e1872a7015";
+    sha256 = "sha256-evkNFgShxbVaoihzWkSYmHHOKdA9GF643uPNR9y6uWY=";
+  };
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "deni";
@@ -76,13 +80,14 @@ in
     pkgs.wireshark
     pkgs.unzip
 
-    (pkgs.python3.withPackages (ps: with ps; [
-      pip
-      virtualenv
-      pynvim
-      virtualenvwrapper
-      ipython
-    ]))
+    (pkgs.python3.withPackages (ps:
+      with ps; [
+        pip
+        virtualenv
+        pynvim
+        virtualenvwrapper
+        ipython
+      ]))
 
     pkgs.python3Packages.subliminal
 
@@ -137,7 +142,6 @@ in
     (pkgs.writeShellScriptBin "zoom-scaled" ''
       exec env QT_AUTO_SCREEN_SCALE_FACTOR=0 zoom-us
     '')
-
   ];
 
   home.sessionVariables = {
@@ -145,13 +149,13 @@ in
   };
 
   xdg.desktopEntries = {
-   browsers = {
+    browsers = {
       name = "Browsers";
       genericName = "Web Browser Chooser";
       exec = "${pkgs.browsers}/bin/browsers %u";
       terminal = false;
-      categories = [ "Application" "Network" "WebBrowser" ];
-      mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/vnd.mozilla.xul+xml" "application/rss+xml" "application/rdf+xml" "x-scheme-handler/http" "x-scheme-handler/https" ];
+      categories = ["Application" "Network" "WebBrowser"];
+      mimeType = ["text/html" "text/xml" "application/xhtml+xml" "application/xml" "application/vnd.mozilla.xul+xml" "application/rss+xml" "application/rdf+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
     };
   };
 

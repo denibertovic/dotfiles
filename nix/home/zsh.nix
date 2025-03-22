@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.dircolors = {
     enable = true;
     enableZshIntegration = true;
@@ -21,12 +24,12 @@
     enableCompletion = true;
     autosuggestion.enable = false;
     completionInit = ''
-    autoload -Uz compinit
-    if [[ -n ''${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-      compinit
-    else
-      compinit -C
-    fi
+      autoload -Uz compinit
+      if [[ -n ''${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+        compinit
+      else
+        compinit -C
+      fi
     '';
     history = {
       append = true;
@@ -45,89 +48,87 @@
       # ];
     };
     shellAliases = {
-        # TEMP ALIASES
-        mtorrents="/home/deni/dotfiles/scripts/mount_torrents.sh";
-        mbackups="/home/deni/dotfiles/scripts/mount_backups.sh";
-        utorrents="umount /media/torrents";
-        ubackups="umount /media/backups";
+      # TEMP ALIASES
+      mtorrents = "/home/deni/dotfiles/scripts/mount_torrents.sh";
+      mbackups = "/home/deni/dotfiles/scripts/mount_backups.sh";
+      utorrents = "umount /media/torrents";
+      ubackups = "umount /media/backups";
 
-        # kube
-        check-kubectl-version="echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)";
-        fetch-latest-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl";
-        k="kubectl --namespace=\${KUBECTL_NAMESPACE:-default}";
-        h="helm --namespace=\${KUBECTL_NAMESPACE:-default}";
+      # kube
+      check-kubectl-version = "echo $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)";
+      fetch-latest-kubectl = "curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl";
+      k = "kubectl --namespace=\${KUBECTL_NAMESPACE:-default}";
+      h = "helm --namespace=\${KUBECTL_NAMESPACE:-default}";
 
-        # Force gpg2
-        # gpg="gpg2";
+      # Force gpg2
+      # gpg="gpg2";
 
-        # Keymaps
-        # Xmonad map is for switching Caps Lock for Control
-        setkben="setxkbmap us";
-        setkbhr="setxkbmap hr";
+      # Keymaps
+      # Xmonad map is for switching Caps Lock for Control
+      setkben = "setxkbmap us";
+      setkbhr = "setxkbmap hr";
 
-        # docker related aliases
-        #
-        c="docker-compose";
-        m="docker-machine";
-        # Delete all stoped/exited containers except data containers which will have the naming scheme
-        # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
-        # dashes or underscores
-        # TODO: figure out how to use labels for this (need inverted query)
-        dclean="docker ps -a -f status=exited | grep -vi \"datacontainer\" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v";
-        # remove all images tagged as <none>
-        dcleanimages="docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi";
-        dcleanvolumes="docker volume ls -q | xargs docker volume rm";
-        dstoplast="docker ps -l -q | xargs docker stop -t 1";
-        dps="docker ps";
-        di="docker images | awk \"{ print \\$1 }\" | tail -n +2 | sort | uniq";
+      # docker related aliases
+      #
+      c = "docker-compose";
+      m = "docker-machine";
+      # Delete all stoped/exited containers except data containers which will have the naming scheme
+      # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
+      # dashes or underscores
+      # TODO: figure out how to use labels for this (need inverted query)
+      dclean = "docker ps -a -f status=exited | grep -vi \"datacontainer\" | tail -n +2 | cut -c1-12 | xargs --no-run-if-empty docker rm -v";
+      # remove all images tagged as <none>
+      dcleanimages = "docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi";
+      dcleanvolumes = "docker volume ls -q | xargs docker volume rm";
+      dstoplast = "docker ps -l -q | xargs docker stop -t 1";
+      dps = "docker ps";
+      di = "docker images | awk \"{ print \\$1 }\" | tail -n +2 | sort | uniq";
 
-        # development related aliases
-        p="python -c \"import IPython; IPython.terminal.ipapp.launch_new_instance()\"";
-        # alias debug="python -m pdb manage.py runserver"
-        # alias idebug="python -m ipdb manage.py runserver --pm"
+      # development related aliases
+      p = "python -c \"import IPython; IPython.terminal.ipapp.launch_new_instance()\"";
+      # alias debug="python -m pdb manage.py runserver"
+      # alias idebug="python -m ipdb manage.py runserver --pm"
 
-        # other aliases
-        sudo="sudo ";
-        dk="cd /home/deni/work";
-        ll="ls -l";
-        lln="ls -l --color=never";
-        lls="ls -l | less";
-        la="ls -la";
-        noack="ack --ignore-file=ext:json --ignore-dir=.devenv --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql";
-        duh="du -h --max-depth=1 | sort -h";
-        ctl="systemctl";
-        t="/home/deni/.local/bin/todo";
-        t-check-tags="grep -E -o \"@.*\" ~/Dropbox/todo/todo.txt  | sort | uniq";
-        get-subtitles="op run -- subliminal --opensubtitles $OPENSUBTITLES_USERNAME $OPENSUBTITLES_PASSWORD download -l en .";
-        copy-path="pwd | tr -d \"\n\" | xsel -b";
-        asciicast2gif="docker run -v \$PWD:/data asciinema/asciicast2gif";
-        gci="google-chrome-stable --profile=\"Default\" --incognito";
-        pdf="zathura";
+      # other aliases
+      sudo = "sudo ";
+      dk = "cd /home/deni/work";
+      ll = "ls -l";
+      lln = "ls -l --color=never";
+      lls = "ls -l | less";
+      la = "ls -la";
+      noack = "ack --ignore-file=ext:json --ignore-dir=.devenv --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql";
+      duh = "du -h --max-depth=1 | sort -h";
+      ctl = "systemctl";
+      t = "/home/deni/.local/bin/todo";
+      t-check-tags = "grep -E -o \"@.*\" ~/Dropbox/todo/todo.txt  | sort | uniq";
+      get-subtitles = "op run -- subliminal --opensubtitles $OPENSUBTITLES_USERNAME $OPENSUBTITLES_PASSWORD download -l en .";
+      copy-path = "pwd | tr -d \"\n\" | xsel -b";
+      asciicast2gif = "docker run -v \$PWD:/data asciinema/asciicast2gif";
+      gci = "google-chrome-stable --profile=\"Default\" --incognito";
+      pdf = "zathura";
 
-        # tmux
-        tmux="tmux -2";
+      # tmux
+      tmux = "tmux -2";
 
-        # eid
-        eid-client="/usr/lib/akd/eidmiddleware/Client";
-        eid-signer="/usr/lib/akd/eidmiddleware/Signer";
+      # eid
+      eid-client = "/usr/lib/akd/eidmiddleware/Client";
+      eid-signer = "/usr/lib/akd/eidmiddleware/Signer";
 
-        # haskell
-        hoogle="hoogle --count=100";
+      # haskell
+      hoogle = "hoogle --count=100";
 
-        # speeds up MC
-        mc="mc --nosubshell";
+      # speeds up MC
+      mc = "mc --nosubshell";
 
-        # pdf printing
-        print-pdf="lpr -o media=a4 -P HomeOffice";
-        # just the first page
-        print-pdf1="lpr -o page-ranges=1 -o media=a4 -P HomeOffice";
-      };
+      # pdf printing
+      print-pdf = "lpr -o media=a4 -P HomeOffice";
+      # just the first page
+      print-pdf1 = "lpr -o page-ranges=1 -o media=a4 -P HomeOffice";
+    };
     initExtraBeforeCompInit = ''
       # This prevents compaudit from running inside Oh My Zsh.
       zstyle ':omz:plugins:compinit' skip true
     '';
-
-
 
     initExtra = ''
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh

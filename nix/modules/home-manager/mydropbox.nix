@@ -1,14 +1,14 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.services.mydropbox;
   dropboxCmd = "${pkgs.dropbox-cli}/bin/dropbox";
-
 in {
-  meta.maintainers = [ maintainers.eyjhb ];
+  meta.maintainers = [maintainers.eyjhb];
 
   options = {
     services.mydropbox = {
@@ -31,12 +31,12 @@ in {
         lib.platforms.linux)
     ];
 
-    home.packages = [ pkgs.dropbox-cli ];
+    home.packages = [pkgs.dropbox-cli];
 
     systemd.user.services.dropbox = {
-      Unit = { Description = "dropbox"; };
+      Unit = {Description = "dropbox";};
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {WantedBy = ["graphical-session.target"];};
 
       Service = {
         Environment = [
@@ -47,11 +47,10 @@ in {
         ProtectSystem = "full";
         Nice = 10;
 
-        ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox" ;
+        ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox";
         ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
         ExecStop = "${dropboxCmd} stop";
         KillMode = "control-group";
-
       };
     };
   };

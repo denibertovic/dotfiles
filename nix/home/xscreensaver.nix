@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ...  }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xscreensaver = {
     enable = true;
     # NOTE: We just link in the hand crafted Xresources

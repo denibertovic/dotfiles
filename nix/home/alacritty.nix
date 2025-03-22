@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -51,8 +55,17 @@
       # };
       keyboard = {
         bindings = [
-          { key = "Space"; mods = "Control"; mode = "Vi"; action = "ScrollToBottom"; }
-          { key = "Space"; mods = "Control";              action = "ToggleViMode"; }
+          {
+            key = "Space";
+            mods = "Control";
+            mode = "Vi";
+            action = "ScrollToBottom";
+          }
+          {
+            key = "Space";
+            mods = "Control";
+            action = "ToggleViMode";
+          }
         ];
       };
     };

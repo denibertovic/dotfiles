@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.thunderbird = {
     enable = true;
     profiles.default = {
@@ -8,6 +12,5 @@
         "layout.css.devPixelsPerPx" = "0.7";
       };
     };
-
   };
 }

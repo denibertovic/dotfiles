@@ -1,7 +1,11 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = [
-#    pkgs.haskellPackages.stack2nix
+    #    pkgs.haskellPackages.stack2nix
     pkgs.haskellPackages.hoogle
     pkgs.haskellPackages.hscolour
     pkgs.haskellPackages.ghc-mod

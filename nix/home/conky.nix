@@ -1,9 +1,12 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   utils = import ./utils.nix {inherit config pkgs lib;};
   dotfiles = "${config.home.homeDirectory}/dotfiles";
-in
-{
+in {
   home.file = utils.linkHomeFiles {
     # set outOfStoreSymlink = true and recursive = true to recursively link all files within source
     ".config/conky/conky.lua" = {
