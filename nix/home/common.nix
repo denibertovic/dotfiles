@@ -84,7 +84,7 @@ in
       ipython
     ]))
 
-    pkgs.unstable.python3Packages.subliminal
+    pkgs.python3Packages.subliminal
 
     pkgs.borgbackup
     pkgs.hddtemp
