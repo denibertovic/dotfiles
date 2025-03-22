@@ -77,6 +77,19 @@ in {
       speedFactor = 100;
       supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
     }
+    {
+      hostName = "deni@daenerys";
+      system = "x86_64-linux"; # add cross building support
+
+      # this is not required so we're leaving it null
+      # since /root/.ssh/config will take care to do the right thing
+      # sshKey = "/home/deni/.ssh/nixbuilder";
+
+      protocol = "ssh-ng";
+      maxJobs = 12;
+      speedFactor = 90;
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+    }
   ];
 
   nix.distributedBuilds = true;
