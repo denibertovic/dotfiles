@@ -72,7 +72,7 @@ in {
       # since /root/.ssh/config will take care to do the right thing
       # sshKey = "/home/deni/.ssh/nixbuilder";
 
-      protocol = "ssh";
+      protocol = "ssh-ng";
       maxJobs = 16;
       speedFactor = 100;
       supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
