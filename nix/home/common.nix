@@ -47,7 +47,7 @@ in {
     pkgs.obsidian
     pkgs.deploy-rs
     pkgs.unstable.llm
-    pkgs.devenv
+    pkgs.unstable.devenv
     pkgs.qutebrowser
     pkgs.acpi
     pkgs.jetbrains-mono
