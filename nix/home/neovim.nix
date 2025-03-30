@@ -20,6 +20,7 @@ in {
   programs.neovim = {
     enable = true;
     vimAlias = true;
+    defaultEditor = true;
     package = pkgs.neovim-unwrapped;
     plugins = with pkgs.vimPlugins; [
       # coding and lsp
