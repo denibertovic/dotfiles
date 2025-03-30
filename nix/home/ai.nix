@@ -6,6 +6,7 @@
 }: {
   home.packages = [
     pkgs.unstable.code-cursor
+    pkgs.unstable.aider-chat
   ];
 
   programs.zed-editor = {
