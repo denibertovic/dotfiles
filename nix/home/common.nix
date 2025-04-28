@@ -37,6 +37,7 @@ in {
     pkgs.appimage-run
     pkgs.denv
     pkgs.alejandra
+    pkgs.unstable.vaultenv
     pkgs.browsers
     pkgs.brave
     pkgs.zathura
