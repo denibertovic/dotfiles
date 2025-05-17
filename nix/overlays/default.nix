@@ -26,11 +26,11 @@
 
     # NOTE: workaround for HP returning a 403 when downloading
     # the hplip plugin via curl (headless). Downloaded manually
-    # for now.
-    hplipWithPlugin = prev.hplip.overrideAttrs (oldAttrs: {
-      withPlugin = true;
-      plugin = ../hotfix/hp/hplip-3.24.4-plugin.run;
-    });
+    # for now. KEEPING THIS FOR IF IT HAPPENS AGAIN.
+    # hplipWithPlugin = prev.hplip.overrideAttrs (oldAttrs: {
+    #   withPlugin = true;
+    #   plugin = ../hotfix/hp/hplip-3.24.4-plugin.run;
+    # });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
