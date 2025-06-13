@@ -11,10 +11,12 @@
     profiles.default = {
       # this is the bare minimum to get me going
       # the rest can be synced from firefox sync
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        vimium
-        tree-style-tab
-      ];
+      extensions = {
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          vimium
+          tree-style-tab
+        ];
+      };
       isDefault = true;
       settings = {
         "browser.startup.homepage" = "about:blank";

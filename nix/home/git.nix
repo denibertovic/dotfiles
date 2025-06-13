@@ -63,7 +63,7 @@
     };
     signing = {
       key = "0x9E5A03FE728A9E5F";
-      gpgPath = "${pkgs.gnupg}/bin/gpg2";
+      signer = "${pkgs.gnupg}/bin/gpg2";
       signByDefault = true;
     };
   };

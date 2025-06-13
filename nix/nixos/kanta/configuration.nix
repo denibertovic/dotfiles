@@ -284,7 +284,23 @@ in {
       inconsolata # monospaced
       libertine
       mononoki
-      nerdfonts
+      nerd-fonts.ubuntu
+      nerd-fonts.ubuntu-sans
+      nerd-fonts.ubuntu-mono
+      nerd-fonts.terminess-ttf
+      nerd-fonts.symbols-only
+      nerd-fonts.roboto-mono
+      nerd-fonts.monoid
+      nerd-fonts.monaspace
+      nerd-fonts.liberation
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.inconsolata
+      nerd-fonts.hack
+      nerd-fonts.fira-mono
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.dejavu-sans-mono
       open-dyslexic
       overpass
       oxygenfonts

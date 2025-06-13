@@ -125,95 +125,97 @@
       # just the first page
       print-pdf1 = "lpr -o page-ranges=1 -o media=a4 -P HomeOffice";
     };
-    initExtraBeforeCompInit = ''
-      # This prevents compaudit from running inside Oh My Zsh.
-      zstyle ':omz:plugins:compinit' skip true
-    '';
+    initContent = let
+      earlyInitContent = lib.mkOrder 550 ''
+        # This prevents compaudit from running inside Oh My Zsh.
+        zstyle ':omz:plugins:compinit' skip true
+      '';
+      normalInitContent = lib.mkOrder 1000 ''
+        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+        unsetopt correct_all
+        # Since the default initialization mode, this plugin will overwrite the previous key
+        # bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.)
+        # to fail. See here: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+        # Define an init function and append to zvm_after_init_commands
+        # useful for documenting steps
+        function my_init() {
+            bindkey "^[[A" history-beginning-search-backward
+            bindkey "^[[B" history-beginning-search-forward
+            autoload -U history-search-end
+        }
+        zvm_after_init_commands+=(my_init)
 
-    initExtra = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      unsetopt correct_all
-      # Since the default initialization mode, this plugin will overwrite the previous key
-      # bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.)
-      # to fail. See here: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
-      # Define an init function and append to zvm_after_init_commands
-      # useful for documenting steps
-      function my_init() {
-          bindkey "^[[A" history-beginning-search-backward
-          bindkey "^[[B" history-beginning-search-forward
-          autoload -U history-search-end
-      }
-      zvm_after_init_commands+=(my_init)
+        WORKON_HOME=/home/deni/.virtualenvs
+        DISABLE_AUTO_UPDATE="true"
+        DISABLE_CORRECTION="true"
+        export PATH="/home/deni/.local/bin:''${PATH}"
 
-      WORKON_HOME=/home/deni/.virtualenvs
-      DISABLE_AUTO_UPDATE="true"
-      DISABLE_CORRECTION="true"
-      export PATH="/home/deni/.local/bin:''${PATH}"
+        # 10ms for key sequences
+        # https://www.johnhawthorn.com/2012/09/vi-escape-delays/
+        export KEYTIMEOUT=1
 
-      # 10ms for key sequences
-      # https://www.johnhawthorn.com/2012/09/vi-escape-delays/
-      export KEYTIMEOUT=1
+        function note () {
+            if [[ $# -eq 1  ]]; then
+                echo "Logging: `fc -ln -1`"
+                echo `fc -ln -1` >> "$HOME/Dropbox/notes/$1-`date +"%Y-%m-%d"`.md" ;
+            else
+                echo "Logging: `fc -ln -1`"
+                echo `fc -ln -1` >> "$HOME/Dropbox/notes/note-`date +"%Y-%m-%d"`.md" ;
+            fi
+        }
 
-      function note () {
-          if [[ $# -eq 1  ]]; then
-              echo "Logging: `fc -ln -1`"
-              echo `fc -ln -1` >> "$HOME/Dropbox/notes/$1-`date +"%Y-%m-%d"`.md" ;
-          else
-              echo "Logging: `fc -ln -1`"
-              echo `fc -ln -1` >> "$HOME/Dropbox/notes/note-`date +"%Y-%m-%d"`.md" ;
-          fi
-      }
+        function kubectlgetall {
+          for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+            echo "Resource:" $i
+            kubectl -n ''${KUBECTL_NAMESPACE:-default} get $i
+          done
+        };
 
-      function kubectlgetall {
-        for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-          echo "Resource:" $i
-          kubectl -n ''${KUBECTL_NAMESPACE:-default} get $i
-        done
-      };
+        print-all-pdfs() {
+          for pdf in *.[Pp][Dd][Ff]; do
+            if [[ ! -f "$pdf" ]]; then
+              echo "No PDF files found in the current directory."
+              return
+            fi
 
-      print-all-pdfs() {
-        for pdf in *.[Pp][Dd][Ff]; do
-          if [[ ! -f "$pdf" ]]; then
-            echo "No PDF files found in the current directory."
-            return
-          fi
+            num_pages=$(pdftk "$pdf" dump_data | grep NumberOfPages | awk '{print $2}')
+            if [[ -z "$num_pages" ]]; then
+              echo "Could not determine number of pages for $pdf, skipping."
+              continue
+            fi
 
-          num_pages=$(pdftk "$pdf" dump_data | grep NumberOfPages | awk '{print $2}')
-          if [[ -z "$num_pages" ]]; then
-            echo "Could not determine number of pages for $pdf, skipping."
-            continue
-          fi
-
-          if (( num_pages > 1 )); then
-            echo "$pdf has $num_pages pages. Do you want to print all pages? (y/n)"
-            read -r answer
-            if [[ "$answer" != "y" ]]; then
-              echo "Enter the page numbers you want to print (patterns: 1 | 1-4 | 1-4,7,9-12):"
-              read -r pages
-              echo "Printing: $pdf"
-              lpr -o media=a4 -o page-ranges=$pages -P HomeOffice "$pdf"
+            if (( num_pages > 1 )); then
+              echo "$pdf has $num_pages pages. Do you want to print all pages? (y/n)"
+              read -r answer
+              if [[ "$answer" != "y" ]]; then
+                echo "Enter the page numbers you want to print (patterns: 1 | 1-4 | 1-4,7,9-12):"
+                read -r pages
+                echo "Printing: $pdf"
+                lpr -o media=a4 -o page-ranges=$pages -P HomeOffice "$pdf"
+              else
+                echo "Printing: $pdf"
+                lpr -o media=a4 -P HomeOffice "$pdf"
+              fi
             else
               echo "Printing: $pdf"
               lpr -o media=a4 -P HomeOffice "$pdf"
             fi
-          else
-            echo "Printing: $pdf"
-            lpr -o media=a4 -P HomeOffice "$pdf"
-          fi
-          sleep 2
-        done
-      };
+            sleep 2
+          done
+        };
 
-      # use denv
-      eval "$(denv hook ZSH)"
+        # use denv
+        eval "$(denv hook ZSH)"
 
-      # use direnv
-      eval "$(direnv hook zsh)"
+        # use direnv
+        eval "$(direnv hook zsh)"
 
-      # aws-vault GetSessionToken duration
-      export AWS_SESSION_TOKEN_TTL=12h
-      export AWS_CHAINED_SESSION_TOKEN_TTL=12h
-      export AWS_VAULT_PROMPT=terminal
-    '';
+        # aws-vault GetSessionToken duration
+        export AWS_SESSION_TOKEN_TTL=12h
+        export AWS_CHAINED_SESSION_TOKEN_TTL=12h
+        export AWS_VAULT_PROMPT=terminal
+      '';
+    in
+      lib.mkMerge [earlyInitContent normalInitContent];
   };
 }

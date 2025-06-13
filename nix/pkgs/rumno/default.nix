@@ -18,7 +18,7 @@ rustPlatform.buildRustPackage rec {
   nativeBuildInputs = [pkgs.pkg-config];
   buildInputs = [pkgs.dbus.dev pkgs.gtk3.dev pkgs.glib.dev];
 
-  cargoHash = "sha256-ha9Ge4QBavfhCh6Zh8wbNWhkMWkK0EYsJO90FAEaEVM=";
+  cargoHash = "sha256-0V7Lgf+QCYY9P3awiQFa0foGfhRGt9/ncAqLAW9GfPs=";
 
   cargoPatches = [
     # a patch file to add/update Cargo.lock in the source code
