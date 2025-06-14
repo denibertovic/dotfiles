@@ -380,6 +380,8 @@ in {
     enable = true;
   };
 
+  security.pam.services.xscreensaver.enable = true;
+
   programs._1password = {
     enable = true;
   };
