@@ -24,6 +24,11 @@ in {
     pkgs.dmenu
   ];
 
+  services.snixembed = {
+    enable = true;
+    beforeUnits = ["trayer.service" "dropbox.service"];
+  };
+
   services.trayer = {
     enable = true;
     settings = {
