@@ -34,6 +34,7 @@ in {
   ];
 
   home.packages = [
+    pkgs.age
     pkgs.appimage-run
     pkgs.denv
     pkgs.alejandra
