@@ -138,6 +138,7 @@ in {
     pkgs.unstable.signal-desktop
     pkgs.chromium
     pkgs.unstable.slack
+    pkgs.rustdesk
     (pkgs.writeShellScriptBin "slack-scaled" ''
       exec slack --force-device-scale-factor=1.0
     '')
