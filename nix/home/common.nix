@@ -37,6 +37,7 @@ in {
     pkgs.age
     pkgs.appimage-run
     pkgs.denv
+    pkgs.gh
     pkgs.alejandra
     pkgs.unstable.vaultenv
     pkgs.browsers
