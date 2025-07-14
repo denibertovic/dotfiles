@@ -72,6 +72,7 @@
       #
       c = "docker-compose";
       m = "docker-machine";
+      dev = "devenv";
       # Delete all stoped/exited containers except data containers which will have the naming scheme
       # someNameData or someNameDataContainer - We have to use camel case because docker-compose.yml doesn't allow for
       # dashes or underscores
