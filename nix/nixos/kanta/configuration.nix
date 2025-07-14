@@ -212,6 +212,11 @@ in {
     "8bd5124fd6213413" # home
   ];
 
+  # tailscale
+  services.tailscale = {
+    enable = true;
+  };
+
   services.pcscd.enable = true;
 
   # VM
@@ -312,7 +317,6 @@ in {
       ubuntu_font_family # Ubuntu fonts
       unifont # some international languages
       jetbrains-mono
-      symbola
       hack-font
       iosevka
       iosevka-comfy.comfy
@@ -342,9 +346,9 @@ in {
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
-    extraPackages = haskellPackages: [
-      pkgs.unstable.haskellPackages.xmobar
-    ];
+    # extraPackages = haskellPackages: [
+    #   pkgs.unstable.haskellPackages.xmobar
+    # ];
   };
 
   services.xserver.displayManager.sessionCommands = ''
@@ -465,8 +469,6 @@ in {
       CPU_HWP_DYN_BOOST_ON_AC = 1;
     };
   };
-
-  services.tailscale.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

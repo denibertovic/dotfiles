@@ -6,7 +6,9 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    # change back to release-25.05 when this is fixed: https://github.com/nix-community/home-manager/pull/7472
+    # or reverted
+    home-manager.url = "github:nix-community/home-manager/c26266790678863cce8e7460fdbf0d80991b1906";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nur = {
