@@ -35,6 +35,8 @@ in {
 
   home.packages = [
     pkgs.age
+    pkgs.screen
+    pkgs.tmux
     pkgs.appimage-run
     pkgs.denv
     pkgs.gh
