@@ -25,7 +25,7 @@ require("conform").setup({
 	},
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "black" },
+		python = { "ruff" },
 		rust = { "rustfmt" },
 		-- Conform will run the first available formatter
 		javascript = { "prettierd", "prettier", stop_after_first = true },
