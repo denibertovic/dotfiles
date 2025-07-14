@@ -4,6 +4,7 @@
   lib,
   ...
 }: {
+  home.packages = [pkgs.git-filter-repo];
   programs.git = {
     enable = true;
     userEmail = "deni@denibertovic.com";
