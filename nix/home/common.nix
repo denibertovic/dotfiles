@@ -37,6 +37,7 @@ in {
     pkgs.age
     pkgs.screen
     pkgs.tmux
+    pkgs.devenv
     pkgs.appimage-run
     pkgs.denv
     pkgs.gh
@@ -52,7 +53,6 @@ in {
     pkgs.obsidian
     pkgs.deploy-rs
     pkgs.unstable.llm
-    pkgs.unstable.devenv
     pkgs.qutebrowser
     pkgs.acpi
     pkgs.jetbrains-mono

@@ -24,6 +24,8 @@
       buildInputs = oldAttrs.buildInputs ++ [prev.pkgs.gperf];
     });
 
+    devenv = inputs.devenv.packages.${final.system}.default;
+
     # NOTE: workaround for HP returning a 403 when downloading
     # the hplip plugin via curl (headless). Downloaded manually
     # for now. KEEPING THIS FOR IF IT HAPPENS AGAIN.

@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    devenv.url = "github:cachix/devenv/main";
+
     # Home manager
     # change back to release-25.05 when this is fixed: https://github.com/nix-community/home-manager/pull/7472
     # or reverted
