@@ -60,7 +60,7 @@ in {
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 14d";
   };
 
   nix.buildMachines = [
@@ -527,11 +527,11 @@ in {
               # fade-out scheme for snapshots starting with `zrepl_`
               # - keep all created in the last hour
               # - then destroy snapshots such that we keep 24 each 1 hour apart
-              # - then destroy snapshots such that we keep 14 each 1 day apart
+              # - then destroy snapshots such that we keep 7 each 1 day apart
               # - then destroy all older snapshots
               {
                 type = "grid";
-                grid = "1x1h(keep=all) | 24x1h | 14x1d";
+                grid = "1x1h(keep=all) | 24x1h | 7x1d";
                 regex = "^zrepl_.*";
               }
               {

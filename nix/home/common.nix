@@ -192,4 +192,10 @@ in {
     source = "${mc-onedark-src}/skins";
     recursive = true;
   };
+
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    options = "--delete-older-than 14d";
+  }
 }
