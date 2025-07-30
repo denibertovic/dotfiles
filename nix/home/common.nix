@@ -41,6 +41,7 @@ in {
     pkgs.appimage-run
     pkgs.denv
     pkgs.gh
+    pkgs.moar
     pkgs.alejandra
     pkgs.unstable.vaultenv
     pkgs.browsers
@@ -197,5 +198,5 @@ in {
     automatic = true;
     frequency = "weekly";
     options = "--delete-older-than 14d";
-  }
+  };
 }
