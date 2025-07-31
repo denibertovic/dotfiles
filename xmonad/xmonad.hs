@@ -833,6 +833,8 @@ myFadeHook =
     , (className =? "URxvt") <&&> isUnfocused --> opacity 0.9
     , (className =? "Alacritty") --> opacity 0.9
     , (className =? "Alacritty") <&&> isUnfocused --> opacity 0.7
+    , (className =? "com.mitchellh.ghostty") --> opacity 0.8
+    , (className =? "com.mitchellh.ghostty") <&&> isUnfocused --> opacity 0.5
     , fmap ("Google" `isPrefixOf`) className --> opaque
     , isDialog --> opaque
     --, isUnfocused --> opacity 0.55

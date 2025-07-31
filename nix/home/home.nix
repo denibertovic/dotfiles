@@ -37,6 +37,7 @@
     ./keyboard.nix
     ./obs.nix
     ./ai.nix
+    ./ghostty.nix
     # ghc-syb-utils doesn't compile (whatever that is)
     #    ./haskell.nix
   ];

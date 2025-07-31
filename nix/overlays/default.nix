@@ -25,6 +25,7 @@
     });
 
     devenv = inputs.devenv.packages.${final.system}.default;
+    ghostty = inputs.ghostty.packages.${final.system}.default;
 
     # NOTE: workaround for HP returning a 403 when downloading
     # the hplip plugin via curl (headless). Downloaded manually
