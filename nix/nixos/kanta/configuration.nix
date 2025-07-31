@@ -353,12 +353,22 @@ in {
 
   services.xserver.displayManager.sessionCommands = ''
     xsetroot -cursor_name left_ptr &
-    ${pkgs.picom}/bin/picom --backend xrender &
     ${pkgs.xorg.xinput}/bin/xinput disable 'Synaptics TM3471-010'
     eval $(gnome-keyring-daemon --start) &
     ${pkgs.feh}/bin/feh --bg-scale /home/deni/walls/hack5.png &
     #synclient TouchpadOff=1 &
   '';
+
+  services.picom = {
+    enable = true;
+    backend = "glx";
+    vSync = true;
+    fade = true;
+    settings = {
+      unredir-if-possible = false; # let full-screen apps bypass the compositor
+      use-damage = true;
+    };
+  };
 
   services.blueman.enable = true;
 
