@@ -37,6 +37,7 @@ in {
     pkgs.age
     pkgs.screen
     pkgs.tmux
+    pkgs.simplescreenrecorder
     pkgs.devenv
     pkgs.appimage-run
     pkgs.denv
