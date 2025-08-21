@@ -121,6 +121,7 @@ in {
     pkgs.jq
     pkgs.terraform
     pkgs.awscli2
+    pkgs.azure-cli
     pkgs.kubernetes-helm
     pkgs.kubernetes-helmPlugins.helm-diff
     pkgs.helmfile
