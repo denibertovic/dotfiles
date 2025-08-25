@@ -4,7 +4,6 @@
   lib,
   ...
 }: let
-  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
   utils = import ./utils.nix {inherit config pkgs lib;};
   dotfiles = "${config.home.homeDirectory}/dotfiles";
 in {
@@ -86,7 +85,7 @@ in {
 
   programs.xmobar = {
     enable = true;
-    package = unstable.xmobar;
+    package = pkgs.unstable.xmobar;
     extraConfig = builtins.readFile "/home/deni/dotfiles/xmobarrc";
   };
 
