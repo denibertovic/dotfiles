@@ -49,18 +49,6 @@
       init = {
         defaultBranch = "main";
       };
-
-      merge = {
-        keepBackup = false;
-        tool = "p4merge";
-      };
-
-      "mergetool \"p4merge\"" = {
-        cmd = ''extmerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
-        keepTemporaries = false;
-        trustExitCode = false;
-        keepBackup = false;
-      };
     };
     signing = {
       key = "0x9E5A03FE728A9E5F";
