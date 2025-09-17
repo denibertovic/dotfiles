@@ -372,7 +372,7 @@ in {
     enable = true;
     backend = "glx";
     vSync = true;
-    fade = true;
+    fade = false;
     settings = {
       unredir-if-possible = false; # let full-screen apps bypass the compositor
       use-damage = true;
