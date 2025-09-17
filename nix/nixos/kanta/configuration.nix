@@ -141,6 +141,15 @@ in {
   # deprecated
   # hardware.video.hidpi.enable = true;
 
+  # set trackpoint speed and sensitivity
+  hardware.trackpoint = {
+    enable = true;
+    emulateWheel = true;
+    speed = 255;
+    sensitivity = 255;
+    device = "TPPS/2 Elan TrackPoint";
+  };
+
   # NETWORKING
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
