@@ -449,6 +449,13 @@ in {
 
   environment.localBinInPath = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    gmp
+  ];
+
   # For this to work I had to log into dropbox.com in the browser first.
   # Then do "dropbox start -i" from the terminal. This installed the daemon and
   # prompted me in the browser to connect my device to my account.
