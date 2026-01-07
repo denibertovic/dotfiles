@@ -381,6 +381,14 @@ in {
 
   services.blueman.enable = true;
 
+  services.pipewire.extraConfig.pipewire = {
+    "99-disable-bell" = {
+      "context.properties" = {
+        "module.x11.bell" = false;
+      };
+    };
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [pkgs.hplipWithPlugin];
