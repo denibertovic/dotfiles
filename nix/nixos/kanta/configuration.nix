@@ -379,6 +379,10 @@ in {
     };
   };
 
+  programs.hyprland = {
+    enable = true;
+  };
+
   services.blueman.enable = true;
 
   services.pipewire.extraConfig.pipewire = {
@@ -438,6 +442,7 @@ in {
     pmutils
     nfs-utils
     manix
+    kitty
 
     # these are required by the dropbox one way or another
     # it's mostly warnings but the thing barely works so better
