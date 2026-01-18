@@ -5,8 +5,9 @@
   ...
 }: {
   home.packages = [
-    pkgs.unstable.code-cursor
-    pkgs.unstable.aider-chat
+    pkgs.unstable.claude-code
+    pkgs.unstable.terraform-mcp-server
+    pkgs.unstable.playwright-mcp
   ];
 
   programs.zed-editor = {
