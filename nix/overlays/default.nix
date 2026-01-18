@@ -43,6 +43,10 @@
       system = final.system;
       config.allowUnfree = true;
     };
+    most-unstable = import inputs.most-unstable {
+      system = final.system;
+      config.allowUnfree = true;
+    };
   };
 
   nur = inputs.nur.overlays.default;
