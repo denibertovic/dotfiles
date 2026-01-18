@@ -8,13 +8,13 @@ rustPlatform.buildRustPackage rec {
   pname = "browsers";
   # 0.5.5 (latest) requires rustc >=1.74 and NixOS 23.11 has 1.73.
   # I couldn't figure out quickly how to override this
-  version = "0.6.0";
+  version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "Browsers-software";
     repo = "browsers";
-    rev = "0.6.0";
-    hash = "sha256-qLqyv5XXG7cpW+/eNCWguqemT3G2BhnolntHi2zZJ0o=";
+    rev = "0.7.0";
+    hash = "sha256-s03BEscaYdSitLtlqbX/tgGSLRHuXc9Ht+3RMCUIdY8=";
   };
 
   nativeBuildInputs = [pkgs.pkg-config];
