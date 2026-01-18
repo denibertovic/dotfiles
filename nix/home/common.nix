@@ -99,6 +99,7 @@ in {
     pkgs.python3Packages.subliminal
 
     pkgs.borgbackup
+    pkgs.sshfs
     pkgs.hddtemp
     pkgs.dos2unix
     pkgs.hplip
@@ -115,6 +116,7 @@ in {
     pkgs.dex
     pkgs.xclip
     pkgs.dig
+    pkgs.ngrok
     # use services.redshift
     # pkgs.redshift
 
@@ -132,6 +134,7 @@ in {
     pkgs.packer
     pkgs.vault
     pkgs.pdftk
+    pkgs.graphviz
     # pkgs.vaultenv
 
     pkgs.cabal-install
