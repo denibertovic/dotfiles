@@ -1,7 +1,18 @@
 {
   description = "NixOS configuration for kanta (t14-gen1)";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://install.determinate.systems"
+    ];
+    extra-trusted-public-keys = [
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+    ];
+  };
+
   inputs = {
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -24,6 +35,7 @@
     self,
     nixpkgs,
     home-manager,
+    determinate,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -56,6 +68,7 @@
     nixosConfigurations.kanta = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
       modules = [
+        determinate.nixosModules.default
         ./nixos/kanta/configuration.nix
       ];
     };
