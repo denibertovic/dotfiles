@@ -2,12 +2,14 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   home.packages = [
-    pkgs.unstable.claude-code
+    pkgs.most-unstable.claude-code
     pkgs.unstable.terraform-mcp-server
     pkgs.unstable.playwright-mcp
+    inputs.opencode.packages.${pkgs.system}.opencode
   ];
 
   programs.zed-editor = {
