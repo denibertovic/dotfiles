@@ -38,6 +38,7 @@
     ./obs.nix
     ./ai.nix
     ./ghostty.nix
+    ./hyprland.nix
     # ghc-syb-utils doesn't compile (whatever that is)
     #    ./haskell.nix
   ];

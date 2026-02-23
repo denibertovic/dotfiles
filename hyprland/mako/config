@@ -1,0 +1,34 @@
+# Mako notification daemon config
+# Solarized Dark theme
+
+anchor=top-right
+default-timeout=5000
+width=420
+outer-margin=20
+padding=10,15
+border-size=2
+border-radius=4
+max-icon-size=32
+font=JetBrainsMono Nerd Font 11
+
+# Solarized colors
+background-color=#002b36
+text-color=#839496
+border-color=#cb4b16
+
+[urgency=low]
+border-color=#586e75
+
+[urgency=normal]
+border-color=#268bd2
+
+[urgency=critical]
+default-timeout=0
+border-color=#dc322f
+layer=overlay
+
+[mode=do-not-disturb]
+invisible=true
+
+[mode=do-not-disturb app-name=notify-send]
+invisible=false

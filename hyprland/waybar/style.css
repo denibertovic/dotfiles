@@ -1,0 +1,141 @@
+/* Waybar styling - Solarized Dark inspired */
+
+/* GTK color definitions */
+@define-color background #002b36;
+@define-color foreground #839496;
+@define-color active #cb4b16;
+@define-color inactive #073642;
+@define-color warning #b58900;
+@define-color critical #dc322f;
+@define-color blue #268bd2;
+@define-color cyan #2aa198;
+@define-color green #859900;
+
+* {
+  background-color: @background;
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font', 'Terminus', monospace;
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 8px;
+  margin: 0 2px;
+  min-width: 12px;
+  color: @foreground;
+  background-color: transparent;
+}
+
+#workspaces button.active {
+  color: @active;
+  font-weight: bold;
+}
+
+#workspaces button.empty {
+  opacity: 0.4;
+}
+
+#workspaces button:hover {
+  color: @blue;
+}
+
+#cpu,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth {
+  padding: 0 10px;
+}
+
+#cpu {
+  color: @cyan;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.warning {
+  color: @warning;
+}
+
+#battery.critical {
+  color: @critical;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  to {
+    color: @foreground;
+  }
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#network {
+  color: @blue;
+}
+
+#network.disconnected {
+  color: @critical;
+}
+
+#bluetooth {
+  color: @blue;
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+  color: @inactive;
+}
+
+#pulseaudio {
+  color: @cyan;
+}
+
+#pulseaudio.muted {
+  color: @inactive;
+}
+
+#clock {
+  color: @foreground;
+  font-weight: bold;
+}
+
+#tray {
+  padding: 0 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+tooltip {
+  background-color: @background;
+  border: 1px solid @active;
+  border-radius: 4px;
+  padding: 4px;
+}
