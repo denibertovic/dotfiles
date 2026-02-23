@@ -72,20 +72,20 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- lua, golang
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "*.lua", "*.go" },
+	pattern = { "lua", "go" },
 	callback = function()
 		-- overrides defaults tab expansion for languages that
 		-- use tabs by convention
-		vim.opt.expandtab = false
+		vim.opt_local.expandtab = false
 	end,
 })
 
--- html, yaml
+-- html, yaml, nix
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "*.nix", "*.html", "*.yaml", "*.yml" },
+	pattern = { "nix", "html", "yaml" },
 	callback = function()
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2
-		vim.opt.softtabstop = 2
+		vim.opt_local.softtabstop = 2
 	end,
 })
