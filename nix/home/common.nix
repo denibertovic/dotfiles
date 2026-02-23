@@ -35,8 +35,11 @@ in {
 
   home.packages = [
     pkgs.age
+    pkgs.attic-client
     pkgs.screen
+    pkgs.bubblewrap
     pkgs.tmux
+    pkgs.mpv
     pkgs.simplescreenrecorder
     pkgs.devenv
     pkgs.appimage-run
@@ -83,7 +86,6 @@ in {
     pkgs.yubikey-manager
     pkgs.yubioath-flutter
     pkgs.yubikey-personalization
-    pkgs.yubikey-personalization-gui
     pkgs.wireshark
     pkgs.unzip
 
@@ -158,6 +160,7 @@ in {
 
   home.sessionVariables = {
     DEFAULT_BROWSER = "${pkgs.browsers}/bin/browsers";
+    SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh";
   };
 
   xdg.desktopEntries = {

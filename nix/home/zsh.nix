@@ -68,6 +68,9 @@
       setkben = "setxkbmap us";
       setkbhr = "setxkbmap hr";
 
+      # agents
+      claude-yolo = "claude --dangerously-skip-permissions";
+
       # docker related aliases
       #
       c = "docker-compose";
@@ -107,6 +110,7 @@
       asciicast2gif = "docker run -v \$PWD:/data asciinema/asciicast2gif";
       gci = "google-chrome-stable --profile=\"Default\" --incognito";
       pdf = "zathura";
+      evince = "papers";
 
       # tmux
       tmux = "tmux -2";
