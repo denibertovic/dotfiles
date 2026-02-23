@@ -10,7 +10,7 @@
     pkgs.unstable.terraform-mcp-server
     pkgs.unstable.playwright-mcp
     pkgs.context7-mcp
-    inputs.opencode.packages.${pkgs.system}.opencode
+    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
   ];
 
   programs.zed-editor = {

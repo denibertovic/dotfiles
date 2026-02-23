@@ -45,7 +45,7 @@ in {
     pkgs.appimage-run
     pkgs.denv
     pkgs.gh
-    pkgs.moar
+    pkgs.moor
     pkgs.alejandra
     pkgs.unstable.vaultenv
     pkgs.browsers
@@ -204,7 +204,7 @@ in {
 
   nix.gc = {
     automatic = true;
-    frequency = "weekly";
+    dates = "weekly";
     options = "--delete-older-than 14d";
   };
 }
