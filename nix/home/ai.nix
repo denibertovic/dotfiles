@@ -9,6 +9,7 @@
     pkgs.most-unstable.claude-code
     pkgs.unstable.terraform-mcp-server
     pkgs.unstable.playwright-mcp
+    pkgs.context7-mcp
     inputs.opencode.packages.${pkgs.system}.opencode
   ];
 
