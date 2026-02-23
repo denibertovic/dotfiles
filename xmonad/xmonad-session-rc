@@ -1,4 +1,6 @@
 #!/bin/bash
+# DEPRECATED: This file was only used on Debian.
+# With NixOS + home-manager, we use systemd user services instead.
 
 # env
 # Integer only

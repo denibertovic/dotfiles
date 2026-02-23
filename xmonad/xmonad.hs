@@ -258,6 +258,7 @@ commands = do
   return $
     defcmds ++
     [ ("meh", mehCmd)
+    , ("khlaaud", khlaaudCmd)
     , ("clear-clipboard", clearClipboardCmd)
     , ("dnd-on", dunstDndOn)
     , ("dnd-off", dunstDndOff)
@@ -482,6 +483,9 @@ mehCmd = do
   -- spawn $ "echo 'xO:" <> (show $ xOffset) <> " yO:" <> (show $ yOffset) <> "   x:" <> (show x) <> " y:" <> (show y) <> "' >/tmp/dinamo.txt"
   spawn $ "/home/deni/.local/bin/meh" <> " -x " <> show x <> " -y " <> show y
 
+khlaaudCmd :: X ()
+khlaaudCmd = spawn "mpv --x11-name=khlaaud --no-audio --ontop --no-border --loop-file=no --geometry=50%:50% /home/deni/claaaaaaude.gif"
+
 micToggleCmd =
   "amixer -q set Capture toggle && amixer get Capture | grep '\\[off\\]' && notify-send \"MIC OFF\" || notify-send \"MIC ON\""
 
@@ -602,6 +606,8 @@ myManageHook =
         , resource =? "clipit" -?> doIgnore
         , resource =? "parcellite" -?> doIgnore
         , className =? "Gimp" -?> doFloat
+        , className =? "mpv" -?> doFloat
+        , resource =? "khlaaud" -?> doCenterFloat
           -- , className =? "thunderbird"      -?> doFloat
         , className =? "Eog" -?> doCenterFloat
         , className =? "Pinentry-x11" -?> forceCenterFloat
@@ -610,6 +616,7 @@ myManageHook =
         , className =? "libreoffice-startcenter" -?> doFullFloat
         , className =? "Zathura" -?> doCenterFloat
         , className =? "Evince" -?> doCenterFloat
+        , className =? "papers" -?> doCenterFloat
         , className =? "vlc" -?> doCenterFloat
         , className =? "VirtualBox Manager" -?> doCenterFloat
         , className =? "Signal" -?> doCenterFloat
@@ -729,63 +736,7 @@ wsDMO = "dmo" -- random demo workspace
 -- Projects
 projects :: [Project]
 projects =
-  [ Project
-      { projectName = wsDMO
-      , projectDirectory = "~/"
-      , projectStartHook =
-          Just $ do
-            spawn "/usr/libexec/xscreensaver/spheremonics"
-            runInTerm "-title top" "top"
-            runInTerm "-title htop" "htop"
-            spawn "/usr/libexec/xscreensaver/cubicgrid"
-            spawn "/usr/libexec/xscreensaver/surfaces"
-      }
-  , Project
-      { projectName = wsSYS1
-      , projectDirectory = "~/"
-      , projectStartHook = Just $ spawnOn wsSYS1 myTerminal
-      }
-  , Project
-      { projectName = wsSYS2
-      , projectDirectory = "~/"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsSYS2 myTerminal
-            spawnOn wsSYS2 myTerminal
-            spawnOn wsSYS2 myTerminal
-      }
-  , Project
-      { projectName = wsPROJ
-      , projectDirectory = "~/projects"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsPROJ myTerminal
-            spawnOn wsPROJ myTerminal
-            spawnOn wsPROJ myTerminal
-      }
-  , Project
-      { projectName = wsWORK1
-      , projectDirectory = "~/work"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsWORK1 myTerminal
-            spawnOn wsWORK1 myTerminal
-            spawnOn wsWORK2 myTerminal
-      }
-  , Project
-      { projectName = wsWORK2
-      , projectDirectory = "~/work"
-      , projectStartHook =
-          Just $ do
-            spawnOn wsWORK2 myTerminal
-            spawnOn wsWORK2 myTerminal
-      }
-  , Project
-      { projectName = wsEMAIL
-      , projectDirectory = "~/"
-      , projectStartHook = Just $ spawnOn wsEMAIL "thunderbird"
-      }
-  ]
+  []
 
 -- This is the event hook from XMonad.Layout.Fullscreen which will constrain the full
 -- screen into the window frame rathe actually doing the "overlay" full screen.
