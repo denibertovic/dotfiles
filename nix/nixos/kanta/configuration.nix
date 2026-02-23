@@ -443,6 +443,7 @@ in {
     nfs-utils
     manix
     kitty
+    virt-manager
 
     # these are required by the dropbox one way or another
     # it's mostly warnings but the thing barely works so better
