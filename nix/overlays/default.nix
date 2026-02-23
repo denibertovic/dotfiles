@@ -26,6 +26,8 @@
 
     devenv = inputs.devenv.packages.${final.system}.default;
     ghostty = inputs.ghostty.packages.${final.system}.default;
+    # Fix for Nix 2.33+ compatibility: https://github.com/serokell/deploy-rs/pull/359
+    deploy-rs = inputs.deploy-rs.packages.${final.system}.default;
 
     # NOTE: workaround for HP returning a 403 when downloading
     # the hplip plugin via curl (headless). Downloaded manually

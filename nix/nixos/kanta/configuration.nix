@@ -131,8 +131,8 @@ in {
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
+      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      libva-vdpau-driver
       libvdpau-va-gl
       libva
     ];
@@ -323,7 +323,7 @@ in {
       source-sans-pro
       source-serif-pro
       ttf_bitstream_vera
-      ubuntu_font_family # Ubuntu fonts
+      ubuntu-classic # ubuntu-classic
       unifont # some international languages
       jetbrains-mono
       hack-font
@@ -348,8 +348,8 @@ in {
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # XMONAD
   services.xserver.windowManager.xmonad = {

@@ -13,18 +13,20 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     most-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     devenv.url = "github:cachix/devenv/main";
     ghostty.url = "github:ghostty-org/ghostty/main";
     opencode.url = "github:anomalyco/opencode/dev";
+    # Fix for Nix 2.33+ compatibility: https://github.com/serokell/deploy-rs/pull/359
+    deploy-rs.url = "github:szlend/deploy-rs/fix-show-derivation-parsing";
 
     # Home manager
     # change back to release-25.05 when this is fixed: https://github.com/nix-community/home-manager/pull/7472
     # or reverted
-    home-manager.url = "github:nix-community/home-manager/c26266790678863cce8e7460fdbf0d80991b1906";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nur = {
