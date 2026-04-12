@@ -2,6 +2,7 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   browsers = pkgs.callPackage ./browsers.nix {};
+  claude-code = pkgs.callPackage ./claude-code/default.nix {};
   context7-mcp = pkgs.callPackage ./context7/default.nix {};
   denv = pkgs.callPackage ./denv.nix {};
   rumno = pkgs.callPackage ./rumno/default.nix {};

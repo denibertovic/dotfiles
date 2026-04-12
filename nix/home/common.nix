@@ -38,6 +38,7 @@ in {
     pkgs.attic-client
     pkgs.screen
     pkgs.bubblewrap
+    pkgs.docker-compose
     pkgs.tmux
     pkgs.mpv
     pkgs.simplescreenrecorder
