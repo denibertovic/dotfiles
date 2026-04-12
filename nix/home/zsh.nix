@@ -103,7 +103,7 @@
       noack = "ack --ignore-file=ext:json --ignore-dir=.devenv --ignore-dir=.next --ignore-dir=node_modules  --ignore-dir=.terraform --ignore-dir=static --ignore-dir=__data --ignore-dir=migrations --ignore-dir=.stack-work --ignore-dir=.stack --ignore-dir=.ghc --ignore-dir=.ghcjs --ignore-dir=.spago --ignore-file=ext:sql";
       duh = "du -h --max-depth=1 | sort -h";
       ctl = "systemctl";
-      t = "/home/deni/.local/bin/todo";
+      t = "todo";
       t-check-tags = "grep -E -o \"@.*\" ~/Dropbox/todo/todo.txt  | sort | uniq";
       get-subtitles = "op run -- subliminal --opensubtitles $OPENSUBTITLES_USERNAME $OPENSUBTITLES_PASSWORD download -l en .";
       copy-path = "pwd | tr -d \"\n\" | xsel -b";

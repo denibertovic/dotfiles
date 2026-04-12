@@ -13,6 +13,7 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
 
+    ./todo.nix
     ./common.nix
     ./zsh.nix
     ./fish.nix
