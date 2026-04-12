@@ -31,6 +31,7 @@ in {
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
+      pkgs.unstable.vimPlugins.nvim-treesitter-textobjects
       (nvim-treesitter.withPlugins (p: [
         p.bash
         p.c
