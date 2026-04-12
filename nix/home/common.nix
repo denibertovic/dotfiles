@@ -51,6 +51,7 @@ in {
     pkgs.unstable.vaultenv
     pkgs.browsers
     pkgs.brave
+    pkgs.ffmpeg
     pkgs.zathura
     pkgs.unstable.cachix
     pkgs.nitch
