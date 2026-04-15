@@ -1414,11 +1414,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776089111,
-        "narHash": "sha256-vtsexZOcikoC/BE90XOO+m6C/mMANSx17aWBrIIhQ9s=",
+        "lastModified": 1776099315,
+        "narHash": "sha256-uIBCTisI95+gHPBgg4N/NKmSJS27W+dY77gsAv176cM=",
         "owner": "denibertovic",
         "repo": "todo",
-        "rev": "a57b817d033df931c06969fad10ac497ea1d8977",
+        "rev": "3dd70a181dd17e4f9a7dd7c144847fe250136748",
         "type": "github"
       },
       "original": {
