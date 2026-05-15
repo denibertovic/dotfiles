@@ -1,39 +1,45 @@
 {
   lib,
   stdenv,
-  buildNpmPackage,
-  fetchzip,
+  fetchurl,
+  patchelf,
+  makeWrapper,
   bubblewrap,
   procps,
   socat,
-}:
-buildNpmPackage rec {
-  pname = "claude-code";
-  version = "2.1.77";
-
-  src = fetchzip {
-    url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-3bsFS3EZYbU8htlO7QtA9Qs8xlm0ZPz02bJ3ROZaugY=";
+}: let
+  platformMap = {
+    "x86_64-linux" = "linux-x64";
+    "aarch64-linux" = "linux-arm64";
   };
+  platform = platformMap.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+in
+  stdenv.mkDerivation rec {
+    pname = "claude-code";
+    version = "2.1.142";
 
-  postPatch = ''
-    cp ${./package-lock.json} package-lock.json
-    substituteInPlace cli.js \
-      --replace-fail '#!/bin/sh' '#!/usr/bin/env sh'
-  '';
+    src = fetchurl {
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code-${platform}/-/claude-code-${platform}-${version}.tgz";
+      hash = "sha256-TQn2N35LxRRXmotcVps2xxPzkEyJQEkX1YJbrXOVWZ4=";
+    };
 
-  npmDepsHash = "sha256-spxAd9PEGRQFiGjaNRqGCu23PdmfwmBQyhT+gwTiTMs=";
+    sourceRoot = "package";
 
-  dontNpmBuild = true;
+    nativeBuildInputs = [ patchelf makeWrapper ];
 
-  env.AUTHORIZED = "1";
+    dontPatchELF = true;
+    dontStrip = true;
 
-  postInstall = ''
-    wrapProgram $out/bin/claude \
-      --set DISABLE_AUTOUPDATER 1 \
-      --set DISABLE_INSTALLATION_CHECKS 1 \
-      --unset DEV \
-      --prefix PATH : ${
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/bin
+      cp claude $out/bin/claude
+      patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $out/bin/claude
+      wrapProgram $out/bin/claude \
+        --set DISABLE_AUTOUPDATER 1 \
+        --set DISABLE_INSTALLATION_CHECKS 1 \
+        --unset DEV \
+        --prefix PATH : ${
         lib.makeBinPath (
           [
             procps
@@ -44,12 +50,13 @@ buildNpmPackage rec {
           ]
         )
       }
-  '';
+      runHook postInstall
+    '';
 
-  meta = with lib; {
-    description = "Agentic coding tool that lives in your terminal";
-    homepage = "https://github.com/anthropics/claude-code";
-    license = licenses.unfree;
-    mainProgram = "claude";
-  };
-}
+    meta = with lib; {
+      description = "Agentic coding tool that lives in your terminal";
+      homepage = "https://github.com/anthropics/claude-code";
+      license = licenses.unfree;
+      mainProgram = "claude";
+    };
+  }
