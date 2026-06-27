@@ -578,7 +578,7 @@ isYoutubeMusic = resource =? youtubeMusicResource
 
 signalCommand = "signal-desktop"
 
-isSignal = className =? "Signal"
+isSignal = className =? "signal"
 
 -- myStartupHook = do
 --   spawn "xrdb -merge -I$HOME ~/.Xresources"
