@@ -38,6 +38,15 @@ in {
   # NIX / NIXOS
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Fetch Determinate Nix (and the Nix it builds from source) from FlakeHub
+  # Cache instead of compiling it locally on every rebuild. The Determinate
+  # installer only puts cache.flakehub.com in trusted-substituters (allowed),
+  # not in the active substituters list, so we enable it explicitly here.
+  nix.settings.extra-substituters = ["https://cache.flakehub.com"];
+  nix.settings.extra-trusted-public-keys = [
+    "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+  ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
     # Add overlays your own flake exports (from overlays and pkgs dir):
