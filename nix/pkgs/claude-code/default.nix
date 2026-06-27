@@ -16,16 +16,16 @@
 in
   stdenv.mkDerivation rec {
     pname = "claude-code";
-    version = "2.1.142";
+    version = "2.1.170";
 
     src = fetchurl {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-${platform}/-/claude-code-${platform}-${version}.tgz";
-      hash = "sha256-TQn2N35LxRRXmotcVps2xxPzkEyJQEkX1YJbrXOVWZ4=";
+      hash = "sha256-WgnUx2ErN0L9rrGmQUh5jGqnldv9dYcQnTva15zNU/8=";
     };
 
     sourceRoot = "package";
 
-    nativeBuildInputs = [ patchelf makeWrapper ];
+    nativeBuildInputs = [patchelf makeWrapper];
 
     dontPatchELF = true;
     dontStrip = true;
