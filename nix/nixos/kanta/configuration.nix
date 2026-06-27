@@ -120,6 +120,16 @@ in {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
+  # VM tuning for no-swap ZFS system
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10; # low but not zero — allows kernel to use zram for cold pages
+    "vm.vfs_cache_pressure" = 150; # reclaim fs caches more aggressively to free RAM for apps
+    "vm.dirty_ratio" = 10; # block writers when 10% of RAM is dirty (default 20 is risky without swap)
+    "vm.dirty_background_ratio" = 5; # start flushing dirty pages earlier in the background
+    "vm.min_free_kbytes" = 262144; # keep 256 MB always free as emergency headroom (default ~66 MB)
+    "vm.watermark_scale_factor" = 50; # wake kswapd earlier to reclaim memory before pressure hits
+  };
+
   # BOOT
   boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep"];
   # Use the systemd-boot EFI boot loader.
@@ -235,6 +245,7 @@ in {
     enable = true;
   };
 
+  services.fwupd.enable = true;
   services.pcscd.enable = true;
 
   # VM
@@ -379,7 +390,7 @@ in {
 
   services.picom = {
     enable = true;
-    backend = "glx";
+    backend = "egl";
     vSync = true;
     fade = false;
     settings = {
@@ -496,14 +507,27 @@ in {
   #   };
   # };
 
+  # compressed swap in RAM — not disk-backed swap, just a compression layer
+  # that prevents OOM kills by compressing cold pages (3:1 typical ratio)
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+  };
+
+  # kill biggest memory hog before the kernel OOM killer freezes the system
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5; # act when less than 5% RAM free
+  };
+
   services.power-profiles-daemon.enable = false;
-  services.thermald.enable = true;
+  services.thermald.enable = false;
   services.tlp = {
     enable = true;
     settings = {
       # Platform
-      PLATFORM_PROFILE_ON_BAT = "low-power";
-      PLATFORM_PROFILE_ON_AC = "perfomance";
+      PLATFORM_PROFILE_ON_BAT = "balanced";
+      PLATFORM_PROFILE_ON_AC = "performance";
 
       # Processor
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
@@ -511,11 +535,12 @@ in {
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 60;
-      CPU_BOOST_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 80;
+      CPU_BOOST_ON_BAT = 1;
       CPU_BOOST_ON_AC = 1;
-      CPU_HWP_DYN_BOOST_ON_BAT = 0;
+      CPU_HWP_DYN_BOOST_ON_BAT = 1;
       CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
 
       START_CHARGE_THRESH_BAT0 = 40;
       STOP_CHARGE_THRESH_BAT0 = 80;
