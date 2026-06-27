@@ -189,6 +189,10 @@ in {
 
   # LOCALE
   i18n.defaultLocale = "en_US.UTF-8";
+  # set default system wide printing paper size to A4
+  i18n.extraLocaleSettings = {
+    LC_PAPER = "en_GB.UTF-8"; # A4
+  };
   time.timeZone = "Europe/Zagreb";
 
   # INPUT
