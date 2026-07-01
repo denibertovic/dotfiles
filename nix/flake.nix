@@ -13,7 +13,7 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     most-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -26,7 +26,7 @@
     # Home manager
     # change back to release-25.05 when this is fixed: https://github.com/nix-community/home-manager/pull/7472
     # or reverted
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     todo = {
