@@ -388,11 +388,11 @@ myKeys x =
       subKeys
         "Media Keys"
         [ ( "<XF86AudioMute>"
-          , addName "Toggle Sounds" toggleSpeakerAndNotify)
+          , addName "Toggle Sounds" $ toggleMute >>= showAudioMuteAlert)
         , ( "<XF86AudioLowerVolume>"
-          , addName "Lower volume" $ changeVolumeAndNotify "4%-")
+          , addName "Lower volume" $ lowerVolume 4 >>= volumeNotification)
         , ( "<XF86AudioRaiseVolume>"
-          , addName "Raise volume" $ changeVolumeAndNotify "4%+")
+          , addName "Raise volume" $ raiseVolume 4 >>= volumeNotification)
            -- , ("<XF86AudioMicMute>", addName "Toggle Mic" $ spawn micToggleCmd)
         , ("<XF86AudioMicMute>", addName "ToggleMic" toggleMicrophoneAndNotify)
         , ( "<XF86MonBrightnessUp>"
@@ -497,27 +497,51 @@ micToggleCmd =
 --
 -- The old XMonad.Actions.Volume / amixer helpers talked to ALSA directly,
 -- which fails under PipeWire because the ALSA->PipeWire ctl module can't be
--- opened (snd_mixer_attach: No such device or address). Drive wpctl instead.
+-- opened (snd_mixer_attach: No such device or address). These are wpctl-backed
+-- drop-in replacements that keep the same `X Double` / `X Bool` shapes, so the
+-- keybindings stay `raiseVolume 4 >>= volumeNotification` etc. and the
+-- notification logic lives in one place.
 --
--- wpctl reports volume as e.g. "Volume: 0.60 [MUTED]"; pull the fraction and
--- turn it into a 0..100 int for the `rumno` on-screen notification.
-sinkVolumePercent :: String
-sinkVolumePercent =
-  "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+-- set and get run in a single synchronous shell command (via outputOf) so the
+-- read reflects the value we just wrote rather than racing the async spawn.
 
-changeVolumeAndNotify :: String -> X ()
-changeVolumeAndNotify delta =
-  spawn $
-  "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ " <> delta <>
-  " && rumno -v " <> sinkVolumePercent
+-- wpctl get-volume prints e.g. "Volume: 0.60" or "Volume: 0.60 [MUTED]".
+-- Pull the fraction and scale to a 0..100 percentage.
+parseWpctlVolume :: String -> Double
+parseWpctlVolume out =
+  case words out of
+    (_:frac:_) ->
+      case reads frac of
+        [(v, _)] -> v * 100
+        _ -> 0
+    _ -> 0
 
-toggleSpeakerAndNotify :: X ()
-toggleSpeakerAndNotify =
-  spawn $
-  "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" <>
-  " && { wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED" <>
-  " && rumno -m" <>
-  " || rumno -v " <> sinkVolumePercent <> "; }"
+getVolume :: X Double
+getVolume =
+  liftIO $ parseWpctlVolume <$> outputOf "wpctl get-volume @DEFAULT_AUDIO_SINK@"
+
+-- delta is a wpctl step like "4%+" / "4%-"; -l 1.0 caps the sink at 100%.
+setSinkVolume :: String -> X Double
+setSinkVolume delta =
+  liftIO $
+  parseWpctlVolume <$>
+  outputOf
+    ("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ " <> delta <>
+     " && wpctl get-volume @DEFAULT_AUDIO_SINK@")
+
+raiseVolume :: Double -> X Double
+raiseVolume pct = setSinkVolume (show (round pct :: Int) <> "%+")
+
+lowerVolume :: Double -> X Double
+lowerVolume pct = setSinkVolume (show (round pct :: Int) <> "%-")
+
+-- Returns True when sound is now ON (unmuted), matching showAudioMuteAlert.
+toggleMute :: X Bool
+toggleMute =
+  liftIO $
+  not . isInfixOf "[MUTED]" <$>
+  outputOf
+    "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && wpctl get-volume @DEFAULT_AUDIO_SINK@"
 
 centered w =
   D.onCurr (D.center w 66) >=>
@@ -532,6 +556,13 @@ centeredLarge w =
 showDzenAudioMuteAlert True = D.dzenConfig (centered 300) "Sound On"
 showDzenAudioMuteAlert False = D.dzenConfig (centered 300) "Sound Off"
 
+volumeNotification :: Double -> X ()
+volumeNotification x = spawn $ "rumno -v " <> show (round x :: Int)
+
+showAudioMuteAlert :: Bool -> X ()
+showAudioMuteAlert True = getVolume >>= volumeNotification
+showAudioMuteAlert False = spawn "rumno -m"
+
 showDzenMicMuteAlert True = D.dzenConfig (centered 300) "Mic on"
 showDzenMicMuteAlert False = D.dzenConfig (centered 300) "Mic off"
 
@@ -544,12 +575,14 @@ outputOf s = do
   hGetContents hOut <* waitForProcess p <* installSignalHandlers
 
 toggleMicrophoneAndNotify :: X ()
-toggleMicrophoneAndNotify =
-  spawn $
-  "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" <>
-  " && { wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED" <>
-  " && rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg" <>
-  " || rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg; }"
+toggleMicrophoneAndNotify = do
+  out <-
+    liftIO $
+    outputOf
+      "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && wpctl get-volume @DEFAULT_AUDIO_SOURCE@"
+  if "[MUTED]" `isInfixOf` out
+    then spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg"
+    else spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
 
 -- COMMANDS
 weechatCommand = "alacritty --title weechat -e weechat"
