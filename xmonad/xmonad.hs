@@ -28,7 +28,6 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DynamicWorkspaces (withNthWorkspace)
 import XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
-import XMonad.Actions.Volume
 import XMonad.Actions.WindowBringer (bringMenu, gotoMenu)
 import XMonad.Actions.WithAll (killAll)
 import XMonad.Config.Gnome
@@ -389,11 +388,11 @@ myKeys x =
       subKeys
         "Media Keys"
         [ ( "<XF86AudioMute>"
-          , addName "Toggle Sounds" $ toggleMute >>= showAudioMuteAlert)
+          , addName "Toggle Sounds" toggleSpeakerAndNotify)
         , ( "<XF86AudioLowerVolume>"
-          , addName "Lower volume" $ lowerVolume 4 >>= volumeNotification)
+          , addName "Lower volume" $ changeVolumeAndNotify "4%-")
         , ( "<XF86AudioRaiseVolume>"
-          , addName "Raise volume" $ raiseVolume 4 >>= volumeNotification)
+          , addName "Raise volume" $ changeVolumeAndNotify "4%+")
            -- , ("<XF86AudioMicMute>", addName "Toggle Mic" $ spawn micToggleCmd)
         , ("<XF86AudioMicMute>", addName "ToggleMic" toggleMicrophoneAndNotify)
         , ( "<XF86MonBrightnessUp>"
@@ -493,17 +492,32 @@ micToggleCmd =
 -- after some alsa/pulseaudio upgrade. Keeping just in case
 -- lowerVolumeHack = spawn "amixer -D pulse sset Master 5%-"
 -- raiseVolumeHack = spawn "amixer -D pulse sset Master 5%+"
-micChannels :: [String]
-micChannels = ["Capture"]
 
-toggleMuteMic :: MonadIO m => m Bool
-toggleMuteMic = toggleMuteChannels micChannels
+-- PipeWire (wireplumber) volume control.
+--
+-- The old XMonad.Actions.Volume / amixer helpers talked to ALSA directly,
+-- which fails under PipeWire because the ALSA->PipeWire ctl module can't be
+-- opened (snd_mixer_attach: No such device or address). Drive wpctl instead.
+--
+-- wpctl reports volume as e.g. "Volume: 0.60 [MUTED]"; pull the fraction and
+-- turn it into a 0..100 int for the `rumno` on-screen notification.
+sinkVolumePercent :: String
+sinkVolumePercent =
+  "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
 
-volumeDzenNotification :: Double -> X ()
-volumeDzenNotification = D.dzenConfig (centered 150) . show . round
+changeVolumeAndNotify :: String -> X ()
+changeVolumeAndNotify delta =
+  spawn $
+  "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ " <> delta <>
+  " && rumno -v " <> sinkVolumePercent
 
-volumeNotification :: Double -> X ()
-volumeNotification x = spawn $ "rumno -v " <> show (round x)
+toggleSpeakerAndNotify :: X ()
+toggleSpeakerAndNotify =
+  spawn $
+  "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" <>
+  " && { wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED" <>
+  " && rumno -m" <>
+  " || rumno -v " <> sinkVolumePercent <> "; }"
 
 centered w =
   D.onCurr (D.center w 66) >=>
@@ -518,9 +532,6 @@ centeredLarge w =
 showDzenAudioMuteAlert True = D.dzenConfig (centered 300) "Sound On"
 showDzenAudioMuteAlert False = D.dzenConfig (centered 300) "Sound Off"
 
-showAudioMuteAlert True = getVolume >>= volumeNotification
-showAudioMuteAlert False = spawn "rumno -m"
-
 showDzenMicMuteAlert True = D.dzenConfig (centered 300) "Mic on"
 showDzenMicMuteAlert False = D.dzenConfig (centered 300) "Mic off"
 
@@ -533,11 +544,12 @@ outputOf s = do
   hGetContents hOut <* waitForProcess p <* installSignalHandlers
 
 toggleMicrophoneAndNotify :: X ()
-toggleMicrophoneAndNotify = do
-  out <- liftIO $ outputOf "amixer set Capture toggle"
-  if "[off]" `isInfixOf` out
-    then spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg"
-    else spawn "rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg"
+toggleMicrophoneAndNotify =
+  spawn $
+  "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" <>
+  " && { wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED" <>
+  " && rumno --custom-symbol /home/deni/.xmonad/icons/micoff.svg" <>
+  " || rumno --custom-symbol /home/deni/.xmonad/icons/micon.svg; }"
 
 -- COMMANDS
 weechatCommand = "alacritty --title weechat -e weechat"
