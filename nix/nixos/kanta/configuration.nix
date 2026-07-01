@@ -525,16 +525,28 @@ in {
   };
 
   services.power-profiles-daemon.enable = false;
+  # thermald is a no-op on this ThinkPad and left off deliberately: the firmware
+  # exposes DYTC (/sys/.../thinkpad_acpi/dytc_lapmode), so thermald sees thermal
+  # management is owned by firmware and exits immediately on start (it did the
+  # same even when previously "enabled" — check the journal). The real thermal
+  # control here is the DYTC platform_profile knob below: "balanced" (not
+  # "performance") caps sustained power so the i7-10510U stops spiking to ~92 C.
   services.thermald.enable = false;
   services.tlp = {
     enable = true;
     settings = {
       # Platform
       PLATFORM_PROFILE_ON_BAT = "balanced";
-      PLATFORM_PROFILE_ON_AC = "performance";
+      # "balanced" (not "performance"): keeps the sustained power limit sane so
+      # the fan/heatsink can keep up. Turbo still fires for bursts via HWP below,
+      # so interactive responsiveness is unchanged — only sustained wattage drops.
+      PLATFORM_PROFILE_ON_AC = "balanced";
 
       # Processor
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      # "powersave" governor with intel_pstate HWP still ramps to max frequency
+      # under load almost instantly, but idles at low voltage instead of pinning
+      # clocks high (the old "performance" governor sat at ~73 C doing nothing).
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
@@ -544,6 +556,7 @@ in {
       CPU_BOOST_ON_AC = 1;
       CPU_HWP_DYN_BOOST_ON_BAT = 1;
       CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
 
       START_CHARGE_THRESH_BAT0 = 40;
