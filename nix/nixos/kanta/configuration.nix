@@ -131,7 +131,14 @@ in {
   };
 
   # BOOT
-  boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep"];
+  # psmouse.synaptics_intertouch=0 forces the touchpad OFF the RMI4/SMBus
+  # ("intertouch") path and back onto legacy PS/2 Synaptics. The Elan
+  # TrackPoint is a PS/2 pass-through routed through the RMI4 device, so when
+  # RMI4/SMBus drops interrupts ("rmi_driver_clear_irq_bits: Failed to change
+  # enabled interrupts!") the trackpoint stalls with it. Disabling intertouch
+  # removes that whole failure path. See ~/scripts/fix_trackpoint_stalling.sh
+  # for the old runtime workaround this replaces.
+  boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep" "psmouse.synaptics_intertouch=0"];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -164,7 +171,10 @@ in {
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
-    speed = 255;
+    # NOTE: `speed` is intentionally omitted. This Elan TrackPoint (fw 0x11)
+    # does not expose a `speed` sysfs attribute, so setting it here is a no-op
+    # (kernel logs "Could not chase sysfs attribute .../speed, ignoring").
+    # Pointer speed is instead controlled via services.libinput.mouse.accelSpeed.
     sensitivity = 255;
     device = "TPPS/2 Elan TrackPoint";
   };
@@ -200,13 +210,10 @@ in {
   services.libinput.touchpad.disableWhileTyping = true;
   services.libinput.enable = true;
   services.xserver.synaptics.enable = false;
-  services.xserver.config = ''
-    Section "InputClass"
-      Identifier     "Enable libinput for TrackPoint"
-      MatchIsPointer "on"
-      Driver         "libinput"
-    EndSection
-  '';
+  # Pointer/trackpoint speed. The hardware `speed` knob is unsupported on this
+  # Elan trackpoint, so acceleration is set via libinput instead.
+  # Range -1.0 (slowest) .. 1.0 (fastest).
+  services.libinput.mouse.accelSpeed = "0.5";
   # services.xserver.libinput.touchpad.naturalScrolling = true;
   # services.xserver.synaptics.twoFingerScroll = true;
 
@@ -386,7 +393,7 @@ in {
 
   services.xserver.displayManager.sessionCommands = ''
     xsetroot -cursor_name left_ptr &
-    ${pkgs.xorg.xinput}/bin/xinput disable 'Synaptics TM3471-010'
+    ${pkgs.xorg.xinput}/bin/xinput disable 'SynPS/2 Synaptics TouchPad'
     eval $(gnome-keyring-daemon --start) &
     ${pkgs.feh}/bin/feh --bg-scale /home/deni/walls/hack5.png &
     #synclient TouchpadOff=1 &
