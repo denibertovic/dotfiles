@@ -254,6 +254,7 @@ in {
   # tailscale
   services.tailscale = {
     enable = true;
+    extraSetFlags = ["--operator=deni"];
   };
 
   services.fwupd.enable = true;

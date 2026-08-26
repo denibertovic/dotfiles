@@ -40,6 +40,7 @@
     ./ai.nix
     ./ghostty.nix
     ./hyprland.nix
+    ./tailscale.nix
     # ghc-syb-utils doesn't compile (whatever that is)
     #    ./haskell.nix
   ];
