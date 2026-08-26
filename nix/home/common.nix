@@ -113,7 +113,7 @@ in {
     pkgs.gnumake
     pkgs.pandoc
     pkgs.pass
-    pkgs.xorg.xev
+    pkgs.xev
     pkgs.lm_sensors
     pkgs.pwgen
     pkgs.tarsnap

@@ -6,6 +6,9 @@
 }: {
   programs.firefox = {
     enable = true;
+    # keep the pre-26.05 profile location (~/.mozilla/firefox); the new default
+    # moves it under $XDG_CONFIG_HOME which would require migrating the dir.
+    configPath = ".mozilla/firefox";
     # this also needs services.gnome.gnome-browser-connector.enable = true
     enableGnomeExtensions = false;
     profiles.default = {

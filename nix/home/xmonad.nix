@@ -14,9 +14,9 @@ in {
     pkgs.gnome-screenshot
     pkgs.eog
     pkgs.networkmanagerapplet
-    pkgs.xorg.xmodmap
-    pkgs.xorg.xmessage
-    pkgs.xorg.xf86inputsynaptics
+    pkgs.xmodmap
+    pkgs.xmessage
+    pkgs.xf86-input-synaptics
     pkgs.trayer
     pkgs.picom
     pkgs.zenity

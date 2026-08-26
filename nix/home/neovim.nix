@@ -21,6 +21,8 @@ in {
     enable = true;
     vimAlias = true;
     defaultEditor = true;
+    withRuby = true;
+    withPython3 = true;
     package = pkgs.neovim-unwrapped;
     plugins = with pkgs.vimPlugins; [
       # coding and lsp
@@ -44,7 +46,6 @@ in {
         p.javascript
         p.jsdoc
         p.json
-        p.jsonc
         p.lua
         p.luadoc
         p.luap
@@ -110,13 +111,14 @@ in {
       nixd
       black
       stylua
-      nodePackages.typescript-language-server
+      typescript-language-server
       haskell-language-server
       yaml-language-server
       terraform-ls
       fd
       ripgrep
       alejandra
+      nixfmt-classic
     ];
     extraConfig = ''
       " For faster startup

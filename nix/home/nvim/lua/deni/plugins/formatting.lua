@@ -31,7 +31,13 @@ require("conform").setup({
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		sh = { "shfmt" },
-		nix = { "alejandra" },
+		nix = function(bufnr)
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			if bufname:match("/work/livtours/") then
+				return { "nixfmt" }
+			end
+			return { "alejandra" }
+		end,
 	},
 })
 

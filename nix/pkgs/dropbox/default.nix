@@ -47,20 +47,19 @@ in
         unsharePid = false;
 
         targetPkgs = pkgs:
-          with pkgs;
-          with xorg; [
-            libICE
-            libSM
-            libX11
-            libXcomposite
-            libXdamage
-            libXext
-            libXfixes
-            libXrender
-            libXxf86vm
+          with pkgs; [
+            libice
+            libsm
+            libx11
+            libxcomposite
+            libxdamage
+            libxext
+            libxfixes
+            libxrender
+            libxxf86vm
             libGL
             libxcb
-            xkeyboardconfig
+            xkeyboard-config
             curl
             dbus
             firefox-bin
@@ -75,7 +74,7 @@ in
             zlib
             mesa
             libxshmfence
-            libpthreadstubs
+            libpthread-stubs
             libappindicator
           ];
 

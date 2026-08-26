@@ -20,6 +20,10 @@
     devenv.url = "github:cachix/devenv/main";
     ghostty.url = "github:ghostty-org/ghostty/main";
     opencode.url = "github:anomalyco/opencode/dev";
+    # opencode's pinned nixpkgs-unstable (9dd5558b) has a broken bun 1.3.13
+    # derivation (installShellCompletion fails on empty bun.bash). Follow our
+    # own nixpkgs-unstable, which has the fixed package.nix.
+    opencode.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # Fix for Nix 2.33+ compatibility: https://github.com/serokell/deploy-rs/pull/359
     deploy-rs.url = "github:szlend/deploy-rs/fix-show-derivation-parsing";
 
