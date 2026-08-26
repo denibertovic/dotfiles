@@ -35,11 +35,13 @@ in {
 
   home.packages = [
     pkgs.age
+    pkgs.hcl2json
     pkgs.attic-client
     pkgs.screen
     pkgs.bubblewrap
     pkgs.docker-compose
     pkgs.tmux
+    pkgs.mosh
     pkgs.mpv
     pkgs.simplescreenrecorder
     pkgs.devenv
