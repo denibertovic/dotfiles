@@ -477,6 +477,14 @@ in {
     kitty
     virt-manager
 
+    # GPU/video-accel diagnostics (glxinfo, eglinfo, vainfo, xdpyinfo,
+    # intel_gpu_top)
+    mesa-demos
+    libva-utils
+    xorg.xdpyinfo
+    strace
+    intel-gpu-tools
+
     # these are required by the dropbox one way or another
     # it's mostly warnings but the thing barely works so better
     # safe than sorry

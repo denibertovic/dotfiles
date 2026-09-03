@@ -28,6 +28,9 @@
         "browser.download.useDownloadDir" = false;
         # !!!This is needed for userChrome.css to work!!!
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        # VA-API video decode (iHD driver); lowers CPU load on video calls
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
       };
       userChrome = builtins.readFile "/home/deni/dotfiles/userChrome.css";
     };
