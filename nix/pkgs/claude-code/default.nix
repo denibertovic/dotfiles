@@ -16,11 +16,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "claude-code";
-    version = "2.1.170";
+    version = "2.1.278";
 
     src = fetchurl {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-${platform}/-/claude-code-${platform}-${version}.tgz";
-      hash = "sha256-WgnUx2ErN0L9rrGmQUh5jGqnldv9dYcQnTva15zNU/8=";
+      hash = "sha256-0ftRqwoCNNG9f0GO6da2sSTCQSst2vPfwyVrrYBj8cc=";
     };
 
     sourceRoot = "package";

@@ -28,7 +28,7 @@ echo "Updating claude-code: $CURRENT_VERSION -> $NEW_VERSION"
 
 # Prefetch the platform tarball and get its hash
 echo "Prefetching tarball..."
-SRC_HASH=$(nix-prefetch-url --unpack "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${NEW_VERSION}.tgz" 2>/dev/null)
+SRC_HASH=$(nix-prefetch-url "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${NEW_VERSION}.tgz" 2>/dev/null)
 SRC_SRI=$(nix hash to-sri --type sha256 "$SRC_HASH" 2>/dev/null || nix hash convert --to sri --type sha256 "$SRC_HASH")
 
 # Update version and hash in default.nix
