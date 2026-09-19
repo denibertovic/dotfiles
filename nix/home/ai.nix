@@ -8,6 +8,7 @@
   home.packages = [
     pkgs.claude-code
     pkgs.unstable.codex
+    pkgs.unstable.pi-coding-agent
     pkgs.unstable.terraform-mcp-server
     pkgs.unstable.playwright-mcp
     pkgs.context7-mcp
