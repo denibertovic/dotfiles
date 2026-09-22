@@ -2,6 +2,9 @@
 
 DEFAULT_GOAL: help system user
 
+# flake attribute follows the machine hostname (nixos/<host>/default.nix)
+HOST ?= $(shell hostname)
+
 require-%:
 	@ if [ "${${*}}" = "" ]; then \
 		echo "ERROR: Environment variable not set: \"$*\""; \
@@ -10,11 +13,11 @@ require-%:
 
 ## build system with 'nixos-reuild switch --flake .'
 system:
-	@sudo nixos-rebuild switch --flake .#kanta ${NIX_BUILDER_OPTS}
+	@sudo nixos-rebuild switch --flake .#$(HOST) ${NIX_BUILDER_OPTS}
 
 ## build home with 'home-manager --flake .#your-username@your-hostname'
 user:
-	@home-manager -j 0 switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@kanta --impure ${NIX_BUILDER_OPTS}
+	@home-manager -j 0 switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@$(HOST) --impure ${NIX_BUILDER_OPTS}
 
 ## Show help screen.
 help:

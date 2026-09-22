@@ -23,6 +23,9 @@
     };
   '';
 in {
+  # Shared by every host. Machine specific settings (hardware scan, hostName,
+  # hostId, swap, quirks) live in ./<host>/default.nix and are added to the
+  # module list in flake.nix.
   imports = [
     # my modules that the flake exports (from modules/nixos):
     # outputs.nixosModules.example
@@ -30,9 +33,6 @@ in {
     # modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
-
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
   ];
 
   # NIX / NIXOS
@@ -131,14 +131,7 @@ in {
   };
 
   # BOOT
-  # psmouse.synaptics_intertouch=0 forces the touchpad OFF the RMI4/SMBus
-  # ("intertouch") path and back onto legacy PS/2 Synaptics. The Elan
-  # TrackPoint is a PS/2 pass-through routed through the RMI4 device, so when
-  # RMI4/SMBus drops interrupts ("rmi_driver_clear_irq_bits: Failed to change
-  # enabled interrupts!") the trackpoint stalls with it. Disabling intertouch
-  # removes that whole failure path. See ~/scripts/fix_trackpoint_stalling.sh
-  # for the old runtime workaround this replaces.
-  boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep" "psmouse.synaptics_intertouch=0"];
+  boot.kernelParams = ["consoleblank=90" "mem_sleep_default=deep"];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -167,27 +160,10 @@ in {
   # deprecated
   # hardware.video.hidpi.enable = true;
 
-  # set trackpoint speed and sensitivity
-  hardware.trackpoint = {
-    enable = true;
-    emulateWheel = true;
-    # NOTE: `speed` is intentionally omitted. This Elan TrackPoint (fw 0x11)
-    # does not expose a `speed` sysfs attribute, so setting it here is a no-op
-    # (kernel logs "Could not chase sysfs attribute .../speed, ignoring").
-    # Pointer speed is instead controlled via services.libinput.mouse.accelSpeed.
-    sensitivity = 255;
-    device = "TPPS/2 Elan TrackPoint";
-  };
-
   # NETWORKING
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
+  # Per-interface useDHCP is set in each host's default.nix.
   networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
-  networking.interfaces.wlp0s20f3.useDHCP = true;
-  networking.hostId = "96b8f8ce"; # cut -c-8 </proc/sys/kernel/random/uuid
-  networking.hostName = "kanta";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall.trustedInterfaces = privateZeroTierInterfaces;
   networking.nameservers = [
@@ -611,7 +587,7 @@ in {
       jobs = [
         {
           # This job pushes to the remote sink defined in job `remote_sink` on the homelab server.
-          name = "kanta_home_backup";
+          name = "${config.networking.hostName}_home_backup";
           type = "push";
           connect = {
             # NOTE: we're sending encrypted datasets over the local network so plain 'tcp' transport
