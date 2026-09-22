@@ -61,11 +61,12 @@ printf '%s' "$PASS" | cryptsetup luksFormat --type luks2 -q "$P2" -
 printf '%s' "$PASS" | cryptsetup open --key-file=- "$P2" cryptswap
 mkswap -L swap /dev/mapper/cryptswap
 
-# ZFS pool, same properties as kanta
+# ZFS pool, same properties as kanta plus atime=off and dnodesize=auto
+# (dnodesize=auto pairs with xattr=sa; fine with systemd-boot, not with GRUB)
 printf '%s' "$PASS" | zpool create -f \
   -o ashift=13 \
   -O encryption=aes-256-gcm -O keyformat=passphrase -O keylocation=prompt \
-  -O mountpoint=none -O compression=on \
+  -O mountpoint=none -O compression=on -O atime=off -O dnodesize=auto \
   -R /mnt "$POOL" "$P3"
 unset PASS
 
