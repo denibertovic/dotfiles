@@ -73,8 +73,19 @@ passphrase for the pool.
       sudo cryptsetup luksChangeKey /dev/disk/by-uuid/<LUKS_UUID>
       sudo zfs change-key laptop
 
-- Restore home from the zrepl backup on melisandre (raw encrypted send, needs
-  the old machine's passphrase once):
+- Move home over from the old laptop, if it is still alive. On the OLD
+  laptop, with both machines on a cable:
+
+      ./03-restore-home.sh deni@<new-ip>
+
+  Raw encrypted send of the latest zrepl snapshot plus an incremental to a
+  fresh one, resumable (rerun after an interruption), then loads the key
+  with the old passphrase, makes it inherit the new pool key, logs deni out
+  on the new machine and swaps the datasets. The fresh home stays as
+  laptop/user/home_fresh until you destroy it. Stops zrepl on the old
+  laptop.
+- Without the old laptop, restore from the zrepl backup on melisandre
+  instead (same idea, by hand):
 
       ssh melisandre sudo zfs send -w rust-pool-1/data/backups/zrepl/remote_sink/kanta/laptop/user/home@<snap> \
         | sudo zfs receive -u laptop/user/home_restore
@@ -83,7 +94,7 @@ passphrase for the pool.
       sudo zfs rename laptop/user/home laptop/user/home_fresh
       sudo zfs rename laptop/user/home_restore laptop/user/home
 
-  Then copy ~/dotfiles from home_fresh, reboot, destroy home_fresh.
+  Do the renames from a root shell with no deni session open, then reboot.
 - Add the new host as a client on the zrepl receiver, the job name is
   `<host>_home_backup`.
 - Optional: enroll the swap in the TPM with systemd-cryptenroll to get down
