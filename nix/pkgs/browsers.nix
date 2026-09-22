@@ -6,15 +6,13 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "browsers";
-  # 0.5.5 (latest) requires rustc >=1.74 and NixOS 23.11 has 1.73.
-  # I couldn't figure out quickly how to override this
-  version = "0.7.0";
+  version = "0.7.5";
 
   src = fetchFromGitHub {
     owner = "Browsers-software";
     repo = "browsers";
-    rev = "0.7.0";
-    hash = "sha256-s03BEscaYdSitLtlqbX/tgGSLRHuXc9Ht+3RMCUIdY8=";
+    rev = version;
+    hash = "sha256-mbYtoWfnDgE7UkXh9KpAtFx6YvNryMv11ntkrXclHaA=";
   };
 
   nativeBuildInputs = [pkgs.pkg-config];
@@ -22,7 +20,13 @@ rustPlatform.buildRustPackage rec {
 
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
-    allowBuiltinFetchGit = true;
+    # The git dependencies point at forks whose branches get force pushed.
+    # Fixed output hashes fetch by commit and keep working after that;
+    # allowBuiltinFetchGit needs the commit to be reachable from a branch.
+    outputHashes = {
+      "druid-0.8.3" = "sha256-MF1aVgmXLcvagEw2aeYCZY80ZSAgjVH2BPlYYBuS1q8=";
+      "rolling-file-0.2.0" = "sha256-3xeOSXFVVgeKRE39gtzTURt0OkKScQ4uwtvLl4CE3R4=";
+    };
   };
 
   # cargoHash = "";
