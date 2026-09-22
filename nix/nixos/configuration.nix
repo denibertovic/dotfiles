@@ -357,6 +357,8 @@ in {
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
+  # the greeter suspends an idle machine after 20 minutes regardless of session settings
+  services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
 
   # XMONAD

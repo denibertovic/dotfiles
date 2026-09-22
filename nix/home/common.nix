@@ -29,6 +29,11 @@ in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  dconf.settings."org/gnome/settings-daemon/plugins/power" = {
+    sleep-inactive-ac-type = "nothing";
+    sleep-inactive-battery-type = "nothing";
+  };
+
   home.sessionPath = [
     "/home/deni/.local/bin"
   ];
