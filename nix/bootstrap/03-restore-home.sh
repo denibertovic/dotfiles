@@ -83,11 +83,13 @@ fi
 # desktop session it terminates.
 echo "swapping datasets on target (this logs deni out there)"
 # Single quoted for the remote shell: ssh does not preserve local quoting.
-SWAP="loginctl terminate-user deni || true; sleep 5;
+SWAP="loginctl terminate-user deni || true; sleep 8;
 for i in 1 2 3 4 5 6 7 8 9 10; do umount /home && break; sleep 3; done;
 findmnt /home >/dev/null && exit 1;
 zfs rename laptop/user/home $FRESH && zfs rename $DST laptop/user/home && mount /home"
-$R "sudo systemd-run --unit=home-swap --collect sh -c '$SWAP'"
+# Transient units get no PATH, and terminating deni also kills this ssh
+# session, so its exit status means nothing.
+$R "sudo systemd-run --unit=home-swap --collect -p Environment=PATH=/run/current-system/sw/bin sh -c '$SWAP'" || true
 # Every ssh login as deni touches /home/deni again, so give the unit time
 # before polling and poll rarely.
 sleep 30
