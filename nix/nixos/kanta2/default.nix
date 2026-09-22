@@ -17,7 +17,7 @@
   boot.zfs.forceImportRoot = false;
   boot.zfs.unsafeAllowHibernation = true;
   boot.initrd.luks.devices.cryptswap = {
-    device = "/dev/disk/by-uuid/@LUKS_UUID@";
+    device = "/dev/disk/by-uuid/4bc9082f-8efe-4695-bbc1-a590149acf1e";
     allowDiscards = true;
   };
   swapDevices = [{device = "/dev/mapper/cryptswap";}];
