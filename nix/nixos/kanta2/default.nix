@@ -1,5 +1,5 @@
 # kanta2: Intel Core Ultra 7 155U laptop
-{...}: {
+{lib, ...}: {
   imports = [./hardware-configuration.nix];
 
   networking.hostName = "kanta2";
@@ -22,4 +22,15 @@
   };
   swapDevices = [{device = "/dev/mapper/cryptswap";}];
   boot.resumeDevice = "/dev/mapper/cryptswap";
+  # nixpkgs orders the initrd pool import only after module loading, so on a
+  # resume boot it can import the pool (and ask for the key) before
+  # systemd-hibernate-resume runs. The hibernated kernel then resumes with a
+  # pool that another kernel just wrote to. Force the import after the
+  # resume attempt; on a successful resume the import never runs.
+  boot.initrd.systemd.services.zfs-import-laptop.after = ["systemd-hibernate-resume.service"];
+
+  # Backups stay off until the machine is settled and the receiver on
+  # melisandre knows this host. Without a receiver zrepl would still take a
+  # snapshot every 15 minutes and never prune them.
+  services.zrepl.enable = lib.mkForce false;
 }
