@@ -82,7 +82,7 @@ passphrase for the pool.
   fresh one, resumable (rerun after an interruption), then loads the key
   with the old passphrase, makes it inherit the new pool key, logs deni out
   on the new machine and swaps the datasets. The fresh home stays as
-  laptop/user/home_fresh until you destroy it. Stops zrepl on the old
+  laptop/user/home_orig until you destroy it. Stops zrepl on the old
   laptop.
 - Without the old laptop, restore from the zrepl backup on melisandre
   instead (same idea, by hand):
@@ -91,7 +91,7 @@ passphrase for the pool.
         | sudo zfs receive -u laptop/user/home_restore
       sudo zfs load-key laptop/user/home_restore
       sudo zfs change-key -i laptop/user/home_restore
-      sudo zfs rename laptop/user/home laptop/user/home_fresh
+      sudo zfs rename laptop/user/home laptop/user/home_orig
       sudo zfs rename laptop/user/home_restore laptop/user/home
 
   Do the renames from a root shell with no deni session open, then reboot.

@@ -11,8 +11,8 @@ set -euo pipefail
 
 TARGET="${1:?usage: $0 deni@<new-host-ip>}"
 SRC=laptop/user/home
-DST=laptop/user/home_kanta
-FRESH=laptop/user/home_fresh
+DST=laptop/user/home_restore
+FRESH=laptop/user/home_orig
 R="ssh -o BatchMode=yes $TARGET"
 
 # Sanity
