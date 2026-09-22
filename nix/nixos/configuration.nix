@@ -446,6 +446,12 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # enough to run `make user` on a fresh install before home-manager has
+    # installed itself into the user profile
+    gnumake
+    home-manager
+    git
+
     # dropbox-cli
     pmutils
     nfs-utils
