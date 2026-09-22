@@ -4,6 +4,9 @@ DEFAULT_GOAL: help system user
 
 # flake attribute follows the machine hostname (nixos/<host>/default.nix)
 HOST ?= $(shell hostname)
+# 0 = never build locally, rely on remote builders and caches. Use
+# JOBS=auto on a machine that cannot reach the builders yet.
+JOBS ?= 0
 
 require-%:
 	@ if [ "${${*}}" = "" ]; then \
@@ -17,7 +20,7 @@ system:
 
 ## build home with 'home-manager --flake .#your-username@your-hostname'
 user:
-	@home-manager -j 0 switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@$(HOST) --impure ${NIX_BUILDER_OPTS}
+	@home-manager -j $(JOBS) switch -b backup-`date +"%Y-%m-%d-%H%M%S"` --flake .#deni@$(HOST) --impure ${NIX_BUILDER_OPTS}
 
 ## Show help screen.
 help:
