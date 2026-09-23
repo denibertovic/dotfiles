@@ -77,9 +77,7 @@ in {
       hostName = "deni@melisandre";
       system = "x86_64-linux"; # add cross building support
 
-      # this is not required so we're leaving it null
-      # since /root/.ssh/config will take care to do the right thing
-      # sshKey = "/home/deni/.ssh/nixbuilder";
+      # Address, user and key come from programs.ssh below.
 
       protocol = "ssh-ng";
       maxJobs = 16;
@@ -90,9 +88,7 @@ in {
       hostName = "deni@daenerys";
       system = "x86_64-linux"; # add cross building support
 
-      # this is not required so we're leaving it null
-      # since /root/.ssh/config will take care to do the right thing
-      # sshKey = "/home/deni/.ssh/nixbuilder";
+      # Address, user and key come from programs.ssh below.
 
       protocol = "ssh-ng";
       maxJobs = 12;
@@ -105,6 +101,35 @@ in {
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
+
+  # The nix-daemon runs remote builds as root, so deni's ~/.ssh/config and
+  # agent do not help it reach the builders. /etc/ssh/ssh_config is read by
+  # every user, root included, so the builder hosts are declared here.
+  programs.ssh = {
+    extraConfig = ''
+      Host melisandre
+        HostName 192.168.1.54
+        User deni
+        IdentityFile /home/deni/.ssh/nixbuilder
+
+      Host daenerys
+        HostName 51.159.100.62
+        User deni
+        IdentityFile /home/deni/.ssh/nixbuilder
+    '';
+
+    # Pinned so root never sees the host-key prompt on a fresh machine.
+    knownHosts = {
+      melisandre = {
+        hostNames = ["melisandre" "192.168.1.54"];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRJ1AHjbtPudvCfEYS3sLJRcAGyojqZqVoTO7U2Z06j";
+      };
+      daenerys = {
+        hostNames = ["daenerys" "51.159.100.62"];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINxz/aFR/5/EW3kKv7JItre7rCWzN0n8eKz9GFgFfqPw";
+      };
+    };
+  };
 
   system.activationScripts.ldso = lib.stringAfter ["usrbinenv"] ''
     mkdir -m 0755 -p /lib64
@@ -184,6 +209,10 @@ in {
   # INPUT
   console.useXkbConfig = true;
   services.libinput.touchpad.disableWhileTyping = true;
+  # The trackpoint is the only pointer in use. Disabling via libinput matches
+  # any touchpad, unlike xinput which needs the exact device name and that
+  # name differs per host (PS/2 on kanta, I2C/HID on kanta2).
+  services.libinput.touchpad.sendEventsMode = "disabled";
   services.libinput.enable = true;
   services.xserver.synaptics.enable = false;
   # Pointer/trackpoint speed. The hardware `speed` knob is unsupported on this
@@ -372,10 +401,8 @@ in {
 
   services.xserver.displayManager.sessionCommands = ''
     xsetroot -cursor_name left_ptr &
-    ${pkgs.xorg.xinput}/bin/xinput disable 'SynPS/2 Synaptics TouchPad'
     eval $(gnome-keyring-daemon --start) &
     ${pkgs.feh}/bin/feh --bg-scale /home/deni/walls/hack5.png &
-    #synclient TouchpadOff=1 &
   '';
 
   services.picom = {
