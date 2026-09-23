@@ -28,4 +28,8 @@
   # pool that another kernel just wrote to. Force the import after the
   # resume attempt; on a successful resume the import never runs.
   boot.initrd.systemd.services.zfs-import-laptop.after = ["systemd-hibernate-resume.service"];
+
+  # Only safe here because of the hibernation setup above. Applies on battery
+  # and on AC; logind ignores the lid when an external monitor is attached.
+  services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
 }
