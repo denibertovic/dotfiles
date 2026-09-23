@@ -28,9 +28,4 @@
   # pool that another kernel just wrote to. Force the import after the
   # resume attempt; on a successful resume the import never runs.
   boot.initrd.systemd.services.zfs-import-laptop.after = ["systemd-hibernate-resume.service"];
-
-  # Backups stay off until the machine is settled and the receiver on
-  # melisandre knows this host. Without a receiver zrepl would still take a
-  # snapshot every 15 minutes and never prune them.
-  services.zrepl.enable = lib.mkForce false;
 }
