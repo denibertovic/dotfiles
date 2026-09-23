@@ -1,5 +1,5 @@
 # kanta: ThinkPad T14 gen1
-{...}: {
+{lib, ...}: {
   imports = [./hardware-configuration.nix];
 
   networking.hostName = "kanta";
@@ -27,4 +27,8 @@
     sensitivity = 255;
     device = "TPPS/2 Elan TrackPoint";
   };
+
+  # The home dataset moved to kanta2, which is now the machine that gets
+  # backed up. Keep this host from snapshotting and pushing a stale copy.
+  services.zrepl.enable = lib.mkForce false;
 }
