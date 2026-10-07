@@ -66,7 +66,10 @@
   in {
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    # Some packages build against pkgs.unstable, so give them the same
+    # overlay the system and home configs get.
+    packages = forAllSystems (system:
+      import ./pkgs (nixpkgs.legacyPackages.${system}.extend outputs.overlays.unstable-packages));
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Reusable nixos modules you might want to export
