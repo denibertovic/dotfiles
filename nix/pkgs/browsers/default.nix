@@ -15,6 +15,8 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-mbYtoWfnDgE7UkXh9KpAtFx6YvNryMv11ntkrXclHaA=";
   };
 
+  patches = [./cache-system-theme.patch];
+
   nativeBuildInputs = [pkgs.pkg-config];
   buildInputs = [pkgs.glib.dev pkgs.glibc.dev pkgs.cairo.dev pkgs.pango.dev pkgs.atkmm.dev pkgs.gtk3.dev];
 
@@ -29,10 +31,16 @@ rustPlatform.buildRustPackage rec {
     };
   };
 
-  # cargoHash = "";
+  # The binary looks for <exe>/../resources at runtime. Without the
+  # repository toml every browser is treated as generic and no profiles
+  # are detected.
+  postInstall = ''
+    mkdir -p $out/resources
+    cp -r resources/i18n resources/icons resources/repository $out/resources/
+  '';
 
   meta = {
-    description = "A really simple command line utility. Takes a .zip file and turns it into a parquet file with two columns.";
+    description = "Context menu for choosing a browser (and profile) when opening a link";
     homepage = "https://github.com/Browsers-software/browsers";
     license = lib.licenses.unlicense;
     maintainers = [];

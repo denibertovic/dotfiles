@@ -173,7 +173,9 @@ in {
   };
 
   xdg.desktopEntries = {
-    browsers = {
+    # The chooser skips its own desktop entry only when the id is
+    # software.Browsers, and that id is what its set-as-default check expects.
+    "software.Browsers" = {
       name = "Browsers";
       genericName = "Web Browser Chooser";
       exec = "${pkgs.browsers}/bin/browsers %u";
@@ -189,9 +191,9 @@ in {
       "application/pdf" = ["org.gnome.Evince.desktop"];
     };
     defaultApplications = {
-      "text/html" = "browsers.desktop";
-      "x-scheme-handler/http" = "browsers.desktop";
-      "x-scheme-handler/https" = "browsers.desktop";
+      "text/html" = "software.Browsers.desktop";
+      "x-scheme-handler/http" = "software.Browsers.desktop";
+      "x-scheme-handler/https" = "software.Browsers.desktop";
       "application/pdf" = ["org.gnome.Evince.desktop"];
     };
   };

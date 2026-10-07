@@ -1,0 +1,34 @@
+diff --git a/src/gui/ui_theme.rs b/src/gui/ui_theme.rs
+index c4fd42a..a8aa385 100644
+--- a/src/gui/ui_theme.rs
++++ b/src/gui/ui_theme.rs
+@@ -3,6 +3,7 @@ use crate::utils::ConfiguredTheme;
+ use dark_light::Mode;
+ use druid::{Color, Data, Env, FontDescriptor, FontFamily, FontStyle, FontWeight, Insets, Key};
+ use serde::{Deserialize, Serialize};
++use std::sync::OnceLock;
+ use tracing::warn;
+ 
+ #[derive(Serialize, Deserialize, Debug, Copy, Clone, PartialEq, Data)]
+@@ -16,7 +17,11 @@ pub fn initialize_theme(env: &mut Env, ui_state: &UIState) {
+ }
+ 
+ fn detect_system_theme() -> UITheme {
+-    match dark_light::detect() {
++    // env_scope re-runs theme setup on every event, and dark_light::detect()
++    // opens a fresh D-Bus connection each call. Query the portal once per
++    // process, otherwise the UI stalls for seconds under mouse movement.
++    static SYSTEM_THEME: OnceLock<UITheme> = OnceLock::new();
++    *SYSTEM_THEME.get_or_init(|| match dark_light::detect() {
+         Ok(Mode::Dark) => UITheme::Dark,
+         Ok(Mode::Light) => UITheme::Light,
+         Ok(Mode::Unspecified) => UITheme::Dark,
+@@ -24,7 +29,7 @@ fn detect_system_theme() -> UITheme {
+             warn!("{}", error);
+             UITheme::Dark
+         }
+-    }
++    })
+ }
+ 
+ pub fn setup_theme(env: &mut Env, visual_settings: &UIVisualSettings) {
