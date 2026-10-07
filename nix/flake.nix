@@ -24,6 +24,8 @@
     # derivation (installShellCompletion fails on empty bun.bash). Follow our
     # own nixpkgs-unstable, which has the fixed package.nix.
     opencode.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    hunk.url = "github:modem-dev/hunk";
+    hunk.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # Fix for Nix 2.33+ compatibility: https://github.com/serokell/deploy-rs/pull/359
     deploy-rs.url = "github:szlend/deploy-rs/fix-show-derivation-parsing";
 

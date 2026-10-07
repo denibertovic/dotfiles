@@ -15,6 +15,7 @@
     pkgs.google-workspace-mcp
     pkgs.unstable.mcp-grafana
     inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+    inputs.hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
   ];
 
   programs.zed-editor = {
