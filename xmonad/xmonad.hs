@@ -378,12 +378,9 @@ myKeys x =
         , ( "M-C-<Delete>"
           , addName "Close all notifications" $ spawn "dunstctl close-all")
            -- Monitors
-        , ( "M-C-<F11>"
-          , addName "Laptop monitor" $
-            spawn "/home/deni/dotfiles/scripts/monitors_laptop.sh")
-        , ( "M-C-<F12>"
-          , addName "Work monitor" $
-            spawn "/home/deni/dotfiles/scripts/monitors_work.sh")
+        , ("M-C-<F10>", addName "Display menu" $ spawn "displayctl menu")
+        , ("M-C-<F11>", addName "Laptop display" $ spawn "displayctl laptop")
+        , ("M-C-<F12>", addName "Work displays" $ spawn "displayctl work")
         ] ^++^
       subKeys
         "Media Keys"

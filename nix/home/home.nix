@@ -29,6 +29,7 @@
     ./dunst.nix
     ./xmonad.nix
     ./rofi.nix
+    ./displayctl.nix
     ./dropbox.nix
     ./zoom.nix
     ./media.nix
