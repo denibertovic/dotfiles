@@ -377,6 +377,9 @@ myKeys x =
         , ("M-<Delete>", addName "Close notification" $ spawn "dunstctl close")
         , ( "M-C-<Delete>"
           , addName "Close all notifications" $ spawn "dunstctl close-all")
+           -- Audio
+        , ("M-C-<F8>", addName "Input menu" $ spawn "audioctl mic")
+        , ("M-C-<F9>", addName "Output menu" $ spawn "audioctl sink")
            -- Monitors
         , ("M-C-<F10>", addName "Display menu" $ spawn "displayctl menu")
         , ("M-C-<F11>", addName "Laptop display" $ spawn "displayctl laptop")
