@@ -16,6 +16,8 @@
       # };
       env = {
         WINIT_X11_SCALE_FACTOR = "1.5";
+        # ibus over XIM adds latency on every keystroke; no IM engine is used here
+        XMODIFIERS = "@im=none";
       };
       font = {
         builtin_box_drawing = false;

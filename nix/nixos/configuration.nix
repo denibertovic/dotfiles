@@ -381,6 +381,11 @@ in {
   # the greeter suspends an idle machine after 20 minutes regardless of session settings
   services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
+  # GNOME enables ibus by default. Only plain xkb layouts are used here, and
+  # ibus adds a synchronous D-Bus round trip to every keystroke in every app
+  # (XIM for alacritty, GTK/Qt IM modules for the rest), which showed up as
+  # visible typing lag.
+  i18n.inputMethod.enable = false;
 
   # XMONAD
   services.xserver.windowManager.xmonad = {
