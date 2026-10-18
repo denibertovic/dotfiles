@@ -214,6 +214,11 @@
 
         # use direnv
         eval "$(direnv hook zsh)"
+        # _ssh_hosts cd's into ~/.ssh in a subshell for each Include line, which
+        # fires chpwd hooks there and makes direnv print "unloading" on every ssh
+        # host completion. direnv 2.38.1 skips subshells itself; drop this then.
+        functions[_direnv_hook_toplevel]=$functions[_direnv_hook]
+        _direnv_hook() { (( ZSH_SUBSHELL )) || _direnv_hook_toplevel "$@" }
 
         # aws-vault GetSessionToken duration
         export AWS_SESSION_TOKEN_TTL=12h
