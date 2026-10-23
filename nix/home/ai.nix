@@ -7,6 +7,7 @@
 }: {
   home.packages = [
     pkgs.claude-code
+    pkgs.dictate
     pkgs.unstable.codex
     pkgs.unstable.pi-coding-agent
     pkgs.unstable.terraform-mcp-server
