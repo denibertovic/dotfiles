@@ -4,6 +4,7 @@
   whisper-cpp,
   pipewire,
   xclip,
+  xprop,
   libnotify,
 }: let
   model = fetchurl {
@@ -13,7 +14,7 @@
 in
   writeShellApplication {
     name = "dictate";
-    runtimeInputs = [(whisper-cpp.override {vulkanSupport = true;}) pipewire xclip libnotify];
+    runtimeInputs = [(whisper-cpp.override {vulkanSupport = true;}) pipewire xclip xprop libnotify];
     runtimeEnv.DICTATE_MODEL = model;
     text = builtins.readFile ./dictate.sh;
   }

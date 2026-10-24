@@ -15,10 +15,11 @@ Config { font = "Monospace 6"
                     , Run Com "/home/deni/dotfiles/scripts/tailscale_status.sh" [] "tailscalestatus" 20
                     , Run StdinReader
                     , Run XPropertyLog "_XMONAD_TRAYPAD"
+                    , Run XPropertyLog "_DICTATE"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% } | BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | %dunststatus% | DNSCRYPT: %dnsstatus% | TS: %tailscalestatus% | { %_XMONAD_TRAYPAD%"
+       , template = "%StdinReader% } <action=`dictate`>%_DICTATE%</action>| BAT: %battery% | CPU: %cpu% | MEM: %memory% | DATE: %date% | %dunststatus% | DNSCRYPT: %dnsstatus% | TS: %tailscalestatus% | { %_XMONAD_TRAYPAD%"
        , lowerOnStart = True
        , overrideRedirect = True
        }

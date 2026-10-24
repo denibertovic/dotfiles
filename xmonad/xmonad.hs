@@ -379,6 +379,7 @@ myKeys x =
           , addName "Close all notifications" $ spawn "dunstctl close-all")
            -- Audio
         , ("M-C-<F7>", addName "Dictate to clipboard" $ spawn "dictate")
+        , ("M-C-S-<F7>", addName "Cancel dictation" $ spawn "dictate cancel")
         , ("M-C-<F8>", addName "Input menu" $ spawn "audioctl mic")
         , ("M-C-<F9>", addName "Output menu" $ spawn "audioctl sink")
            -- Monitors
