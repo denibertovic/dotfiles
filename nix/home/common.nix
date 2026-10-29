@@ -146,6 +146,7 @@ in {
     pkgs.vault
     pkgs.pdftk
     pkgs.graphviz
+    pkgs.scaleway-cli
     # pkgs.vaultenv
 
     pkgs.cabal-install
