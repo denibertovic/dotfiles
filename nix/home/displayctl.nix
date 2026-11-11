@@ -54,6 +54,24 @@ in {
           };
         };
       };
+
+      work-single = {
+        fingerprint = {
+          eDP-1 = edid.laptop;
+          DP-1-3 = edid.dell27;
+        };
+        config = {
+          DP-1-3 = {
+            primary = true;
+            position = "0x0";
+            mode = "2560x1440";
+          };
+          eDP-1 = {
+            position = "2560x240";
+            mode = "1920x1200";
+          };
+        };
+      };
     };
   };
 }

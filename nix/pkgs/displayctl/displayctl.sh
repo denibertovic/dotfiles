@@ -7,9 +7,12 @@ Usage: displayctl <mode>
 
   laptop   laptop panel only
   work     portrait Dell 23 | Dell 27 (primary) | laptop panel
+  work-single
+           Dell 27 (primary) | laptop panel
   mirror   clone the laptop panel onto whatever external display is attached
   extend   put the external display to the right of the laptop panel
-  auto     work if the Dells are attached, mirror for any other external display
+  auto     work or work-single if the Dells are attached, mirror for any
+           other external display
   menu     pick a mode with rofi
   status   show the profile that fits the attached displays, and the layout
 USAGE
@@ -43,7 +46,7 @@ load() {
 
 mode=${1:-}
 case "$mode" in
-  laptop | work)
+  laptop | work | work-single)
     load "$mode"
     ;;
   mirror)
@@ -71,7 +74,7 @@ case "$mode" in
     fi
     ;;
   menu)
-    choice=$(printf '%s\n' laptop work mirror extend auto | rofi -dmenu -i -p "Display")
+    choice=$(printf '%s\n' laptop work work-single mirror extend auto | rofi -dmenu -i -p "Display")
     [ -n "$choice" ] || exit 0
     exec "$0" "$choice"
     ;;
