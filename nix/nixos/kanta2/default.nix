@@ -29,6 +29,13 @@
   # resume attempt; on a successful resume the import never runs.
   boot.initrd.systemd.services.zfs-import-laptop.after = ["systemd-hibernate-resume.service"];
 
+  # Left alone the ARC grows to nearly all 64 GB, and shrinking it on demand
+  # keeps kswapd busy when apps need the memory back.
+  boot.kernelParams = [
+    "zfs.zfs_arc_min=${toString (2 * 1024 * 1024 * 1024)}"
+    "zfs.zfs_arc_max=${toString (16 * 1024 * 1024 * 1024)}"
+  ];
+
   # Only safe here because of the hibernation setup above. Applies on battery
   # and on AC; logind ignores the lid when an external monitor is attached.
   services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
