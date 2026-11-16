@@ -135,6 +135,10 @@ in {
     pkgs.terraform
     pkgs.awscli2
     pkgs.azure-cli
+    (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
+      gke-gcloud-auth-plugin
+      docker-credential-gcr
+    ]))
     pkgs.kubernetes-helm
     pkgs.kubernetes-helmPlugins.helm-diff
     pkgs.helmfile
