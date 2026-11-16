@@ -134,7 +134,7 @@ in {
     pkgs.jq
     pkgs.terraform
     pkgs.awscli2
-    pkgs.azure-cli
+    (pkgs.azure-cli.withExtensions [ pkgs.azure-cli.extensions.ssh ])
     (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
       gke-gcloud-auth-plugin
       docker-credential-gcr
